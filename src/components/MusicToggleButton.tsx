@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
-import useSound from "use-sound";
+import React, { useEffect, useRef, useState } from "react";
 
 export const MusicToggleButton = () => {
   const bars = 5;
@@ -11,19 +10,14 @@ export const MusicToggleButton = () => {
     return Array.from({ length: bars }, () => Math.random() * 0.8 + 0.2);
   };
 
-  const [heights, setHeights] = useState(getRandomHeights());
+  const [heights, setHeights] = useState(() => getRandomHeights());
   const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const [play, { pause }] = useSound("/audio/audio.m4a", {
-    format: ['m4a'],
-    html5: true,
-    loop: true,
-    onplay: () => setIsPlaying(true),
-    onend: () => setIsPlaying(false),
-    onpause: () => setIsPlaying(false),
-    onstop: () => setIsPlaying(false),
-    soundEnabled: true,
-  });
+  useEffect(() => () => {
+    audioRef.current?.pause();
+    audioRef.current = null;
+  }, []);
 
   useEffect(() => {
     if (isPlaying) {
@@ -38,14 +32,29 @@ export const MusicToggleButton = () => {
     setHeights(Array(bars).fill(0.1));
   }, [isPlaying]);
 
-  const handleClick = () => {
-    if (isPlaying) {
-      pause();
+  const handleClick = async () => {
+    let audio = audioRef.current;
+    if (!audio) {
+      audio = new Audio("/audio/audio.m4a");
+      audio.loop = true;
+      audio.preload = "none";
+      audio.addEventListener("play", () => setIsPlaying(true));
+      audio.addEventListener("pause", () => setIsPlaying(false));
+      audio.addEventListener("ended", () => setIsPlaying(false));
+      audioRef.current = audio;
+    }
+
+    if (!audio.paused) {
+      audio.pause();
       setIsPlaying(false);
       return;
     }
-    play();
-    setIsPlaying(true);
+
+    try {
+      await audio.play();
+    } catch {
+      setIsPlaying(false);
+    }
   };
 
   return (

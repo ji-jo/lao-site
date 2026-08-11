@@ -53,6 +53,17 @@ export function revealPass(): void {
   });
 }
 
+function revealElement(el: HTMLElement): void {
+  if (el.dataset.revealed) return;
+  el.dataset.revealed = '1';
+
+  if (el.tagName.toLowerCase() === 'svg') {
+    el.querySelectorAll<SVGPathElement>('path').forEach((path) => {
+      path.style.strokeDashoffset = '0';
+    });
+  }
+}
+
 /**
  * Form checkmark animation helper — double rAF required for transition to trigger correctly
  */
@@ -73,23 +84,35 @@ export function animateCheck(svg: SVGElement | null): void {
   });
 }
 
-let ticking = false;
-function onScroll(): void {
-  if (!ticking) {
-    requestAnimationFrame(() => {
-      revealPass();
-      ticking = false;
-    });
-    ticking = true;
-  }
-}
+let revealObserver: IntersectionObserver | null = null;
 
 export function initRevealSystem(): void {
   setupDrawing();
 
-  window.removeEventListener('scroll', onScroll);
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
+  revealObserver?.disconnect();
+  revealObserver = null;
+
+  const pending = document.querySelectorAll<HTMLElement>(
+    'svg[data-draw]:not([data-revealed]), [data-wipe]:not([data-revealed]), [data-brighten]:not([data-revealed])',
+  );
+  if (!pending.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    pending.forEach(revealElement);
+    return;
+  }
+
+  revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        revealElement(entry.target as HTMLElement);
+        observer.unobserve(entry.target);
+      });
+    },
+    { rootMargin: '0px 0px -10% 0px', threshold: 0 },
+  );
+  pending.forEach((element) => revealObserver?.observe(element));
 }
 
 // Global window attachment for convenience

@@ -97,6 +97,7 @@ export interface GooeyInputProps extends Omit<React.InputHTMLAttributes<HTMLInpu
   disabled?: boolean;
   icon?: React.ReactNode;
   iconName?: "username" | "email" | "animation";
+  showPlaceholderWhenCollapsed?: boolean;
 }
 
 export function GooeyInput({
@@ -114,6 +115,7 @@ export function GooeyInput({
   disabled = false,
   icon,
   iconName,
+  showPlaceholderWhenCollapsed = false,
   ...inputProps
 }: GooeyInputProps) {
   const reactId = useId();
@@ -234,9 +236,15 @@ export function GooeyInput({
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                   transition={{ duration: 0.2 }}
-                  className="flex size-full items-center justify-center text-text-hi [&_svg]:size-[1.25em]"
+                  className={cn(
+                    "flex size-full items-center text-text-hi [&_svg]:size-[1.25em]",
+                    showPlaceholderWhenCollapsed ? "justify-start gap-3 px-2" : "justify-center",
+                  )}
                 >
                   {renderIcon()}
+                  {showPlaceholderWhenCollapsed && (
+                    <span className="truncate text-left text-sm font-normal text-text-low">{placeholder}</span>
+                  )}
                 </motion.div>
               )}
               {isExpanded && (

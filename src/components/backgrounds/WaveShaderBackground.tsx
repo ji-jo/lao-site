@@ -316,7 +316,11 @@ export function ShaderBackground({ className }: { className?: string }) {
     const pendingRelease = pendingContextReleases.get(canvas)
     if (pendingRelease !== undefined) window.clearTimeout(pendingRelease)
     pendingContextReleases.delete(canvas)
-    const gl = canvas.getContext("webgl", { antialias: false })
+    const gl = canvas.getContext("webgl", {
+      alpha: false,
+      antialias: false,
+      powerPreference: "low-power",
+    })
     if (!gl) return
 
     const compile = (type: number, src: string) => {
@@ -405,19 +409,25 @@ export function ShaderBackground({ className }: { className?: string }) {
     let bounds = canvas.getBoundingClientRect()
     let raf = 0
     let lastNow: number | null = null
+    let lastDraw = 0
     let visible = document.visibilityState === "visible"
     let inView = true
+    const activityHost = canvas.closest<HTMLElement>("[data-hero-wave]")
+    let externallyActive = activityHost?.dataset.shaderActive !== "false"
     let disposed = false
     const start = performance.now()
-    const timeAnimated = Math.abs(UNIFORMS.timeScale) > 0.0001
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const timeAnimated = Math.abs(UNIFORMS.timeScale) > 0.0001 && !reducedMotion
 
     const resizeCanvas = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      // This shader is deliberately grainy and blurred, so rendering above 1x
+      // DPR adds GPU cost without adding visible detail.
+      const dpr = Math.min(window.devicePixelRatio || 1, 1)
       const rawWidth = Math.max(1, Math.round(bounds.width * dpr))
       const rawHeight = Math.max(1, Math.round(bounds.height * dpr))
       const pixelScale = Math.min(
         1,
-        Math.sqrt(2_000_000 / Math.max(1, rawWidth * rawHeight)),
+        Math.sqrt(1_000_000 / Math.max(1, rawWidth * rawHeight)),
       )
       const width = Math.max(1, Math.round(rawWidth * pixelScale))
       const height = Math.max(1, Math.round(rawHeight * pixelScale))
@@ -429,7 +439,7 @@ export function ShaderBackground({ className }: { className?: string }) {
     }
 
     function requestRender() {
-      if (!disposed && visible && inView && raf === 0) {
+      if (!disposed && visible && inView && externallyActive && raf === 0) {
         raf = requestAnimationFrame(render)
       }
     }
@@ -496,7 +506,23 @@ export function ShaderBackground({ className }: { className?: string }) {
         lastNow = null
       }
     })
-    intersectionObserver.observe(canvas)
+    intersectionObserver.observe(activityHost ?? canvas)
+
+    const activityObserver = activityHost
+      ? new MutationObserver(() => {
+          externallyActive = activityHost.dataset.shaderActive !== "false"
+          if (externallyActive) requestRender()
+          else if (raf !== 0) {
+            cancelAnimationFrame(raf)
+            raf = 0
+            lastNow = null
+          }
+        })
+      : null
+    activityObserver?.observe(activityHost!, {
+      attributes: true,
+      attributeFilter: ["data-shader-active"],
+    })
     const onVisibilityChange = () => {
       visible = document.visibilityState === "visible"
       if (visible) requestRender()
@@ -508,16 +534,25 @@ export function ShaderBackground({ className }: { className?: string }) {
     }
     document.addEventListener("visibilitychange", onVisibilityChange)
 
+    updateLayout()
+
     function render(now: number) {
       raf = 0
-      if (disposed || !visible || !inView) return
+      if (disposed || !visible || !inView || !externallyActive) return
+
+      // Cap the expensive fragment pass at 30fps. The shader's slow drift is
+      // unchanged; only redundant frames on 60/120/144Hz displays are skipped.
+      if (timeAnimated && lastDraw && now - lastDraw < 1000 / 30) {
+        requestRender()
+        return
+      }
+      lastDraw = now
       const dt = lastNow === null ? 0 : Math.min((now - lastNow) / 1000, 0.1)
       lastNow = now
       const follow = 1 - Math.exp(-12 * dt)
       mouseX += (targetX - mouseX) * follow
       mouseY += (targetY - mouseY) * follow
       cursorPresence += (targetPresence - cursorPresence) * follow
-      resizeCanvas()
       const width = canvas.width
       const height = canvas.height
       gl.uniform4f(
@@ -549,12 +584,12 @@ export function ShaderBackground({ className }: { className?: string }) {
       if (timeAnimated || pointerSettling) requestRender()
       else lastNow = null
     }
-    requestRender()
     return () => {
       disposed = true
       cancelAnimationFrame(raf)
       resizeObserver.disconnect()
       intersectionObserver.disconnect()
+      activityObserver?.disconnect()
       document.removeEventListener("visibilitychange", onVisibilityChange)
       window.removeEventListener("resize", updateLayout)
       if (UNIFORMS.cursorEnabled) {

@@ -4,10 +4,11 @@ import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import clsx from "clsx";
 import { useGLTF } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { MotionValue, useMotionValue } from "framer-motion";
+import { useMotionValue } from "framer-motion";
+import type { MotionValue } from "framer-motion";
 import * as THREE from "three";
 import { ScrollObserver } from "@/components/ScrollObserver";
-import monitorModelUrl from "../../assets/3D/Monitor/Monitor 2/crt_monitor.glb?url";
+import monitorModelUrl from "../../assets/3D/Monitor/Monitor 2/crt_monitor.optimized.glb?url";
 
 function ModeCube({ side, label, progress }: { side: -1 | 1; label: string; progress: MotionValue<number> }) {
   const groupRef = useRef<THREE.Group>(null);
@@ -22,6 +23,11 @@ function ModeCube({ side, label, progress }: { side: -1 | 1; label: string; prog
   const targetX = side * panelWidth * 0.16;
   const targetY = -panelHeight * 0.22;
   const { scene } = useGLTF(monitorModelUrl);
+
+  useEffect(() => {
+    document.documentElement.dataset.monitorReady = "true";
+    window.dispatchEvent(new Event("lao:monitor-ready"));
+  }, []);
 
   const monitor = useMemo(() => {
     const object = scene.clone(true);
@@ -91,11 +97,21 @@ function ModeCube({ side, label, progress }: { side: -1 | 1; label: string; prog
   );
 }
 
-useGLTF.preload(monitorModelUrl);
+function SceneInvalidator({ progress }: { progress: MotionValue<number> }) {
+  const invalidate = useThree((state) => state.invalidate);
+
+  useEffect(() => {
+    invalidate();
+    return progress.on("change", () => invalidate());
+  }, [invalidate, progress]);
+
+  return null;
+}
 
 function CubeScene({ progress }: { progress: MotionValue<number> }) {
   return (
     <>
+      <SceneInvalidator progress={progress} />
       <ambientLight intensity={2.2} />
       <directionalLight position={[0, 8, 10]} intensity={1.15} color="#ffffff" />
       <directionalLight position={[-7, 1, 6]} intensity={0.4} color="#b6cbe6" />
@@ -171,42 +187,59 @@ export default function ModeCubeSection() {
   const cubeProgress = useMotionValue(0);
   const stepRef = useRef(0);
   const [activeStep, setActiveStep] = useState(0);
-  const [isCanvasActive, setIsCanvasActive] = useState(false);
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsCanvasActive(entry.isIntersecting),
-      { rootMargin: "100% 0px 100% 0px" },
-    );
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
     let frame = 0;
-    const trackStickyProgress = () => {
-      const section = sectionRef.current;
-      if (section) {
-        const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
-        const rect = section.getBoundingClientRect();
-        const stickyTravel = Math.max(1, rect.height - viewportHeight);
-        const stickyProgress = THREE.MathUtils.clamp(-rect.top / stickyTravel, 0, 1);
-        const nextStep = stickyProgress >= 0.58 ? 3 : stickyProgress >= 0.3 ? 2 : stickyProgress >= 0.08 ? 1 : 0;
-        if (nextStep !== stepRef.current) {
-          stepRef.current = nextStep;
-          setActiveStep(nextStep);
-        }
-        // The cubes begin only when line two activates.
-        cubeProgress.set(THREE.MathUtils.clamp((stickyProgress - 0.3) / 0.58, 0, 1));
+    let isNear = false;
+
+    const updateStickyProgress = () => {
+      frame = 0;
+      if (!isNear) return;
+
+      const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const stickyTravel = Math.max(1, rect.height - viewportHeight);
+      const stickyProgress = THREE.MathUtils.clamp(-rect.top / stickyTravel, 0, 1);
+      const nextStep = stickyProgress >= 0.58 ? 3 : stickyProgress >= 0.3 ? 2 : stickyProgress >= 0.08 ? 1 : 0;
+      if (nextStep !== stepRef.current) {
+        stepRef.current = nextStep;
+        setActiveStep(nextStep);
       }
-      frame = requestAnimationFrame(trackStickyProgress);
+
+      const nextCubeProgress = THREE.MathUtils.clamp((stickyProgress - 0.3) / 0.58, 0, 1);
+      if (Math.abs(nextCubeProgress - cubeProgress.get()) > 0.0001) {
+        cubeProgress.set(nextCubeProgress);
+      }
     };
 
-    frame = requestAnimationFrame(trackStickyProgress);
-    return () => cancelAnimationFrame(frame);
+    const scheduleUpdate = () => {
+      if (isNear && !frame) frame = requestAnimationFrame(updateStickyProgress);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isNear = entry?.isIntersecting ?? false;
+        if (isNear) scheduleUpdate();
+        else if (frame) {
+          cancelAnimationFrame(frame);
+          frame = 0;
+        }
+      },
+      { rootMargin: "60% 0px 60% 0px" },
+    );
+    observer.observe(section);
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate, { passive: true });
+
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+    };
   }, [cubeProgress]);
 
   return (
@@ -216,19 +249,18 @@ export default function ModeCubeSection() {
           <div className="aspect-[3/2] min-h-[420px] w-full max-w-[1200px] rounded-[40px] bg-[#dddddd]" />
         </div>
 
-        {isCanvasActive && (
-          <Canvas
-            camera={{ position: [0, 0, 10], fov: 38 }}
-            dpr={[1, 1.25]}
-            gl={{ alpha: true, antialias: false, powerPreference: "high-performance" }}
-            className="pointer-events-none absolute inset-0 z-10 h-full w-full"
-            style={{ background: "transparent" }}
-          >
-            <Suspense fallback={<MonitorLoadingScene progress={cubeProgress} />}>
-              <CubeScene progress={cubeProgress} />
-            </Suspense>
-          </Canvas>
-        )}
+        <Canvas
+          camera={{ position: [0, 0, 10], fov: 38 }}
+          dpr={1}
+          frameloop="demand"
+          gl={{ alpha: true, antialias: false, powerPreference: "high-performance" }}
+          className="pointer-events-none absolute inset-0 z-10 h-full w-full"
+          style={{ background: "transparent" }}
+        >
+          <Suspense fallback={<MonitorLoadingScene progress={cubeProgress} />}>
+            <CubeScene progress={cubeProgress} />
+          </Suspense>
+        </Canvas>
 
         <div className="absolute inset-0 z-20 flex items-center justify-center px-[clamp(16px,3vw,40px)]">
           <div className="relative aspect-[3/2] min-h-[420px] w-full max-w-[1200px]">

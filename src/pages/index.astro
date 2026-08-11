@@ -12,6 +12,9 @@ import ThreeScrollCards from '../components/ThreeScrollCards';
 import MacbookScrollDemo from '@/components/MacbookScrollDemo';
 import HowItWorks from '@/components/ui/how-it-works';
 import ModeCubeSection from '@/components/ModeCubeSection';
+import PicturaAudienceSection from '@/components/PicturaAudienceSection';
+import wordmarkUrl from '../../assets/wordmark.svg?url';
+import palmUrl from '../../assets/palm.svg?url';
 ---
 
 <Base title="LAO Waitlist">
@@ -24,7 +27,7 @@ import ModeCubeSection from '@/components/ModeCubeSection';
     <HighlighterDock client:only="react" />
 
     <nav id="main-nav" class="fixed top-[20px] left-1/2 -translate-x-1/2 z-50 flex items-center justify-between gap-6 w-[min(640px,calc(100vw-40px))] py-[9px] pr-[10px] pl-[24px] rounded-full bg-ink-800/78 backdrop-blur-md shadow-[0_18px_50px_-20px_rgba(0,0,0,.85)] transition-all duration-[260ms] ease-[cubic-bezier(0.4,0,0.2,1)]">
-      <img src="/assets/wordmark.svg" alt="LAO" class="w-[44px] h-[29px] invert brightness-150" />
+      <img src={wordmarkUrl} alt="LAO" class="w-[44px] h-[29px] invert brightness-150" />
       <div class="flex-1 flex justify-center">
         <MusicToggleButton client:only="react" />
       </div>
@@ -50,7 +53,7 @@ import ModeCubeSection from '@/components/ModeCubeSection';
 
       <!-- Keep the wave shader inside the hero stack, beneath the cloud panel
            and the laptop/content layers. -->
-      <div data-hero-wave class="pointer-events-none fixed inset-0 z-[-3] h-[100dvh] w-full overflow-hidden bg-[#05050b] will-change-opacity">
+      <div data-hero-wave data-shader-active="true" class="pointer-events-none fixed inset-0 z-[-3] h-[100dvh] w-full overflow-hidden bg-[#05050b] will-change-opacity">
         <div
           class="absolute inset-0 rotate-180"
           style="mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%);"
@@ -60,7 +63,7 @@ import ModeCubeSection from '@/components/ModeCubeSection';
       </div>
 
       <div class="relative z-20 mx-auto flex max-w-[1200px] flex-col items-center px-[20px] pt-[188px] pb-0">
-        <h1 class="m-0 text-center font-display font-normal text-[clamp(34px,4vw,48px)] leading-[1.06] tracking-[-0.015em] text-ink-800 text-balance mb-[68px]">
+        <h1 class="site-heading m-0 text-center text-ink-800 mb-[68px]">
           Animate the thing<br />you're trying to explain.
         </h1>
         <MacbookScrollDemo client:only="react" />
@@ -92,16 +95,16 @@ import ModeCubeSection from '@/components/ModeCubeSection';
       <div class="absolute inset-0 z-0 pointer-events-none bg-ink-900">
       </div>
       <!-- Cards sit on top with transparent canvas -->
-      <ThreeScrollCards client:load />
+      <ThreeScrollCards client:visible />
     </section>
 
     <!-- The two mode cards are intentionally separate from the ThreeScrollCards
          stage above. This section owns the mirrored cube scene and its text reveal. -->
-    <ModeCubeSection client:only="react" />
+    <ModeCubeSection client:load />
 
     <section class="relative z-10 bg-ink-900 pt-[150px] pb-[160px] overflow-x-clip">
       <div class="relative max-w-[1200px] mx-auto px-[clamp(20px,5vw,120px)]">
-        <h2 class="m-0 mb-[90px] text-center font-display font-normal text-[48px] text-text-hi">
+        <h2 class="site-heading m-0 mb-[90px] text-center text-text-hi">
           It's a file. You keep it.
         </h2>
 
@@ -143,42 +146,14 @@ import ModeCubeSection from '@/components/ModeCubeSection';
       </div>
     </section>
 
-    <section class="relative z-10 bg-ink-900 py-[140px]">
-      <div class="max-w-[1200px] mx-auto px-[clamp(20px,5vw,120px)]">
-        <h2 class="m-0 mb-[48px] font-display font-normal text-[clamp(28px,2.8vw,36px)] text-text-hi">Who is it for?</h2>
-        <div class="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-[10px] md:gap-[32px] items-start py-[32px] rule-soft">
-          <p class="m-0 font-mono text-[12px] tracking-[0.08em] uppercase text-text-hi">Teachers</p>
-          <p data-brighten class="m-0 text-[17px] leading-[1.6] max-w-[60ch]">
-            Turn the thing you keep redrawing on the whiteboard into a loop you reuse every term.
-          </p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-[10px] md:gap-[32px] items-start py-[32px] rule-soft">
-          <p class="m-0 font-mono text-[12px] tracking-[0.08em] uppercase text-text-hi">Explainers &amp; writers</p>
-          <p data-brighten class="m-0 text-[17px] leading-[1.6] max-w-[60ch]">
-            A moving diagram beats three paragraphs.
-          </p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-[10px] md:gap-[32px] items-start py-[32px] rule-soft">
-          <p class="m-0 font-mono text-[12px] tracking-[0.08em] uppercase text-text-hi">Designers</p>
-          <p data-brighten class="m-0 text-[17px] leading-[1.6] max-w-[60ch]">
-            Build assets and loops in minutes instead of scheduling them.
-          </p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-[280px_1fr] gap-[10px] md:gap-[32px] items-start py-[32px] rule-soft-y">
-          <p class="m-0 font-mono text-[12px] tracking-[0.08em] uppercase text-text-hi">Anyone who thinks by drawing</p>
-          <p data-brighten class="m-0 text-[17px] leading-[1.6] max-w-[60ch]">
-            This is a sketchbook that moves.
-          </p>
-        </div>
-      </div>
-    </section>
+    <PicturaAudienceSection client:visible />
 
-    <section class="relative z-10 bg-ink-900 pt-[20px] pb-[150px]">
+    <section class="relative z-20 isolate bg-ink-900 pt-[160px] pb-[150px] overflow-hidden">
       <div class="max-w-[1200px] mx-auto px-[clamp(20px,5vw,120px)]">
         <div class="relative flex flex-col md:flex-row items-end min-h-0 md:min-h-[640px] rounded-[28px] md:rounded-[59px] bg-paper overflow-hidden">
-          <img data-wipe data-wipe-slow src="/assets/palm.svg" alt="Hand-drawn open palm" class="block md:absolute md:right-[-2%] md:top-[6%] w-[80%] md:w-[66%] h-auto mx-auto md:mx-0 relative inset-auto" />
+          <img data-wipe data-wipe-slow src={palmUrl} alt="Hand-drawn open palm" class="block md:absolute md:right-[-2%] md:top-[6%] w-[80%] md:w-[66%] h-auto mx-auto md:mx-0 relative inset-auto" />
           <div class="p-[28px_22px_36px] md:p-[56px] max-w-[620px]">
-            <h2 class="m-0 mb-[20px] font-display font-normal text-[clamp(30px,3.2vw,46px)] leading-[1.06] tracking-[-0.015em] text-ink-800">
+            <h2 class="site-heading m-0 mb-[20px] text-ink-800">
               Designed screen by screen, not prompted.
             </h2>
             <p class="m-0 text-[17px] leading-[1.6] max-w-[56ch] text-[#3E4A5C]">
@@ -191,8 +166,9 @@ import ModeCubeSection from '@/components/ModeCubeSection';
 
     <section id="waitlist" class="relative z-10 bg-ink-900 pt-[160px] pb-[200px] overflow-x-clip">
       <div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-ink-900 from-0% via-ink-900/25 via-32% via-ink-900/25 via-68% to-ink-900 to-100%"></div>
-      <div class="relative z-10 max-w-[800px] mx-auto px-[20px] text-center">
-        <h2 class="m-0 mb-[16px] font-display font-normal text-[clamp(32px,3.6vw,48px)] leading-[1.06] tracking-[-0.015em] text-text-hi">
+      <div class="relative z-10 mx-auto max-w-[1200px] rounded-[28px] md:rounded-[59px] bg-ink-800 px-[clamp(20px,5vw,120px)] py-[56px] md:py-[76px] text-center shadow-2xl">
+       <div class="mx-auto max-w-[800px]">
+        <h2 class="site-heading m-0 mb-[16px] text-text-hi">
           Get in early. Take a good username.
         </h2>
         <p class="m-0 mb-[46px] text-[17px] leading-[1.6] text-text max-w-[620px] mx-auto">
@@ -202,8 +178,8 @@ import ModeCubeSection from '@/components/ModeCubeSection';
         <!-- Waitlist Form Island -->
         <div id="waitlist-form-container" class="max-w-[680px] mx-auto">
           <form method="POST" action="/api/waitlist" class="flex flex-col gap-[22px] text-left">
-            <div class="flex flex-col sm:flex-row sm:items-center gap-[8px] sm:gap-[24px]">
-              <label for="lao-username" class="w-full sm:w-[220px] shrink-0 font-mono text-[12px] tracking-[0.08em] uppercase text-text-hi">Username</label>
+            <div class="flex flex-col gap-[8px]">
+              <label for="lao-username" class="sr-only">Username</label>
               <div class="flex-1 min-w-0">
                 <GooeyInput
                   client:visible
@@ -212,6 +188,7 @@ import ModeCubeSection from '@/components/ModeCubeSection';
                   required
                   autoComplete="off"
                   placeholder="Username"
+                  showPlaceholderWhenCollapsed
                   className="w-full justify-start"
                   collapsedWidth="100%"
                   expandedWidth="calc(100% - 64px)"
@@ -220,8 +197,8 @@ import ModeCubeSection from '@/components/ModeCubeSection';
               </div>
             </div>
 
-            <div class="flex flex-col sm:flex-row sm:items-center gap-[8px] sm:gap-[24px]">
-              <label for="lao-email" class="w-full sm:w-[220px] shrink-0 font-mono text-[12px] tracking-[0.08em] uppercase text-text-hi">Email</label>
+            <div class="flex flex-col gap-[8px]">
+              <label for="lao-email" class="sr-only">Email</label>
               <div class="flex-1 min-w-0">
                 <GooeyInput
                   client:visible
@@ -229,7 +206,8 @@ import ModeCubeSection from '@/components/ModeCubeSection';
                   name="email"
                   type="email"
                   required
-                  placeholder="you@somewhere.com"
+                  placeholder="Email"
+                  showPlaceholderWhenCollapsed
                   className="w-full justify-start"
                   collapsedWidth="100%"
                   expandedWidth="calc(100% - 64px)"
@@ -238,14 +216,15 @@ import ModeCubeSection from '@/components/ModeCubeSection';
               </div>
             </div>
 
-            <div class="flex flex-col sm:flex-row sm:items-center gap-[8px] sm:gap-[24px]">
-              <label for="lao-first" class="w-full sm:w-[220px] shrink-0 font-mono text-[12px] tracking-[0.08em] uppercase text-text-hi">What would you animate first?</label>
+            <div class="flex flex-col gap-[8px]">
+              <label for="lao-first" class="sr-only">What would you animate first?</label>
               <div class="flex-1 min-w-0">
                 <GooeyInput
                   client:visible
                   id="lao-first"
                   name="first_animation"
-                  placeholder="a diagram I keep redrawing for my students"
+                  placeholder="What would you animate first?"
+                  showPlaceholderWhenCollapsed
                   className="w-full justify-start"
                   collapsedWidth="100%"
                   expandedWidth="calc(100% - 64px)"
@@ -273,22 +252,37 @@ import ModeCubeSection from '@/components/ModeCubeSection';
             </p>
           </form>
         </div>
+        </div>
       </div>
     </section>
 
-    <Footer client:only="react" />
+    <Footer client:visible />
   </div>
 </Base>
 
 <script>
+  let disposePageEffects = () => {};
+
   const setupPageEffects = () => {
+    disposePageEffects();
+
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const controller = new AbortController();
+    const { signal } = controller;
+    let navFrame = 0;
+    let waveFrame = 0;
 
     // Nav blur scroll effect
     const nav = document.getElementById('main-nav');
     if (nav) {
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 80) {
+      let compact: boolean | null = null;
+      const updateNav = () => {
+        navFrame = 0;
+        const nextCompact = window.scrollY > 80;
+        if (nextCompact === compact) return;
+        compact = nextCompact;
+
+        if (nextCompact) {
           nav.classList.replace('py-[9px]', 'py-[6px]');
           nav.classList.replace('pr-[10px]', 'pr-[8px]');
           nav.classList.replace('pl-[24px]', 'pl-[20px]');
@@ -301,7 +295,12 @@ import ModeCubeSection from '@/components/ModeCubeSection';
           nav.classList.replace('bg-ink-800/94', 'bg-ink-800/78');
           nav.classList.replace('backdrop-blur-xl', 'backdrop-blur-md');
         }
-      }, { passive: true });
+      };
+      const requestNavUpdate = () => {
+        if (!navFrame) navFrame = requestAnimationFrame(updateNav);
+      };
+      window.addEventListener('scroll', requestNavUpdate, { passive: true, signal });
+      updateNav();
     }
 
     // Hold the wave in the viewport for the first 90vh of hero travel, then
@@ -310,7 +309,6 @@ import ModeCubeSection from '@/components/ModeCubeSection';
     const waveStage = document.querySelector<HTMLElement>('[data-hero-wave-stage]');
     const wave = document.querySelector<HTMLElement>('[data-hero-wave]');
     if (waveStage && wave && !reduced) {
-      let waveFrame = 0;
       const updateWaveFade = () => {
         waveFrame = 0;
         const travelled = Math.max(0, -waveStage.getBoundingClientRect().top);
@@ -318,61 +316,23 @@ import ModeCubeSection from '@/components/ModeCubeSection';
         const fadeDistance = window.innerHeight * 0.59;
         const progress = Math.min(1, Math.max(0, (travelled - holdDistance) / fadeDistance));
         wave.style.opacity = String(1 - progress);
+        const shaderActive = progress < 0.999;
+        wave.dataset.shaderActive = String(shaderActive);
+        wave.style.visibility = shaderActive ? 'visible' : 'hidden';
       };
       const requestWaveFade = () => {
         if (!waveFrame) waveFrame = requestAnimationFrame(updateWaveFade);
       };
-      window.addEventListener('scroll', requestWaveFade, { passive: true });
-      window.addEventListener('resize', requestWaveFade, { passive: true });
+      window.addEventListener('scroll', requestWaveFade, { passive: true, signal });
+      window.addEventListener('resize', requestWaveFade, { passive: true, signal });
       requestWaveFade();
     }
 
-    // Hero window: enters small, grows as it reaches the viewport centre, then
-    // remains there through its sticky stage before flowing away with the page.
-    const heroWindow = document.getElementById('hero-window');
-    const heroStage = document.getElementById('hero-scroll-stage');
-    if (heroWindow && heroStage && !reduced) {
-      const MIN_SCALE = 0.78;
-      const MAX_SCALE = 1;
-      let current = MIN_SCALE;
-      let target = MIN_SCALE;
-      let running = false;
-
-      const measure = () => {
-        // The card reaches its centred sticky position at 15vh. Smoothstep keeps
-        // the scale velocity at zero at both ends, so wheel and trackpad input
-        // never makes the card jump.
-        const progress = Math.max(0, Math.min(1,
-          (window.innerHeight * 0.15 - heroStage.getBoundingClientRect().top) / (window.innerHeight * 0.75)
-        ));
-        const eased = progress * progress * (3 - 2 * progress);
-        target = MIN_SCALE + eased * (MAX_SCALE - MIN_SCALE);
-      };
-
-      const step = () => {
-        current += (target - current) * 0.14;
-        heroWindow.style.setProperty('--hero-scale', current.toFixed(4));
-        return Math.abs(target - current) > 0.0005;
-      };
-
-      const tick = () => {
-        if (step()) requestAnimationFrame(tick);
-        else running = false;
-      };
-
-      const onScroll = () => {
-        measure();
-        step();
-        if (!running) {
-          running = true;
-          requestAnimationFrame(tick);
-        }
-      };
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', onScroll, { passive: true });
-      onScroll();
-    }
+    disposePageEffects = () => {
+      controller.abort();
+      cancelAnimationFrame(navFrame);
+      cancelAnimationFrame(waveFrame);
+    };
   };
 
   setupPageEffects();

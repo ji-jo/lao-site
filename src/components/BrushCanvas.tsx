@@ -95,7 +95,7 @@ export function BrushCanvas() {
     let raf = 0;
     const redraw = () => {
       raf = 0;
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       const w = window.innerWidth;
       const h = window.innerHeight;
       if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) {
@@ -115,6 +115,12 @@ export function BrushCanvas() {
     };
     const schedule = () => {
       if (!raf) raf = requestAnimationFrame(redraw);
+    };
+    const scheduleScrollRedraw = () => {
+      // Until somebody draws, scrolling cannot change this transparent canvas.
+      // Clearing the entire viewport on every scroll frame was a large hidden
+      // cost on the default page experience.
+      if (strokes.current.length > 0) schedule();
     };
     redraw();
 
@@ -179,7 +185,7 @@ export function BrushCanvas() {
     canvas.addEventListener('pointerdown', down);
     canvas.addEventListener('pointermove', move);
     window.addEventListener('pointerup', up);
-    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('scroll', scheduleScrollRedraw, { passive: true });
     window.addEventListener('resize', schedule, { passive: true });
     window.addEventListener(CLEAR_EVENT, clear);
 
@@ -188,7 +194,7 @@ export function BrushCanvas() {
       canvas.removeEventListener('pointerdown', down);
       canvas.removeEventListener('pointermove', move);
       window.removeEventListener('pointerup', up);
-      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('scroll', scheduleScrollRedraw);
       window.removeEventListener('resize', schedule);
       window.removeEventListener(CLEAR_EVENT, clear);
     };

@@ -206,10 +206,11 @@ export default function CloudShader({ cloud, className }: CloudShaderProps) {
       }
       gl.viewport(0, 0, canvas.width, canvas.height);
     };
-    window.addEventListener('resize', resize, { passive: true });
+    resize();
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(wrap);
 
     const render = (t: number) => {
-      resize();
       const cl = cloudRef.current;
       gl.uniform2f(uRes, canvas.width, canvas.height);
       gl.uniform1f(uTime, t * (cl.speed ?? 1));
@@ -238,42 +239,63 @@ export default function CloudShader({ cloud, className }: CloudShaderProps) {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduced) {
       return () => {
-        window.removeEventListener('resize', resize);
+        resizeObserver.disconnect();
         gl.deleteProgram(prog);
         gl.deleteBuffer(buf);
       };
     }
 
-    let paused = false;
+    let inView = false;
+    let visible = document.visibilityState === 'visible';
+    let raf = 0;
+    let dead = false;
+    let lastFrame = 0;
+    const start = performance.now();
+
+    const stopLoop = () => {
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+    };
+
+    const loop = (now: number) => {
+      raf = 0;
+      if (dead || !visible || !inView) return;
+
+      // The cloud noise is intentionally soft; 30fps is visually identical at
+      // this speed and halves the fragment-shader work on high-refresh screens.
+      if (now - lastFrame >= 1000 / 30) {
+        lastFrame = now;
+        render((now - start) / 1000);
+      }
+      raf = requestAnimationFrame(loop);
+    };
+
+    const startLoop = () => {
+      if (!dead && visible && inView && !raf) raf = requestAnimationFrame(loop);
+    };
+
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { paused = !e.isIntersecting || document.hidden; }),
+      ([entry]) => {
+        inView = entry?.isIntersecting ?? false;
+        if (inView) startLoop();
+        else stopLoop();
+      },
       { threshold: 0 }
     );
     observer.observe(wrap);
     const onVis = () => {
-      const rect = wrap.getBoundingClientRect();
-      const inView = rect.bottom > 0 && rect.top < window.innerHeight;
-      paused = document.hidden || !inView;
+      visible = document.visibilityState === 'visible';
+      if (visible) startLoop();
+      else stopLoop();
     };
     document.addEventListener('visibilitychange', onVis);
 
-    let raf = 0;
-    let dead = false;
-    const start = performance.now();
-    const loop = () => {
-      if (dead) return;
-      raf = requestAnimationFrame(loop);
-      if (paused) return;
-      render((performance.now() - start) / 1000);
-    };
-    raf = requestAnimationFrame(loop);
-
     return () => {
       dead = true;
-      cancelAnimationFrame(raf);
+      stopLoop();
       observer.disconnect();
+      resizeObserver.disconnect();
       document.removeEventListener('visibilitychange', onVis);
-      window.removeEventListener('resize', resize);
       gl.deleteProgram(prog);
       gl.deleteBuffer(buf);
     };

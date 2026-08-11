@@ -15,15 +15,32 @@ const smootherstep = (value: number) => {
 export default function ThreeScrollCards() {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<Array<HTMLElement | null>>([]);
+  const cardSizesRef = useRef(CARDS.map(() => ({ width: 0, height: 0 })));
 
   useEffect(() => {
     let frame = 0;
+    let active = false;
+    let viewportWidth = window.innerWidth;
+    let viewportHeight = window.innerHeight;
+
+    const measure = () => {
+      viewportWidth = window.innerWidth;
+      viewportHeight = window.innerHeight;
+      cardRefs.current.forEach((card, index) => {
+        if (!card) return;
+        cardSizesRef.current[index] = {
+          width: card.offsetWidth,
+          height: card.offsetHeight,
+        };
+      });
+    };
 
     const updateCards = () => {
+      frame = 0;
+      if (!active) return;
       const container = containerRef.current;
       if (!container) return;
 
-      const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
       const rect = container.getBoundingClientRect();
       const travel = Math.max(1, rect.height - viewportHeight);
       const globalProgress = clamp(-rect.top / travel);
@@ -33,10 +50,9 @@ export default function ThreeScrollCards() {
         const config = CARDS[index];
         const localProgress = clamp((globalProgress - config.enterStart) / config.enterDistance);
         const entered = smootherstep(localProgress);
-        const cardWidth = card.offsetWidth;
-        const cardHeight = card.offsetHeight;
+        const { width: cardWidth, height: cardHeight } = cardSizesRef.current[index];
         const startX = -cardWidth * 0.72;
-        const targetX = window.innerWidth * (config.targetPctX / 100) - cardWidth / 2;
+        const targetX = viewportWidth * (config.targetPctX / 100) - cardWidth / 2;
         const targetY = viewportHeight * (config.targetPctY / 100) - cardHeight / 2;
         const x = startX + (targetX - startX) * entered;
         const rotationY = 46 * (1 - entered);
@@ -49,19 +65,39 @@ export default function ThreeScrollCards() {
     };
 
     const scheduleUpdate = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(updateCards);
+      if (active && !frame) frame = requestAnimationFrame(updateCards);
     };
 
-    scheduleUpdate();
+    const handleResize = () => {
+      measure();
+      scheduleUpdate();
+    };
+
+    measure();
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        active = entry?.isIntersecting ?? false;
+        if (active) scheduleUpdate();
+        else if (frame) {
+          cancelAnimationFrame(frame);
+          frame = 0;
+        }
+      },
+      { rootMargin: '50% 0px 50% 0px' },
+    );
+    if (containerRef.current) intersectionObserver.observe(containerRef.current);
+
+    const resizeObserver = new ResizeObserver(handleResize);
+    cardRefs.current.forEach((card) => card && resizeObserver.observe(card));
+
     window.addEventListener('scroll', scheduleUpdate, { passive: true });
-    window.addEventListener('resize', scheduleUpdate);
-    window.visualViewport?.addEventListener('resize', scheduleUpdate);
+    window.addEventListener('resize', handleResize, { passive: true });
     return () => {
       cancelAnimationFrame(frame);
+      intersectionObserver.disconnect();
+      resizeObserver.disconnect();
       window.removeEventListener('scroll', scheduleUpdate);
-      window.removeEventListener('resize', scheduleUpdate);
-      window.visualViewport?.removeEventListener('resize', scheduleUpdate);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 

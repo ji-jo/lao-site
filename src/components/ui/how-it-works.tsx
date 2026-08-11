@@ -1,165 +1,6 @@
 "use client";
 
 import React from "react";
-// domMax, not domAnimation: the smaller bundle omits the viewport feature, so
-// `whileInView` silently never fires and every animated element stays stuck at
-// its `initial` state (cards invisible, rules collapsed to scaleX 0).
-import { LazyMotion, domMax, m } from "motion/react";
-
-interface CardProps {
-  number: string;
-  title: string;
-  description: string;
-  colorTheme?: "orange" | "blue" | "purple";
-  className?: string;
-  rotate?: string;
-  /** Position in the sequence; drives the 100ms entrance stagger. */
-  index?: number;
-  colors?: {
-    bg: string;
-    text: string;
-    border: string;
-  };
-}
-
-const Pin = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    className={className}
-  >
-    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-    <path d="M16 3a1 1 0 0 1 .117 1.993l-.117 .007v4.764l1.894 3.789a1 1 0 0 1 .1 .331l.006 .116v2a1 1 0 0 1 -.883 .993l-.117 .007h-4v4a1 1 0 0 1 -1.993 .117l-.007 -.117v-4h-4a1 1 0 0 1 -.993 -.883l-.007 -.117v-2a1 1 0 0 1 .06 -.34l.046 -.107l1.894 -3.791v-4.762a1 1 0 0 1 -.117 -1.993l.117 -.007h8z" />
-  </svg>
-);
-
-const Card = ({
-  number,
-  title,
-  description,
-  colorTheme = "blue",
-  className,
-  rotate,
-  index = 0,
-  colors: customColors,
-}: CardProps) => {
-  const defaultBgColors = {
-    orange: "bg-orange-50 dark:bg-orange-500/10",
-    blue: "bg-blue-50 dark:bg-blue-500/10",
-    purple: "bg-purple-50 dark:bg-purple-500/10",
-  };
-  const defaultTextColors = {
-    orange: "text-orange-500 dark:text-orange-400",
-    blue: "text-blue-600 dark:text-blue-400",
-    purple: "text-purple-600 dark:text-purple-400",
-  };
-  const defaultBorderColors = {
-    orange: "border-orange-100 dark:border-orange-500/20",
-    blue: "border-blue-100 dark:border-blue-500/20",
-    purple: "border-purple-100 dark:border-purple-500/20",
-  };
-
-  const bgColor = customColors?.bg || defaultBgColors[colorTheme];
-  const textColor = customColors?.text || defaultTextColors[colorTheme];
-  const borderColor = customColors?.border || defaultBorderColors[colorTheme];
-
-  return (
-    // `rotate-*` / `scale-*` are Tailwind v4 utilities, which set the standalone
-    // `rotate` and `scale` properties — so motion writing `transform` here for
-    // the entrance does not clobber the tilt or the hover scale.
-    <m.div
-      className={`relative w-full md:w-[280px] transition-transform duration-300 hover:z-30 hover:scale-105 ${rotate} ${className}`}
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.35 }}
-      transition={{
-        duration: 0.55,
-        delay: index * 0.1,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-    >
-      <div className="bg-white dark:bg-neutral-900 p-2 rounded-[25px] shadow-[0px_10px_20px_0px_#D3D3D3] dark:shadow-none border border-neutral-100 dark:border-neutral-800">
-        <Pin className={`w-8 h-8 ${textColor} z-20 mb-6 mx-auto`} />
-        <div
-          className={`${bgColor} border ${borderColor} rounded-[15px] p-[15px] h-full flex flex-col relative overflow-hidden`}
-        >
-          <span
-            className={`${textColor} text-4xl font-handwriting mb-5`}
-            style={{
-              fontFamily: '"Comic Sans MS", "Chalkboard SE", sans-serif',
-            }}
-          >
-            {number}
-          </span>
-          <h3 className="text-2xl font-semibold text-neutral-800 dark:text-neutral-100 leading-none mb-[10px]">
-            {title}
-          </h3>
-          <p className="text-neutral-500 dark:text-neutral-400 text-sm/5 tracking-tight">
-            {description}
-          </p>
-        </div>
-      </div>
-    </m.div>
-  );
-};
-
-// Progressive blur for the horizontal rules. A single element cannot vary its
-// blur across its own width, so each rule set is drawn several times: every
-// copy is blurrier than the last and masked to a narrower band at the left and
-// right edges. The result is lines that dissolve outward instead of stopping
-// dead at the viewport edge. `filter` (not `backdrop-filter`) is used so only
-// the rules blur — nothing behind them is touched.
-// Three steps rather than four: each is a full-bleed blurred surface, and the
-// blur is the expensive part — dropping one removes a quarter of the raster
-// cost for a difference that is not visible at these opacities.
-const RULE_BLUR_LAYERS = [
-  { blur: 0, mask: "transparent 0%, #000 16%, #000 84%, transparent 100%" },
-  { blur: 3, mask: "#000 0%, #000 6%, transparent 20%, transparent 80%, #000 94%, #000 100%" },
-  { blur: 9, mask: "#000 0%, transparent 8%, transparent 92%, #000 100%" },
-];
-
-/**
- * One full-bleed set of horizontal rules, blurred progressively at the edges,
- * which widens open from the centre when the section scrolls into view.
- */
-function Rules({ image, className }: { image: string; className: string }) {
-  return (
-    <m.div
-      aria-hidden="true"
-      className={`pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 ${className}`}
-      initial={{ scaleX: 0 }}
-      whileInView={{ scaleX: 1 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-    >
-      {RULE_BLUR_LAYERS.map((layer) => {
-        const mask = `linear-gradient(to right, ${layer.mask})`;
-        return (
-          <div
-            key={layer.blur}
-            className="absolute inset-0"
-            style={{
-              backgroundImage: image,
-              backgroundSize: "100% 32px",
-              marginTop: "4px",
-              filter: layer.blur ? `blur(${layer.blur}px)` : undefined,
-              maskImage: mask,
-              WebkitMaskImage: mask,
-              // Promote each copy to its own compositor layer so the blur is
-              // rasterised once instead of being repainted on every scroll
-              // frame — that repainting was the source of the jitter.
-              transform: "translateZ(0)",
-              backfaceVisibility: "hidden",
-            }}
-          />
-        );
-      })}
-    </m.div>
-  );
-}
 
 export interface Step {
   title: string;
@@ -180,159 +21,397 @@ export interface StepPosition {
 export interface HowItWorksProps {
   features?: Step[];
   className?: string;
+  /** Kept for API compatibility with earlier versions of this component. */
   stepPositions?: StepPosition[];
 }
 
-const DEFAULT_CARD_POSITIONS: StepPosition[] = [
-  { className: "md:absolute md:top-0 md:left-[15%]", rotate: "rotate-8" },
-  {
-    className: "md:absolute md:top-[120px] md:right-[15%]",
-    rotate: "-rotate-8",
-  },
-  { className: "md:absolute md:top-[450px] md:left-[15%]", rotate: "rotate-8" },
-  {
-    className: "md:absolute md:top-[570px] md:right-[10%]",
-    rotate: "-rotate-8",
-  },
-  { className: "md:absolute md:top-[850px] md:left-[15%]", rotate: "rotate-8" },
+type Point = { x: number; y: number };
+type DragState = {
+  index: number;
+  pointerId: number;
+  startX: number;
+  startY: number;
+  origin: Point;
+};
+
+const WIDE_LAYOUT: Point[] = [
+  { x: 0.18, y: 0.27 },
+  { x: 0.69, y: 0.23 },
+  { x: 0.31, y: 0.72 },
+  { x: 0.79, y: 0.69 },
+  { x: 0.52, y: 0.48 },
 ];
+
+const NARROW_LAYOUT: Point[] = [
+  { x: 0.5, y: 0.15 },
+  { x: 0.5, y: 0.39 },
+  { x: 0.5, y: 0.63 },
+  { x: 0.5, y: 0.87 },
+  { x: 0.5, y: 0.5 },
+];
+
+const CARD_ROTATIONS = [-3.5, 2.8, -2.1, 3.2, -1.4];
+const THREAD_COLORS = ["#ff6078", "#f5eee0", "#ff6078", "#48618d"];
+
+const DEFAULT_FEATURES: Step[] = [
+  {
+    title: "Create Account",
+    description: "Sign up in minutes and get started.",
+    colorTheme: "orange",
+  },
+  {
+    title: "Verify Identity",
+    description: "Complete your profile verification.",
+    colorTheme: "blue",
+  },
+  {
+    title: "Select Plan",
+    description: "Choose the plan that fits your goal.",
+    colorTheme: "purple",
+  },
+  {
+    title: "Track Growth",
+    description: "Keep an eye on your progress.",
+    colorTheme: "orange",
+  },
+];
+
+const THEME = {
+  orange: { accent: "#ef603f", wash: "#fff1dc", border: "#e9cda7" },
+  blue: { accent: "#48618d", wash: "#edf3fb", border: "#c8d3e2" },
+  purple: { accent: "#765f98", wash: "#f2edf7", border: "#d7cae1" },
+};
+
+function makeThreadPath(from: Point, to: Point) {
+  const dx = to.x - from.x;
+  const dy = to.y - from.y;
+  const distance = Math.hypot(dx, dy);
+  const sag = Math.min(92, Math.max(42, distance * 0.16));
+
+  return [
+    `M ${from.x.toFixed(1)} ${from.y.toFixed(1)}`,
+    `C ${(from.x + dx * 0.28).toFixed(1)} ${(from.y + dy * 0.25 + sag).toFixed(1)},`,
+    `${(from.x + dx * 0.72).toFixed(1)} ${(from.y + dy * 0.75 + sag).toFixed(1)},`,
+    `${to.x.toFixed(1)} ${to.y.toFixed(1)}`,
+  ].join(" ");
+}
 
 export default function HowItWorks({
   features,
-  className,
-  stepPositions,
+  className = "",
 }: HowItWorksProps) {
-  const defaultFeatures: Step[] = [
-    {
-      title: "Create Account",
-      description:
-        "Sign up in minutes. Enter your details and verify your email to get started.",
-      colorTheme: "orange",
-    },
-    {
-      title: "Verify Identity",
-      description:
-        "Complete your profile verification to ensure secure transactions and compliance.",
-      colorTheme: "blue",
-    },
-    {
-      title: "Select Plan",
-      description:
-        "Choose from a variety of investment plans tailored to your financial goals.",
-      colorTheme: "purple",
-    },
-    {
-      title: "Analyze & Invest",
-      description:
-        "Review returns and make your first investment with confidence.",
-      colorTheme: "orange",
-    },
-    {
-      title: "Track Growth",
-      description:
-        "Monitor your portfolio in real-time and watch your wealth grow over time.",
-      colorTheme: "blue",
-    },
-  ];
+  const data = features?.length ? features : DEFAULT_FEATURES;
+  const boardRef = React.useRef<HTMLDivElement>(null);
+  const pinRefs = React.useRef<Array<HTMLSpanElement | null>>([]);
+  const dragRef = React.useRef<DragState | null>(null);
+  const pointerRef = React.useRef<Point>({ x: 0, y: 0 });
+  const frameRef = React.useRef<number | null>(null);
+  const hasPositionedRef = React.useRef(false);
 
-  const data = features && features.length > 0 ? features : defaultFeatures;
-  const positions = stepPositions || DEFAULT_CARD_POSITIONS;
+  const [positions, setPositions] = React.useState<Point[]>(() =>
+    data.map((_, index) => WIDE_LAYOUT[index % WIDE_LAYOUT.length]),
+  );
+  const [pinPoints, setPinPoints] = React.useState<Point[]>([]);
+  const [isVisible, setIsVisible] = React.useState(false);
+  const [draggingIndex, setDraggingIndex] = React.useState<number | null>(null);
 
-  let height = 1130;
-  if (data.length === 1) height = 400;
-  else if (data.length === 2) height = 450;
-  else if (data.length === 3) height = 800;
-  else if (data.length === 4) height = 900;
-  else height = 1130;
+  const measurePins = React.useCallback(() => {
+    const board = boardRef.current;
+    if (!board) return;
+
+    const boardRect = board.getBoundingClientRect();
+    const next = pinRefs.current.slice(0, data.length).map((pin) => {
+      if (!pin) return { x: 0, y: 0 };
+      const rect = pin.getBoundingClientRect();
+      return {
+        x: rect.left + rect.width / 2 - boardRect.left,
+        y: rect.top + rect.height / 2 - boardRect.top,
+      };
+    });
+
+    setPinPoints(next);
+  }, [data.length]);
+
+  React.useLayoutEffect(() => {
+    const board = boardRef.current;
+    if (!board) return;
+
+    if (!hasPositionedRef.current) {
+      const layout = board.clientWidth < 680 ? NARROW_LAYOUT : WIDE_LAYOUT;
+      setPositions(data.map((_, index) => layout[index % layout.length]));
+      hasPositionedRef.current = true;
+    }
+
+    measurePins();
+    const observer = new ResizeObserver(measurePins);
+    observer.observe(board);
+    return () => observer.disconnect();
+  }, [data, measurePins]);
+
+  React.useLayoutEffect(() => {
+    measurePins();
+  }, [positions, measurePins]);
+
+  React.useEffect(() => {
+    const board = boardRef.current;
+    if (!board) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setIsVisible(true);
+        observer.disconnect();
+      },
+      { threshold: 0.14 },
+    );
+    observer.observe(board);
+    return () => observer.disconnect();
+  }, []);
+
+  React.useEffect(
+    () => () => {
+      if (frameRef.current !== null) cancelAnimationFrame(frameRef.current);
+    },
+    [],
+  );
+
+  const applyPointerPosition = React.useCallback(() => {
+    frameRef.current = null;
+    const drag = dragRef.current;
+    const board = boardRef.current;
+    if (!drag || !board) return;
+
+    const card = pinRefs.current[drag.index]?.closest<HTMLElement>(
+      "[data-note-card]",
+    );
+    if (!card) return;
+
+    const boardRect = board.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const halfWidth = cardRect.width / boardRect.width / 2;
+    const halfHeight = cardRect.height / boardRect.height / 2;
+    const x = Math.min(
+      1 - halfWidth,
+      Math.max(
+        halfWidth,
+        drag.origin.x + (pointerRef.current.x - drag.startX) / boardRect.width,
+      ),
+    );
+    const y = Math.min(
+      1 - halfHeight,
+      Math.max(
+        halfHeight,
+        drag.origin.y + (pointerRef.current.y - drag.startY) / boardRect.height,
+      ),
+    );
+
+    setPositions((current) => {
+      const next = [...current];
+      next[drag.index] = { x, y };
+      return next;
+    });
+  }, []);
+
+  const onPointerDown = (
+    event: React.PointerEvent<HTMLDivElement>,
+    index: number,
+  ) => {
+    if (event.button !== 0) return;
+    event.currentTarget.setPointerCapture(event.pointerId);
+    dragRef.current = {
+      index,
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      origin: positions[index],
+    };
+    pointerRef.current = { x: event.clientX, y: event.clientY };
+    setDraggingIndex(index);
+  };
+
+  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (dragRef.current?.pointerId !== event.pointerId) return;
+    pointerRef.current = { x: event.clientX, y: event.clientY };
+    if (frameRef.current === null) {
+      frameRef.current = requestAnimationFrame(applyPointerPosition);
+    }
+  };
+
+  const finishDrag = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (dragRef.current?.pointerId !== event.pointerId) return;
+    pointerRef.current = { x: event.clientX, y: event.clientY };
+    applyPointerPosition();
+    dragRef.current = null;
+    setDraggingIndex(null);
+  };
+
+  const nudgeCard = (event: React.KeyboardEvent<HTMLDivElement>, index: number) => {
+    const direction: Record<string, Point> = {
+      ArrowLeft: { x: -1, y: 0 },
+      ArrowRight: { x: 1, y: 0 },
+      ArrowUp: { x: 0, y: -1 },
+      ArrowDown: { x: 0, y: 1 },
+    };
+    const delta = direction[event.key];
+    if (!delta) return;
+    event.preventDefault();
+    const amount = event.shiftKey ? 0.04 : 0.015;
+    setPositions((current) => {
+      const next = [...current];
+      const point = current[index];
+      next[index] = {
+        x: Math.min(0.9, Math.max(0.1, point.x + delta.x * amount)),
+        y: Math.min(0.9, Math.max(0.1, point.y + delta.y * amount)),
+      };
+      return next;
+    });
+  };
 
   return (
-    <LazyMotion features={domMax}>
+    <section className={`relative px-4 md:px-8 ${className}`}>
       <div
-        className={`bg-white dark:bg-black max-md:pt-10 max-md:pb-25 md:py-20 px-8 relative ${className}`}
+        ref={boardRef}
+        className="relative mx-auto h-[980px] w-full max-w-[1120px] overflow-hidden rounded-[28px] border border-white/10 md:h-[760px]"
+        style={{
+          backgroundColor: "#151412",
+          backgroundImage:
+            "radial-gradient(circle at 20% 30%, rgba(255,255,255,.045) 0 1px, transparent 1.5px), radial-gradient(circle at 75% 65%, rgba(218,177,118,.04) 0 1px, transparent 1.5px), linear-gradient(115deg, rgba(255,255,255,.018), transparent 38%)",
+          backgroundSize: "17px 19px, 23px 29px, 100% 100%",
+          boxShadow:
+            "inset 0 1px 0 rgba(255,255,255,.06), inset 0 0 90px rgba(0,0,0,.38)",
+        }}
       >
-        {/* Full-bleed: these break out of whatever container they are dropped
-            into, so the rules run edge to edge of the screen.
+        <div className="pointer-events-none absolute left-5 top-5 z-[3] flex items-center gap-3 rounded-full border border-white/10 bg-black/30 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.14em] text-white/55 md:left-8 md:top-7">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#ff6078]" />
+          Drag a note — the thread stays pinned
+        </div>
 
-            A single fixed-colour set, rather than the original light/dark pair:
-            those swapped on `dark:`, which resolves from the visitor's OS here
-            (this project sets no `dark` class), so the rules would flip colour
-            on a light-mode machine and all but vanish. */}
-        <Rules
-          image="linear-gradient(#48618D 1px, transparent 1px)"
-          className="opacity-[0.14]"
-        />
-        <div className="from-background pointer-events-none absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r"></div>
-        <div className="from-background pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l"></div>
-
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div
-            className="relative w-full max-w-[1000px] mx-auto flex flex-col space-y-8 md:space-y-0 md:block h-auto md:h-[var(--md-height)]"
-            style={{ "--md-height": `${height}px` } as React.CSSProperties}
+        {pinPoints.length === data.length && data.length > 1 && (
+          <svg
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 z-[4] h-full w-full"
+            viewBox={`0 0 ${boardRef.current?.clientWidth || 1120} ${boardRef.current?.clientHeight || 760}`}
+            preserveAspectRatio="none"
           >
-            {data.length > 1 && (
-              <svg
-                className="absolute top-0 left-0 w-full h-full pointer-events-none hidden md:block z-0"
-                viewBox={`0 0 1000 ${height}`}
-                preserveAspectRatio="none"
-              >
-                {(() => {
-                  const pathD = data.reduce((acc, _, index) => {
-                    if (index >= data.length - 1) return acc;
-                    if (index === 0)
-                      return "M 290 150 C 500 150, 550 270, 710 270"; // 1 -> 2
-                    if (index === 1)
-                      return acc + " C 850 270, 500 350, 290 450"; // 2 -> 3
-                    if (index === 2)
-                      return acc + " C 290 600, 550 720, 750 720"; // 3 -> 4
-                    if (index === 3)
-                      return acc + " C 950 720, 500 800, 290 850"; // 4 -> 5
-                    return acc;
-                  }, "");
-                  return (
-                    <m.path
-                      d={pathD}
-                      stroke="currentColor"
-                      className="text-neutral-300 dark:text-neutral-700"
-                      strokeWidth="2"
-                      strokeDasharray="8 6"
-                      fill="none"
-                      strokeLinecap="round"
-                      vectorEffect="non-scaling-stroke"
-                      initial={{ strokeDashoffset: 0 }}
-                      animate={{
-                        strokeDashoffset: -140, // Multiple of 14 (8+6) for seamless loop
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
-                    />
-                  );
-                })()}
-              </svg>
-            )}
-
-            {data.map((step, index) => {
-              const position = positions[index % positions.length];
-
+            {pinPoints.slice(0, -1).map((from, index) => {
+              const path = makeThreadPath(from, pinPoints[index + 1]);
+              const delay = `${index * 100 + 160}ms`;
+              const revealed = isVisible;
               return (
-                <Card
-                  key={step.title}
-                  number={`0${index + 1}`}
-                  title={step.title}
-                  description={step.description}
-                  colorTheme={step.colorTheme || "blue"}
-                  colors={step.colors}
-                  rotate={position.rotate}
-                  className={position.className}
-                  index={index}
-                />
+                <g key={`${data[index].title}-${data[index + 1].title}`}>
+                  <path
+                    d={path}
+                    fill="none"
+                    pathLength={1}
+                    stroke="rgba(0,0,0,.52)"
+                    strokeLinecap="round"
+                    strokeWidth="5"
+                    style={{
+                      strokeDasharray: 1,
+                      strokeDashoffset: revealed ? 0 : 1,
+                      transition: `stroke-dashoffset 650ms cubic-bezier(.22,1,.36,1) ${delay}`,
+                    }}
+                  />
+                  <path
+                    d={path}
+                    fill="none"
+                    pathLength={1}
+                    stroke={THREAD_COLORS[index % THREAD_COLORS.length]}
+                    strokeLinecap="round"
+                    strokeWidth="2.25"
+                    style={{
+                      strokeDasharray: 1,
+                      strokeDashoffset: revealed ? 0 : 1,
+                      transition: `stroke-dashoffset 650ms cubic-bezier(.22,1,.36,1) ${delay}`,
+                    }}
+                  />
+                </g>
               );
             })}
-          </div>
-        </div>
+          </svg>
+        )}
+
+        {data.map((step, index) => {
+          const point = positions[index] || WIDE_LAYOUT[index % WIDE_LAYOUT.length];
+          const theme = THEME[step.colorTheme || "blue"];
+          const isDragging = draggingIndex === index;
+
+          return (
+            <div
+              key={step.title}
+              data-note-card
+              role="group"
+              aria-label={`Step ${index + 1}: ${step.title}. Drag to reposition.`}
+              tabIndex={0}
+              className="absolute cursor-grab select-none touch-none outline-none focus-visible:ring-2 focus-visible:ring-[#ff6078] active:cursor-grabbing"
+              style={{
+                width: "min(270px, calc(100% - 32px))",
+                left: `${point.x * 100}%`,
+                top: `${point.y * 100}%`,
+                zIndex: isDragging ? 30 : 8 + index,
+                transform: `translate(-50%, -50%) rotate(${CARD_ROTATIONS[index % CARD_ROTATIONS.length]}deg)`,
+              }}
+              onPointerDown={(event) => onPointerDown(event, index)}
+              onPointerMove={onPointerMove}
+              onPointerUp={finishDrag}
+              onPointerCancel={finishDrag}
+              onLostPointerCapture={() => {
+                dragRef.current = null;
+                setDraggingIndex(null);
+              }}
+              onKeyDown={(event) => nudgeCard(event, index)}
+            >
+              <div
+                className="relative min-h-[180px] rounded-[3px] border px-6 pb-6 pt-9 text-[#25231f] shadow-[0_16px_30px_rgba(0,0,0,.34)] transition-[opacity,transform,box-shadow] duration-500 ease-out"
+                style={{
+                  backgroundColor: step.colors?.bg || theme.wash,
+                  backgroundImage:
+                    "radial-gradient(circle at 18% 24%, rgba(78,60,36,.08) 0 .7px, transparent .9px), repeating-linear-gradient(0deg, rgba(87,70,48,.025) 0 1px, transparent 1px 5px)",
+                  backgroundSize: "11px 13px, 100% 5px",
+                  borderColor: step.colors?.border || theme.border,
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible
+                    ? `translateY(0) scale(${isDragging ? 1.025 : 1})`
+                    : "translateY(26px) scale(.97)",
+                  transitionDelay: `${index * 100}ms`,
+                  boxShadow: isDragging
+                    ? "0 24px 44px rgba(0,0,0,.5)"
+                    : "0 16px 30px rgba(0,0,0,.34)",
+                }}
+              >
+                <span
+                  ref={(node) => {
+                    pinRefs.current[index] = node;
+                  }}
+                  aria-hidden="true"
+                  className="absolute left-1/2 top-[-9px] z-10 h-[22px] w-[22px] -translate-x-1/2 rounded-full border border-black/25 shadow-[0_5px_8px_rgba(0,0,0,.38)]"
+                  style={{
+                    background:
+                      "radial-gradient(circle at 35% 28%, #ffd1d8 0 8%, #ff6078 28%, #a91e39 78%, #641022 100%)",
+                  }}
+                />
+
+                <div className="mb-5 flex items-center justify-between border-b border-black/10 pb-3 font-mono text-[10px] uppercase tracking-[0.13em] text-black/45">
+                  <span>Step {String(index + 1).padStart(2, "0")}</span>
+                  <span>LAO file</span>
+                </div>
+                <h3 className="m-0 font-display text-[29px] font-normal leading-none text-[#22201d]">
+                  {step.title}
+                </h3>
+                <p className="mb-0 mt-4 max-w-[28ch] text-[14px] leading-[1.55] text-[#4f4a42]">
+                  {step.description}
+                </p>
+                <span
+                  aria-hidden="true"
+                  className="absolute bottom-3 right-4 font-mono text-[10px]"
+                  style={{ color: step.colors?.text || theme.accent }}
+                >
+                  {String(index + 1).padStart(2, "0")} / {String(data.length).padStart(2, "0")}
+                </span>
+              </div>
+            </div>
+          );
+        })}
       </div>
-    </LazyMotion>
+    </section>
   );
 }

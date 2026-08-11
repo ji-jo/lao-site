@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import React, { useRef } from "react";
+import { CrowdCanvas } from "@/components/ui/skiper-ui/skiper39";
 
 const Footer = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -13,10 +14,10 @@ const Footer = () => {
   return (
     <section
       ref={ref}
-      className="mx-auto flex h-[350vh] w-full flex-col items-center overflow-hidden bg-ink-900 px-4 text-text-hi"
+      className="relative mx-auto flex h-[350vh] w-full flex-col items-center overflow-x-clip bg-ink-900 px-4 text-text-hi"
     >
-      <div className="mt-40 relative flex w-fit flex-col items-center justify-center gap-5 text-center">
-        <h1 className="font-display relative z-10 text-5xl md:text-7xl lg:text-9xl tracking-[-0.08em]">
+      <div className="relative z-10 mt-16 flex w-fit flex-col items-center justify-center gap-5 text-center md:mt-24">
+        <h1 className="site-heading relative z-10">
           Draw, animate, <br /> and explain <br />
           with LAO
         </h1>
@@ -25,16 +26,16 @@ const Footer = () => {
         </p>
 
         <LinePath
-          className="absolute -right-[40%] top-0 z-0 text-accent"
+          className="pointer-events-none absolute -right-[40%] top-[280px] z-0 text-accent"
           scrollYProgress={scrollYProgress}
         />
       </div>
 
-      <div className="rounded-[2rem] font-body w-full max-w-[1200px] translate-y-[200vh] bg-ink-800 pb-10 text-text-hi shadow-2xl">
-        <h1 className="mt-10 text-center font-display text-[15.5vw] leading-[0.9] tracking-tighter lg:text-[16.6vw]">
+      <div className="relative z-10 rounded-[2rem] font-body w-full max-w-[1200px] translate-y-[200vh] bg-ink-800 pb-10 text-text-hi shadow-2xl">
+        <h1 className="mx-auto mt-10 flex w-full justify-center text-center font-display text-[15.5vw] leading-[0.9] tracking-tighter lg:text-[16.6vw]">
           lao.so
         </h1>
-        <div className="mt-40 lg:mt-80 flex w-full flex-col items-start gap-5 px-8 lg:px-12 font-medium lg:flex-row lg:justify-between text-text-mid">
+        <div className="mt-10 lg:mt-[200px] flex w-full flex-col items-start gap-5 px-8 lg:px-12 font-medium lg:flex-row lg:justify-between text-text-mid">
           <div className="flex w-full items-center justify-between gap-12 uppercase lg:w-fit lg:justify-center">
             <p className="w-fit text-sm">
               Built for <br />
@@ -46,13 +47,16 @@ const Footer = () => {
           </div>
           <div className="flex w-full flex-wrap items-center justify-between gap-12 uppercase lg:w-fit lg:justify-center">
             <p className="w-fit text-sm">
-              Mac & Windows <br /> Native
+              Browser <br /> Based
             </p>
-            <p className="w-fit text-right text-sm lg:text-left hover:text-text-hi transition-colors cursor-pointer">
-              <a href="#waitlist">Join Waitlist</a>
+            <p className="w-fit text-right text-sm leading-tight transition-colors hover:text-text-hi lg:text-left">
+              <a href="#waitlist">JOIN<br />WAITLIST</a>
             </p>
           </div>
         </div>
+      </div>
+      <div className="pointer-events-none absolute bottom-0 left-1/2 z-20 h-screen w-screen -translate-x-1/2 overflow-visible">
+        <CrowdCanvas src="/images/peeps/all-peeps.png" rows={15} cols={7} count={12} />
       </div>
     </section>
   );
@@ -67,7 +71,11 @@ const LinePath = ({
   className: string;
   scrollYProgress: any;
 }) => {
-  const pathLength = useTransform(scrollYProgress, [0, 1], [0.5, 1]);
+  const pathLength = useTransform(
+    scrollYProgress,
+    [0, 0.62, 1],
+    [0.5, 0.78, 0.78],
+  );
 
   return (
     <svg

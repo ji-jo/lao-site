@@ -298,7 +298,7 @@ export const KBtn = ({
   childrenClassName?: string;
   backlit?: boolean;
 }) => (
-  <div className={cn("[transform:translateZ(0)] rounded-[4px] p-[0.5px] [will-change:transform]", backlit && "bg-white/[0.2] shadow-xl shadow-white")}>
+  <div className={cn("rounded-[4px] p-[0.5px]", backlit && "bg-white/[0.2] shadow-xl shadow-white")}>
     <div
       className={cn("flex h-6 w-6 items-center justify-center rounded-[3.5px] bg-[#0A090D]", className)}
       style={{ boxShadow: "0px -0.5px 2px 0 #0D0D0F inset, -0.5px 0px 2px 0 #0D0D0F inset" }}
@@ -329,7 +329,7 @@ const AceternityLogo = () => (
 );
 
 export const Keypad = () => (
-  <div className="mx-1 h-full [transform:translateZ(0)] rounded-md bg-[#050505] p-1 [will-change:transform]">
+  <div className="mx-1 h-full rounded-md bg-[#050505] p-1">
     {/* Row 1 */}
     <div className="mb-[2px] flex w-full shrink-0 gap-[2px]">
       <KBtn className="w-10 items-end justify-start pb-[2px] pl-[4px]" childrenClassName="items-start">esc</KBtn>
