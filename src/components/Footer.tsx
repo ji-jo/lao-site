@@ -31,11 +31,13 @@ const Footer = () => {
         />
       </div>
 
-      <div className="relative z-10 rounded-[2rem] font-body w-full max-w-[1200px] translate-y-[200vh] bg-ink-800 pb-10 text-text-hi shadow-2xl">
-        <h1 className="mx-auto mt-10 flex w-full justify-center text-center font-display text-[15.5vw] leading-[0.9] tracking-tighter lg:text-[16.6vw]">
-          lao.so
-        </h1>
-        <div className="mt-10 lg:mt-[200px] flex w-full flex-col items-start gap-5 px-8 lg:px-12 font-medium lg:flex-row lg:justify-between text-text-mid">
+      <div className="relative z-10 flex min-h-[420px] w-full max-w-[1200px] translate-y-[200vh] flex-col rounded-[2rem] bg-ink-800 px-8 pb-12 pt-10 font-body text-text-hi shadow-2xl md:min-h-[560px] lg:px-12">
+        <div className="flex flex-1 items-center justify-center">
+          <h1 className="m-0 flex w-full justify-center text-center font-display text-[15.5vw] leading-[0.9] tracking-tighter lg:text-[16.6vw]">
+            lao.so
+          </h1>
+        </div>
+        <div className="mt-10 flex w-full flex-col items-start gap-5 font-medium text-text-mid lg:flex-row lg:justify-between">
           <div className="flex w-full items-center justify-between gap-12 uppercase lg:w-fit lg:justify-center">
             <p className="w-fit text-sm">
               Built for <br />
@@ -74,7 +76,7 @@ const LinePath = ({
   const pathLength = useTransform(
     scrollYProgress,
     [0, 0.62, 1],
-    [0.5, 0.78, 0.78],
+    [0.5, 0.86, 0.86],
   );
 
   return (

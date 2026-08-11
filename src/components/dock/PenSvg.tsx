@@ -34,7 +34,7 @@ export const TIPS = {
 const BAND = "M8 57.0525H34.1475V67.7492H8V57.0525Z";
 
 interface PenProps {
-  tip: "slant" | "fine" | "round";
+  tip: keyof typeof TIPS;
   /** Animated ink colour, passed as an oklch() string. */
   color: string;
   /** Rendered width in px; height follows the 43×170 aspect. */

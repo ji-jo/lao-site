@@ -140,7 +140,7 @@ interface PenDef {
 
 const PENS: PenDef[] = [
   { id: "slant", label: "Highlighter" },
-  { id: "brush", label: "Draw" },
+  { id: "brush", label: "Brush" },
 ];
 
 // Pen ids in row order (left -> right), so the drag overlay can compute a pen's along-row slot offset.
