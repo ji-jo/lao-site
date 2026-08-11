@@ -1,12 +1,11 @@
-import React from "react";
 import { MacbookScroll } from "@/components/ui/macbook-scroll";
-import heroImageUrl from "../../assets/hero-image.png?url";
+import HeroMiniDemo from "@/components/HeroMiniDemo";
 
 export default function MacbookScrollDemo() {
   return (
     <div className="w-full bg-transparent">
       <MacbookScroll
-        src={heroImageUrl}
+        screen={<HeroMiniDemo />}
         showGradient={false}
       />
     </div>

@@ -1,0 +1,38 @@
+---
+interface Props {
+  src?: string;
+  title?: string;
+  class?: string;
+}
+
+const {
+  src = "/lao-demo/",
+  title = "Interactive lao studio demo",
+  class: className,
+} = Astro.props;
+---
+
+<div class:list={["lao-studio-embed", className]}>
+  <iframe
+    src={src}
+    title={title}
+    width="1282"
+    height="914"
+    loading="lazy"
+    allow="autoplay"
+  ></iframe>
+</div>
+
+<style>
+  .lao-studio-embed,
+  .lao-studio-embed iframe {
+    display: block;
+    width: 1282px;
+    height: 914px;
+    border: 0;
+  }
+
+  .lao-studio-embed {
+    overflow: hidden;
+  }
+</style>

@@ -23,11 +23,13 @@ import { CommandIcon } from "@phosphor-icons/react/dist/csr/Command";
 
 export const MacbookScroll = ({
   src,
+  screen,
   showGradient,
   title,
   badge,
 }: {
   src?: string;
+  screen?: React.ReactNode;
   showGradient?: boolean;
   title?: string | React.ReactNode;
   badge?: React.ReactNode;
@@ -81,6 +83,17 @@ export const MacbookScroll = ({
   );
   // The display grows beyond the laptop only as the lid finishes opening.
   const screenZoom = useTransform(scrollYProgress, [0, OPEN_END], [1, isMobile ? 1.05 : 1.25]);
+  // Keep the laptop display clean while it is still seated in the lid. The
+  // Prussian-blue glow only fades in during the final part of its expansion.
+  const screenGlow = useTransform(
+    scrollYProgress,
+    [0, OPEN_END * 0.85, OPEN_END],
+    [
+      "0 2rem 5rem 0.75rem rgba(0, 49, 83, 0)",
+      "0 2rem 5rem 0.75rem rgba(0, 49, 83, 0)",
+      "0 2rem 5rem 0.75rem rgba(0, 49, 83, 0.72)",
+    ],
+  );
   // --- Viewport-relative screenshot centring ------------------------------
   // Keep the chassis where it belongs. Only the screenshot lifts out of the
   // lid, scales up, and locks to the browser centre during the sticky hold.
@@ -203,10 +216,12 @@ export const MacbookScroll = ({
           </motion.h2>
           <Lid
             src={src}
+            screen={screen}
             scaleX={scaleX}
             scaleY={scaleY}
             rotate={rotate}
             screenZoom={screenZoom}
+            screenGlow={screenGlow}
             screenshotLift={screenshotY}
             screenshotRef={screenshotRef}
             screenshotAnchorRef={screenshotAnchorRef}
@@ -236,16 +251,18 @@ export const MacbookScroll = ({
 };
 
 export const Lid = ({
-  scaleX, scaleY, rotate, screenZoom, screenshotLift, screenshotRef, screenshotAnchorRef, src,
+  scaleX, scaleY, rotate, screenZoom, screenGlow, screenshotLift, screenshotRef, screenshotAnchorRef, src, screen,
 }: {
   scaleX: MotionValue<number>;
   scaleY: MotionValue<number>;
   rotate: MotionValue<number>;
   screenZoom: MotionValue<number>;
+  screenGlow: MotionValue<string>;
   screenshotLift: MotionValue<number>;
   screenshotRef: React.RefObject<HTMLDivElement | null>;
   screenshotAnchorRef: React.RefObject<HTMLDivElement | null>;
   src?: string;
+  screen?: React.ReactNode;
 }) => {
   return (
     <div ref={screenshotAnchorRef} className="relative isolate [perspective:800px]">
@@ -268,19 +285,22 @@ export const Lid = ({
         style={{
           scaleX, scaleY, scale: screenZoom, y: screenshotLift, rotateX: rotate,
           transformStyle: "preserve-3d", transformOrigin: "top",
-          willChange: "transform",
+          willChange: "transform, box-shadow",
+          boxShadow: screenGlow,
         }}
         ref={screenshotRef}
         className="absolute inset-0 z-10 h-96 w-[32rem] rounded-2xl bg-[#010101] p-2 overflow-visible"
       >
-        <img
-          src={src as string}
-          alt="LAO app screenshot"
-          loading="eager"
-          decoding="sync"
-          fetchPriority="high"
-          className="absolute inset-0 h-full w-full rounded-lg object-cover object-left-top"
-        />
+        {screen ?? (src ? (
+          <img
+            src={src}
+            alt="LAO app screenshot"
+            loading="eager"
+            decoding="sync"
+            fetchPriority="high"
+            className="absolute inset-0 h-full w-full rounded-lg object-cover object-left-top"
+          />
+        ) : null)}
       </motion.div>
     </div>
   );
