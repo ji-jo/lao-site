@@ -43,10 +43,10 @@ const WIDE_LAYOUT: Point[] = [
 ];
 
 const NARROW_LAYOUT: Point[] = [
-  { x: 0.5, y: 0.24 },
-  { x: 0.5, y: 0.46 },
-  { x: 0.5, y: 0.68 },
-  { x: 0.5, y: 0.89 },
+  { x: 0.5, y: 0.18 },
+  { x: 0.5, y: 0.4 },
+  { x: 0.5, y: 0.62 },
+  { x: 0.5, y: 0.83 },
   { x: 0.5, y: 0.57 },
 ];
 
@@ -280,14 +280,6 @@ export default function HowItWorks({
             "inset 0 1px 0 rgba(255,255,255,.06), inset 0 0 90px rgba(0,0,0,.38)",
         }}
       >
-        <div
-          className="pointer-events-none absolute left-1/2 top-5 z-20 flex -translate-x-1/2 items-center gap-3 whitespace-nowrap rounded-full bg-black/30 px-4 py-2 text-[10px] uppercase tracking-[0.14em] text-white/55 md:top-7"
-          style={{ fontFamily: '"Departure Mono", ui-monospace, monospace' }}
-        >
-          <span className="h-1.5 w-1.5 rounded-full bg-[#ff6078]" />
-          Drag a note — the thread stays pinned
-        </div>
-
         {pinPoints.length === data.length && data.length > 1 && (
           <svg
             aria-hidden="true"

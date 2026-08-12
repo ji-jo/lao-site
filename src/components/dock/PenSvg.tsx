@@ -1,5 +1,6 @@
 import { useId, type CSSProperties } from "react";
 import { lightenOklch, oklchToRgb, parseOklch } from "./oklch.ts";
+import eraserToolUrl from "../../icons/eraser-tool.svg?url";
 
 // The three nib shapes, each in its own 0-15 space. TX centres the nib; per-tip `ty` drops its base
 // onto the funnel top. Exported so the favicon can paint the same selected nib (see favicon-svg.ts).
@@ -28,6 +29,12 @@ export const TIPS = {
     ty: -2.8,
     inner: "scale(0.16047) translate(-12.4263 0)",
   },
+  // The eraser has its own complete illustration; this placeholder only keeps
+  // the shared tool type exhaustive and is never painted as an ink nib.
+  eraser: {
+    d: "",
+    ty: 0,
+  },
 } as const;
 
 // Ink band near the funnel, outside the barrel's drop-shadow so MarkerRow can crossfade just the colour over a static barrel.
@@ -46,8 +53,24 @@ interface PenProps {
 }
 
 export function Pen({ tip, color, width, className, style, colorOnly }: PenProps) {
-  // Namespace the gradient/filter ids so multiple <Pen>s don't collide on shared defs.
+  // Keep hook order stable when the carried tool switches between a pen and eraser.
   const id = useId();
+
+  if (tip === "eraser") {
+    if (colorOnly) return null;
+    return (
+      <img
+        src={eraserToolUrl}
+        alt=""
+        aria-hidden="true"
+        draggable={false}
+        className={className}
+        style={{ width, height: "auto", ...style }}
+      />
+    );
+  }
+
+  // Namespace the gradient/filter ids so multiple <Pen>s don't collide on shared defs.
   const ink = parseOklch(color);
   // Cap displayed nib lightness so a pure-white ink stays visible against the panel.
   const visibleInk = ink.L > 0.9 ? { L: 0.9, C: ink.C, H: ink.H } : ink;

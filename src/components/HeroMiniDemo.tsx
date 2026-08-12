@@ -11,9 +11,15 @@ type LaoDemoWheelMessage = {
   deltaMode?: number;
 };
 
+type LaoDemoPointerDetail = {
+  clientX: number;
+  clientY: number;
+};
+
 export default function HeroMiniDemo() {
   const viewportRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const pointerBoundsRef = useRef({ left: 0, top: 0, width: 0, height: 0 });
   const [scale, setScale] = useState(1);
 
   useEffect(() => {
@@ -72,6 +78,56 @@ export default function HeroMiniDemo() {
 
     window.addEventListener("message", onMessage);
     return () => window.removeEventListener("message", onMessage);
+  }, []);
+
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+
+    let frameWindow: Window | null = null;
+
+    const syncPointerBounds = () => {
+      const { left, top, width, height } = iframe.getBoundingClientRect();
+      pointerBoundsRef.current = { left, top, width, height };
+    };
+
+    const relayPointerPosition = (event: MouseEvent) => {
+      const rect = pointerBoundsRef.current;
+      if (rect.width <= 0 || rect.height <= 0) return;
+
+      // The studio is scaled inside the MacBook screen. Convert the iframe's
+      // local mouse coordinates back to the visible viewport coordinates so
+      // the parent hint follows the real pointer precisely.
+      const detail: LaoDemoPointerDetail = {
+        clientX: rect.left + event.clientX * (rect.width / DEMO_WIDTH),
+        clientY: rect.top + event.clientY * (rect.height / DEMO_HEIGHT),
+      };
+      window.dispatchEvent(new CustomEvent<LaoDemoPointerDetail>("lao-demo-pointermove", { detail }));
+    };
+
+    const relayPointerLeave = () => window.dispatchEvent(new Event("lao-demo-pointerleave"));
+
+    const connectPointerRelay = () => {
+      frameWindow?.removeEventListener("mousemove", relayPointerPosition);
+      frameWindow?.removeEventListener("mouseleave", relayPointerLeave);
+      frameWindow = iframe.contentWindow;
+      frameWindow?.addEventListener("mousemove", relayPointerPosition, { passive: true });
+      frameWindow?.addEventListener("mouseleave", relayPointerLeave);
+    };
+
+    iframe.addEventListener("load", connectPointerRelay);
+    const resizeObserver = new ResizeObserver(syncPointerBounds);
+    resizeObserver.observe(iframe);
+    window.addEventListener("scroll", syncPointerBounds, { passive: true, capture: true });
+    syncPointerBounds();
+    connectPointerRelay();
+    return () => {
+      iframe.removeEventListener("load", connectPointerRelay);
+      resizeObserver.disconnect();
+      window.removeEventListener("scroll", syncPointerBounds, true);
+      frameWindow?.removeEventListener("mousemove", relayPointerPosition);
+      frameWindow?.removeEventListener("mouseleave", relayPointerLeave);
+    };
   }, []);
 
   return (

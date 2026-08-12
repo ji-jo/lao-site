@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { MotionValue, motion, useMotionValue, useScroll, useTransform } from "framer-motion";
+import { createPortal } from "react-dom";
+import { MotionValue, motion, useMotionValue, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { SunDimIcon } from "@phosphor-icons/react/dist/csr/SunDim";
 import { SunIcon } from "@phosphor-icons/react/dist/csr/Sun";
@@ -21,6 +22,23 @@ import { CaretLeftIcon } from "@phosphor-icons/react/dist/csr/CaretLeft";
 import { CaretRightIcon } from "@phosphor-icons/react/dist/csr/CaretRight";
 import { CommandIcon } from "@phosphor-icons/react/dist/csr/Command";
 
+const getViewportMetrics = () => {
+  if (typeof window === "undefined") return { isMobile: false, wrapperScale: 1.4 };
+
+  const width = window.innerWidth;
+  if (width >= 768) return { isMobile: false, wrapperScale: 1.4 };
+  // Tablet: reduce the laptop by 25% while preserving its centred sticky
+  // behaviour and enough inline room for the chassis at the narrow end.
+  if (width >= 600) return { isMobile: false, wrapperScale: 0.844 };
+
+  // The former phone scale was 0.5. Use the requested 2x size wherever the
+  // 32rem chassis fits, then shrink only enough to retain a 12px safe margin.
+  return {
+    isMobile: true,
+    wrapperScale: Math.min(1, Math.max(0.5, (width - 24) / 512)),
+  };
+};
+
 export const MacbookScroll = ({
   src,
   screen,
@@ -40,10 +58,10 @@ export const MacbookScroll = ({
     offset: ["start start", "end start"],
   });
 
-  const [isMobile, setIsMobile] = useState(false);
+  const [{ isMobile, wrapperScale }, setViewportMetrics] = useState(getViewportMetrics);
 
   useEffect(() => {
-    const updateViewportMode = () => setIsMobile(window.innerWidth < 768);
+    const updateViewportMode = () => setViewportMetrics(getViewportMetrics());
     updateViewportMode();
     window.addEventListener("resize", updateViewportMode);
     return () => window.removeEventListener("resize", updateViewportMode);
@@ -65,12 +83,17 @@ export const MacbookScroll = ({
   const TOTAL_VH = 100 + OPEN_VH + HOLD_VH; // sticky frame is one screen tall
   const OPEN_END = OPEN_VH / TOTAL_VH; // ~0.231
   const STICKY_END = (OPEN_VH + HOLD_VH) / TOTAL_VH;
+  const [screenInteractive, setScreenInteractive] = useState(false);
+
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    setScreenInteractive(value >= OPEN_END * 0.86 && value <= STICKY_END);
+  });
 
   // NOTE: these are the lid's *open* geometry, not a size control. The lid uses
   // transformOrigin "top", so raising scaleY stretches the screen downward from
   // the hinge and spills it over the keyboard rather than enlarging the laptop.
   // 1.2 is the correct fully-open value — to resize the whole thing, change the
-  // wrapper's md:scale-[…] below instead.
+  // responsive wrapper scale below instead.
   const scaleX = useTransform(
     scrollYProgress,
     [0, OPEN_END],
@@ -115,7 +138,6 @@ export const MacbookScroll = ({
       const holdRange = STICKY_END - OPEN_END;
       const holdProgress = Math.min(1, Math.max(0, (progress - OPEN_END) / holdRange));
       const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
-      const wrapperScale = window.innerWidth >= 768 ? 1.4 : window.innerWidth >= 640 ? 0.75 : 0.5;
       const travel = holdProgress * (HOLD_VH / 100) * viewportHeight;
 
       chassisScrollY.set(-travel);
@@ -131,7 +153,7 @@ export const MacbookScroll = ({
       window.visualViewport?.removeEventListener("resize", updateSeparatedTravel);
       unsubscribe();
     };
-  }, [OPEN_END, STICKY_END, chassisScrollY, screenshotCompensation, scrollYProgress]);
+  }, [OPEN_END, STICKY_END, chassisScrollY, screenshotCompensation, scrollYProgress, wrapperScale]);
 
   useLayoutEffect(() => {
     let animationFrame = 0;
@@ -151,7 +173,6 @@ export const MacbookScroll = ({
       // The screenshot sits inside the responsive chassis wrapper. Convert the
       // viewport-space distance back into that wrapper's local coordinate
       // system before applying it.
-      const wrapperScale = window.innerWidth >= 768 ? 1.4 : window.innerWidth >= 640 ? 0.75 : 0.5;
       // Read vertical position from the stable lid anchor. Measuring the
       // translated screenshot itself fed each correction back into the next
       // frame and caused visible shaking while scrolling.
@@ -182,7 +203,7 @@ export const MacbookScroll = ({
       window.visualViewport?.removeEventListener("resize", scheduleRecentre);
       unsubscribe();
     };
-  }, [OPEN_END, screenshotLift, scrollYProgress]);
+  }, [OPEN_END, screenshotLift, scrollYProgress, wrapperScale]);
   // Same shape as the original [0.1, 0.12, 0.3], rescaled onto the new OPEN_END.
   const rotate = useTransform(
     scrollYProgress,
@@ -207,7 +228,10 @@ export const MacbookScroll = ({
         >
           {/* Lift the chassis with the viewport, while the opened display is
               independently measured back to the viewport centre. */}
-          <div className="flex -translate-y-[12dvh] scale-[0.5] flex-col items-center sm:scale-75 md:scale-[1.4]">
+          <div
+            className="flex flex-col items-center will-change-transform"
+            style={{ transform: `translateY(-12dvh) scale(${wrapperScale})` }}
+          >
           <motion.h2
             style={{ translateY: textTransform, opacity: textOpacity }}
             className="mb-20 text-center text-3xl font-bold text-neutral-800 dark:text-white"
@@ -222,6 +246,7 @@ export const MacbookScroll = ({
             rotate={rotate}
             screenZoom={screenZoom}
             screenGlow={screenGlow}
+            interactive={screenInteractive}
             screenshotLift={screenshotY}
             screenshotRef={screenshotRef}
             screenshotAnchorRef={screenshotAnchorRef}
@@ -251,19 +276,63 @@ export const MacbookScroll = ({
 };
 
 export const Lid = ({
-  scaleX, scaleY, rotate, screenZoom, screenGlow, screenshotLift, screenshotRef, screenshotAnchorRef, src, screen,
+  scaleX, scaleY, rotate, screenZoom, screenGlow, interactive, screenshotLift, screenshotRef, screenshotAnchorRef, src, screen,
 }: {
   scaleX: MotionValue<number>;
   scaleY: MotionValue<number>;
   rotate: MotionValue<number>;
   screenZoom: MotionValue<number>;
   screenGlow: MotionValue<string>;
+  interactive: boolean;
   screenshotLift: MotionValue<number>;
   screenshotRef: React.RefObject<HTMLDivElement | null>;
   screenshotAnchorRef: React.RefObject<HTMLDivElement | null>;
   src?: string;
   screen?: React.ReactNode;
 }) => {
+  const cursorHintRef = useRef<HTMLDivElement>(null);
+  const isIframePointerRef = useRef(false);
+
+  const setCursorHintPosition = (clientX: number, clientY: number) => {
+    const hint = cursorHintRef.current;
+    hint?.style.setProperty("--cursor-hint-x", `${clientX}px`);
+    hint?.style.setProperty("--cursor-hint-y", `${clientY}px`);
+    hint?.style.setProperty("opacity", "1");
+  };
+
+  const hideCursorHint = () => {
+    cursorHintRef.current?.style.setProperty("opacity", "0");
+  };
+
+  useEffect(() => {
+    if (!interactive) hideCursorHint();
+  }, [interactive]);
+
+  useEffect(() => {
+    const onDemoPointerMove = (event: Event) => {
+      if (!interactive) return;
+      const { clientX, clientY } = (event as CustomEvent<{ clientX: number; clientY: number }>).detail;
+      isIframePointerRef.current = true;
+      setCursorHintPosition(clientX, clientY);
+    };
+    const onDemoPointerLeave = () => {
+      isIframePointerRef.current = false;
+      hideCursorHint();
+    };
+
+    window.addEventListener("lao-demo-pointermove", onDemoPointerMove);
+    window.addEventListener("lao-demo-pointerleave", onDemoPointerLeave);
+    return () => {
+      window.removeEventListener("lao-demo-pointermove", onDemoPointerMove);
+      window.removeEventListener("lao-demo-pointerleave", onDemoPointerLeave);
+    };
+  }, [interactive]);
+
+  const positionCursorHint = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (!interactive || event.pointerType === "touch") return;
+    setCursorHintPosition(event.clientX, event.clientY);
+  };
+
   return (
     <div ref={screenshotAnchorRef} className="relative isolate [perspective:800px]">
       <div
@@ -289,7 +358,22 @@ export const Lid = ({
           boxShadow: screenGlow,
         }}
         ref={screenshotRef}
-        className="absolute inset-0 z-10 h-96 w-[32rem] rounded-2xl bg-[#010101] p-2 overflow-visible"
+        onPointerEnter={(event) => {
+          positionCursorHint(event);
+        }}
+        onPointerMove={positionCursorHint}
+        onPointerLeave={() => {
+          // Moving from the MacBook wrapper into its iframe emits a parent
+          // leave event. Defer the decision one tick so the frame's relay can
+          // mark itself as the active pointer target first.
+          window.setTimeout(() => {
+            if (!isIframePointerRef.current) hideCursorHint();
+          }, 0);
+        }}
+        className={cn(
+          "absolute inset-0 z-10 h-96 w-[32rem] overflow-visible rounded-2xl bg-[#010101] p-2",
+          interactive && "cursor-pointer",
+        )}
       >
         {screen ?? (src ? (
           <img
@@ -302,6 +386,20 @@ export const Lid = ({
           />
         ) : null)}
       </motion.div>
+      {typeof document !== "undefined" && createPortal(
+        <div
+          ref={cursorHintRef}
+          aria-hidden="true"
+          className={cn(
+            "pointer-events-none fixed left-0 top-0 z-[200] opacity-0 transition-opacity duration-100 [transform:translate3d(var(--cursor-hint-x,50vw),var(--cursor-hint-y,50vh),0)]",
+          )}
+        >
+          <span className="absolute left-[-8px] top-[18px] whitespace-nowrap rounded-full border border-white/20 bg-[#101010]/95 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[.12em] text-white shadow-[0_6px_18px_rgba(0,0,0,.38)]">
+            Interact..
+          </span>
+        </div>,
+        document.body,
+      )}
     </div>
   );
 };

@@ -3,10 +3,13 @@
 When starting the dev server, use background mode:
 
 ```
-astro dev --background
+npm run dev
 ```
 
-Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+Manage the background server with `npm run dev:stop`, `npm run dev:status`, and `npm run dev:logs`.
+
+This project currently uses Astro 5, so background lifecycle management is provided by
+`scripts/astro-dev.mjs`. Astro's native `astro dev --background` command requires Astro 7.
 
 ## Documentation
 

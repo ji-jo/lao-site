@@ -21,6 +21,7 @@ export const DEFAULT_TUNING: Record<PenTip, TipTune> = {
   round: { dx: 0, dy: -3, scale: 1 },
   fine: { dx: 0, dy: -2.5, scale: 1 },
   brush: { dx: 0, dy: -3, scale: 1 },
+  eraser: { dx: 0, dy: -2, scale: 1 },
 };
 
 let state: OutlineTuning = { tips: { ...DEFAULT_TUNING }, preview: null };

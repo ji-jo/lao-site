@@ -1,15 +1,24 @@
 import { useEffect, useRef } from 'react';
 import { useSelectionStyle } from '../selection-style';
 import { CLEAR_EVENT } from './dock/ClearButton';
+import highlighterCursorUrl from '../icons/sf/highlighter-fill.svg?url';
+import brushCursorUrl from '../icons/sf/paint-brush-fill.svg?url';
+import eraserCursorUrl from '../icons/sf/eraser-fill.svg?url';
+import type { PenTip } from '../selection-style';
 
 type Pt = { x: number; y: number; w: number };
-type Stroke = { color: string; alpha: number; pts: Pt[] };
+type Stroke = { mode: 'paint' | 'erase'; color: string; alpha: number; pts: Pt[] };
 
 /** Base nib width in px; pressure and speed scale around this. */
 const BASE_W = 7;
 
-const BRUSH_CURSOR_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256"><path d="M232,32a8,8,0,0,0-8-8c-44.08,0-89.31,49.71-114.43,82.63A60,60,0,0,0,32,164c0,30.88-19.54,44.73-20.47,45.37A8,8,0,0,0,16,224H92a60,60,0,0,0,57.37-77.57C182.3,121.31,232,76.08,232,32ZM124.42,113.55q5.14-6.66,10.09-12.55A76.23,76.23,0,0,1,155,121.49q-5.9,4.94-12.55,10.09A60.54,60.54,0,0,0,124.42,113.55Zm42.7-2.68a92.57,92.57,0,0,0-22-22c31.78-34.53,55.75-45,69.9-47.91C212.17,55.12,201.65,79.09,167.12,110.87Z"/></svg>`;
-const BRUSH_CURSOR = `url("data:image/svg+xml,${encodeURIComponent(BRUSH_CURSOR_SVG)}") 4 28, crosshair`;
+const TOOL_CURSORS: Record<PenTip, string> = {
+  slant: `url("${highlighterCursorUrl}") 6 27, text`,
+  round: `url("${highlighterCursorUrl}") 6 27, text`,
+  fine: `url("${highlighterCursorUrl}") 6 27, text`,
+  brush: `url("${brushCursorUrl}") 5 28, crosshair`,
+  eraser: `url("${eraserCursorUrl}") 7 26, crosshair`,
+};
 
 /**
  * Freehand drawing surface for the dock's brush pen.
@@ -30,10 +39,15 @@ export function BrushCanvas() {
   const strokes = useRef<Stroke[]>([]);
   const colorRef = useRef(style.color);
   const alphaRef = useRef(style.opacity);
-  const activeRef = useRef(style.pen === 'brush');
+  const toolRef = useRef(style.pen);
   colorRef.current = style.color;
   alphaRef.current = style.opacity;
-  activeRef.current = style.pen === 'brush';
+  toolRef.current = style.pen;
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--drawing-tool-cursor', TOOL_CURSORS[style.pen]);
+    return () => document.documentElement.style.removeProperty('--drawing-tool-cursor');
+  }, [style.pen]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -110,10 +124,12 @@ export function BrushCanvas() {
       const ox = window.scrollX;
       const oy = window.scrollY;
       for (const s of strokes.current) {
+        ctx.globalCompositeOperation = s.mode === 'erase' ? 'destination-out' : 'source-over';
         ctx.globalAlpha = s.alpha;
         ctx.fillStyle = s.color;
         traceStroke(s, ox, oy);
       }
+      ctx.globalCompositeOperation = 'source-over';
       ctx.globalAlpha = 1;
     };
     const schedule = () => {
@@ -134,6 +150,9 @@ export function BrushCanvas() {
     // Stylus reports real pressure; a mouse always reports 0.5, so fall back to
     // speed — fast strokes thin out, slow ones sit heavier, like a real nib.
     const widthFor = (e: PointerEvent, prev: Pt | undefined) => {
+      // Erasing should have a predictable footprint instead of inheriting the
+      // brush's pressure/speed taper.
+      if (toolRef.current === 'eraser') return 14;
       let target: number;
       if (e.pointerType === 'pen' && e.pressure > 0) {
         target = BASE_W * (0.25 + e.pressure * 1.5);
@@ -151,12 +170,14 @@ export function BrushCanvas() {
     };
 
     const down = (e: PointerEvent) => {
-      if (!activeRef.current) return;
+      const tool = toolRef.current;
+      if (tool !== 'brush' && tool !== 'eraser') return;
       lastT = performance.now();
-      lastW = BASE_W;
+      lastW = tool === 'eraser' ? 28 : BASE_W;
       current = {
+        mode: tool === 'eraser' ? 'erase' : 'paint',
         color: colorRef.current,
-        alpha: alphaRef.current,
+        alpha: tool === 'eraser' ? 1 : alphaRef.current,
         pts: [{ x: e.clientX + window.scrollX, y: e.clientY + window.scrollY, w: widthFor(e, undefined) }],
       };
       strokes.current.push(current);
@@ -203,13 +224,13 @@ export function BrushCanvas() {
     };
   }, []);
 
-  const active = style.pen === 'brush';
+  const active = style.pen === 'brush' || style.pen === 'eraser';
   return (
     <canvas
       ref={canvasRef}
       aria-hidden="true"
       className="fixed inset-0 z-40 h-full w-full"
-      style={{ pointerEvents: active ? 'auto' : 'none', cursor: active ? BRUSH_CURSOR : 'auto' }}
+      style={{ pointerEvents: active ? 'auto' : 'none', cursor: active ? TOOL_CURSORS[style.pen] : 'auto' }}
     />
   );
 }
