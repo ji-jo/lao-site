@@ -153,6 +153,7 @@ const toPen = (hex: string) => oklchToCss(hexToOklch(hex));
 export function MarkerRow({
   color,
   selected,
+  active = true,
   opacityByPen,
   onSelect,
   onActivate,
@@ -160,6 +161,8 @@ export function MarkerRow({
 }: {
   color: string;
   selected: PenTip;
+  /** When false, no pen is armed and every pen stays in its resting position. */
+  active?: boolean;
   /** Per-pen ink opacity (0-1); each pen shows its own as a percentage. */
   opacityByPen: Record<PenTip, number>;
   onSelect: (pen: PenTip) => void;
@@ -196,7 +199,7 @@ export function MarkerRow({
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const keyboard = useNavModality();
 
-  const selectedIdx = PENS.findIndex((p) => p.id === selected);
+  const selectedIdx = active ? PENS.findIndex((p) => p.id === selected) : -1;
 
   // Clip each pen's hit region in from the top/sides so the grab-handle band above the pens (and any
   // neighbour spill) can't steal their hover/click. The art sits well below the top inset, so it never
@@ -224,7 +227,7 @@ export function MarkerRow({
     <div ref={rowRef} className="relative flex items-end" style={{ gap: GAP }} onPointerEnter={primeMarkerAudio}>
       {/* Every tool is named for assistive tech and keeps the same generous slot. */}
       {PENS.map((p, i) => {
-        const isSelected = p.id === selected;
+        const isSelected = active && p.id === selected;
         const pct = Math.round(opacityByPen[p.id] * 100);
         const place: CSSProperties = { position: "absolute", left: 0, top: REST_TOP };
         return (

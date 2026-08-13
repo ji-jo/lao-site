@@ -12,6 +12,27 @@ const smootherstep = (value: number) => {
   const t = clamp(value);
   return t * t * t * (t * (t * 6 - 15) + 10);
 };
+const getResponsiveTargetY = (
+  index: number,
+  targetPctY: number,
+  cardHeight: number,
+  viewportWidth: number,
+  viewportHeight: number,
+) => {
+  if (viewportWidth >= 768) {
+    return viewportHeight * (targetPctY / 100) - cardHeight / 2;
+  }
+
+  const cardGap = clamp(viewportHeight * 0.045, 24, 42);
+  const viewportPadding = clamp(viewportHeight * 0.045, 22, 40);
+  const idealStackHeight = cardHeight * CARDS.length + cardGap * (CARDS.length - 1);
+  const availableHeight = Math.max(cardHeight, viewportHeight - viewportPadding * 2);
+  const adjustedGap = Math.max(18, Math.min(cardGap, (availableHeight - cardHeight * CARDS.length) / (CARDS.length - 1)));
+  const stackHeight = cardHeight * CARDS.length + adjustedGap * (CARDS.length - 1);
+  const stackTop = Math.max(viewportPadding, (viewportHeight - Math.min(idealStackHeight, stackHeight)) / 2);
+
+  return stackTop + index * (cardHeight + adjustedGap);
+};
 
 export default function ThreeScrollCards() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -68,7 +89,7 @@ export default function ThreeScrollCards() {
         const { width: cardWidth, height: cardHeight } = cardSizesRef.current[index];
         const startX = -cardWidth * 1.35;
         const targetX = viewportWidth * (config.targetPctX / 100) - cardWidth / 2 + config.offsetX;
-        const targetY = viewportHeight * (config.targetPctY / 100) - cardHeight / 2;
+        const targetY = getResponsiveTargetY(index, config.targetPctY, cardHeight, viewportWidth, viewportHeight);
         const x = startX + (targetX - startX) * entered;
         const rotationY = 46 * (1 - entered);
         const isVisible = index === 0 || globalProgress >= config.enterStart;

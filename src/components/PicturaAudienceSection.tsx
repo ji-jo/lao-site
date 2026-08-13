@@ -88,6 +88,16 @@ const featureTargets = [
   { x: 0.33, y: 0.08, rotate: 8 },
 ];
 
+// On narrower viewports, a compact two-by-two composition keeps the cards and
+// their labels in the visible canvas instead of pushing the outer cards into
+// the supporting copy at the bottom of the section.
+const compactFeatureTargets = [
+  { x: -0.21, y: -0.2, rotate: -6 },
+  { x: 0.21, y: -0.2, rotate: 6 },
+  { x: -0.21, y: 0.13, rotate: -5 },
+  { x: 0.21, y: 0.13, rotate: 5 },
+];
+
 const featureCopy = [
   {
     title: 'Teachers',
@@ -153,6 +163,7 @@ export default function PicturaAudienceSection() {
       const eased = progress * progress * (3 - 2 * progress);
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
+      const useCompactFeatureLayout = viewportWidth <= 900;
 
       if (
         Math.abs(progress - previousProgress) < 0.0005
@@ -189,14 +200,14 @@ export default function PicturaAudienceSection() {
         if (!element) return;
 
         if (tile.id < featureTargets.length) {
-          const target = featureTargets[tile.id];
+          const target = (useCompactFeatureLayout ? compactFeatureTargets : featureTargets)[tile.id];
           const initialX = (tile.x + tile.width / 2 - width / 2) * scaleX;
           const initialY = (tile.y + tile.height / 2 - height / 2) * scaleY;
           const targetX = viewportWidth * target.x;
           const targetY = viewportHeight * target.y;
           const moveX = (targetX - initialX) / scaleX;
           const moveY = (targetY - initialY) / scaleY;
-          const scale = 1 + eased * 0.36;
+          const scale = 1 + eased * (useCompactFeatureLayout ? 0.12 : 0.36);
           element.style.transform = `translate3d(${(moveX * eased).toFixed(2)}px, ${(moveY * eased).toFixed(2)}px, 0) rotate(${(target.rotate * eased).toFixed(2)}deg) scale(${scale.toFixed(4)})`;
           element.style.opacity = '1';
           element.style.zIndex = '6';
@@ -251,13 +262,16 @@ export default function PicturaAudienceSection() {
             (() => {
               const column = tile.frame % CROWD_COLUMNS;
               const row = Math.floor(tile.frame / CROWD_COLUMNS);
-              const portraitOffset = tile.height === 37 ? 8 : 24;
+              // Offset relative to each square, rather than by a fixed number
+              // of pixels. A fixed 24px shift pushed the tiny lower rows far
+              // beyond their crop window on small screens.
+              const portraitOffset = Math.round(tile.height * 0.065);
 
               return (
                 <div
                   key={tile.id}
                   ref={(element) => { tileRefs.current[tile.id] = element; }}
-                  className={`pictura-tile ${tile.id < featureTargets.length ? 'pictura-feature-tile' : ''}`}
+                  className={`pictura-tile ${tile.id < featureTargets.length ? `pictura-feature-tile pictura-feature-tile-${tile.id}` : ''}`}
                   style={{
                     left: `${(tile.x / width) * 100}%`,
                     top: `${(tile.y / height) * 100}%`,
@@ -348,10 +362,12 @@ export default function PicturaAudienceSection() {
           .pictura-pin { min-height: 600px; }
           .pictura-kicker { top: 88px; }
           .pictura-heart { top: 43%; width: min(86vw,620px); }
-          .pictura-side-copy { bottom: 32px; width: calc(50% - 30px); font-size: clamp(21px,5vw,30px); }
+          .pictura-side-copy { display: none; }
           .pictura-side-copy-left { left: 20px; }
           .pictura-side-copy-right { right: 20px; }
-          .pictura-feature-copy { top: calc(100% + 10px); width: min(210px, 225%); gap: 4px; }
+          .pictura-feature-copy { top: calc(100% + 10px); width: min(42vw, 170px); gap: 4px; }
+          .pictura-feature-tile-1 .pictura-feature-copy,
+          .pictura-feature-tile-3 .pictura-feature-copy { right: 0; left: auto; text-align: right; }
           .pictura-feature-title { font-size: clamp(18px,3.4vw,24px); }
           .pictura-feature-description { font-size: 11px; line-height: 1.35; }
         }

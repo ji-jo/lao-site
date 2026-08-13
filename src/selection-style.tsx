@@ -44,6 +44,7 @@ interface SelectionStyleContextValue {
   style: SelectionStyle;
   setColor: (color: string) => void;
   setPen: (pen: PenTip) => void;
+  setDefaultTool: () => void;
   setOpacity: (opacity: number) => void;
   setMarkType: (markType: MarkType) => void;
 }
@@ -66,6 +67,11 @@ export function SelectionStyleProvider({ children }: { children: ReactNode }) {
     setPen(next);
     setActive(true);
   }, []);
+  // Keep the last ink and pen choice available, but disarm every drawing mode.
+  // Selecting a pen again re-arms it through `selectPen` above.
+  const setDefaultTool = useCallback(() => {
+    setActive(false);
+  }, []);
   // The slider edits the active pen's opacity, leaving others untouched.
   const setOpacity = useCallback(
     (next: number) => setOpacityByPen((m) => ({
@@ -80,10 +86,11 @@ export function SelectionStyleProvider({ children }: { children: ReactNode }) {
       style: { color, pen, active, opacity: opacityByPen[pen], opacityByPen, markType },
       setColor,
       setPen: selectPen,
+      setDefaultTool,
       setOpacity,
       setMarkType,
     }),
-    [active, color, pen, opacityByPen, markType, selectPen, setOpacity],
+    [active, color, pen, opacityByPen, markType, selectPen, setDefaultTool, setOpacity],
   );
   return (
     <SelectionStyleContext.Provider value={value}>

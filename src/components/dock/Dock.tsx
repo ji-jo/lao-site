@@ -5,6 +5,7 @@ import { MorphBackground } from "./MorphBackground.tsx";
 import { CollapsedMarker } from "./CollapsedMarker.tsx";
 import { ColorPalette } from "./ColorPalette.tsx";
 import { ClearButton } from "./ClearButton.tsx";
+import { DefaultToolButton } from "./DefaultToolButton.tsx";
 import { MarkerRow } from "./Marker.tsx";
 import { DockHandle } from "./DockHandle.tsx";
 import { DockPopover } from "./DockPopover.tsx";
@@ -17,7 +18,7 @@ import { useDockEntrance, useSkipDockEntrance } from "../../dock-entrance.tsx";
 import { dockContentAxis, useDockTier } from "../../hooks/useDockTier.ts";
 import { useDockDrag } from "./useDockDrag.ts";
 import type { DockRefs } from "./dockRefs.ts";
-import { DOCK_H, DOCK_W, ROW_W, ROW_H } from "./constants.ts";
+import { DOCK_H, ROW_W, ROW_H } from "./constants.ts";
 
 // Start fully below the viewport so the tray rises in from the bottom.
 const ENTER_FROM = DOCK_H + 96;
@@ -29,7 +30,7 @@ const ENTRANCE = {
 
 /** The tool tray. The outer layer is pointer-events:none so only the capsule is interactive. */
 export function Dock() {
-  const { style, setColor, setPen, setOpacity, setMarkType } = useSelectionStyle();
+  const { style, setColor, setPen, setDefaultTool, setOpacity, setMarkType } = useSelectionStyle();
   // Hold the entrance until the page's text cascade has landed.
   const { ready } = useDockEntrance();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -95,6 +96,7 @@ export function Dock() {
   const markerRowProps = {
     color: style.color,
     selected: style.pen,
+    active: style.active,
     opacityByPen: style.opacityByPen,
     onSelect: handleSelectPen,
     onActivate: handleActivate,
@@ -153,7 +155,7 @@ export function Dock() {
               <div
                 ref={refs.horizontal}
                 className="relative flex shrink-0 items-center justify-center gap-[32px] pl-[8px]"
-                style={{ width: DOCK_W, height: DOCK_H }}
+                style={{ width: "max-content", height: DOCK_H }}
               >
                 <div className="flex h-full items-center gap-[28px]">
                   <div className="flex h-full items-end">
@@ -161,7 +163,10 @@ export function Dock() {
                   </div>
                   {widthTier.showColors && <ColorPalette {...paletteProps} />}
                 </div>
-                <ClearButton />
+                <div className="flex items-center gap-[8px]">
+                  <DefaultToolButton active={!style.active} onClick={setDefaultTool} />
+                  <ClearButton />
+                </div>
               </div>
             </div>
 
@@ -228,7 +233,7 @@ export function Dock() {
               style={{ opacity: 0 }}
             />
 
-            <CollapsedMarker
+            {style.active && <CollapsedMarker
               pen={style.pen}
               color={penColor}
               pct={Math.round(style.opacity * 100)}
@@ -239,7 +244,7 @@ export function Dock() {
               opacity={geometry.markerOpacity}
               shapeWidth={geometry.width}
               shapeHeight={geometry.height}
-            />
+            />}
           </div>
 
           <DockHandle
