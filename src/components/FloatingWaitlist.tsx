@@ -705,9 +705,13 @@ export default function FloatingWaitlist() {
                   placeholder="Username"
                   showPlaceholderWhenCollapsed
                   className="w-full justify-start"
-                  classNames={{ input: "pr-32 text-[16px] sm:text-sm" }}
+                  classNames={{
+                    input:
+                      "min-w-0 pl-[68px] pr-[108px] text-[16px] sm:pr-32 sm:text-sm",
+                  }}
                   collapsedWidth="100%"
                   expandedWidth="calc(100% - 64px)"
+                  expandedOffset={0}
                   iconName="username"
                   disableGooey
                   value={username}
@@ -746,9 +750,12 @@ export default function FloatingWaitlist() {
                   placeholder="Email"
                   showPlaceholderWhenCollapsed
                   className="w-full justify-start"
-                  classNames={{ input: "text-[16px] sm:text-sm" }}
+                  classNames={{
+                    input: "min-w-0 pl-[68px] pr-4 text-[16px] sm:text-sm",
+                  }}
                   collapsedWidth="100%"
                   expandedWidth="calc(100% - 64px)"
+                  expandedOffset={0}
                   iconName="email"
                   disableGooey
                   value={email}
@@ -768,9 +775,12 @@ export default function FloatingWaitlist() {
                   placeholder="What would you animate first?"
                   showPlaceholderWhenCollapsed
                   className="w-full justify-start"
-                  classNames={{ input: "text-[16px] sm:text-sm" }}
+                  classNames={{
+                    input: "min-w-0 pl-[68px] pr-4 text-[16px] sm:text-sm",
+                  }}
                   collapsedWidth="100%"
                   expandedWidth="calc(100% - 64px)"
+                  expandedOffset={0}
                   iconName="animation"
                   disableGooey
                   value={description}
