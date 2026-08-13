@@ -53,7 +53,7 @@ const Footer = () => {
   return (
     <section
       ref={ref}
-      className="relative mx-auto flex h-[calc(350vh-500px)] w-full flex-col items-center overflow-x-clip bg-ink-900 px-4 text-text-hi"
+      className="relative mx-auto flex h-[calc(200vh+620px)] w-full flex-col items-center overflow-x-clip bg-ink-900 px-4 text-text-hi"
     >
       <div className="relative z-10 mt-16 flex w-fit flex-col items-center justify-center gap-5 text-center md:mt-24">
         <h1 className="site-heading relative z-10">
@@ -96,7 +96,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="pointer-events-none absolute -bottom-[24vh] left-1/2 z-20 h-[38vh] w-screen -translate-x-1/2 overflow-visible [contain:layout_paint_style]">
-        <CrowdCanvas src="/images/peeps/all-peeps ori.webp" rows={15} cols={7} count={8} scale={0.25} maxFps={15} pixelRatio={0.75} maxPixels={1_200_000} />
+        <CrowdCanvas src="/images/peeps/all-peeps ori.webp" rows={15} cols={7} count={8} scale={0.25} desktopScale={0.5} maxFps={15} pixelRatio={0.75} maxPixels={1_200_000} />
       </div>
     </section>
   );

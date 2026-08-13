@@ -23,15 +23,13 @@ const getResponsiveTargetY = (
     return viewportHeight * (targetPctY / 100) - cardHeight / 2;
   }
 
-  const cardGap = clamp(viewportHeight * 0.045, 24, 42);
+  const cardGap = 12;
   const viewportPadding = clamp(viewportHeight * 0.045, 22, 40);
   const idealStackHeight = cardHeight * CARDS.length + cardGap * (CARDS.length - 1);
-  const availableHeight = Math.max(cardHeight, viewportHeight - viewportPadding * 2);
-  const adjustedGap = Math.max(18, Math.min(cardGap, (availableHeight - cardHeight * CARDS.length) / (CARDS.length - 1)));
-  const stackHeight = cardHeight * CARDS.length + adjustedGap * (CARDS.length - 1);
+  const stackHeight = cardHeight * CARDS.length + cardGap * (CARDS.length - 1);
   const stackTop = Math.max(viewportPadding, (viewportHeight - Math.min(idealStackHeight, stackHeight)) / 2);
 
-  return stackTop + index * (cardHeight + adjustedGap);
+  return stackTop + index * (cardHeight + cardGap);
 };
 
 export default function ThreeScrollCards() {
@@ -175,7 +173,7 @@ export default function ThreeScrollCards() {
                       || (index === 2 && actionCardSettled)
                     ) ? (
                       <OpenItLaoAnimation
-                        className="aspect-square h-full w-auto max-w-none origin-center scale-[1.6]"
+                        className="block h-full w-full max-w-none origin-center scale-[1.12] object-cover object-center md:scale-100"
                         src={index === 0
                           ? '/media/open-it-lao-animation.svg'
                           : index === 1

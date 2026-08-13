@@ -154,7 +154,7 @@ export function Dock() {
             >
               <div
                 ref={refs.horizontal}
-                className="relative flex shrink-0 items-center justify-center gap-[32px] pl-[8px]"
+                className="relative flex shrink-0 items-center justify-center gap-[32px] pl-[24px] pr-[16px]"
                 style={{ width: "max-content", height: DOCK_H }}
               >
                 <div className="flex h-full items-center gap-[28px]">

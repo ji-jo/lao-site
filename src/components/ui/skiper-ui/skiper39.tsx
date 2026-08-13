@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 interface CrowdCanvasProps {
@@ -9,6 +9,7 @@ interface CrowdCanvasProps {
   cols?: number;
   count?: number;
   scale?: number;
+  desktopScale?: number;
   maxFps?: number;
   pixelRatio?: number;
   maxPixels?: number;
@@ -25,11 +26,27 @@ const CrowdCanvas = ({
   cols = 7,
   count = 12,
   scale = 1,
+  desktopScale,
   maxFps = 15,
   pixelRatio = 1,
   maxPixels = 360_000,
 }: CrowdCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [resolvedScale, setResolvedScale] = useState(scale);
+
+  useEffect(() => {
+    if (desktopScale === undefined) {
+      setResolvedScale(scale);
+      return;
+    }
+
+    const desktopQuery = window.matchMedia("(min-width: 768px)");
+    const updateScale = () => setResolvedScale(desktopQuery.matches ? desktopScale : scale);
+    updateScale();
+    desktopQuery.addEventListener("change", updateScale);
+
+    return () => desktopQuery.removeEventListener("change", updateScale);
+  }, [desktopScale, scale]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -239,7 +256,7 @@ const CrowdCanvas = ({
       }
 
       validRects.forEach((rect) => {
-        allPeeps.push(createPeep({ image: img, rect, scale }));
+        allPeeps.push(createPeep({ image: img, rect, scale: resolvedScale }));
       });
     };
 
@@ -411,7 +428,7 @@ const CrowdCanvas = ({
       intersectionObserver.disconnect();
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [cols, count, maxFps, maxPixels, pixelRatio, rows, scale, src]);
+  }, [cols, count, maxFps, maxPixels, pixelRatio, rows, resolvedScale, src]);
   return (
     <canvas ref={canvasRef} className="pointer-events-none absolute bottom-0 h-full w-full [contain:strict]" />
   );

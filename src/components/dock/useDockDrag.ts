@@ -46,6 +46,8 @@ const SETTLE = { type: "spring", stiffness: 300, damping: 27, velocity: 0 } as c
 // Rotation snap: the pen jumps (springs) fully to its docked angle on entering an edge zone, back to
 // upright on leaving - it does NOT track the cursor angle.
 const ROT_SNAP = { type: "spring", stiffness: 520, damping: 38 } as const;
+const SCALE_MIN = 0.75;
+const MOBILE_COMPACT_QUERY = "(max-width: 639px)";
 
 const layoutFadeTransition = (appearing: boolean) =>
   ({ duration: FADE, ease: "easeInOut" as const, delay: appearing ? EXPAND_FADE : 0 });
@@ -202,10 +204,12 @@ export function useDockDrag({
   const freezeCx = useMotionValue(0);
   const freezeCy = useMotionValue(0);
   const frozen = useMotionValue(0);
-  // Start compact, then expand the intact tray the first time its handle moves.
-  // This is a transform-only change, so contents remain sharp and their hit areas
-  // continue to follow the visible dock.
-  const dragScale = useMotionValue(0.5);
+  // Desktop opens full size; the compact mobile dock stays readable without
+  // exposing a larger state that would crowd the narrow viewport.
+  const mobileCompactRef = useRef(
+    typeof window !== "undefined" && window.matchMedia(MOBILE_COMPACT_QUERY).matches,
+  );
+  const dragScale = useMotionValue(mobileCompactRef.current ? SCALE_MIN : 1);
   // Ref to the in-flight dragScale animation so a new press can hard-cancel the previous one.
   const dragScaleCtrl = useRef<ReturnType<typeof animate> | null>(null);
   const animateDragScale = (to: number, stiffness = 400, damping = 36) => {
@@ -221,8 +225,20 @@ export function useDockDrag({
   const [atTop, atTopRef, setAtTop] = useStateRef(false);
   const [collapsed, collapsedRef, setCollapsed] = useStateRef(false);
   const [preview, previewRef, setPreview] = useStateRef<DockTarget | null>(null);
-  // The dock begins in the compact state; moving or tapping the handle expands it.
-  const [, minimizedRef, setMinimized] = useStateRef(true);
+  // Mobile is deliberately compact-only; desktop begins expanded and can toggle compact mode.
+  const [, minimizedRef, setMinimized] = useStateRef(mobileCompactRef.current);
+
+  useEffect(() => {
+    const media = window.matchMedia(MOBILE_COMPACT_QUERY);
+    const update = () => {
+      mobileCompactRef.current = media.matches;
+      setMinimized(media.matches);
+      dragScale.set(media.matches ? SCALE_MIN : 1);
+    };
+    media.addEventListener("change", update);
+    update();
+    return () => media.removeEventListener("change", update);
+  }, [dragScale, setMinimized]);
 
   // When true the circle tracks the pointer; false while a preview/transition owns x/y (anchored).
   const followRef = useRef(true);
@@ -830,8 +846,6 @@ export function useDockDrag({
 
   // Max upward drag in px that maps to minimum scale.
   const DRAG_MAX = 220;
-  // Smallest scale the dock reaches when pulled all the way up.
-  const SCALE_MIN = 0.5;
   // Tap: pointer must stay within this many px to be treated as a tap, not a drag.
   const TAP_THRESHOLD = 8;
 
@@ -855,7 +869,7 @@ export function useDockDrag({
         const dx = startX - me.clientX;
         const dy = startY - me.clientY; // positive = upward, negative = downward
         if (Math.abs(dy) > TAP_THRESHOLD || Math.abs(dx) > TAP_THRESHOLD) {
-          if (!moved && minimizedRef.current) {
+          if (!moved && minimizedRef.current && !mobileCompactRef.current) {
             setMinimized(false);
             animateDragScale(1, 480, 26);
           }
@@ -863,14 +877,15 @@ export function useDockDrag({
         }
 
         const isMinimised = minimizedRef.current;
+        const compactOnly = mobileCompactRef.current;
 
         let shouldHandOff = false;
         if (ph === "bottom") {
-          if (dy > LIFT_DISTANCE && !isMinimised) shouldHandOff = true;
+          if (dy > LIFT_DISTANCE && !isMinimised && !compactOnly) shouldHandOff = true;
         } else if (ph === "top") {
-          if (dy < -LIFT_DISTANCE && !isMinimised) shouldHandOff = true;
+          if (dy < -LIFT_DISTANCE && !isMinimised && !compactOnly) shouldHandOff = true;
         } else if (ph === "side") {
-          if (Math.abs(dx) > LIFT_DISTANCE && !isMinimised) shouldHandOff = true;
+          if (Math.abs(dx) > LIFT_DISTANCE && !isMinimised && !compactOnly) shouldHandOff = true;
         }
 
         // Hand off to the global free-floating drag
@@ -881,7 +896,7 @@ export function useDockDrag({
           window.removeEventListener("pointercancel", onDragUp);
 
           // Reset local scale safely
-          animateDragScale(isMinimised ? 0.5 : 1, 380, 28);
+          animateDragScale(isMinimised ? SCALE_MIN : 1, 380, 28);
           
           // Seed the global drag session
           onDragStart?.();
@@ -910,12 +925,12 @@ export function useDockDrag({
         if (ph === "bottom" || ph === "top") {
           // Bottom sheet scale behavior
           if (ph === "bottom") {
-            if (dy < 0 && !isMinimised) {
+            if (dy < 0 && !isMinimised && !compactOnly) {
               const t = Math.min(Math.abs(dy) / DRAG_MAX, 1);
               const targetScale = startScale - t * (startScale - SCALE_MIN);
               dragScaleCtrl.current?.stop();
               dragScale.set(targetScale);
-            } else if (dy > 0 && isMinimised) {
+            } else if (dy > 0 && isMinimised && !compactOnly) {
               const t = Math.min(dy / DRAG_MAX, 1);
               const targetScale = startScale + t * (1 - startScale);
               dragScaleCtrl.current?.stop();
@@ -939,21 +954,21 @@ export function useDockDrag({
         window.removeEventListener("pointercancel", onDragUp);
         if (handedOff) return;
 
-        if (!moved) {
+        if (!moved && !mobileCompactRef.current) {
           // TAP: toggle minimised state
           const nowMin = !minimizedRef.current;
           setMinimized(nowMin);
-          animateDragScale(nowMin ? 0.5 : 1, nowMin ? 340 : 480, nowMin ? 30 : 26);
+          animateDragScale(nowMin ? SCALE_MIN : 1, nowMin ? 340 : 480, nowMin ? 30 : 26);
         } else {
           // Check if we passed the half-way threshold to commit to the new state
           const dy = startY - ue.clientY;
           let nowMin = minimizedRef.current;
-          if (ph === "bottom") {
+          if (ph === "bottom" && !mobileCompactRef.current) {
             if (!nowMin && dy < -40) nowMin = true; // Dragged down enough
             else if (nowMin && dy > 40) nowMin = false; // Dragged up enough
           }
           setMinimized(nowMin);
-          animateDragScale(nowMin ? 0.5 : 1, 380, 28);
+          animateDragScale(nowMin ? SCALE_MIN : 1, 380, 28);
         }
       };
 

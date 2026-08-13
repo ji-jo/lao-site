@@ -88,14 +88,14 @@ const featureTargets = [
   { x: 0.33, y: 0.08, rotate: 8 },
 ];
 
-// On narrower viewports, a compact two-by-two composition keeps the cards and
-// their labels in the visible canvas instead of pushing the outer cards into
-// the supporting copy at the bottom of the section.
+// On narrower viewports, keep the audience cards in one readable vertical
+// sequence. This prevents an expanded card or its caption from being pushed
+// into a neighbour or beyond the bottom edge.
 const compactFeatureTargets = [
-  { x: -0.21, y: -0.2, rotate: -6 },
-  { x: 0.21, y: -0.2, rotate: 6 },
-  { x: -0.21, y: 0.13, rotate: -5 },
-  { x: 0.21, y: 0.13, rotate: 5 },
+  { x: 0, y: -0.22, rotate: -3 },
+  { x: 0, y: -0.06, rotate: 3 },
+  { x: 0, y: 0.1, rotate: -2 },
+  { x: 0, y: 0.26, rotate: 2 },
 ];
 
 const featureCopy = [
@@ -207,7 +207,9 @@ export default function PicturaAudienceSection() {
           const targetY = viewportHeight * target.y;
           const moveX = (targetX - initialX) / scaleX;
           const moveY = (targetY - initialY) / scaleY;
-          const scale = 1 + eased * (useCompactFeatureLayout ? 0.12 : 0.36);
+          // Mobile cards stop at their close stack positions and finish at
+          // twice the previous compact size, rather than travelling outward.
+          const scale = useCompactFeatureLayout ? 1 + eased * 0.1 : 1 + eased * 0.36;
           element.style.transform = `translate3d(${(moveX * eased).toFixed(2)}px, ${(moveY * eased).toFixed(2)}px, 0) rotate(${(target.rotate * eased).toFixed(2)}deg) scale(${scale.toFixed(4)})`;
           element.style.opacity = '1';
           element.style.zIndex = '6';
@@ -262,10 +264,9 @@ export default function PicturaAudienceSection() {
             (() => {
               const column = tile.frame % CROWD_COLUMNS;
               const row = Math.floor(tile.frame / CROWD_COLUMNS);
-              // Offset relative to each square, rather than by a fixed number
-              // of pixels. A fixed 24px shift pushed the tiny lower rows far
-              // beyond their crop window on small screens.
-              const portraitOffset = Math.round(tile.height * 0.065);
+              // Preserve the crop of the four feature portraits while scaling
+              // down the shift for mini squares so their lower rows remain in view.
+              const portraitOffset = Math.min(24, Math.round(tile.height * 0.22));
 
               return (
                 <div
@@ -360,16 +361,18 @@ export default function PicturaAudienceSection() {
         @media (max-width: 900px) {
           .pictura-audience { height: 215vh; min-height: 1320px; }
           .pictura-pin { min-height: 600px; }
-          .pictura-kicker { top: 88px; }
-          .pictura-heart { top: 43%; width: min(86vw,620px); }
-          .pictura-side-copy { display: none; }
-          .pictura-side-copy-left { left: 20px; }
-          .pictura-side-copy-right { right: 20px; }
-          .pictura-feature-copy { top: calc(100% + 10px); width: min(42vw, 170px); gap: 4px; }
-          .pictura-feature-tile-1 .pictura-feature-copy,
-          .pictura-feature-tile-3 .pictura-feature-copy { right: 0; left: auto; text-align: right; }
+          .pictura-kicker { top: 84px; }
+          .pictura-heart { top: 50%; width: min(86vw,620px); }
+          .pictura-side-copy { top: 128px; bottom: auto; width: calc(50% - 40px); font-size: clamp(16px,4vw,24px); }
+          .pictura-side-copy-left { left: 24px; }
+          .pictura-side-copy-right { right: 24px; }
+          .pictura-feature-copy { top: calc(100% + 10px); left: 50%; width: min(50vw, 190px); gap: 4px; text-align: center; transform: translate3d(-50%,var(--feature-copy-offset,12px),0); }
           .pictura-feature-title { font-size: clamp(18px,3.4vw,24px); }
           .pictura-feature-description { font-size: 11px; line-height: 1.35; }
+          /* On a small viewport the long stagger leaves a conspicuous field of
+             empty squares while the section is already on screen. Reveal the
+             full portrait mosaic together instead. */
+          .is-revealed .pictura-tile-reveal { animation-delay: 0ms; }
         }
 
         @media (prefers-reduced-motion: reduce) {
