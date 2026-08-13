@@ -237,6 +237,7 @@ export function MarkerRow({
               // The freehand brush has no marker-settings panel. Only the text
               // marker opens this popover; the brush stays a direct drawing tool.
               if (isSelected && p.id === "slant") {
+                onSelect(p.id);
                 onActivate(e.currentTarget);
               } else {
                 playMarkerSelect();

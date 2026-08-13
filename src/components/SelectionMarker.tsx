@@ -35,7 +35,7 @@ export function SelectionMarker(): null {
         ? selection.anchorNode
         : selection?.anchorNode?.parentElement;
       if (
-        active.pen !== "slant" || !selection || selection.rangeCount === 0 || !text ||
+        !active.active || active.pen !== "slant" || !selection || selection.rangeCount === 0 || !text ||
         anchor?.closest("[aria-label='Highlighter tray'], input, textarea, select, button")
       ) {
         clear();
@@ -88,9 +88,9 @@ export function SelectionMarker(): null {
   }, []);
 
   useEffect(() => {
-    document.documentElement.classList.toggle("selection-marker-active", style.pen === "slant");
+    document.documentElement.classList.toggle("selection-marker-active", style.active && style.pen === "slant");
     return () => document.documentElement.classList.remove("selection-marker-active");
-  }, [style.pen]);
+  }, [style.active, style.pen]);
 
   return null;
 }

@@ -323,9 +323,9 @@ export default function FloatingWaitlist() {
     // Match Feather's independent corner card: roughly one quarter of its
     // width remains on-screen, pinned to the top-right before the section.
     const peekVisibleFraction = viewportWidth < 640 ? 0.28 : 0.24;
-    // On phones, keep the minimized card 40px farther right so it reads as a
+    // On phones, keep the minimized card 20px farther right so it reads as a
     // corner tab instead of sitting over the page content.
-    const mobilePeekOffset = viewportWidth < 640 ? 40 : 0;
+    const mobilePeekOffset = viewportWidth < 640 ? 20 : 0;
     const peekX = viewportWidth - cardWidth * peekVisibleFraction - safeRight - (viewportWidth >= 640 ? 16 : 0) + mobilePeekOffset;
     const peekY = viewportWidth < 640 ? 16 : 24;
 

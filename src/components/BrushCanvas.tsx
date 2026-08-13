@@ -41,17 +41,19 @@ export function BrushCanvas() {
   const colorRef = useRef(style.color);
   const alphaRef = useRef(style.opacity);
   const toolRef = useRef(style.pen);
+  const activeRef = useRef(style.active);
   colorRef.current = style.color;
   alphaRef.current = style.opacity;
   toolRef.current = style.pen;
+  activeRef.current = style.active;
 
   useEffect(() => {
     const root = document.documentElement;
-    root.style.setProperty('--drawing-tool-cursor', TOOL_CURSORS[style.pen]);
+    root.style.setProperty('--drawing-tool-cursor', style.active ? TOOL_CURSORS[style.pen] : 'auto');
     return () => {
       root.style.removeProperty('--drawing-tool-cursor');
     };
-  }, [style.pen]);
+  }, [style.active, style.pen]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -240,6 +242,7 @@ export function BrushCanvas() {
     let activePointerId: number | null = null;
 
     const down = (e: PointerEvent) => {
+      if (!activeRef.current) return;
       const tool = toolRef.current;
       if (tool !== 'brush' && tool !== 'eraser' && tool !== 'slant') return;
       if (!e.isPrimary || e.button !== 0 || activePointerId !== null) return;

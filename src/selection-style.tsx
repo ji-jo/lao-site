@@ -15,6 +15,8 @@ export type PenTip = "slant" | "round" | "fine" | "brush" | "eraser";
 export interface SelectionStyle {
   color: string;
   pen: PenTip;
+  /** True only after the visitor explicitly chooses a pen. */
+  active: boolean;
   /** The active pen's opacity (`opacityByPen[pen]`). */
   opacity: number;
   /** Per-pen ink opacity: each marker keeps its own. */
@@ -53,11 +55,17 @@ const SelectionStyleContext = createContext<SelectionStyleContextValue | null>(
 /** Holds the dock's selection style so it drives the live SelectionMarker. */
 export function SelectionStyleProvider({ children }: { children: ReactNode }) {
   const [color, setColor] = useState(DEFAULT_INK);
-  // Start in highlighter mode so text marking is immediately available.
+  // The dock visually starts on the highlighter, but the page stays unarmed
+  // until the visitor explicitly clicks a pen.
   const [pen, setPen] = useState<PenTip>(DEFAULT_PEN);
+  const [active, setActive] = useState(false);
   const [opacityByPen, setOpacityByPen] =
     useState<Record<PenTip, number>>(DEFAULT_OPACITY_BY_PEN);
   const [markType, setMarkType] = useState<MarkType>(DEFAULT_MARK_TYPE);
+  const selectPen = useCallback((next: PenTip) => {
+    setPen(next);
+    setActive(true);
+  }, []);
   // The slider edits the active pen's opacity, leaving others untouched.
   const setOpacity = useCallback(
     (next: number) => setOpacityByPen((m) => ({
@@ -69,13 +77,13 @@ export function SelectionStyleProvider({ children }: { children: ReactNode }) {
   );
   const value = useMemo<SelectionStyleContextValue>(
     () => ({
-      style: { color, pen, opacity: opacityByPen[pen], opacityByPen, markType },
+      style: { color, pen, active, opacity: opacityByPen[pen], opacityByPen, markType },
       setColor,
-      setPen,
+      setPen: selectPen,
       setOpacity,
       setMarkType,
     }),
-    [color, pen, opacityByPen, markType, setOpacity],
+    [active, color, pen, opacityByPen, markType, selectPen, setOpacity],
   );
   return (
     <SelectionStyleContext.Provider value={value}>
