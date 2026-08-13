@@ -140,7 +140,8 @@ interface PenDef {
 
 const PENS: PenDef[] = [
   { id: "slant", label: "Highlighter" },
-  { id: "brush", label: "Draw" },
+  { id: "brush", label: "Brush" },
+  { id: "eraser", label: "Eraser" },
 ];
 
 // Pen ids in row order (left -> right), so the drag overlay can compute a pen's along-row slot offset.
@@ -221,7 +222,7 @@ export function MarkerRow({
 
   return (
     <div ref={rowRef} className="relative flex items-end" style={{ gap: GAP }} onPointerEnter={primeMarkerAudio}>
-      {/* Each pen is captioned so a first-time visitor knows what the two tools do. */}
+      {/* Every tool is named for assistive tech and keeps the same generous slot. */}
       {PENS.map((p, i) => {
         const isSelected = p.id === selected;
         const pct = Math.round(opacityByPen[p.id] * 100);
@@ -233,7 +234,7 @@ export function MarkerRow({
             aria-label={p.label}
             aria-pressed={isSelected}
             onClick={(e) => {
-              if (isSelected) {
+              if (isSelected && p.id !== "eraser") {
                 onActivate(e.currentTarget);
               } else {
                 playMarkerSelect();
@@ -260,7 +261,7 @@ export function MarkerRow({
               className="dock-pen-art dock-lift-art"
               style={place}
             />
-            {fadeOut && (
+            {fadeOut && p.id !== "eraser" && (
               // colorOnly skips the barrel shadow (no doubling); keyed so rapid swaps restart the fade.
               <Pen
                 key={fadeOut.key}
@@ -274,13 +275,15 @@ export function MarkerRow({
             )}
             {/* Rides the pen transform (.dock-pen-art) so the digits track its rise/pop. Hidden for the
                 lifted pen so the carried overlay's readout (which travels with it) isn't doubled. */}
-            <span
-              aria-hidden
-              className="dock-pen-art dock-lift-art pointer-events-none absolute"
-              style={{ left: 0, top: REST_TOP, width: SVG_W }}
-            >
-              <OpacityReadout pct={pct} />
-            </span>
+            {p.id !== "eraser" && (
+              <span
+                aria-hidden
+                className="dock-pen-art dock-lift-art pointer-events-none absolute"
+                style={{ left: 0, top: REST_TOP, width: SVG_W }}
+              >
+                <OpacityReadout pct={pct} />
+              </span>
+            )}
           </button>
         );
       })}

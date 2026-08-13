@@ -8,8 +8,8 @@ import {
 } from "react";
 import type { HighlightOptions, MarkType } from "@highlighters/core";
 
-// The dock's three pens, one per core nib type; shared with SelectionMarker.
-export type PenTip = "slant" | "round" | "fine" | "brush";
+// The dock's drawing tools; shared by the toolbar, selection marker, and canvas.
+export type PenTip = "slant" | "round" | "fine" | "brush" | "eraser";
 
 // The live, user-chosen selection style the dock controls.
 export interface SelectionStyle {
@@ -33,6 +33,7 @@ const DEFAULT_OPACITY_BY_PEN: Record<PenTip, number> = {
   round: DEFAULT_OPACITY,
   fine: DEFAULT_OPACITY,
   brush: 0.95,
+  eraser: 1,
 };
 
 interface SelectionStyleContextValue {

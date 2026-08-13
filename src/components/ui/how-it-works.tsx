@@ -43,11 +43,11 @@ const WIDE_LAYOUT: Point[] = [
 ];
 
 const NARROW_LAYOUT: Point[] = [
-  { x: 0.5, y: 0.15 },
-  { x: 0.5, y: 0.39 },
-  { x: 0.5, y: 0.63 },
-  { x: 0.5, y: 0.87 },
-  { x: 0.5, y: 0.5 },
+  { x: 0.5, y: 0.18 },
+  { x: 0.5, y: 0.4 },
+  { x: 0.5, y: 0.62 },
+  { x: 0.5, y: 0.83 },
+  { x: 0.5, y: 0.57 },
 ];
 
 const CARD_ROTATIONS = [-3.5, 2.8, -2.1, 3.2, -1.4];
@@ -280,11 +280,6 @@ export default function HowItWorks({
             "inset 0 1px 0 rgba(255,255,255,.06), inset 0 0 90px rgba(0,0,0,.38)",
         }}
       >
-        <div className="pointer-events-none absolute left-5 top-5 z-[3] flex items-center gap-3 rounded-full border border-white/10 bg-black/30 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.14em] text-white/55 md:left-8 md:top-7">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#ff6078]" />
-          Drag a note — the thread stays pinned
-        </div>
-
         {pinPoints.length === data.length && data.length > 1 && (
           <svg
             aria-hidden="true"

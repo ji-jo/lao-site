@@ -119,13 +119,15 @@ export function CollapsedMarker({
               style={{ position: "absolute", left: 0, top: REST_TOP, transform: `translateY(-${SELECTED_RISE}px)` }}
             />
             {/* The opacity readout, positioned exactly as in the row so it travels with the pen. */}
-            <span
-              aria-hidden
-              className="pointer-events-none absolute"
-              style={{ left: 0, top: REST_TOP, width: SVG_W, transform: `translateY(-${SELECTED_RISE}px)` }}
-            >
-              <OpacityReadout pct={pct} />
-            </span>
+            {pen !== "eraser" && (
+              <span
+                aria-hidden
+                className="pointer-events-none absolute"
+                style={{ left: 0, top: REST_TOP, width: SVG_W, transform: `translateY(-${SELECTED_RISE}px)` }}
+              >
+                <OpacityReadout pct={pct} />
+              </span>
+            )}
           </div>
         </div>
       </div>

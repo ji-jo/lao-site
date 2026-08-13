@@ -1,0 +1,3 @@
+# Copy to .dev.vars for local Cloudflare Pages testing. Never commit the real key.
+RESEND_API_KEY=re_your_key
+WAITLIST_DEBUG=true

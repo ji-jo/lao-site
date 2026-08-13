@@ -37,7 +37,7 @@
     @apply bg-ink-900 text-text font-body antialiased selection:bg-accent/30 selection:text-text-hi;
     margin: 0;
     padding: 0;
-    cursor: url('../../assets/cursor-mac.svg') 4 2, auto;
+    cursor: var(--drawing-tool-cursor, url('../../assets/cursor-mac.svg') 4 2, auto);
     overscroll-behavior: none;
   }
 

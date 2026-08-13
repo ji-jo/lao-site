@@ -32,4 +32,5 @@ const OUTLINES = {
 export const PEN_OUTLINES: Record<PenTip, PenOutline> = {
   ...OUTLINES,
   brush: OUTLINES.round,
+  eraser: OUTLINES.round,
 };

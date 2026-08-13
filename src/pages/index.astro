@@ -2,47 +2,21 @@
 import Base from '../layouts/Base.astro';
 import CloudShader from '../components/backgrounds/CloudShader';
 import WaveShaderBackground from '../components/backgrounds/WaveShaderBackground';
-import BlurEffect from 'react-progressive-blur';
-import { GooeyInput } from '../components/ui/gooey-input';
 import HighlighterDock from '../components/HighlighterDock';
 import Footer from '../components/Footer.tsx';
-import { MusicToggleButton } from '../components/MusicToggleButton.tsx';
-import { GradientHoverButton } from '../components/ui/GradientHoverButton.tsx';
 import ThreeScrollCards from '../components/ThreeScrollCards';
 import MacbookScrollDemo from '@/components/MacbookScrollDemo';
 import HowItWorks from '@/components/ui/how-it-works';
 import ModeCubeSection from '@/components/ModeCubeSection';
 import PicturaAudienceSection from '@/components/PicturaAudienceSection';
-import wordmarkUrl from '../../assets/wordmark.svg?url';
+import FloatingWaitlist from '@/components/FloatingWaitlist';
 import palmUrl from '../../assets/palm.svg?url';
 ---
 
 <Base title="LAO Waitlist">
   <div id="main-app" class="relative bg-ink-900 font-body text-text overflow-x-clip">
 
-    <div class="fixed top-0 left-0 right-0 h-[120px] z-40">
-      <BlurEffect position="top" intensity={50} className="h-full" />
-    </div>
-
     <HighlighterDock client:only="react" />
-
-    <nav id="main-nav" class="fixed top-[20px] left-1/2 -translate-x-1/2 z-50 flex items-center justify-between gap-6 w-[min(640px,calc(100vw-40px))] py-[9px] pr-[10px] pl-[24px] rounded-full bg-ink-800/78 backdrop-blur-md shadow-[0_18px_50px_-20px_rgba(0,0,0,.85)] transition-all duration-[260ms] ease-[cubic-bezier(0.4,0,0.2,1)]">
-      <img src={wordmarkUrl} alt="LAO" class="w-[44px] h-[29px] invert brightness-150" />
-      <div class="flex-1 flex justify-center">
-        <MusicToggleButton client:only="react" />
-      </div>
-      <GradientHoverButton
-        client:load
-        href="#waitlist"
-        background="linear-gradient(in oklab 180deg, oklab(0% 0 0) 0%, oklab(48.5% -0.018 -0.082) 100%)"
-        hoverBackground="linear-gradient(in oklab 180deg, oklab(10% 0 -0.01) 0%, oklab(58% -0.03 -0.13) 100%)"
-        borderColor="#292A2A"
-        hoverBorderColor="#363636"
-        className="py-[10px] px-[22px] rounded-full text-text-hi font-display text-[19px] focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-3"
-      >
-        Join Waitlist
-      </GradientHoverButton>
-    </nav>
 
     <!-- Keep the sticky laptop above the following story panel while its
          display is still opening/holding in the viewport. -->
@@ -139,10 +113,6 @@ import palmUrl from '../../assets/palm.svg?url';
           ]}
         />
 
-        <div class="flex flex-wrap items-baseline gap-[28px] mt-[52px]">
-          <p class="m-0 font-display italic text-[23px] text-text-mid">Your work outlives the tool. That's the deal.</p>
-          <p class="m-0 font-mono text-[11px] tracking-[0.04em] text-text-low">// no cloud, no account, no export jail</p>
-        </div>
       </div>
     </section>
 
@@ -166,93 +136,8 @@ import palmUrl from '../../assets/palm.svg?url';
 
     <section id="waitlist" class="relative z-10 bg-ink-900 pt-[160px] pb-[200px] overflow-x-clip">
       <div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-ink-900 from-0% via-ink-900/25 via-32% via-ink-900/25 via-68% to-ink-900 to-100%"></div>
-      <div class="relative z-10 mx-auto max-w-[1200px] rounded-[28px] md:rounded-[59px] bg-ink-800 px-[clamp(20px,5vw,120px)] py-[56px] md:py-[76px] text-center shadow-2xl">
-       <div class="mx-auto max-w-[800px]">
-        <h2 class="site-heading m-0 mb-[16px] text-text-hi">
-          Get in early. Take a good username.
-        </h2>
-        <p class="m-0 mb-[46px] text-[17px] leading-[1.6] text-text max-w-[620px] mx-auto">
-          Early access goes out in waves. Tell me what you'd animate and you'll be in an earlier one.
-        </p>
-
-        <!-- Waitlist Form Island -->
-        <div id="waitlist-form-container" class="max-w-[680px] mx-auto">
-          <form method="POST" action="/api/waitlist" class="flex flex-col gap-[22px] text-left">
-            <div class="flex flex-col gap-[8px]">
-              <label for="lao-username" class="sr-only">Username</label>
-              <div class="flex-1 min-w-0">
-                <GooeyInput
-                  client:visible
-                  id="lao-username"
-                  name="username"
-                  required
-                  autoComplete="off"
-                  placeholder="Username"
-                  showPlaceholderWhenCollapsed
-                  className="w-full justify-start"
-                  collapsedWidth="100%"
-                  expandedWidth="calc(100% - 64px)"
-                  iconName="username"
-                />
-              </div>
-            </div>
-
-            <div class="flex flex-col gap-[8px]">
-              <label for="lao-email" class="sr-only">Email</label>
-              <div class="flex-1 min-w-0">
-                <GooeyInput
-                  client:visible
-                  id="lao-email"
-                  name="email"
-                  type="email"
-                  required
-                  placeholder="Email"
-                  showPlaceholderWhenCollapsed
-                  className="w-full justify-start"
-                  collapsedWidth="100%"
-                  expandedWidth="calc(100% - 64px)"
-                  iconName="email"
-                />
-              </div>
-            </div>
-
-            <div class="flex flex-col gap-[8px]">
-              <label for="lao-first" class="sr-only">What would you animate first?</label>
-              <div class="flex-1 min-w-0">
-                <GooeyInput
-                  client:visible
-                  id="lao-first"
-                  name="first_animation"
-                  placeholder="What would you animate first?"
-                  showPlaceholderWhenCollapsed
-                  className="w-full justify-start"
-                  collapsedWidth="100%"
-                  expandedWidth="calc(100% - 64px)"
-                  iconName="animation"
-                />
-              </div>
-            </div>
-
-            <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" class="absolute left-[-9999px] w-[1px] h-[1px] opacity-0" />
-
-            <GradientHoverButton
-              client:load
-              type="submit"
-              background="linear-gradient(in oklab 180deg, oklab(0% 0 0) 0%, oklab(48.5% -0.018 -0.082) 100%)"
-              hoverBackground="linear-gradient(in oklab 180deg, oklab(10% 0 -0.01) 0%, oklab(58% -0.03 -0.13) 100%)"
-              borderColor="#292A2A"
-              hoverBorderColor="#363636"
-              className="mt-[6px] p-[16px] w-full rounded-full text-text-hi font-mono text-[13px] tracking-[0.08em] uppercase shadow-[0_4px_14px_0_rgba(0,0,0,0.39)]"
-            >
-              Claim my spot
-            </GradientHoverButton>
-
-            <p class="m-0 mt-[6px] text-[14px] leading-[1.6] text-text-mid text-center">
-              No spam. One email when it's ready, and the occasional build update you can leave anytime.
-            </p>
-          </form>
-        </div>
-        </div>
+      <div class="relative z-10 mx-auto max-w-[1200px] px-[clamp(20px,5vw,120px)]">
+        <FloatingWaitlist client:load />
       </div>
     </section>
 
@@ -269,39 +154,7 @@ import palmUrl from '../../assets/palm.svg?url';
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const controller = new AbortController();
     const { signal } = controller;
-    let navFrame = 0;
     let waveFrame = 0;
-
-    // Nav blur scroll effect
-    const nav = document.getElementById('main-nav');
-    if (nav) {
-      let compact: boolean | null = null;
-      const updateNav = () => {
-        navFrame = 0;
-        const nextCompact = window.scrollY > 80;
-        if (nextCompact === compact) return;
-        compact = nextCompact;
-
-        if (nextCompact) {
-          nav.classList.replace('py-[9px]', 'py-[6px]');
-          nav.classList.replace('pr-[10px]', 'pr-[8px]');
-          nav.classList.replace('pl-[24px]', 'pl-[20px]');
-          nav.classList.replace('bg-ink-800/78', 'bg-ink-800/94');
-          nav.classList.replace('backdrop-blur-md', 'backdrop-blur-xl');
-        } else {
-          nav.classList.replace('py-[6px]', 'py-[9px]');
-          nav.classList.replace('pr-[8px]', 'pr-[10px]');
-          nav.classList.replace('pl-[20px]', 'pl-[24px]');
-          nav.classList.replace('bg-ink-800/94', 'bg-ink-800/78');
-          nav.classList.replace('backdrop-blur-xl', 'backdrop-blur-md');
-        }
-      };
-      const requestNavUpdate = () => {
-        if (!navFrame) navFrame = requestAnimationFrame(updateNav);
-      };
-      window.addEventListener('scroll', requestNavUpdate, { passive: true, signal });
-      updateNav();
-    }
 
     // Hold the wave in the viewport for the first 90vh of hero travel, then
     // dissolve it during the next 59vh. Direct style updates are batched into
@@ -330,7 +183,6 @@ import palmUrl from '../../assets/palm.svg?url';
 
     disposePageEffects = () => {
       controller.abort();
-      cancelAnimationFrame(navFrame);
       cancelAnimationFrame(waveFrame);
     };
   };

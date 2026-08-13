@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Component as PencilLoader } from "@/components/ui/loader-1";
 import monitorModelUrl from "../../assets/3D/Monitor/Monitor 2/crt_monitor.optimized.glb?url";
-import heroImageUrl from "../../assets/hero-image.png?url";
 import wordmarkUrl from "../../assets/wordmark.svg?url";
 import palmUrl from "../../assets/palm.svg?url";
 import cursorUrl from "../../assets/cursor-mac.svg?url";
@@ -10,7 +9,7 @@ const ASSET_SHARE = 0.82;
 const FONT_SHARE = 0.06;
 const PAGE_SHARE = 0.04;
 const MONITOR_PARSE_SHARE = 0.08;
-const CRITICAL_ASSETS = [monitorModelUrl, heroImageUrl, wordmarkUrl, palmUrl, cursorUrl];
+const CRITICAL_ASSETS = [monitorModelUrl, "/media/giftbox-demo.mp4", wordmarkUrl, palmUrl, cursorUrl];
 
 const clampPercent = (value: number) => Math.min(100, Math.max(0, Math.round(value)));
 

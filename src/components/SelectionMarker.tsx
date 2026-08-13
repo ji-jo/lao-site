@@ -46,14 +46,15 @@ export function SelectionMarker(): null {
     return () => window.removeEventListener(CLEAR_EVENT, clear);
   }, []);
 
-  // The brush draws on its own canvas; keep the highlighter's nib on the last
-  // marker so switching to brush doesn't try to map a non-nib onto core.
+  // Canvas tools have no highlighter nib; keep the core renderer on the slant
+  // fallback while brush or eraser mode is selected.
   useEffect(() => {
+    const markerPen = style.pen === "brush" || style.pen === "eraser" ? "slant" : style.pen;
     handleRef.current?.update({
       color,
       opacity: style.opacity,
       markType: style.markType,
-      ...penToTip(style.pen === "brush" ? "slant" : style.pen),
+      ...penToTip(markerPen),
     });
   }, [color, style.pen, style.opacity, style.markType]);
 

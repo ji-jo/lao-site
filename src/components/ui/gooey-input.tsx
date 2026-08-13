@@ -8,6 +8,7 @@ import {
   useMemo,
   useCallback,
   type ChangeEvent,
+  type FocusEvent,
 } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { UsernameIcon, EmailIcon, AnimationIcon } from "../icons/GooeyIcons";
@@ -90,6 +91,8 @@ export interface GooeyInputProps extends Omit<React.InputHTMLAttributes<HTMLInpu
   expandedOffset?: number;
   /** Gaussian blur amount for the gooey SVG filter */
   gooeyBlur?: number;
+  /** Skip the SVG gooey filter for transform-heavy surfaces. */
+  disableGooey?: boolean;
   value?: string;
   defaultValue?: string;
   onValueChange?: (value: string) => void;
@@ -108,6 +111,7 @@ export function GooeyInput({
   expandedWidth = 200,
   expandedOffset = 64,
   gooeyBlur = 5,
+  disableGooey = false,
   value: valueProp,
   defaultValue = "",
   onValueChange,
@@ -116,6 +120,7 @@ export function GooeyInput({
   icon,
   iconName,
   showPlaceholderWhenCollapsed = false,
+  onBlur,
   ...inputProps
 }: GooeyInputProps) {
   const reactId = useId();
@@ -150,6 +155,14 @@ export function GooeyInput({
     [isControlled, onValueChange],
   );
 
+  // Parent callbacks often change identity after validation state updates.
+  // Keep the latest setter without treating that as a reason to focus this
+  // field again; otherwise moving from Username to Email gets focus stolen.
+  const setSearchTextRef = useRef(setSearchText);
+  useEffect(() => {
+    setSearchTextRef.current = setSearchText;
+  }, [setSearchText]);
+
   const setExpanded = useCallback(
     (next: boolean) => {
       setIsExpanded(next);
@@ -162,10 +175,10 @@ export function GooeyInput({
     if (isExpanded) {
       inputRef.current?.focus();
     } else if (prevExpandedRef.current) {
-      setSearchText("");
+      setSearchTextRef.current("");
     }
     prevExpandedRef.current = isExpanded;
-  }, [isExpanded, setSearchText]);
+  }, [isExpanded]);
 
   const buttonVariants = useMemo(
     () => ({
@@ -186,12 +199,13 @@ export function GooeyInput({
     [setSearchText],
   );
 
-  const handleBlur = useCallback(() => {
+  const handleBlur = useCallback((event: FocusEvent<HTMLInputElement>) => {
+    onBlur?.(event);
     if (!searchText) setExpanded(false);
-  }, [searchText, setExpanded]);
+  }, [onBlur, searchText, setExpanded]);
 
   const surfaceClass =
-    "bg-ink-700 text-text-hi shadow-[inset_0_1px_0_rgba(42,58,86,.55)]";
+    "bg-ink-700 text-text-hi shadow-[inset_0_1px_0_rgba(42,58,86,.55)] transition-colors duration-200 hover:bg-[#1d1d1d] focus-within:bg-[#1d1d1d]";
 
   return (
     <div
@@ -201,14 +215,14 @@ export function GooeyInput({
         classNames?.root,
       )}
     >
-      <GooeyFilter filterId={filterId} blur={gooeyBlur} />
+      {!disableGooey && <GooeyFilter filterId={filterId} blur={gooeyBlur} />}
 
       <div
         className={cn(
           "relative flex h-[54px] w-full items-center justify-start",
           classNames?.filterWrap,
         )}
-        style={{ filter: `url(#${filterId})` }}
+        style={disableGooey ? undefined : { filter: `url(#${filterId})` }}
       >
         <motion.div
           layout
@@ -231,7 +245,6 @@ export function GooeyInput({
             <AnimatePresence mode="popLayout">
               {!isExpanded && (
                 <motion.div 
-                  layoutId={iconLayoutId} 
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
@@ -241,7 +254,16 @@ export function GooeyInput({
                     showPlaceholderWhenCollapsed ? "justify-start gap-3 px-2" : "justify-center",
                   )}
                 >
-                  {renderIcon()}
+                  {icon || iconName ? (
+                    <motion.span
+                      layoutId={iconLayoutId}
+                      className="flex shrink-0 items-center justify-center"
+                    >
+                      {renderIcon()}
+                    </motion.span>
+                  ) : (
+                    renderIcon()
+                  )}
                   {showPlaceholderWhenCollapsed && (
                     <span className="truncate text-left text-sm font-normal text-text-low">{placeholder}</span>
                   )}
