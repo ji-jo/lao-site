@@ -1,7 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useRef, useState, type ReactNode, type RefObject } from "react";
-import { useIntersection } from "react-use";
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 
 type TriggerGroupContext = {
   activeId: symbol | null;
@@ -33,17 +32,24 @@ function Trigger({
   const ref = useRef<HTMLDivElement>(null);
   const idRef = useRef(Symbol("scroll-observer-trigger"));
   const group = useContext(TriggerContext);
-  const intersection = useIntersection(ref as RefObject<HTMLElement>, {
-    root: null,
-    rootMargin: "0px 0px -24% 0px",
-    threshold: 0.35,
-  });
+  const [isIntersecting, setIsIntersecting] = useState(false);
 
   useEffect(() => {
-    if (intersection?.isIntersecting) group?.setActiveId(idRef.current);
-  }, [group, intersection?.isIntersecting]);
+    const element = ref.current;
+    if (!element) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsIntersecting(entry?.isIntersecting ?? false),
+      { rootMargin: "0px 0px -24% 0px", threshold: 0.35 },
+    );
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
 
-  const isActive = group ? group.activeId === idRef.current : Boolean(intersection?.isIntersecting);
+  useEffect(() => {
+    if (isIntersecting) group?.setActiveId(idRef.current);
+  }, [group, isIntersecting]);
+
+  const isActive = group ? group.activeId === idRef.current : isIntersecting;
   return (
     <div ref={ref} className={className}>
       {children(isActive)}

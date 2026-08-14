@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import { DotGridSpotlight } from "@/components/dot-grid-spotlight";
+import { OpenItDrawing, SaveItDrawing, ShareItDrawing, WorkItDrawing } from "@/components/OpenItDrawing";
 
 export interface Step {
   title: string;
@@ -37,7 +39,8 @@ type DragState = {
 const WIDE_LAYOUT: Point[] = [
   { x: 0.18, y: 0.27 },
   { x: 0.69, y: 0.23 },
-  { x: 0.31, y: 0.72 },
+  // The Open it card sits 16px lower on the 760px desktop board.
+  { x: 0.31, y: 0.741 },
   { x: 0.79, y: 0.69 },
   { x: 0.52, y: 0.48 },
 ];
@@ -45,7 +48,8 @@ const WIDE_LAYOUT: Point[] = [
 const NARROW_LAYOUT: Point[] = [
   { x: 0.5, y: 0.18 },
   { x: 0.5, y: 0.4 },
-  { x: 0.5, y: 0.62 },
+  // The same 16px offset on the 980px mobile board.
+  { x: 0.5, y: 0.6363 },
   { x: 0.5, y: 0.83 },
   { x: 0.5, y: 0.57 },
 ];
@@ -270,16 +274,17 @@ export default function HowItWorks({
     <section className={`relative px-4 md:px-8 ${className}`}>
       <div
         ref={boardRef}
-        className="relative mx-auto h-[980px] w-full max-w-[1120px] overflow-hidden rounded-[28px] border border-white/10 md:h-[760px]"
+        className="relative mx-auto h-[980px] w-full max-w-[1120px] overflow-hidden rounded-[28px] md:h-[760px]"
         style={{
           backgroundColor: "#151412",
           backgroundImage:
-            "radial-gradient(circle at 20% 30%, rgba(255,255,255,.045) 0 1px, transparent 1.5px), radial-gradient(circle at 75% 65%, rgba(218,177,118,.04) 0 1px, transparent 1.5px), linear-gradient(115deg, rgba(255,255,255,.018), transparent 38%)",
-          backgroundSize: "17px 19px, 23px 29px, 100% 100%",
+            "linear-gradient(115deg, rgba(255,255,255,.018), transparent 38%)",
+          backgroundSize: "100% 100%",
           boxShadow:
             "inset 0 1px 0 rgba(255,255,255,.06), inset 0 0 90px rgba(0,0,0,.38)",
         }}
       >
+        <DotGridSpotlight targetRef={boardRef} />
         {pinPoints.length === data.length && data.length > 1 && (
           <svg
             aria-hidden="true"
@@ -329,6 +334,14 @@ export default function HowItWorks({
           const point = positions[index] || WIDE_LAYOUT[index % WIDE_LAYOUT.length];
           const theme = THEME[step.colorTheme || "blue"];
           const isDragging = draggingIndex === index;
+          const isOpenItCard = step.title === "Open it";
+          const drawing = step.title === "Work on it"
+            ? <WorkItDrawing play={isVisible} className="pointer-events-none absolute bottom-5 right-4 h-auto w-[78px] text-[#ef603f]/75" />
+            : step.title === "Save it"
+              ? <SaveItDrawing play={isVisible} className="pointer-events-none absolute bottom-5 right-4 h-auto w-[76px] text-[#48618d]/75" />
+              : step.title === "Open it"
+                ? <OpenItDrawing play={isVisible} className="pointer-events-none absolute bottom-5 right-4 h-auto w-[86px] text-[#765f98]/75" />
+                : <ShareItDrawing play={isVisible} className="pointer-events-none absolute bottom-5 right-4 h-auto w-[78px] text-[#ef603f]/75" />;
 
           return (
             <div
@@ -356,7 +369,7 @@ export default function HowItWorks({
               onKeyDown={(event) => nudgeCard(event, index)}
             >
               <div
-                className="relative min-h-[180px] rounded-[3px] border px-6 pb-6 pt-9 text-[#25231f] shadow-[0_16px_30px_rgba(0,0,0,.34)] transition-[opacity,transform,box-shadow] duration-500 ease-out"
+                className={`relative min-h-[180px] rounded-[3px] border px-6 pb-6 pt-9 text-[#25231f] shadow-[0_16px_30px_rgba(0,0,0,.34)] transition-[opacity,transform,box-shadow] duration-500 ease-out ${isOpenItCard ? "min-h-[200px]" : ""}`}
                 style={{
                   backgroundColor: step.colors?.bg || theme.wash,
                   backgroundImage:
@@ -392,16 +405,10 @@ export default function HowItWorks({
                 <h3 className="m-0 font-display text-[29px] font-normal leading-none text-[#22201d]">
                   {step.title}
                 </h3>
-                <p className="mb-0 mt-4 max-w-[28ch] text-[14px] leading-[1.55] text-[#4f4a42]">
+                <p className="mb-0 mt-4 max-w-[17ch] text-[14px] leading-[1.55] text-[#4f4a42]">
                   {step.description}
                 </p>
-                <span
-                  aria-hidden="true"
-                  className="absolute bottom-3 right-4 font-mono text-[10px]"
-                  style={{ color: step.colors?.text || theme.accent }}
-                >
-                  {String(index + 1).padStart(2, "0")} / {String(data.length).padStart(2, "0")}
-                </span>
+                {drawing}
               </div>
             </div>
           );

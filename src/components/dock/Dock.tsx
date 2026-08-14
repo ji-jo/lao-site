@@ -108,7 +108,7 @@ export function Dock() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-50 select-none overflow-hidden"
+      className="pointer-events-none fixed inset-0 z-[100] select-none overflow-hidden"
       aria-label="Highlighter tray"
     >
       <div

@@ -23,14 +23,16 @@ const checkerboard = {
 export function OpacitySlider({
   inkColor,
   value,
+  max = 1,
   onChange,
 }: {
   inkColor: string;
   value: number;
+  max?: number;
   onChange: (next: number) => void;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
-  const drag = useCapsuleDrag({ trackRef, value, min: 0, max: 1, onChange });
+  const drag = useCapsuleDrag({ trackRef, value, min: 0, max, onChange });
   const pct = Math.round(value * 100);
 
   const resetOpacity = useCallback(() => {
@@ -45,7 +47,7 @@ export function OpacitySlider({
     e.preventDefault();
     // Shift = 10% (coarse step), else 5%.
     const step = e.shiftKey ? 0.1 : 0.05;
-    drag.glideTo(clamp(value + dir * step, 0, 1));
+    drag.glideTo(clamp(value + dir * step, 0, max));
   };
 
   return (
@@ -55,7 +57,7 @@ export function OpacitySlider({
       aria-label="Opacity"
       aria-orientation="horizontal"
       aria-valuemin={0}
-      aria-valuemax={100}
+      aria-valuemax={Math.round(max * 100)}
       aria-valuenow={pct}
       aria-valuetext={`${pct}%`}
       tabIndex={0}
@@ -70,6 +72,14 @@ export function OpacitySlider({
       className="relative w-full shrink-0 cursor-pointer touch-none select-none"
       style={{ height: TRACK_H }}
     >
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-paper/85"
+        style={{
+          ...capsuleMask,
+          boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.32), 0 3px 10px rgba(0,0,0,0.18)",
+        }}
+      />
       <div aria-hidden className="absolute inset-0" style={{ ...capsuleMask, ...checkerboard }}>
         {/* Ramp built from the registered --ink colour so a colour change fades (transition: --ink)
             instead of snapping; a background-image gradient can't be transitioned directly. */}
@@ -82,7 +92,7 @@ export function OpacitySlider({
           } as CSSProperties}
         />
       </div>
-      <CapsuleKnob left={knobLeftPercent(value, 0, 1)} />
+      <CapsuleKnob left={knobLeftPercent(value, 0, max)} />
     </div>
   );
 }

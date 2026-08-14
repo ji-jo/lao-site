@@ -8,13 +8,14 @@ interface CrowdCanvasProps {
   rows?: number;
   cols?: number;
   count?: number;
+  scale?: number;
 }
 
 // Keep the registry animation intact while excluding every pose belonging to
 // the two unwanted head-covered characters.
 const EXCLUDED_FRAMES = new Set([12, 24, 25, 35, 60, 62, 63, 65, 70, 75, 85, 87, 98]);
 
-const CrowdCanvas = ({ src, rows = 15, cols = 7, count = 12 }: CrowdCanvasProps) => {
+const CrowdCanvas = ({ src, rows = 15, cols = 7, count = 12, scale = 1 }: CrowdCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -44,7 +45,9 @@ const CrowdCanvas = ({ src, rows = 15, cols = 7, count = 12 }: CrowdCanvasProps)
     // TWEEN FACTORIES
     const resetPeep = ({ stage, peep }: { stage: any; peep: any }) => {
       const direction = Math.random() > 0.5 ? 1 : -1;
-      const offsetY = 100 - 250 * gsap.parseEase("power2.in")(Math.random());
+      // Never push a character below the canvas edge: the positive offset
+      // cropped their lower body in the footer crowd.
+      const offsetY = -150 * gsap.parseEase("power2.in")(Math.random());
       const startY = stage.height - peep.height + offsetY;
       let startX: number;
       let endX: number;
@@ -122,9 +125,11 @@ const CrowdCanvas = ({ src, rows = 15, cols = 7, count = 12 }: CrowdCanvasProps)
     const createPeep = ({
       image,
       rect,
+      scale,
     }: {
       image: HTMLImageElement;
       rect: number[];
+      scale: number;
     }): Peep => {
       const peep: Peep = {
         image,
@@ -139,8 +144,8 @@ const CrowdCanvas = ({ src, rows = 15, cols = 7, count = 12 }: CrowdCanvasProps)
         walk: null,
         setRect: (rect: number[]) => {
           peep.rect = rect;
-          peep.width = rect[2];
-          peep.height = rect[3];
+          peep.width = rect[2] * scale;
+          peep.height = rect[3] * scale;
           peep.drawArgs = [peep.image, ...rect, 0, 0, peep.width, peep.height];
         },
         render: (ctx: CanvasRenderingContext2D) => {
@@ -177,25 +182,63 @@ const CrowdCanvas = ({ src, rows = 15, cols = 7, count = 12 }: CrowdCanvasProps)
     const availablePeeps: Peep[] = [];
     const crowd: Peep[] = [];
 
+    // Some cells in the source sheet are deliberately blank/black. Detect
+    // those at runtime rather than ever choosing them as a crowd member.
+    const isEmptySpriteCell = (rect: number[]) => {
+      const sampleSize = 32;
+      const sample = document.createElement("canvas");
+      sample.width = sampleSize;
+      sample.height = sampleSize;
+      const sampleContext = sample.getContext("2d", { willReadFrequently: true });
+      if (!sampleContext) return false;
+
+      sampleContext.drawImage(
+        img,
+        rect[0],
+        rect[1],
+        rect[2],
+        rect[3],
+        0,
+        0,
+        sampleSize,
+        sampleSize,
+      );
+
+      const pixels = sampleContext.getImageData(0, 0, sampleSize, sampleSize).data;
+      let brightPixelCount = 0;
+      for (let index = 0; index < pixels.length; index += 4) {
+        if (pixels[index] + pixels[index + 1] + pixels[index + 2] > 120) {
+          brightPixelCount += 1;
+          if (brightPixelCount >= 4) return false;
+        }
+      }
+
+      return true;
+    };
+
     const createPeeps = () => {
       const { rows, cols } = config;
       const { naturalWidth: width, naturalHeight: height } = img;
       const total = rows * cols;
+      // Preserve the original sprite convention: `rows` is the horizontal
+      // frame count and `cols` is the vertical frame count.
       const rectWidth = width / rows;
       const rectHeight = height / cols;
 
       for (let i = 0; i < total; i++) {
-        if (EXCLUDED_FRAMES.has(i)) continue;
+        const rect = [
+          (i % rows) * rectWidth,
+          Math.floor(i / rows) * rectHeight,
+          rectWidth,
+          rectHeight,
+        ];
+        if (EXCLUDED_FRAMES.has(i) || isEmptySpriteCell(rect)) continue;
 
         allPeeps.push(
           createPeep({
             image: img,
-            rect: [
-              (i % rows) * rectWidth,
-              ((i / rows) | 0) * rectHeight,
-              rectWidth,
-              rectHeight,
-            ],
+            rect,
+            scale,
           }),
         );
       }
@@ -286,7 +329,7 @@ const CrowdCanvas = ({ src, rows = 15, cols = 7, count = 12 }: CrowdCanvasProps)
     };
   }, []);
   return (
-    <canvas ref={canvasRef} className="absolute bottom-0 h-[90vh] w-full" />
+    <canvas ref={canvasRef} className="absolute bottom-0 h-screen w-full" />
   );
 };
 
@@ -294,7 +337,7 @@ const Skiper39 = () => {
   return (
     <div className="relative h-full w-full">
       <div className="absolute bottom-0 h-full w-screen">
-        <CrowdCanvas src="/images/peeps/all-peeps.png" rows={15} cols={7} count={12} />
+        <CrowdCanvas src="/images/peeps/all-peeps ori.webp" rows={15} cols={7} count={12} scale={0.8} />
       </div>
     </div>
   );
