@@ -10,7 +10,6 @@ import HowItWorks from '@/components/ui/how-it-works';
 import ModeCubeSection from '@/components/ModeCubeSection';
 import PicturaAudienceSection from '@/components/PicturaAudienceSection';
 import FloatingWaitlist from '@/components/FloatingWaitlist';
-import palmUrl from '../../assets/palm.svg?url';
 ---
 
 <Base title="LAO Waitlist">
@@ -120,9 +119,8 @@ import palmUrl from '../../assets/palm.svg?url';
 
     <section class="relative z-20 isolate bg-ink-900 pt-[160px] pb-[150px] overflow-hidden">
       <div class="max-w-[1200px] mx-auto px-[clamp(20px,5vw,120px)]">
-        <div class="relative flex flex-col md:flex-row items-end min-h-0 md:min-h-[640px] rounded-[28px] md:rounded-[59px] bg-paper overflow-hidden">
-          <img data-wipe data-wipe-slow src={palmUrl} alt="Hand-drawn open palm" class="block md:absolute md:right-[-2%] md:top-[6%] w-[80%] md:w-[66%] h-auto mx-auto md:mx-0 relative inset-auto" />
-          <div class="p-[28px_22px_36px] md:p-[56px] max-w-[620px]">
+        <div class="relative flex min-h-[460px] flex-col justify-between overflow-hidden rounded-[28px] bg-[#F0ECE5] md:min-h-[540px] md:rounded-[59px]">
+          <div class="relative z-10 max-w-[620px] p-[28px_22px_0] md:p-[56px_56px_0]">
             <h2 class="site-heading m-0 mb-[20px] text-ink-800">
               Designed screen by screen, not prompted.
             </h2>
@@ -130,6 +128,14 @@ import palmUrl from '../../assets/palm.svg?url';
               Every screen, flow, and interaction designed by hand in Paper, on a small design system built from fluid functionalism, beUI, and chanhdai. AI can help you build. It can't draw your map.
             </p>
           </div>
+          <img
+            src="/media/hand-30fps-optimize.slower.webp"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            decoding="async"
+            class="pointer-events-none absolute bottom-0 left-1/2 z-0 h-auto w-[min(88%,560px)] max-w-none -translate-x-1/2 md:left-auto md:right-[4%] md:w-[58%] md:translate-x-0"
+          />
         </div>
       </div>
     </section>

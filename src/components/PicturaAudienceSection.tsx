@@ -1,9 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-const imageUrl = (index: number, small = false) =>
-  `https://qclay.design/lovable/pictura/${small ? 'person_small' : 'person'}/person${index}.png`;
-
-const portraitNumbers = Array.from({ length: 44 }, (_, index) => index + 1).filter((index) => index !== 8);
+const CROWD_SPRITE = '/images/peeps/all-peeps ori.webp';
+const CROWD_COLUMNS = 15;
+const CROWD_ROWS = 7;
+// The original sprite is 3600 × 2268: each 15 × 7 frame is 240 × 324.
+// Cards stay square; the taller source frame is bottom-aligned and crops only at its top.
+const CROWD_FRAME_HEIGHT = 135;
+const EXCLUDED_CROWD_FRAMES = new Set([12, 24, 25, 35, 60, 62, 63, 65, 70, 75, 85, 87, 98]);
+const crowdFrames = Array.from({ length: CROWD_COLUMNS * CROWD_ROWS }, (_, index) => index)
+  .filter((index) => !EXCLUDED_CROWD_FRAMES.has(index));
 
 const rows = [
   { count: 4, size: 126, gapAfter: 112, gapAfterIndex: 1 },
@@ -22,7 +27,7 @@ type Tile = {
   y: number;
   width: number;
   height: number;
-  image: string;
+  frame: number;
   revealOrder: number;
   scatterX: number;
   scatterY: number;
@@ -57,7 +62,8 @@ function makeTiles(): { tiles: Tile[]; width: number; height: number } {
         y,
         width: row.size,
         height: row.size,
-        image: imageUrl(portraitNumbers[id % portraitNumbers.length]),
+        // Keep the persona copy in place while swapping the Teachers and Product teams faces.
+        frame: crowdFrames[(id === 0 ? 1 : id === 1 ? 0 : id) % crowdFrames.length],
         revealOrder: revealOffset + revealColumns.indexOf(col),
         scatterX: Math.cos(angle) * distance,
         scatterY: Math.sin(angle) * distance * 0.72,
@@ -85,19 +91,19 @@ const featureTargets = [
 const featureCopy = [
   {
     title: 'Teachers',
-    description: 'Turn the thing you keep redrawing on the whiteboard into a loop you reuse every term.',
+    description: 'Turn a lesson or whiteboard explanation into a loop your class can replay.',
   },
   {
-    title: 'Explainers & writers',
-    description: 'A moving diagram beats three paragraphs.',
+    title: 'Product teams',
+    description: 'Make a feature, flow, or product decision understandable in seconds.',
   },
   {
     title: 'Designers',
-    description: 'Build assets and loops in minutes instead of scheduling them.',
+    description: 'Bring interaction, prototypes, and presentation moments to life.',
   },
   {
-    title: 'Content creators',
-    description: 'Add animation to your stories',
+    title: 'Creators',
+    description: 'Give a story the movement that makes people stop.',
   },
 ];
 
@@ -105,6 +111,7 @@ export default function PicturaAudienceSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const heartRef = useRef<HTMLDivElement>(null);
   const laoHeartRef = useRef<HTMLObjectElement>(null);
+  const heartProgressRef = useRef(0);
   const tileRefs = useRef<Array<HTMLDivElement | null>>([]);
   const [isRevealed, setIsRevealed] = useState(false);
   const { tiles, width, height } = useMemo(makeTiles, []);
@@ -157,6 +164,22 @@ export default function PicturaAudienceSection() {
       previousWidth = viewportWidth;
       previousHeight = viewportHeight;
 
+      // Scrub the hand-drawn heart with the section scroll position. Moving
+      // back up rewinds the SVG through the same drawing path.
+      const heartCompletion = Math.min(1, Math.max(0, (eased - 0.7) / 0.3));
+      heartProgressRef.current = heartCompletion;
+      const laoHeart = laoHeartRef.current;
+      if (laoHeart) {
+        laoHeart.style.opacity = (heartCompletion * 0.7).toFixed(3);
+        laoHeart.style.transform = `translate3d(-50%, -50%, 0) scale(${(0.78 + heartCompletion * 0.08).toFixed(3)})`;
+
+        const heartSvg = laoHeart.contentDocument?.documentElement as SVGSVGElement | null;
+        if (heartSvg) {
+          heartSvg.pauseAnimations();
+          heartSvg.setCurrentTime(heartCompletion * 3.2);
+        }
+      }
+
       const heartBounds = heart.getBoundingClientRect();
       const scaleX = heartBounds.width / width;
       const scaleY = heartBounds.height / height;
@@ -185,16 +208,6 @@ export default function PicturaAudienceSection() {
         }
       });
 
-      if (laoHeartRef.current) {
-        laoHeartRef.current.style.transform = `translate3d(-50%, -50%, 0) scale(${(0.86 + eased * 1.42).toFixed(4)})`;
-
-        const heartSvg = laoHeartRef.current.contentDocument?.documentElement as SVGSVGElement | null;
-        if (heartSvg) {
-          heartSvg.pauseAnimations();
-          const heartProgress = reduceMotion.matches ? 1 : rawProgress;
-          heartSvg.setCurrentTime(0.28 + heartProgress * (17.3333333333 - 0.28));
-        }
-      }
     };
 
     const schedule = () => {
@@ -235,49 +248,66 @@ export default function PicturaAudienceSection() {
           aria-label="A heart of portraits assembling from top to bottom"
         >
           {tiles.map((tile) => (
-            <div
-              key={tile.id}
-              ref={(element) => { tileRefs.current[tile.id] = element; }}
-              className={`pictura-tile ${tile.id < featureTargets.length ? 'pictura-feature-tile' : ''}`}
-              style={{
-                left: `${(tile.x / width) * 100}%`,
-                top: `${(tile.y / height) * 100}%`,
-                width: `${(tile.width / width) * 100}%`,
-                height: `${(tile.height / height) * 100}%`,
-                ['--tile-delay' as string]: `${0.08 + tile.revealOrder * 0.042}s`,
-              }}
-            >
-              <div className="pictura-tile-reveal">
-                <img src={tile.image} alt="" loading="lazy" decoding="async" draggable={false} />
-              </div>
-              {tile.id < featureCopy.length && (
-                <div className="pictura-feature-copy" aria-hidden="true">
-                  <span className="pictura-feature-title">{featureCopy[tile.id].title}</span>
-                  <span className="pictura-feature-description">{featureCopy[tile.id].description}</span>
+            (() => {
+              const column = tile.frame % CROWD_COLUMNS;
+              const row = Math.floor(tile.frame / CROWD_COLUMNS);
+              const portraitOffset = tile.height === 37 ? 8 : 24;
+
+              return (
+                <div
+                  key={tile.id}
+                  ref={(element) => { tileRefs.current[tile.id] = element; }}
+                  className={`pictura-tile ${tile.id < featureTargets.length ? 'pictura-feature-tile' : ''}`}
+                  style={{
+                    left: `${(tile.x / width) * 100}%`,
+                    top: `${(tile.y / height) * 100}%`,
+                    width: `${(tile.width / width) * 100}%`,
+                    height: `${(tile.height / height) * 100}%`,
+                    ['--tile-delay' as string]: `${0.08 + tile.revealOrder * 0.042}s`,
+                  }}
+                >
+                  <div className="pictura-tile-reveal">
+                    <img
+                      className="pictura-crowd-portrait"
+                      src={CROWD_SPRITE}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      draggable={false}
+                      style={{
+                        left: `-${column * 100}%`,
+                        top: `calc(100% - ${(row + 1) * CROWD_FRAME_HEIGHT}% + ${portraitOffset}px)`,
+                      }}
+                    />
+                  </div>
+                  {tile.id < featureCopy.length && (
+                    <div className="pictura-feature-copy" aria-hidden="true">
+                      <span className="pictura-feature-title">{featureCopy[tile.id].title}</span>
+                      <span className="pictura-feature-description">{featureCopy[tile.id].description}</span>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              );
+            })()
           ))}
 
-          <object
-            ref={laoHeartRef}
-            className="pictura-lao-heart"
-            data="/assets/who-mini-heart.svg"
-            type="image/svg+xml"
-            aria-hidden="true"
-            tabIndex={-1}
-            onLoad={(event) => {
-              const heartSvg = event.currentTarget.contentDocument?.documentElement as SVGSVGElement | null;
-              const section = sectionRef.current;
-              if (!heartSvg || !section) return;
+          {isRevealed && (
+            <object
+              ref={laoHeartRef}
+              className="pictura-lao-heart"
+              data="/assets/who-mini-heart.optimized.svg"
+              type="image/svg+xml"
+              aria-hidden="true"
+              tabIndex={-1}
+              onLoad={(event) => {
+                const heartSvg = event.currentTarget.contentDocument?.documentElement as SVGSVGElement | null;
+                if (!heartSvg) return;
 
-              const sectionBounds = section.getBoundingClientRect();
-              const scrollDistance = Math.max(sectionBounds.height - window.innerHeight, 1);
-              const progress = Math.min(1, Math.max(0, -sectionBounds.top / scrollDistance));
-              heartSvg.pauseAnimations();
-              heartSvg.setCurrentTime(0.28 + progress * (17.3333333333 - 0.28));
-            }}
-          />
+                heartSvg.pauseAnimations();
+                heartSvg.setCurrentTime(heartProgressRef.current * 3.2);
+              }}
+            />
+          )}
         </div>
 
         <div className="pictura-side-copy pictura-side-copy-right" aria-hidden="true">
@@ -295,13 +325,14 @@ export default function PicturaAudienceSection() {
         .pictura-tile { position: absolute; z-index: 2; transform-origin: center; }
         .pictura-tile-reveal { width: 100%; height: 100%; overflow: hidden; background: #161616; opacity: 0; transform: translate3d(0,-54px,0) scale(.94); filter: blur(10px); }
         .pictura-tile img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; pointer-events: none; }
+        .pictura-tile img.pictura-crowd-portrait { position: absolute; width: 1500%; height: auto; max-width: none; object-fit: initial; }
         .is-revealed .pictura-tile-reveal { animation: picturaTileIn .84s cubic-bezier(.22,1,.36,1) var(--tile-delay) both; }
         .pictura-feature-tile .pictura-tile-reveal { box-shadow: 0 28px 76px rgba(0,0,0,.4); }
         .pictura-feature-copy { position: absolute; top: calc(100% + 13px); left: 0; width: min(260px, 210%); display: grid; gap: 6px; opacity: var(--feature-copy-opacity, 0); transform: translate3d(0,var(--feature-copy-offset,12px),0); color: rgba(255,255,255,.94); pointer-events: none; text-align: left; }
         .pictura-feature-title { font-family: var(--font-display,Georgia,serif); font-size: clamp(20px,1.75vw,30px); font-weight: 400; line-height: .95; letter-spacing: -.035em; text-wrap: balance; }
         .pictura-feature-description { max-width: 32ch; font-family: var(--font-sans,Arial,sans-serif); font-size: clamp(12px,.82vw,15px); font-weight: 400; line-height: 1.42; color: rgba(255,255,255,.66); text-wrap: pretty; }
 
-        .pictura-lao-heart { position: absolute; z-index: 0; left: 50%; top: calc(48.8% + 48px); display: block; width: 16%; aspect-ratio: 1; overflow: visible; border: 0; opacity: .7; filter: brightness(0) saturate(100%) invert(86%) sepia(19%) saturate(749%) hue-rotate(292deg) brightness(101%) contrast(93%); transform: translate3d(-50%,-50%,0) scale(.86); transform-origin: center; will-change: transform; pointer-events: none; }
+        .pictura-lao-heart { position: absolute; z-index: 5; left: 50%; top: calc(48.8% + 48px); display: block; width: 16%; aspect-ratio: 1; overflow: visible; border: 0; opacity: 0; filter: brightness(0) saturate(100%) invert(86%) sepia(19%) saturate(749%) hue-rotate(292deg) brightness(101%) contrast(93%); transform: translate3d(-50%,-50%,0) scale(.78); transform-origin: center; pointer-events: none; }
 
         .pictura-side-copy { position: absolute; z-index: 7; bottom: clamp(52px,8vh,90px); display: flex; width: min(30vw,430px); flex-direction: column; opacity: 0; transform: translate3d(0,20px,0); font-family: var(--font-display,Georgia,serif); font-size: clamp(31px,4vw,58px); font-weight: 400; line-height: .94; letter-spacing: -.035em; color: #dedede; text-wrap: balance; }
         .pictura-side-copy-left { left: clamp(24px,5vw,84px); text-align: left; align-items: flex-start; }

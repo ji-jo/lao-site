@@ -17,3 +17,6 @@ skills-lock.json
 # Duplicate source copies; the app uses public/audio/audio.m4a
 public/audio/Halo 3 Warthog Run OST HQ.m4a
 public/audio/audio/
+
+# Original media masters kept locally; only optimized derivatives ship.
+source-media/

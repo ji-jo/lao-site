@@ -26,7 +26,8 @@ export interface SelectionStyle {
 // Fluorescent red. The upstream default is a brown tuned for a light page; on
 // this dark surface it multiplies down to nothing.
 export const DEFAULT_INK = "#ff2d3f";
-export const DEFAULT_OPACITY = 0.82; // keep in sync with BASE_SELECTION_OPTIONS
+export const DEFAULT_OPACITY = 0.35; // marker default
+export const MARKER_MAX_OPACITY = 0.85;
 export const DEFAULT_MARK_TYPE: MarkType = "highlight";
 const DEFAULT_OPACITY_BY_PEN: Record<PenTip, number> = {
   slant: DEFAULT_OPACITY,
@@ -51,13 +52,18 @@ const SelectionStyleContext = createContext<SelectionStyleContextValue | null>(
 /** Holds the dock's selection style so it drives the live SelectionMarker. */
 export function SelectionStyleProvider({ children }: { children: ReactNode }) {
   const [color, setColor] = useState(DEFAULT_INK);
-  const [pen, setPen] = useState<PenTip>("slant");
+  // Freehand brush is the first tool users see and the one standing up in the dock.
+  const [pen, setPen] = useState<PenTip>("brush");
   const [opacityByPen, setOpacityByPen] =
     useState<Record<PenTip, number>>(DEFAULT_OPACITY_BY_PEN);
   const [markType, setMarkType] = useState<MarkType>(DEFAULT_MARK_TYPE);
   // The slider edits the active pen's opacity, leaving others untouched.
   const setOpacity = useCallback(
-    (next: number) => setOpacityByPen((m) => ({ ...m, [pen]: next })),
+    (next: number) => setOpacityByPen((m) => ({
+      ...m,
+      // The marker must remain translucent even at the slider's end stop.
+      [pen]: Math.min(pen === "slant" ? MARKER_MAX_OPACITY : 1, Math.max(0, next)),
+    })),
     [pen],
   );
   const value = useMemo<SelectionStyleContextValue>(

@@ -1,34 +1,20 @@
 import { useEffect, useRef, useState } from "react";
+import { AnimatedNumber } from "@/components/core/animated-number";
 import { Component as PencilLoader } from "@/components/ui/loader-1";
-import monitorModelUrl from "../../assets/3D/Monitor/Monitor 2/crt_monitor.optimized.glb?url";
 import wordmarkUrl from "../../assets/wordmark.svg?url";
 import palmUrl from "../../assets/palm.svg?url";
 import cursorUrl from "../../assets/cursor-mac.svg?url";
 
-const ASSET_SHARE = 0.82;
-const FONT_SHARE = 0.06;
-const PAGE_SHARE = 0.04;
-const MONITOR_PARSE_SHARE = 0.08;
-const CRITICAL_ASSETS = [monitorModelUrl, "/media/giftbox-demo.mp4", wordmarkUrl, palmUrl, cursorUrl];
+const ASSET_SHARE = 0.8;
+const FONT_SHARE = 0.1;
+const PAGE_SHARE = 0.1;
+const CRITICAL_ASSETS = [wordmarkUrl, palmUrl, cursorUrl];
 
 const clampPercent = (value: number) => Math.min(100, Math.max(0, Math.round(value)));
 
 async function waitForWindowLoad() {
   if (document.readyState === "complete") return;
   await new Promise<void>((resolve) => window.addEventListener("load", () => resolve(), { once: true }));
-}
-
-async function waitForMonitorParse() {
-  if (document.documentElement.dataset.monitorReady === "true") return;
-
-  await new Promise<void>((resolve) => {
-    const finish = () => {
-      window.removeEventListener("lao:monitor-ready", finish);
-      resolve();
-    };
-    window.addEventListener("lao:monitor-ready", finish, { once: true });
-    window.setTimeout(finish, 30000);
-  });
 }
 
 export default function SitePreloader() {
@@ -57,15 +43,13 @@ export default function SitePreloader() {
     let assetRatio = 0;
     let fontsReady = false;
     let pageReady = false;
-    let monitorReady = false;
 
     const publish = () => {
       if (cancelled) return;
       const next = clampPercent(
         (assetRatio * ASSET_SHARE
           + Number(fontsReady) * FONT_SHARE
-          + Number(pageReady) * PAGE_SHARE
-          + Number(monitorReady) * MONITOR_PARSE_SHARE) * 100,
+          + Number(pageReady) * PAGE_SHARE) * 100,
       );
       const monotonic = Math.max(progressRef.current, next);
       progressRef.current = monotonic;
@@ -119,13 +103,14 @@ export default function SitePreloader() {
           preloadAssets(),
           document.fonts.ready.then(() => { fontsReady = true; publish(); }),
           waitForWindowLoad().then(() => { pageReady = true; publish(); }),
-          waitForMonitorParse().then(() => { monitorReady = true; publish(); }),
         ]);
       } catch (error) {
         console.error("Critical asset preload failed; continuing with rendered fallbacks.", error);
       }
 
-      const minimumDisplay = Math.max(0, 500 - (performance.now() - startedAt));
+      // Keep the preloader around long enough for the visible counter to count
+      // through each integer, even when the browser serves files from cache.
+      const minimumDisplay = Math.max(0, 2_300 - (performance.now() - startedAt));
       await new Promise((resolve) => window.setTimeout(resolve, minimumDisplay));
       if (cancelled) return;
 
@@ -166,7 +151,11 @@ export default function SitePreloader() {
       <div className="site-preloader__content">
         <PencilLoader className="site-preloader__pencil" />
         <output className="site-preloader__progress" aria-label={`${progress} percent loaded`}>
-          {String(progress).padStart(3, "0")}%
+          <AnimatedNumber
+            value={progress}
+            springOptions={{ bounce: 0, duration: 1_800 }}
+          />
+          %
         </output>
         <p className="site-preloader__label">Preparing the canvas</p>
       </div>
