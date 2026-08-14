@@ -6,9 +6,7 @@ pages_build_output_dir = "./dist"
 PUBLIC_SITE_URL = "https://lao.lt"
 WAITLIST_FROM_EMAIL = "LAO <waitlist@lao.lt>"
 
-# Create the database with `npx wrangler d1 create lao-waitlist`, then add the
-# returned binding here (or bind it as WAITLIST_DB in Cloudflare Pages):
-# [[d1_databases]]
-# binding = "WAITLIST_DB"
-# database_name = "lao-waitlist"
-# database_id = "paste-the-d1-database-id"
+[[d1_databases]]
+binding = "WAITLIST_DB"
+database_name = "lao-waitlist"
+database_id = "5b360aaf-6939-4c9b-bc5a-8b522de4c408"
