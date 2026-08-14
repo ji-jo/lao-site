@@ -1,1 +1,822 @@
-òã#B’“°Ð¢òòæ–ÖG&öâ†26ö×ÆWFVB—G2W‡ç6–öâ'’ãcâ&Vv–âF†R7F÷Ö÷F–öàÐ¢òò6&B–ÖÖVF–FVÇ’gFW"F†BÂÆVf–ærVæ÷Vv‚7F–6·’G&fVÂf÷"—BFðÐ¢òò&—6Rf—6–&Ç’g&öÒF†R&÷GFöÒ&Vf÷&RF†—266VæR&VÆV6W2àÐ¢6öç7B6V6öæDVçG&æ6RÒ6Öö÷F‡7FW†6Æ×‚‡7F–6·•&öw&W72Òãb’òã"’“°Ð¢6öç7Bf–Ww÷'Ev–GF‚Òv–æF÷ræ–ææW%v–GFƒ°Ð¢6öç7B6fT–æÆ–æTÖ&v–âÒc°Ð¢6öç7B6fT&Æö6´Ö&v–âÒc°Ð¢òò†öæS¢W†7FÇ’g‚B&÷F‚VFvW2âF&ÆWBöFW6·F÷¢G'VRcC‚6àÐ¢òò6†÷'BÆæG66Rf–Ww÷'G26â6‡&–æ²gW'F†W"Fò&W6W'fRF†R6÷W&6PÐ¢òò&F–òv—F†÷WB6Æ—–ærF†R6&BfW'F–6ÆÇ’àÐ¢6öç7BgVÆÅf–FVõv–GF‚ÒÖF‚æÖ–â€Ð¢cCÀÐ¢f–Ww÷'Ev–GF‚Ò6fT–æÆ–æTÖ&v–â¢"ÀÐ¢‡f–Ww÷'D†V–v‡BÒ6fT&Æö6´Ö&v–â¢"’¢æ–ÖG&öä7V7E&F–òÀÐ¢“°Ð¢6öç7BgVÆÅf–FVô†V–v‡BÒgVÆÅf–FVõv–GF‚òæ–ÖG&öä7V7E&F–ó°Ð¢6öç7BgVÆÄÆVgBÒ‡f–Ww÷'Ev–GF‚ÒgVÆÅf–FVõv–GF‚’ò#°Ð¢6öç7BgVÆÅF÷Ò‡f–Ww÷'D†V–v‡BÒgVÆÅf–FVô†V–v‡B’ò#°Ð¢6öç7B÷&–v–âÒ67&VVå&V7E&Vbæ7W'&VçBóò°Ð¢ÆVgC¢f–Ww÷'Ev–GF‚¢ã#‚ÀÐ¢F÷¢f–Ww÷'D†V–v‡B¢ãSRÀÐ¢v–GFƒ¢ÖF‚æÖ‚ƒ“bÂf–Ww÷'Ev–GF‚¢ãb’ÀÐ¢†V–v‡C¢ÖF‚æÖ‚ƒƒÂf–Ww÷'Ev–GF‚¢ã3R’ÀÐ¢Ó°Ð Ð¢–b†&ÇVT&6¶G&÷&Vbæ7W'&VçB’°Ð¢6öç7B†ÆõFF–ærÒÖF‚æÖ–âƒ‚ÂÖF‚æÖ‚ƒC‚ÂgVÆÅf–FVõv–GF‚¢ãb’“°Ð¢&ÇVT&6¶G&÷&Vbæ7W'&VçBç7G–ÆRçv–GF‚ÒG¶gVÆÅf–FVõv–GF‚²†ÆõFF–ær¢'×†°Ð¢&ÇVT&6¶G&÷&Vbæ7W'&VçBç7G–ÆRæ†V–v‡BÒG¶gVÆÅf–FVô†V–v‡B²†ÆõFF–ær¢'×†°Ð¢&ÇVT&6¶G&÷&Vbæ7W'&VçBç7G–ÆRæ÷6—G’Ò7G&–ær†W‡ç6–öâ¢ã3R“°Ð¢&ÇVT&6¶G&÷&Vbæ7W'&VçBç7G–ÆRçG&ç6f÷&ÒÒG&ç6ÆFS6B‚G¶gVÆÄÆVgBÒ†ÆõFF–æw×‚ÂG¶gVÆÅF÷Ò†ÆõFF–æw×‚Â–°Ð¢ÐÐ¢6öç7BöÆE66VæT÷6—G’Ò7G&–ærƒÒ6Öö÷F‡7FW†6Æ×†W‡ç6–öâ¢ã3R’’“°Ð¢–b‡æVÅ&Vbæ7W'&VçB’æVÅ&Vbæ7W'&VçBç7G–ÆRæ÷6—G’ÒöÆE66VæT÷6—G“°Ð¢–b†6çf4Æ–W%&Vbæ7W'&VçB’6çf4Æ–W%&Vbæ7W'&VçBç7G–ÆRæ÷6—G’ÒöÆE66VæT÷6—G“°Ð¢–b‡67&VVä÷fW&Æ”Æ–W%&Vbæ7W'&VçB’67&VVä÷fW&Æ”Æ–W%&Vbæ7W'&VçBç7G–ÆRæ÷6—G’ÒöÆE66VæT÷6—G“°Ð¢–b†6÷”Æ–W%&Vbæ7W'&VçB’6÷”Æ–W%&Vbæ7W'&VçBç7G–ÆRæ÷6—G’ÒöÆE66VæT÷6—G“°Ð Ð¢–b†W‡æF–æuf–FVõ&Vbæ7W'&VçB’°Ð¢6öç7B‚ÒD…$TRäÖF…WF–Ç2æÆW'†÷&–v–âæÆVgBÂgVÆÄÆVgBÂW‡ç6–öâ“°Ð¢6öç7B’ÒD…$TRäÖF…WF–Ç2æÆW'†÷&–v–âçF÷ÂgVÆÅF÷ÂW‡ç6–öâ“°Ð¢6öç7B66ÆU‚ÒD…$TRäÖF…WF–Ç2æÆW'†÷&–v–âçv–GF‚ògVÆÅf–FVõv–GF‚ÂÂW‡ç6–öâ“°Ð¢6öç7B66ÆU’ÒD…$TRäÖF…WF–Ç2æÆW'†÷&–v–âæ†V–v‡BògVÆÅf–FVô†V–v‡BÂÂW‡ç6–öâ“°Ð¢W‡æF–æuf–FVõ&Vbæ7W'&VçBç7G–ÆRçv–GF‚ÒG¶gVÆÅf–FVõv–GF‡×†°Ð¢W‡æF–æuf–FVõ&Vbæ7W'&VçBç7G–ÆRæ†V–v‡BÒG¶gVÆÅf–FVô†V–v‡G×†°Ð¢W‡æF–æuf–FVõ&Vbæ7W'&VçBç7G–ÆRæ÷6—G’Ò7G&–ær‡6Öö÷F‡7FW†6Æ×†W‡ç6–öâ¢R’’“°Ð¢W‡æF–æuf–FVõ&Vbæ7W'&VçBç7G–ÆRæ&÷&FW%&F—W2Ò#g‚#°Ð¢W‡æF–æuf–FVõ&Vbæ7W'&VçBç7G–ÆRçG&ç6f÷&ÒÒG&ç6ÆFS6B‚G·‡×‚ÂG·—×‚Â’66ÆR‚G·66ÆU‡ÒÂG·66ÆU—Ò–°Ð¢ÐÐ Ð¢–b‡6V6öæEf–FVôÆ–W%&Vbæ7W'&VçB’°Ð¢6öç7B÷fW&Æ’ÒgVÆÅF÷²gVÆÅf–FVô†V–v‡B¢‡f–Ww÷'Ev–GF‚ÂcCòãb¢ã"“°Ð¢6öç7B6V6öæEf–FVõv–GF‚ÒÖF‚æÖ–â€Ð¢cCÀÐ¢f–Ww÷'Ev–GF‚Ò6fT–æÆ–æTÖ&v–â¢"ÀÐ¢ÖF‚æÖ‚ƒÂf–Ww÷'D†V–v‡BÒ÷fW&Æ’Ò6fT&Æö6´Ö&v–â’¢7F÷Ö÷F–öä7V7E&F–òÀÐ¢“°Ð¢6öç7B6V6öæEf–FVô†V–v‡BÒ6V6öæEf–FVõv–GF‚ò7F÷Ö÷F–öä7V7E&F–ó°Ð¢6öç7BFW6—&VE6V6öæE‚ÒgVÆÄÆVgB²gVÆÅf–FVõv–GF‚¢‡f–Ww÷'Ev–GF‚ÂcCòãB¢ã‚“°Ð¢6öç7B6V6öæE‚ÒD…$TRäÖF…WF–Ç2æ6Æ×€Ð¢FW6—&VE6V6öæE‚ÀÐ¢6fT–æÆ–æTÖ&v–âÀÐ¢f–Ww÷'Ev–GF‚Ò6V6öæEf–FVõv–GF‚Ò6fT–æÆ–æTÖ&v–âÀÐ¢“°Ð¢6öç7B6V6öæEF&vWE’ÒÖF‚æÖ–â†÷fW&Æ’Âf–Ww÷'D†V–v‡BÒ6V6öæEf–FVô†V–v‡BÒ6fT&Æö6´Ö&v–â“°Ð¢6öç7B6V6öæE’ÒD…$TRäÖF…WF–Ç2æÆW'‡f–Ww÷'D†V–v‡B²3"Â6V6öæEF&vWE’Â6V6öæDVçG&æ6R“°Ð¢6öç7B6V6öæE&÷FF–öâÒf–Ww÷'Ev–GF‚ÂcCò¢D…$TRäÖF…WF–Ç2æÆW'ƒÂÓ2Â6V6öæDVçG&æ6R“°Ð¢6V6öæEf–FVôÆ–W%&Vbæ7W'&VçBç7G–ÆRçv–GF‚ÒG·6V6öæEf–FVõv–GF‡×†°Ð¢6V6öæEf–FVôÆ–W%&Vbæ7W'&VçBç7G–ÆRæ†V–v‡BÒG·6V6öæEf–FVô†V–v‡G×†°Ð¢6V6öæEf–FVôÆ–W%&Vbæ7W'&VçBç7G–ÆRæ÷6—G’Ò7G&–ær‡6V6öæDVçG&æ6R“°Ð¢6V6öæEf–FVôÆ–W%&Vbæ7W'&VçBç7G–ÆRçG&ç6f÷&ÒÒG&ç6ÆFS6B‚G·6V6öæE‡×‚ÂG·6V6öæE—×‚Â’&÷FFR‚G·6V6öæE&÷FF–öçÖFVr–°Ð¢ÐÐ Ð¢òò7F'B&÷F‚&Wf–Ww22F†V—"5%G2&R&WfVÆVBâF†W’&VÖ–â×WFVBæ@Ð¢òòÆö÷6öçF–çV÷W6Ç’v†–ÆRF†RÖöFR6WVVæ6R—2–âf–WràÐ¢–b‡7F–6·•&öw&W72ãÒã"bbæ–ÖG&öåÆ–VE&Vbæ7W'&VçBbbæ–ÖG&öåf–FVõ&Vbæ7W'&VçB’°Ð¢æ–ÖG&öåÆ–VE&Vbæ7W'&VçBÒG'VS°Ð¢æ–ÖG&öåf–FVõ&Vbæ7W'&VçBæ7W'&VçEF–ÖRÒ°Ð¢–b†æ–ÖG&öå67&VVå&Vbæ7W'&VçB’°Ð¢æ–ÖG&öå67&VVå&Vbæ7W'&VçBæ7W'&VçEF–ÖRÒ°Ð¢fö–Bæ–ÖG&öå67&VVå&Vbæ7W'&VçBçÆ’‚’æ6F6‚‚‚’ÓâVæFVf–æVB“°Ð¢ÐÐ¢fö–Bæ–ÖG&öåf–FVõ&Vbæ7W'&VçBçÆ’‚’æ6F6‚‚‚’ÓâVæFVf–æVB“°Ð¢ÐÐ¢–b‡7F–6·•&öw&W72ãÒã"bb7F÷Ö÷F–öä7'EÆ–VE&Vbæ7W'&VçBbb7F÷Ö÷F–öåf–FVõ&Vbæ7W'&VçB’°Ð¢7F÷Ö÷F–öä7'EÆ–VE&Vbæ7W'&VçBÒG'VS°Ð¢–b‡7F÷Ö÷F–öåf–FVõ&Vbæ7W'&VçBç&VG•7FFRÓÓÒ…DÔÄÖVF–VÆVÖVçBä„dUôäõD„”är’°Ð¢7F÷Ö÷F–öåf–FVõ&Vbæ7W'&VçBæÆöB‚“°Ð¢ÐÐ¢7F÷Ö÷F–öåf–FVõ&Vbæ7W'&VçBæ7W'&VçEF–ÖRÒ°Ð¢–b‡7F÷Ö÷F–öå67&VVå&Vbæ7W'&VçB’°Ð¢7F÷Ö÷F–öå67&VVå&Vbæ7W'&VçBæ7W'&VçEF–ÖRÒ°Ð¢fö–B7F÷Ö÷F–öå67&VVå&Vbæ7W'&VçBçÆ’‚’æ6F6‚‚‚’ÓâVæFVf–æVB“°Ð¢ÐÐ¢fö–B7F÷Ö÷F–öåf–FVõ&Vbæ7W'&VçBçÆ’‚’æ6F6‚‚‚’Óâ°Ð¢7F÷Ö÷F–öä7'EÆ–VE&Vbæ7W'&VçBÒfÇ6S°Ð¢Ò“°Ð¢ÐÐ¢–b‡7F–6·•&öw&W72ãÒãbbb7F÷Ö÷F–öåÆ–VE&Vbæ7W'&VçBbb7F÷Ö÷F–öåf–FVõ&Vbæ7W'&VçB’°Ð¢7F÷Ö÷F–öåÆ–VE&Vbæ7W'&VçBÒG'VS°Ð¢–b‡7F÷Ö÷F–öåf–FVõ&Vbæ7W'&VçBç&VG•7FFRÓÓÒ…DÔÄÖVF–VÆVÖVçBä„dUôäõD„”är’°Ð¢7F÷Ö÷F–öåf–FVõ&Vbæ7W'&VçBæÆöB‚“°Ð¢ÐÐ¢7F÷Ö÷F–öåf–FVõ&Vbæ7W'&VçBæ7W'&VçEF–ÖRÒ°Ð¢fö–B7F÷Ö÷F–öåf–FVõ&Vbæ7W'&VçBçÆ’‚’æ6F6‚‚‚’Óâ°Ð¢7F÷Ö÷F–öåÆ–VE&Vbæ7W'&VçBÒfÇ6S°Ð¢Ò“°Ð¢ÐÐ¢Ó°Ð Ð¢6öç7B66†VGVÆUWFFRÒ‚’Óâ°Ð¢–b†—4æV"bbg&ÖR’g&ÖRÒ&WVW7Dæ–ÖF–öäg&ÖR‡WFFU7F–6·•&öw&W72“°Ð¢Ó°Ð Ð¢6öç7Bö'6W'fW"ÒæWr–çFW'6V7F–öäö'6W'fW"€Ð¢…¶VçG'•Ò’Óâ°¢—4æV"ÒVçG'“òæ—4–çFW'6V7F–æróòfÇ6S°¢6WE&VæFW$7F—fR†—4æV"“°¢–b†—4æV"’°¢66†VGVÆUWFFR‚“°¢ÒVÇ6R°¢–b†g&ÖR’°¢6æ6VÄæ–ÖF–öäg&ÖR†g&ÖR“°¢g&ÖRÒ°¢Ð¢æ–ÖG&öå67&VVå&Vbæ7W'&VçCòçW6R‚“°¢7F÷Ö÷F–öå67&VVå&Vbæ7W'&VçCòçW6R‚“°¢æ–ÖG&öåf–FVõ&Vbæ7W'&VçCòçW6R‚“°¢7F÷Ö÷F–öåf–FVõ&Vbæ7W'&VçCòçW6R‚“°¢æ–ÖG&öåÆ–VE&Vbæ7W'&VçBÒfÇ6S°¢7F÷Ö÷F–öä7'EÆ–VE&Vbæ7W'&VçBÒfÇ6S°¢7F÷Ö÷F–öåÆ–VE&Vbæ7W'&VçBÒfÇ6S°¢Ð¢ÒÀÐ¢²&ö÷DÖ&v–ã¢#R‚R‚"ÒÀ¢“°Ð¢ö'6W'fW"æö'6W'fR‡6V7F–öâ“°Ð¢v–æF÷ræFDWfVçDÆ—7FVæW"‚'67&öÆÂ"Â66†VGVÆUWFFRÂ²76—fS¢G'VRÒ“°Ð¢v–æF÷ræFDWfVçDÆ—7FVæW"‚'&W6—¦R"Â66†VGVÆUWFFRÂ²76—fS¢G'VRÒ“°Ð Ð¢&WGW&â‚’Óâ°Ð¢6æ6VÄæ–ÖF–öäg&ÖR†g&ÖR“°Ð¢ö'6W'fW"æF—66öææV7B‚“°Ð¢v–æF÷rç&VÖ÷fTWfVçDÆ—7FVæW"‚'67&öÆÂ"Â66†VGVÆUWFFR“°Ð¢v–æF÷rç&VÖ÷fTWfVçDÆ—7FVæW"‚'&W6—¦R"Â66†VGVÆUWFFR“°Ð¢Ó°Ð¢ÒÂ¶æ–ÖG&öä7V7E&F–òÂ7V&U&öw&W72Â7F÷Ö÷F–öä7V7E&F–õÒ“°Ð Ð¢&WGW&â€Ð¢Ç6V7F–öâ&Vc×·6V7F–öå&VgÒ–CÒ&ÖöFW2"6Æ74æÖSÒ'&VÆF—fR¢Õ³“Ò‚Õ³Ccf…Ò&rÖ–æ²Ó“#àÐ¢Å67&öÆÄö'6W'fW"6Æ74æÖSÒ'7F–6·’F÷Ó‚Õ³Gf…ÒrÖgVÆÂ÷fW&fÆ÷rÖ†–FFVâ#àÐ¢ÆF—b6Æ74æÖSÒ&'6öÇWFR–ç6WBÓfÆW‚—FV×2Ö6VçFW"§W7F–g’Ö6VçFW"‚Õ¶6Æ×ƒg‚Ã7grÃC‚•Ò#àÐ¢ÆF—b&Vc×·æVÅ&VgÒ6Æ74æÖSÒ&7V7BÕ³2ó%ÒÖ–âÖ‚Õ³C#…ÒrÖgVÆÂÖ‚×rÕ³#…Ò&÷VæFVBÕ³C…Ò&rÕ²4cT4SUÒv–ÆÂÖ6†ævRÕ¶÷6—G•Ò"óà¢ÂöF—càÐ Ð¢ÆF—b&Vc×¶6çf4Æ–W%&VgÒ6Æ74æÖSÒ'ö–çFW"ÖWfVçG2ÖæöæR'6öÇWFR–ç6WBÓ¢Óv–ÆÂÖ6†ævRÕ¶÷6—G•Ò#àÐ¢Ä6çf0Ð¢6ÖW&×·²÷6—F–öã¢³ÂÂÒÂf÷c¢3‚×ÐÐ¢G#×³ÐÐ¢g&ÖVÆö÷Ò&FVÖæB Ð¢vÃ×·²Ç†¢G'VRÂçF–Æ–3¢fÇ6RÂ÷vW%&VfW&Væ6S¢&†–v‚×W&f÷&Öæ6R"×ÐÐ¢6Æ74æÖSÒ&‚ÖgVÆÂrÖgVÆÂ Ð¢7G–ÆS×·²&6¶w&÷VæC¢'G&ç7&VçB"×ÐÐ¢àÐ¢Å7W7Vç6RfÆÆ&6³×³ÄÖöæ—F÷$ÆöF–æu66VæR&öw&W73×¶7V&U&öw&W77ÒóçÓàÐ¢Ä7V&U66VæPÐ¢&öw&W73×¶7V&U&öw&W77ÐÐ¢æ–ÖG&öå67&VVå&Vc×¶æ–ÖG&öå67&VVå&VgÐÐ¢7F÷Ö÷F–öå67&VVå&Vc×·7F÷Ö÷F–öå67&VVå&VgÐ¢67&VVå&V7E&Vc×·67&VVå&V7E&VgÐ¢&VæFW$7F—fS×·&VæFW$7F—fWÐ¢óàÐ¢Âõ7W7Vç6SàÐ¢Âô6çf3àÐ¢ÂöF—càÐ Ð¢ÆF—`Ð¢&Vc×·67&VVä÷fW&Æ”Æ–W%&VgÐÐ¢&–Ö†–FFVãÒ'G'VR Ð¢6Æ74æÖSÒ'ö–çFW"ÖWfVçG2ÖæöæRf—†VBÆVgBÕ²Ó…ÒF÷Ó×¢Ó‚Õ³#Sg…ÒrÕ³#Sg…Ò÷6—G’Ó Ð¢àÐ¢Çf–FVðÐ¢&Vc×¶æ–ÖG&öå67&VVå&VgÐÐ¢7&3×´ä”ÔE$ôåõd”DTõõU$ÇÐÐ¢×WFV@Ð¢Æö÷ Ð¢Æ—4–æÆ–æPÐ¢&VÆöCÒ&ÖWFFF ¢&–Ö†–FFVãÒ'G'VR Ð¢6Æ74æÖSÒ&‚ÖgVÆÂrÖgVÆÂ Ð¢óàÐ¢Çf–FVðÐ¢&Vc×·7F÷Ö÷F–öå67&VVå&VgÐÐ¢7&3×µ5DõôÔõD”ôåõd”DTõõU$ÇÐÐ¢×WFV@Ð¢Æö÷ Ð¢Æ—4–æÆ–æPÐ¢&VÆöCÒ&ÖWFFF ¢&–Ö†–FFVãÒ'G'VR Ð¢6Æ74æÖSÒ&‚ÖgVÆÂrÖgVÆÂ Ð¢óàÐ¢ÂöF—càÐ Ð¢ÆF—b&Vc×¶6÷”Æ–W%&VgÒ6Æ74æÖSÒ&'6öÇWFR–ç6WBÓ¢Ó#fÆW‚—FV×2Ö6VçFW"§W7F–g’Ö6VçFW"‚Õ¶6Æ×ƒg‚Ã7grÃC‚•Òv–ÆÂÖ6†ævRÕ¶÷6—G•Ò#àÐ¢ÆF—b6Æ74æÖSÒ'&VÆF—fR7V7BÕ³2ó%ÒÖ–âÖ‚Õ³C#…ÒrÖgVÆÂÖ‚×rÕ³#…Ò#àÐ¢Å67&öÆÄö'6W'fW"åG&–vvW$w&÷W6Æ74æÖSÒ'ö–çFW"ÖWfVçG2ÖæöæR'6öÇWFR–ç6WB×‚ÓF÷Õ³rãRUÒ¢Ó‚ÓRFW‡BÖ6VçFW"FW‡BÕ²3““•Ò#àÐ¢µ°Ð¢$æ–ÖF–öâ6†÷VÆBæ÷B&R6ö×Æ–6FVB"ÀÐ¢%F†N(	—2v‡’vRÖFRF†R&öGV7B"ÀÐ¢$Æò†2GvòÖöFW2"ÀÐ¢ÒæÖ‚†Æ–æRÂ–æFW‚’Óâ°Ð¢6öç7B—47F—fRÒ7F—fU7FWãÒ–æFW‚²°Ð¢6öç7B—4Æ7BÒ–æFW‚ÓÓÒ#°Ð¢&WGW&â€Ð¢Å67&öÆÄö'6W'fW"åG&–vvW"¶W“×¶Æ–æWÒ6Æ74æÖS×¶6Ç7‚‚'&VÆF—fR"Â—4Æ7Bbb&×BÕ¶6Æ×ƒ3‡‚ÃRãggrÃcg‚•Ò"—ÓàÐ¢²‚’Óâ€Ð¢ÃàÐ¢Ç6Æ74æÖS×¶6Ç7‚‡²&÷6—G’Ó#¢—47F—fRÒÂ&'6öÇWFR–ç6WBÓÒÓföçBÖF—7Æ’G&ç6—F–öâGW&F–öâÓs"Â—4Æ7Bò'FW‡BÕ¶6Æ×ƒ#—‚Ã2ãGgrÃC'‚•ÒÆVF–ærÖæöæR"¢'FW‡BÕ¶6Æ×ƒ3'‚ÃBãgrÃC‡‚•ÒÆVF–ærÕ³ã%Ò"—ÓàÐ¢¶Æ–æWÐÐ¢Â÷àÐ¢Ç6Æ74æÖS×¶6Ç7‚‚&–çf—6–&ÆR&VÆF—fRÒÓföçBÖF—7Æ’"Â—4Æ7Bò'FW‡BÕ¶6Æ×ƒ#—‚Ã2ãGgrÃC'‚•ÒÆVF–ærÖæöæR"¢'FW‡BÕ¶6Æ×ƒ3'‚ÃBãgrÃC‡‚•ÒÆVF–ærÕ³ã%Ò"—ÓàÐ¢¶Æ–æWÐÐ¢Â÷àÐ¢ÂóàÐ¢—ÐÐ¢Âõ67&öÆÄö'6W'fW"åG&–vvW#àÐ¢“°Ð¢Ò—ÐÐ¢Âõ67&öÆÄö'6W'fW"åG&–vvW$w&÷WàÐ¢ÂöF—càÐ¢ÂöF—càÐ Ð¢ÆF—`Ð¢&Vc×¶&ÇVT&6¶G&÷&VgÐÐ¢&–Ö†–FFVãÒ'G'VR Ð¢6Æ74æÖSÒ'ö–çFW"ÖWfVçG2ÖæöæR'6öÇWFRÆVgBÓF÷Ó¢Õ³#UÒ&÷VæFVBÕ³3'…Ò&rÕ²3#Vc“UÒó#R÷6—G’Ó&ÇW"Õ³C‡…Òv–ÆÂÖ6†ævRÕ·G&ç6f÷&ÒÆ÷6—G•Ò·G&ç6f÷&ÒÖ÷&–v–ã£óÒ Ð¢óàÐ Ð¢ÆF—`Ð¢&Vc×¶W‡æF–æuf–FVõ&VgÐÐ¢6Æ74æÖSÒ'ö–çFW"ÖWfVçG2ÖæöæR'6öÇWFRÆVgBÓF÷Ó¢Ó3÷fW&fÆ÷r×f—6–&ÆR&÷VæFVBÕ³g…Ò÷6—G’Óv–ÆÂÖ6†ævRÕ·G&ç6f÷&ÒÆ÷6—G’Æ&÷&FW"×&F—W5Ò·G&ç6f÷&ÒÖ÷&–v–ã£óÒ Ð¢&–ÖÆ&VÃÒ$æ–ÖG&öâ&öGV7B&Wf–Wr Ð¢àÐ¢ÆF—b6Æ74æÖSÒ&'6öÇWFR–ç6WBÓ÷fW&fÆ÷rÖ†–FFVâ&÷VæFVBÕ³g…Ò&rÕ²3SSUÒ6†F÷rÕ³óG…ó3G…ó'…÷&v&ƒÃC’Ãƒ2Âã#‚•Ò¶6÷&æW"×6†S§7V—&6ÆUÒ#àÐ¢²æ–ÖG&öäf–Æ&ÆRbb€Ð¢ÆF—b6Æ74æÖSÒ&'6öÇWFR–ç6WBÓw&–BÆ6RÖ—FV×2Ö6VçFW"‚ÓBFW‡BÖ6VçFW"föçBÖÖöæòFW‡BÕ³…ÒWW&66RG&6¶–ærÕ²ãVÕÒFW‡B×v†—FRóCR#àÐ¢FBæ–ÖG&öâÖFVÖòæ×@Ð¢ÂöF—càÐ¢—ÐÐ¢Çf–FVðÐ¢&Vc×¶6GW&Tæ–ÖG&öåf–FV÷ÐÐ¢7&3×´ä”ÔE$ôåõd”DTõõU$ÇÐÐ¢×WFV@Ð¢Æö÷ Ð¢Æ—4–æÆ–æPÐ¢&VÆöCÒ&ÖWFFF ¢öäÆöFVDÖWFFF×²†WfVçB’Óâ°Ð¢6öç7Bf–FVòÒWfVçBæ7W'&VçEF&vWC°Ð¢–b‡f–FVòçf–FVõv–GF‚âbbf–FVòçf–FVô†V–v‡Bâ’°Ð¢6WDæ–ÖG&öä7V7E&F–ò‡f–FVòçf–FVõv–GF‚òf–FVòçf–FVô†V–v‡B“°Ð¢ÐÐ¢×ÐÐ¢öä6åÆ“×²‚’Óâ°Ð¢6WDæ–ÖG&öäf–Æ&ÆR‡G'VR“°Ð¢–b†ÆFW7E&öw&W75&Vbæ7W'&VçBãÒã"bbæ–ÖG&öåf–FVõ&Vbæ7W'&VçCòçW6VB’°Ð¢fö–Bæ–ÖG&öåf–FVõ&Vbæ7W'&VçBçÆ’‚’æ6F6‚‚‚’ÓâVæFVf–æVB“°Ð¢ÐÐ¢×ÐÐ¢öäW'&÷#×²‚’Óâ6WDæ–ÖG&öäf–Æ&ÆR†fÇ6R—ÐÐ¢6Æ74æÖS×¶6Ç7‚‚&‚ÖgVÆÂrÖgVÆÂö&¦V7BÖ6÷fW""Âæ–ÖG&öäf–Æ&ÆRò&÷6—G’Ó"¢&÷6—G’Ó"—ÐÐ¢óàÐ¢ÂöF—càÐ¢Ç6Æ74æÖSÒ'ö–çFW"ÖWfVçG2ÖæöæR'6öÇWFR–ç6WB×‚ÓF÷ÖgVÆÂ¢Ó×BÓ2v†—FW76RÖæ÷w&FW‡BÖ6VçFW"föçBÖF—7Æ’FW‡BÕ³#G…ÒföçBÖæ÷&ÖÂÆVF–ærÖæöæRFW‡BÕ²6Vc&##eÒ#àÐ¢æ–ÖG&öàÐ¢Â÷àÐ¢ÂöF—càÐ Ð¢ÆF—`Ð¢&Vc×·6V6öæEf–FVôÆ–W%&VgÐÐ¢6Æ74æÖSÒ'ö–çFW"ÖWfVçG2ÖæöæR'6öÇWFRÆVgBÓF÷Ó¢ÓC÷fW&fÆ÷r×f—6–&ÆR&÷VæFVBÕ³g…Ò÷6—G’Óv–ÆÂÖ6†ævRÕ·G&ç6f÷&ÒÆ÷6—G•Ò·G&ç6f÷&ÒÖ÷&–v–ã£SUóSUÒ Ð¢&–ÖÆ&VÃÒ%7F÷ÖÖ÷F–öâ&öGV7B&Wf–Wr Ð¢àÐ¢ÆF—b6Æ74æÖSÒ&'6öÇWFR–ç6WBÓ÷fW&fÆ÷rÖ†–FFVâ&÷VæFVBÕ³g…Ò&rÕ²3SSUÒ6†F÷rÕ³ó#‡…óƒ…÷&v&ƒÃÃÂãC‚•Ò¶6÷&æW"×6†S§7V—&6ÆUÒ#àÐ¢Çf–FVðÐ¢&Vc×¶6GW&U7F÷Ö÷F–öåf–FV÷ÐÐ¢7&3×µ5DõôÔõD”ôåõd”DTõõU$ÇÐÐ¢×WFV@Ð¢Æö÷ Ð¢Æ—4–æÆ–æPÐ¢&VÆöCÒ&ÖWFFF ¢öäÆöFVDÖWFFF×²†WfVçB’Óâ°Ð¢6öç7Bf–FVòÒWfVçBæ7W'&VçEF&vWC°Ð¢–b‡f–FVòçf–FVõv–GF‚âbbf–FVòçf–FVô†V–v‡Bâ’°Ð¢6WE7F÷Ö÷F–öä7V7E&F–ò‡f–FVòçf–FVõv–GF‚òf–FVòçf–FVô†V–v‡B“°Ð¢ÐÐ¢×ÐÐ¢öä6åÆ“×²‚’Óâ°Ð¢–b†ÆFW7E&öw&W75&Vbæ7W'&VçBãÒã"bb7F÷Ö÷F–öåf–FVõ&Vbæ7W'&VçCòçW6VB’°Ð¢fö–B7F÷Ö÷F–öåf–FVõ&Vbæ7W'&VçBçÆ’‚’æ6F6‚‚‚’ÓâVæFVf–æVB“°Ð¢ÐÐ¢×ÐÐ¢6Æ74æÖSÒ&‚ÖgVÆÂrÖgVÆÂö&¦V7BÖ6÷fW" Ð¢óàÐ¢ÂöF—càÐ¢Ç6Æ74æÖSÒ'ö–çFW"ÖWfVçG2ÖæöæR'6öÇWFR–ç6WB×‚ÓF÷ÖgVÆÂ¢Ó×BÓ2v†—FW76RÖæ÷w&FW‡BÖ6VçFW"föçBÖF—7Æ’FW‡BÕ³#G…ÒföçBÖæ÷&ÖÂÆVF–ærÖæöæRFW‡BÕ²6Vc&##eÒ#àÐ¢7F÷Ö÷F–öàÐ¢Â÷àÐ¢ÂöF—càÐ¢Âõ67&öÆÄö'6W'fW#àÐ¢Â÷6V7F–öãàÐ¢“°Ð§ÐÐ
+"use client";
+
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState, type MutableRefObject } from "react";
+import clsx from "clsx";
+import { useGLTF } from "@react-three/drei";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useMotionValue } from "framer-motion";
+import type { MotionValue } from "framer-motion";
+import * as THREE from "three";
+import { ScrollObserver } from "@/components/ScrollObserver";
+import monitorModelUrl from "../../assets/3D/Monitor/Monitor 2/crt_monitor.optimized.glb?url";
+
+// Fetch the CRT model as soon as the island loads, before its section reaches
+// the viewport, so the monitors are ready on arrival.
+useGLTF.preload(monitorModelUrl);
+
+const ANIMATRON_VIDEO_URL = "/media/animatron-demo.optimized.mp4";
+const STOP_MOTION_VIDEO_URL = "/media/stopmotion-demo.optimized.mp4";
+
+// CRT layout controls â€” tweak these two values while tuning the mode section.
+// Higher separation moves the monitors farther apart; higher scale enlarges
+// both 3D monitors, their inset video surfaces, and the expansion origin.
+const CRT_MONITOR_SEPARATION = 1;
+const CRT_MONITOR_SCALE = 1.2;
+// The base footprint intentionally leaves breathing room between the two CRTs
+// and the rounded panel edge. CRT_MONITOR_SCALE is applied on top of this.
+const CRT_MONITOR_WIDTH_RATIO = 0.27;
+const CRT_MONITOR_HEIGHT_RATIO = 0.35;
+const CRT_MONITOR_YAW = THREE.MathUtils.degToRad(15);
+const CRT_MONITOR_PITCH = 0.42;
+const CRT_MONITOR_ENTRY_YAW = THREE.MathUtils.degToRad(45);
+const CRT_MONITOR_ENTRY_PITCH = 0.58;
+
+// Tune the two embedded videos independently. They are mounted beneath the
+// GLB's picture-tube node, so they inherit its exact transform at every frame.
+const CRT_ANIMATRON_SURFACE = {
+  // Left monitor tuning (local to its own picture tube).
+  x: -0.025,
+  y: 0,
+  z: -0.1,
+  width: 1.88,
+  height: 1.59,
+  curvature: -0.05,
+  scale: .8,
+  entryScale: 1,
+  rotationX: 0,
+  // The GLB's tube faces -Z. A default Three plane faces +Z, which would make
+  // the footage appear mirrored because the camera sees its back face.
+  rotationY: Math.PI - 0.15,
+  rotationZ: 0,
+};
+const CRT_STOP_MOTION_SURFACE = {
+  // Right monitor tuning is intentionally independent from Animatron.
+  x: 0.05,
+  y: 0,
+  z: -0.1,
+  width: 1.88,
+  height: 1.59,
+  curvature: -0.05,
+  scale: .8,
+  entryScale: 1,
+  rotationX: 0,
+  rotationY: Math.PI - 0.15,
+  rotationZ: 0,
+};
+
+type ScreenRect = { left: number; top: number; width: number; height: number };
+
+const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
+const smoothstep = (value: number) => value * value * (3 - 2 * value);
+
+function createCurvedCrtGeometry(width: number, height: number, curvature: number) {
+  const geometry = new THREE.PlaneGeometry(width, height, 18, 10);
+  const positions = geometry.attributes.position;
+  for (let index = 0; index < positions.count; index += 1) {
+    const horizontal = positions.getX(index) / (width * 0.5);
+    // The picture tube bows forward through its centre. Keeping the corners at
+    // zero locks the video edge to the opening while the middle follows CRT's
+    // subtle horizontal bulge.
+    positions.setZ(index, -curvature * (1 - horizontal * horizontal));
+  }
+  positions.needsUpdate = true;
+  geometry.computeVertexNormals();
+  return geometry;
+}
+
+function ModeCube({
+  side,
+  label,
+  progress,
+  screenOverlayRef,
+  screenRectRef,
+  renderActive,
+}: {
+  side: -1 | 1;
+  label: string;
+  progress: MotionValue<number>;
+  screenOverlayRef: MutableRefObject<HTMLVideoElement | null>;
+  screenRectRef?: MutableRefObject<ScreenRect | null>;
+  renderActive: boolean;
+}) {
+  const groupRef = useRef<THREE.Group>(null);
+  const displaySurfaceRef = useRef<THREE.Mesh<THREE.BufferGeometry>>(null);
+  const displaySurfaceBaseScaleRef = useRef(new THREE.Vector3(1, 1, 1));
+  const { camera, viewport, size: canvasSize, invalidate } = useThree();
+  const panelPadding = THREE.MathUtils.clamp(canvasSize.width * 0.03, 16, 40);
+  const panelPixelWidth = Math.min(canvasSize.width - panelPadding * 2, 1200);
+  const panelPixelHeight = Math.max(420, panelPixelWidth * (2 / 3));
+  const panelWidth = viewport.width * (panelPixelWidth / canvasSize.width);
+  const panelHeight = viewport.height * (panelPixelHeight / canvasSize.height);
+  const width = panelWidth * CRT_MONITOR_WIDTH_RATIO;
+  const height = panelHeight * CRT_MONITOR_HEIGHT_RATIO;
+  const targetY = -panelHeight * 0.22;
+  const surface = side === -1 ? CRT_ANIMATRON_SURFACE : CRT_STOP_MOTION_SURFACE;
+  const { scene } = useGLTF(monitorModelUrl);
+  // The monitor export's glass has no usable UV data, so we render a curved
+  // video surface inside the exact picture-tube node instead.
+  const screenCanvas = useMemo(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 480;
+    canvas.height = 400;
+    return canvas;
+  }, []);
+  const screenTexture = useMemo(() => {
+    const texture = new THREE.CanvasTexture(screenCanvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.flipY = true;
+    texture.minFilter = THREE.LinearFilter;
+    texture.magFilter = THREE.LinearFilter;
+    texture.generateMipmaps = false;
+    return texture;
+  }, [screenCanvas]);
+
+  useEffect(() => {
+    document.documentElement.dataset.monitorReady = "true";
+    window.dispatchEvent(new Event("lao:monitor-ready"));
+  }, []);
+
+  const monitor = useMemo(() => {
+    const object = scene.clone(true);
+    const bounds = new THREE.Box3().setFromObject(object);
+    const size = bounds.getSize(new THREE.Vector3());
+    const center = bounds.getCenter(new THREE.Vector3());
+
+    object.position.sub(center);
+    let screen: THREE.Mesh<THREE.BufferGeometry> | null = null;
+    object.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        child.castShadow = false;
+        child.receiveShadow = false;
+        if (child.material?.name === "Material.004") {
+          screen = child as THREE.Mesh<THREE.BufferGeometry>;
+        }
+      }
+    });
+
+    // The exported CRT glass has no UV attribute (the original material was a
+    // flat colour), so VideoTexture has nothing to sample and renders black.
+    // Generate UVs from the screen's local XY bounds. Its GLB transform mirrors
+    // local X, hence maxâ†’min produces visual leftâ†’right across the glass.
+    if (screen && !screen.geometry.attributes.uv) {
+      const screenGeometry = screen.geometry.clone();
+      screenGeometry.computeBoundingBox();
+      const screenBounds = screenGeometry.boundingBox;
+      const positions = screenGeometry.attributes.position;
+      if (screenBounds && positions) {
+        const spanX = Math.max(THREE.MathUtils.EPSILON, screenBounds.max.x - screenBounds.min.x);
+        const spanY = Math.max(THREE.MathUtils.EPSILON, screenBounds.max.y - screenBounds.min.y);
+        const uvs = new Float32Array(positions.count * 2);
+        for (let index = 0; index < positions.count; index += 1) {
+          uvs[index * 2] = (screenBounds.max.x - positions.getX(index)) / spanX;
+          uvs[index * 2 + 1] = (positions.getY(index) - screenBounds.min.y) / spanY;
+        }
+        screenGeometry.setAttribute("uv", new THREE.BufferAttribute(uvs, 2));
+        screen.geometry = screenGeometry;
+      }
+    }
+
+    // A subdivided, gently curved surface keeps the footage inside the CRT
+    // opening but gives it the same tube-like bow as the monitor face.
+    if (screen) {
+      const displaySurface = new THREE.Mesh(
+        createCurvedCrtGeometry(surface.width, surface.height, surface.curvature),
+        new THREE.MeshBasicMaterial({
+          map: screenTexture,
+          toneMapped: false,
+          // The GLB glass itself is an opaque black material. Draw this video
+          // surface after it, while its geometry remains clipped to the tube.
+          depthTest: false,
+          depthWrite: false,
+          side: THREE.DoubleSide,
+        }),
+      );
+      displaySurface.scale.setScalar(surface.scale);
+      displaySurface.position.set(surface.x, surface.y, surface.z);
+      displaySurface.rotateX(surface.rotationX);
+      displaySurface.rotateY(surface.rotationY);
+      displaySurface.rotateZ(surface.rotationZ);
+      displaySurface.renderOrder = 20;
+      displaySurface.frustumCulled = false;
+      screen.add(displaySurface);
+      displaySurfaceRef.current = displaySurface;
+      displaySurfaceBaseScaleRef.current.copy(displaySurface.scale);
+    }
+
+    return { object, size, screen };
+  }, [scene, screenTexture, surface]);
+
+  const modelScale = Math.min(width / monitor.size.x, height / monitor.size.y) * 0.92 * CRT_MONITOR_SCALE;
+  // Keep a readable gap between the CRTs using their real scaled width. This
+  // means enlarging CRT_MONITOR_SCALE also expands their resting separation.
+  const visualMonitorWidth = monitor.size.x * modelScale;
+  const visualMonitorDepth = monitor.size.z * modelScale;
+  const targetX = side * (visualMonitorWidth * 0.62 + panelWidth * 0.03) * CRT_MONITOR_SEPARATION;
+  const labelTexture = useMemo(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 512;
+    canvas.height = 128;
+    const context = canvas.getContext("2d");
+    if (context) {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.fillStyle = "#ef2b26";
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+      context.font = '700 61px "Redaction 35", Georgia, serif';
+      context.fillText(label, canvas.width / 2, canvas.height / 2, canvas.width * 0.94);
+    }
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.minFilter = THREE.LinearFilter;
+    texture.magFilter = THREE.LinearFilter;
+    texture.generateMipmaps = false;
+    return texture;
+  }, [label]);
+
+  useEffect(() => () => labelTexture.dispose(), [labelTexture]);
+  useEffect(() => () => screenTexture.dispose(), [screenTexture]);
+  useEffect(() => {
+    if (!renderActive) return;
+    const video = screenOverlayRef.current;
+    if (!video) return;
+
+    let cancelled = false;
+    let videoFrame = 0;
+    let animationFrame = 0;
+
+    const requestNextFrame = () => {
+      if (cancelled) return;
+      if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+        const context = screenCanvas.getContext("2d", { alpha: false });
+        if (context && video.videoWidth > 0 && video.videoHeight > 0) {
+          const sourceAspect = video.videoWidth / video.videoHeight;
+          const targetAspect = screenCanvas.width / screenCanvas.height;
+          let sourceX = 0;
+          let sourceY = 0;
+          let sourceWidth = video.videoWidth;
+          let sourceHeight = video.videoHeight;
+          if (sourceAspect > targetAspect) {
+            sourceWidth = video.videoHeight * targetAspect;
+            sourceX = (video.videoWidth - sourceWidth) / 2;
+          } else if (sourceAspect < targetAspect) {
+            sourceHeight = video.videoWidth / targetAspect;
+            sourceY = (video.videoHeight - sourceHeight) / 2;
+          }
+          context.drawImage(
+            video,
+            sourceX,
+            sourceY,
+            sourceWidth,
+            sourceHeight,
+            0,
+            0,
+            screenCanvas.width,
+            screenCanvas.height,
+          );
+          screenTexture.needsUpdate = true;
+        }
+      }
+      invalidate();
+      if (typeof video.requestVideoFrameCallback === "function") {
+        videoFrame = video.requestVideoFrameCallback(requestNextFrame);
+      } else {
+        animationFrame = requestAnimationFrame(requestNextFrame);
+      }
+    };
+
+    requestNextFrame();
+    return () => {
+      cancelled = true;
+      if (videoFrame && typeof video.cancelVideoFrameCallback === "function") {
+        video.cancelVideoFrameCallback(videoFrame);
+      }
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+    };
+  }, [invalidate, renderActive, screenOverlayRef, screenCanvas, screenTexture]);
+  const labelOffsetX = (viewport.width / canvasSize.width) * (side === -1 ? -10 : 15);
+
+  useFrame(() => {
+    const cube = groupRef.current;
+    if (!cube) return;
+
+    const entered = THREE.MathUtils.smootherstep(progress.get(), 0, 1);
+    // At the 60Â° entry angle both width and depth project horizontally. Clear
+    // their combined footprint so a monitor never appears before the entrance.
+    const startX = side * (viewport.width / 2 + visualMonitorWidth * 0.72 + visualMonitorDepth * 0.42 + 0.2);
+    cube.position.x = THREE.MathUtils.lerp(startX, targetX, entered);
+    cube.position.y = targetY;
+    cube.rotation.x = THREE.MathUtils.lerp(CRT_MONITOR_ENTRY_PITCH, CRT_MONITOR_PITCH, entered);
+    cube.rotation.y = THREE.MathUtils.lerp(side * CRT_MONITOR_ENTRY_YAW, side * CRT_MONITOR_YAW, entered);
+    cube.rotation.z = THREE.MathUtils.lerp(side * 0.06, 0, entered);
+
+    const surfaceScale = THREE.MathUtils.lerp(surface.entryScale, 1, entered);
+    displaySurfaceRef.current?.scale.copy(displaySurfaceBaseScaleRef.current).multiplyScalar(surfaceScale);
+
+    // Use the actual visible video planeâ€”not the GLB's unused black glassâ€”to
+    // seed the expanded Animatron video. This keeps the handoff anchored when
+    // CRT_MONITOR_SCALE or the surface coordinates are adjusted.
+    const displaySurface = displaySurfaceRef.current;
+    if (displaySurface && side === -1 && screenRectRef) {
+      cube.updateMatrixWorld(true);
+      displaySurface.geometry.computeBoundingBox();
+      const screenBounds = displaySurface.geometry.boundingBox;
+      if (!screenBounds) return;
+      const corners = [
+        new THREE.Vector3(screenBounds.min.x, screenBounds.min.y, screenBounds.min.z),
+        new THREE.Vector3(screenBounds.max.x, screenBounds.min.y, screenBounds.min.z),
+        new THREE.Vector3(screenBounds.max.x, screenBounds.max.y, screenBounds.max.z),
+        new THREE.Vector3(screenBounds.min.x, screenBounds.max.y, screenBounds.max.z),
+      ].map((point) => displaySurface.localToWorld(point).project(camera));
+      const xs = corners.map((point) => (point.x * 0.5 + 0.5) * canvasSize.width);
+      const ys = corners.map((point) => (-point.y * 0.5 + 0.5) * canvasSize.height);
+      const left = Math.min(...xs);
+      const right = Math.max(...xs);
+      const top = Math.min(...ys);
+      const bottom = Math.max(...ys);
+      screenRectRef.current = { left, top, width: right - left, height: bottom - top };
+    }
+  });
+
+  return (
+    <group ref={groupRef}>
+      <primitive object={monitor.object} scale={modelScale} />
+      <mesh position={[labelOffsetX, -height * 0.57, monitor.size.z * modelScale * 0.12]}>
+        <planeGeometry args={[width * 0.72, width * 0.18]} />
+        <meshBasicMaterial map={labelTexture} transparent depthWrite={false} toneMapped={false} side={THREE.DoubleSide} />
+      </mesh>
+    </group>
+  );
+}
+
+function SceneInvalidator({ progress }: { progress: MotionValue<number> }) {
+  const invalidate = useThree((state) => state.invalidate);
+
+  useEffect(() => {
+    invalidate();
+    return progress.on("change", () => invalidate());
+  }, [invalidate, progress]);
+
+  return null;
+}
+
+function CubeScene({
+  progress,
+  animatronScreenRef,
+  stopMotionScreenRef,
+  screenRectRef,
+  renderActive,
+}: {
+  progress: MotionValue<number>;
+  animatronScreenRef: MutableRefObject<HTMLVideoElement | null>;
+  stopMotionScreenRef: MutableRefObject<HTMLVideoElement | null>;
+  screenRectRef: MutableRefObject<ScreenRect | null>;
+  renderActive: boolean;
+}) {
+  return (
+    <>
+      <SceneInvalidator progress={progress} />
+      <ambientLight intensity={2.2} />
+      <directionalLight position={[0, 8, 10]} intensity={1.15} color="#ffffff" />
+      <directionalLight position={[-7, 1, 6]} intensity={0.4} color="#b6cbe6" />
+      <ModeCube side={-1} label="Animatron" progress={progress} screenOverlayRef={animatronScreenRef} screenRectRef={screenRectRef} renderActive={renderActive} />
+      <ModeCube side={1} label="Stop motion" progress={progress} screenOverlayRef={stopMotionScreenRef} renderActive={renderActive} />
+    </>
+  );
+}
+
+function FallbackMonitor({ side, progress }: { side: -1 | 1; progress: MotionValue<number> }) {
+  const groupRef = useRef<THREE.Group>(null);
+  const { viewport, size: canvasSize } = useThree();
+  const panelPadding = THREE.MathUtils.clamp(canvasSize.width * 0.03, 16, 40);
+  const panelPixelWidth = Math.min(canvasSize.width - panelPadding * 2, 1200);
+  const panelPixelHeight = Math.max(420, panelPixelWidth * (2 / 3));
+  const panelWidth = viewport.width * (panelPixelWidth / canvasSize.width);
+  const panelHeight = viewport.height * (panelPixelHeight / canvasSize.height);
+  const width = panelWidth * CRT_MONITOR_WIDTH_RATIO;
+  const height = panelHeight * CRT_MONITOR_HEIGHT_RATIO;
+  const depth = width * 0.28;
+  const visualMonitorWidth = width * 0.86 * CRT_MONITOR_SCALE;
+  const visualMonitorDepth = depth * CRT_MONITOR_SCALE;
+  const targetX = side * (visualMonitorWidth * 0.62 + panelWidth * 0.03) * CRT_MONITOR_SEPARATION;
+  const targetY = -panelHeight * 0.22;
+
+  useFrame(() => {
+    const monitor = groupRef.current;
+    if (!monitor) return;
+    const entered = THREE.MathUtils.smootherstep(progress.get(), 0, 1);
+    const startX = side * (viewport.width / 2 + visualMonitorWidth * 0.72 + visualMonitorDepth * 0.42 + 0.2);
+    monitor.position.x = THREE.MathUtils.lerp(startX, targetX, entered);
+    monitor.position.y = targetY;
+    monitor.rotation.x = THREE.MathUtils.lerp(CRT_MONITOR_ENTRY_PITCH, CRT_MONITOR_PITCH, entered);
+    monitor.rotation.y = THREE.MathUtils.lerp(side * CRT_MONITOR_ENTRY_YAW, side * CRT_MONITOR_YAW, entered);
+    monitor.rotation.z = THREE.MathUtils.lerp(side * 0.06, 0, entered);
+  });
+
+  return (
+    <group ref={groupRef} scale={CRT_MONITOR_SCALE}>
+      <mesh>
+        <boxGeometry args={[width * 0.86, height * 0.72, depth]} />
+        <meshBasicMaterial color="#dedbd2" />
+      </mesh>
+      <mesh position={[0, 0, depth / 2 + 0.012]}>
+        <planeGeometry args={[width * 0.68, height * 0.5]} />
+        <meshBasicMaterial color="#111111" />
+      </mesh>
+      <mesh position={[0, -height * 0.47, 0]}>
+        <boxGeometry args={[width * 0.12, height * 0.2, depth * 0.2]} />
+        <meshBasicMaterial color="#cbc8bf" />
+      </mesh>
+      <mesh position={[0, -height * 0.59, 0]}>
+        <boxGeometry args={[width * 0.42, height * 0.05, depth * 0.55]} />
+        <meshBasicMaterial color="#cbc8bf" />
+      </mesh>
+    </group>
+  );
+}
+
+function MonitorLoadingScene({ progress }: { progress: MotionValue<number> }) {
+  return (
+    <>
+      <FallbackMonitor side={-1} progress={progress} />
+      <FallbackMonitor side={1} progress={progress} />
+    </>
+  );
+}
+
+export default function ModeCubeSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const canvasLayerRef = useRef<HTMLDivElement>(null);
+  const screenOverlayLayerRef = useRef<HTMLDivElement>(null);
+  const copyLayerRef = useRef<HTMLDivElement>(null);
+  const blueBackdropRef = useRef<HTMLDivElement>(null);
+  const expandingVideoRef = useRef<HTMLDivElement>(null);
+  const secondVideoLayerRef = useRef<HTMLDivElement>(null);
+  const animatronScreenRef = useRef<HTMLVideoElement>(null);
+  const stopMotionScreenRef = useRef<HTMLVideoElement>(null);
+  const animatronVideoRef = useRef<HTMLVideoElement>(null);
+  const stopMotionVideoRef = useRef<HTMLVideoElement>(null);
+  const screenRectRef = useRef<ScreenRect | null>(null);
+  const latestProgressRef = useRef(0);
+  const animatronPlayedRef = useRef(false);
+  const stopMotionCrtPlayedRef = useRef(false);
+  const stopMotionPlayedRef = useRef(false);
+  const cubeProgress = useMotionValue(0);
+  const stepRef = useRef(0);
+  const [activeStep, setActiveStep] = useState(0);
+  const [animatronAvailable, setAnimatronAvailable] = useState(false);
+  const [animatronAspectRatio, setAnimatronAspectRatio] = useState(1);
+  const [stopMotionAspectRatio, setStopMotionAspectRatio] = useState(1);
+  const [renderActive, setRenderActive] = useState(false);
+
+  const captureAnimatronVideo = useCallback((video: HTMLVideoElement | null) => {
+    animatronVideoRef.current = video;
+    if (video?.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      setAnimatronAvailable(true);
+    }
+  }, []);
+
+  const captureStopMotionVideo = useCallback((video: HTMLVideoElement | null) => {
+    stopMotionVideoRef.current = video;
+  }, []);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    let frame = 0;
+    let isNear = false;
+
+    const updateStickyProgress = () => {
+      frame = 0;
+      if (!isNear) return;
+
+      const rect = section.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      const stickyTravel = Math.max(1, rect.height - viewportHeight);
+      const stickyProgress = THREE.MathUtils.clamp(-rect.top / stickyTravel, 0, 1);
+      latestProgressRef.current = stickyProgress;
+      const nextStep = stickyProgress >= 0.24 ? 3 : stickyProgress >= 0.12 ? 2 : stickyProgress >= 0.03 ? 1 : 0;
+      if (nextStep !== stepRef.current) {
+        stepRef.current = nextStep;
+        setActiveStep(nextStep);
+      }
+
+      const nextCubeProgress = THREE.MathUtils.clamp((stickyProgress - 0.12) / 0.22, 0, 1);
+      if (Math.abs(nextCubeProgress - cubeProgress.get()) > 0.0001) {
+        cubeProgress.set(nextCubeProgress);
+      }
+
+      const expansion = smoothstep(clamp01((stickyProgress - 0.36) / 0.24));
+      // Animatron has completed its expansion by 0.60. Begin the Stop Motion
+      // card immediately after that, leaving enough sticky travel for it to
+      // rise visibly from the bottom before this scene releases.
+      const secondEntrance = smoothstep(clamp01((stickyProgress - 0.6) / 0.12));
+      const viewportWidth = window.innerWidth;
+      const safeInlineMargin = 16;
+      const safeBlockMargin = 16;
+      // Phone: exactly 16px at both edges. Tablet/desktop: a true 640px cap.
+      // Short landscape viewports can shrink further to preserve the source
+      // ratio without clipping the card vertically.
+      const fullVideoWidth = Math.min(
+        640,
+        viewportWidth - safeInlineMargin * 2,
+        (viewportHeight - safeBlockMargin * 2) * animatronAspectRatio,
+      );
+      const fullVideoHeight = fullVideoWidth / animatronAspectRatio;
+      const fullLeft = (viewportWidth - fullVideoWidth) / 2;
+      const fullTop = (viewportHeight - fullVideoHeight) / 2;
+      const origin = screenRectRef.current ?? {
+        left: viewportWidth * 0.28,
+        top: viewportHeight * 0.55,
+        width: Math.max(96, viewportWidth * 0.16),
+        height: Math.max(80, viewportWidth * 0.135),
+      };
+
+      if (blueBackdropRef.current) {
+        const haloPadding = Math.min(108, Math.max(48, fullVideoWidth * 0.16));
+        blueBackdropRef.current.style.width = `${fullVideoWidth + haloPadding * 2}px`;
+        blueBackdropRef.current.style.height = `${fullVideoHeight + haloPadding * 2}px`;
+        blueBackdropRef.current.style.opacity = String(expansion * 0.35);
+        blueBackdropRef.current.style.transform = `translate3d(${fullLeft - haloPadding}px, ${fullTop - haloPadding}px, 0)`;
+      }
+      const oldSceneOpacity = String(1 - smoothstep(clamp01(expansion * 1.35)));
+      if (panelRef.current) panelRef.current.style.opacity = oldSceneOpacity;
+      if (canvasLayerRef.current) canvasLayerRef.current.style.opacity = oldSceneOpacity;
+      if (screenOverlayLayerRef.current) screenOverlayLayerRef.current.style.opacity = oldSceneOpacity;
+      if (copyLayerRef.current) copyLayerRef.current.style.opacity = oldSceneOpacity;
+
+      if (expandingVideoRef.current) {
+        const x = THREE.MathUtils.lerp(origin.left, fullLeft, expansion);
+        const y = THREE.MathUtils.lerp(origin.top, fullTop, expansion);
+        const scaleX = THREE.MathUtils.lerp(origin.width / fullVideoWidth, 1, expansion);
+        const scaleY = THREE.MathUtils.lerp(origin.height / fullVideoHeight, 1, expansion);
+        expandingVideoRef.current.style.width = `${fullVideoWidth}px`;
+        expandingVideoRef.current.style.height = `${fullVideoHeight}px`;
+        expandingVideoRef.current.style.opacity = String(smoothstep(clamp01(expansion * 5)));
+        expandingVideoRef.current.style.borderRadius = "16px";
+        expandingVideoRef.current.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scaleX}, ${scaleY})`;
+      }
+
+      if (secondVideoLayerRef.current) {
+        const overlapY = fullTop + fullVideoHeight * (viewportWidth < 640 ? 0.16 : 0.12);
+        const secondVideoWidth = Math.min(
+          640,
+          viewportWidth - safeInlineMargin * 2,
+          Math.max(1, viewportHeight - overlapY - safeBlockMargin) * stopMotionAspectRatio,
+        );
+        const secondVideoHeight = secondVideoWidth / stopMotionAspectRatio;
+        const desiredSecondX = fullLeft + fullVideoWidth * (viewportWidth < 640 ? 0.04 : 0.08);
+        const secondX = THREE.MathUtils.clamp(
+          desiredSecondX,
+          safeInlineMargin,
+          viewportWidth - secondVideoWidth - safeInlineMargin,
+        );
+        const secondTargetY = Math.min(overlapY, viewportHeight - secondVideoHeight - safeBlockMargin);
+        const secondY = THREE.MathUtils.lerp(viewportHeight + 32, secondTargetY, secondEntrance);
+        const secondRotation = viewportWidth < 640 ? 0 : THREE.MathUtils.lerp(0, -3, secondEntrance);
+        secondVideoLayerRef.current.style.width = `${secondVideoWidth}px`;
+        secondVideoLayerRef.current.style.height = `${secondVideoHeight}px`;
+        secondVideoLayerRef.current.style.opacity = String(secondEntrance);
+        secondVideoLayerRef.current.style.transform = `translate3d(${secondX}px, ${secondY}px, 0) rotate(${secondRotation}deg)`;
+      }
+
+      // Start both previews as their CRTs are revealed. They remain muted and
+      // loop continuously while the mode sequence is in view.
+      if (stickyProgress >= 0.12 && !animatronPlayedRef.current && animatronVideoRef.current) {
+        animatronPlayedRef.current = true;
+        animatronVideoRef.current.currentTime = 0;
+        if (animatronScreenRef.current) {
+          animatronScreenRef.current.currentTime = 0;
+          void animatronScreenRef.current.play().catch(() => undefined);
+        }
+        void animatronVideoRef.current.play().catch(() => undefined);
+      }
+      if (stickyProgress >= 0.12 && !stopMotionCrtPlayedRef.current && stopMotionVideoRef.current) {
+        stopMotionCrtPlayedRef.current = true;
+        if (stopMotionVideoRef.current.readyState === HTMLMediaElement.HAVE_NOTHING) {
+          stopMotionVideoRef.current.load();
+        }
+        stopMotionVideoRef.current.currentTime = 0;
+        if (stopMotionScreenRef.current) {
+          stopMotionScreenRef.current.currentTime = 0;
+          void stopMotionScreenRef.current.play().catch(() => undefined);
+        }
+        void stopMotionVideoRef.current.play().catch(() => {
+          stopMotionCrtPlayedRef.current = false;
+        });
+      }
+      if (stickyProgress >= 0.6 && !stopMotionPlayedRef.current && stopMotionVideoRef.current) {
+        stopMotionPlayedRef.current = true;
+        if (stopMotionVideoRef.current.readyState === HTMLMediaElement.HAVE_NOTHING) {
+          stopMotionVideoRef.current.load();
+        }
+        stopMotionVideoRef.current.currentTime = 0;
+        void stopMotionVideoRef.current.play().catch(() => {
+          stopMotionPlayedRef.current = false;
+        });
+      }
+    };
+
+    const scheduleUpdate = () => {
+      if (isNear && !frame) frame = requestAnimationFrame(updateStickyProgress);
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isNear = entry?.isIntersecting ?? false;
+        setRenderActive(isNear);
+        if (isNear) {
+          scheduleUpdate();
+        } else {
+          if (frame) {
+            cancelAnimationFrame(frame);
+            frame = 0;
+          }
+          animatronScreenRef.current?.pause();
+          stopMotionScreenRef.current?.pause();
+          animatronVideoRef.current?.pause();
+          stopMotionVideoRef.current?.pause();
+          animatronPlayedRef.current = false;
+          stopMotionCrtPlayedRef.current = false;
+          stopMotionPlayedRef.current = false;
+        }
+      },
+      { rootMargin: "100% 0px 100% 0px" },
+    );
+    observer.observe(section);
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate, { passive: true });
+
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+    };
+  }, [animatronAspectRatio, cubeProgress, stopMotionAspectRatio]);
+
+  return (
+    <section ref={sectionRef} id="modes" className="relative z-[90] h-[460vh] bg-ink-900">
+      <ScrollObserver className="sticky top-0 h-[100dvh] w-full overflow-hidden">
+        <div className="absolute inset-0 flex items-center justify-center px-[clamp(16px,3vw,40px)]">
+          <div ref={panelRef} className="aspect-[3/2] min-h-[420px] w-full max-w-[1200px] rounded-[40px] bg-[#dddddd] will-change-[opacity]" />
+        </div>
+
+        <div ref={canvasLayerRef} className="pointer-events-none absolute inset-0 z-10 will-change-[opacity]">
+          <Canvas
+            camera={{ position: [0, 0, 10], fov: 38 }}
+            dpr={1}
+            frameloop="demand"
+            gl={{ alpha: true, antialias: false, powerPreference: "high-performance" }}
+            className="h-full w-full"
+            style={{ background: "transparent" }}
+          >
+            <Suspense fallback={<MonitorLoadingScene progress={cubeProgress} />}>
+              <CubeScene
+                progress={cubeProgress}
+                animatronScreenRef={animatronScreenRef}
+                stopMotionScreenRef={stopMotionScreenRef}
+                screenRectRef={screenRectRef}
+                renderActive={renderActive}
+              />
+            </Suspense>
+          </Canvas>
+        </div>
+
+        <div
+          ref={screenOverlayLayerRef}
+          aria-hidden="true"
+          className="pointer-events-none fixed left-[-10000px] top-0 -z-10 h-[256px] w-[256px] opacity-0"
+        >
+          <video
+            ref={animatronScreenRef}
+            src={ANIMATRON_VIDEO_URL}
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+            className="h-full w-full"
+          />
+          <video
+            ref={stopMotionScreenRef}
+            src={STOP_MOTION_VIDEO_URL}
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
+            className="h-full w-full"
+          />
+        </div>
+
+        <div ref={copyLayerRef} className="absolute inset-0 z-20 flex items-center justify-center px-[clamp(16px,3vw,40px)] will-change-[opacity]">
+          <div className="relative aspect-[3/2] min-h-[420px] w-full max-w-[1200px]">
+            <ScrollObserver.TriggerGroup className="pointer-events-none absolute inset-x-0 top-[7.5%] z-10 px-5 text-center text-[#090909]">
+              {[
+                "Animation should not be complicated",
+                "Thatâ€™s why we made the product",
+                "Lao has two modes",
+              ].map((line, index) => {
+                const isActive = activeStep >= index + 1;
+                const isLast = index === 2;
+                return (
+                  <ScrollObserver.Trigger key={line} className={clsx("relative", isLast && "mt-[clamp(38px,5.6vw,66px)]")}>
+                    {() => (
+                      <>
+                        <p className={clsx({ "opacity-0": !isActive }, "absolute inset-0 m-0 font-display transition duration-700", isLast ? "text-[clamp(29px,3.4vw,42px)] leading-none" : "text-[clamp(32px,4.1vw,48px)] leading-[1.12]")}>
+                          {line}
+                        </p>
+                        <p className={clsx("invisible relative m-0 font-display", isLast ? "text-[clamp(29px,3.4vw,42px)] leading-none" : "text-[clamp(32px,4.1vw,48px)] leading-[1.12]")}>
+                          {line}
+                        </p>
+                      </>
+                    )}
+                  </ScrollObserver.Trigger>
+                );
+              })}
+            </ScrollObserver.TriggerGroup>
+          </div>
+        </div>
+
+        <div
+          ref={blueBackdropRef}
+          aria-hidden="true"
+          className="pointer-events-none absolute left-0 top-0 z-[25] rounded-[32px] bg-[#0b5f95]/25 opacity-0 blur-[48px] will-change-[transform,opacity] [transform-origin:0_0]"
+        />
+
+        <div
+          ref={expandingVideoRef}
+          className="pointer-events-none absolute left-0 top-0 z-30 overflow-visible rounded-[16px] opacity-0 will-change-[transform,opacity,border-radius] [transform-origin:0_0]"
+          aria-label="Animatron product preview"
+        >
+          <div className="absolute inset-0 overflow-hidden rounded-[16px] bg-[#050505] shadow-[0_14px_34px_2px_rgba(0,49,83,.28)] [corner-shape:squircle]">
+            {!animatronAvailable && (
+              <div className="absolute inset-0 grid place-items-center px-4 text-center font-mono text-[10px] uppercase tracking-[.1em] text-white/45">
+                Add animatron-demo.mp4
+              </div>
+            )}
+            <video
+              ref={captureAnimatronVideo}
+              src={ANIMATRON_VIDEO_URL}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              onLoadedMetadata={(event) => {
+                const video = event.currentTarget;
+                if (video.videoWidth > 0 && video.videoHeight > 0) {
+                  setAnimatronAspectRatio(video.videoWidth / video.videoHeight);
+                }
+              }}
+              onCanPlay={() => {
+                setAnimatronAvailable(true);
+                if (latestProgressRef.current >= 0.12 && animatronVideoRef.current?.paused) {
+                  void animatronVideoRef.current.play().catch(() => undefined);
+                }
+              }}
+              onError={() => setAnimatronAvailable(false)}
+              className={clsx("h-full w-full object-cover", animatronAvailable ? "opacity-100" : "opacity-0")}
+            />
+          </div>
+          <p className="pointer-events-none absolute inset-x-0 top-full z-10 mt-3 whitespace-nowrap text-center font-display text-[24px] font-normal leading-none text-[#ef2b26]">
+            Animatron
+          </p>
+        </div>
+
+        <div
+          ref={secondVideoLayerRef}
+          className="pointer-events-none absolute left-0 top-0 z-40 overflow-visible rounded-[16px] opacity-0 will-change-[transform,opacity] [transform-origin:50%_50%]"
+          aria-label="Stop-motion product preview"
+        >
+          <div className="absolute inset-0 overflow-hidden rounded-[16px] bg-[#050505] shadow-[0_28px_80px_rgba(0,0,0,.48)] [corner-shape:squircle]">
+            <video
+              ref={captureStopMotionVideo}
+              src={STOP_MOTION_VIDEO_URL}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              onLoadedMetadata={(event) => {
+                const video = event.currentTarget;
+                if (video.videoWidth > 0 && video.videoHeight > 0) {
+                  setStopMotionAspectRatio(video.videoWidth / video.videoHeight);
+                }
+              }}
+              onCanPlay={() => {
+                if (latestProgressRef.current >= 0.12 && stopMotionVideoRef.current?.paused) {
+                  void stopMotionVideoRef.current.play().catch(() => undefined);
+                }
+              }}
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <p className="pointer-events-none absolute inset-x-0 top-full z-10 mt-3 whitespace-nowrap text-center font-display text-[24px] font-normal leading-none text-[#ef2b26]">
+            Stop motion
+          </p>
+        </div>
+      </ScrollObserver>
+    </section>
+  );
+}
