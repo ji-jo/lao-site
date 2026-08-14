@@ -8,7 +8,6 @@ import {
 import { createPortal } from "react-dom";
 import { gsap } from "gsap";
 import { animate as motionAnimate, motion, useReducedMotion } from "framer-motion";
-import { PaperTexture } from "@paper-design/shaders-react";
 import { GooeyInput } from "./ui/gooey-input";
 import { GradientHoverButton } from "./ui/GradientHoverButton";
 import planeDisplayUrl from "../icons/waitlist/plane-display.png?url";
@@ -326,8 +325,18 @@ export default function FloatingWaitlist() {
     // card is tracking its real slot before the form can be interacted with.
     const start = viewportHeight * 1.16;
     const end = Math.max(84, viewportHeight * 0.13);
-    const rawProgress = clamp01((start - slotRect.top) / (start - end));
-    const progress = forcePeek ? 0 : smoothstep(clamp01(rawProgress / 0.94));
+    const rawEntryProgress = clamp01((start - slotRect.top) / (start - end));
+    const entryProgress = smoothstep(clamp01(rawEntryProgress / 0.94));
+
+    // The card is an independent corner object, not a permanently fixed
+    // replacement for its slot. After its full-form moment has been visible,
+    // hand it back to the original corner peek while the reader continues
+    // down the page. Reversing the same progress when scrolling up keeps the
+    // transition continuous in both directions.
+    const exitStart = viewportHeight * 0.55;
+    const exitEnd = -Math.min(cardHeight * 0.16, viewportHeight * 0.18);
+    const exitProgress = smoothstep(clamp01((exitStart - slotRect.bottom) / (exitStart - exitEnd)));
+    const progress = forcePeek ? 0 : entryProgress * (1 - exitProgress);
 
     return {
       x: gsap.utils.interpolate(
@@ -639,30 +648,7 @@ export default function FloatingWaitlist() {
         className={`waitlist-float fixed left-0 top-0 z-[120] rounded-[28px] bg-paper outline-none will-change-transform [backface-visibility:hidden] md:rounded-[59px] ${moving ? "shadow-none" : "shadow-[0_28px_90px_rgba(0,0,0,.48)]"} ${open ? `max-h-[calc(100dvh-32px)] ${dialogScrollable ? "overflow-y-auto overscroll-contain" : "overflow-hidden"}` : "overflow-visible"} ${ready ? "visible" : "invisible"}`}
       >
         <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[inherit] [contain:paint]" aria-hidden="true">
-          {!moving && (
-            <PaperTexture
-              width="100%"
-              height="100%"
-              minPixelRatio={1}
-              maxPixelCount={500_000}
-              colorBack="#ffffff"
-              colorFront="#d9d1bf"
-              contrast={0.3}
-              roughness={0.4}
-              fiber={0.31}
-              fiberSize={0.2}
-              crumples={0.3}
-              crumpleSize={0.35}
-              folds={0.65}
-              foldCount={5}
-              drops={0.2}
-              fade={0}
-              seed={5.8}
-              scale={0.6}
-              fit="cover"
-              className="h-full w-full opacity-45 mix-blend-multiply"
-            />
-          )}
+          {!moving && <div className="waitlist-paper-texture h-full w-full opacity-45 mix-blend-multiply" />}
         </div>
 
         <button
@@ -687,7 +673,7 @@ export default function FloatingWaitlist() {
             <img src={planeDisplayUrl} alt="" className="h-auto w-[150px] opacity-70 min-[600px]:w-[164px] md:w-[182px]" />
             <img src={waitlistDisplayUrl} alt="" className="h-auto w-[150px] opacity-80 min-[600px]:w-[164px] md:w-[182px]" />
           </div>
-          <span ref={openLabelRef} className="mt-1 block text-center font-mono text-[9px] uppercase tracking-[0.14em] text-[#4a4a4a] sm:text-[10px]">Open</span>
+          <span ref={openLabelRef} className="mt-1 block text-center font-mono text-[20px] uppercase tracking-[0.14em] text-[#4a4a4a] sm:text-[22px]">Open</span>
         </div>
 
         <div ref={formContentRef} className="relative z-[1] px-[22px] py-[44px] text-center will-change-[opacity] md:px-[48px] md:py-[52px]">

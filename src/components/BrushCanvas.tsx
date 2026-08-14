@@ -7,7 +7,8 @@ import eraserCursorUrl from '../icons/sf/eraser-fill.svg?url';
 import type { PenTip } from '../selection-style';
 
 type Pt = { x: number; y: number; w: number };
-type Stroke = { mode: 'paint' | 'erase'; color: string; alpha: number; pts: Pt[] };
+type StrokeTool = 'marker' | 'brush' | 'eraser';
+type Stroke = { mode: 'paint' | 'erase'; tool: StrokeTool; color: string; alpha: number; pts: Pt[] };
 
 /** Base nib width in px; pressure and speed scale around this. */
 const BASE_W = 7;
@@ -45,8 +46,11 @@ export function BrushCanvas() {
   toolRef.current = style.pen;
 
   useEffect(() => {
-    document.documentElement.style.setProperty('--drawing-tool-cursor', TOOL_CURSORS[style.pen]);
-    return () => document.documentElement.style.removeProperty('--drawing-tool-cursor');
+    const root = document.documentElement;
+    root.style.setProperty('--drawing-tool-cursor', TOOL_CURSORS[style.pen]);
+    return () => {
+      root.style.removeProperty('--drawing-tool-cursor');
+    };
   }, [style.pen]);
 
   useEffect(() => {
@@ -60,6 +64,39 @@ export function BrushCanvas() {
     // curved, so no segment ever reads as a straight line.
     const traceStroke = (s: Stroke, ox: number, oy: number) => {
       const p = s.pts;
+      // Marker freehand deliberately ignores the hand's intermediate movement:
+      // it resolves to one clean, straight chisel band from press to release.
+      // The blunt ends mimic a real highlighter and never wobble or taper.
+      if (s.tool === 'marker') {
+        const first = p[0];
+        const last = p[p.length - 1] ?? first;
+        const dx = last.x - first.x;
+        const dy = last.y - first.y;
+        const length = Math.hypot(dx, dy) || 1;
+        const tx = dx / length;
+        const ty = dy / length;
+        const nx = -ty;
+        const ny = tx;
+        const half = first.w;
+        // Parallel slanted cuts, like a chisel nib held at one fixed angle.
+        const chisel = 5;
+        const point = (base: Pt, normal: number, along: number) => ({
+          x: base.x - ox + nx * normal + tx * along,
+          y: base.y - oy + ny * normal + ty * along,
+        });
+        const startTop = point(first, half, -chisel);
+        const endTop = point(last, half, -chisel);
+        const endBottom = point(last, -half, chisel);
+        const startBottom = point(first, -half, chisel);
+        ctx.beginPath();
+        ctx.moveTo(startTop.x, startTop.y);
+        ctx.lineTo(endTop.x, endTop.y);
+        ctx.lineTo(endBottom.x, endBottom.y);
+        ctx.lineTo(startBottom.x, startBottom.y);
+        ctx.closePath();
+        ctx.fill();
+        return;
+      }
       if (p.length < 2) {
         if (p.length === 1) {
           ctx.beginPath();
@@ -127,10 +164,16 @@ export function BrushCanvas() {
         ctx.globalCompositeOperation = s.mode === 'erase' ? 'destination-out' : 'source-over';
         ctx.globalAlpha = s.alpha;
         ctx.fillStyle = s.color;
+        // A marker is broad and even, like the text highlighter. The brush
+        // keeps the pressure/speed taper below, so the two tools do not feel
+        // like the same pen with a different icon.
+        ctx.shadowColor = s.tool === 'marker' ? s.color : 'transparent';
+        ctx.shadowBlur = s.tool === 'marker' ? 2 : 0;
         traceStroke(s, ox, oy);
       }
       ctx.globalCompositeOperation = 'source-over';
       ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
     };
     const schedule = () => {
       if (!raf) raf = requestAnimationFrame(redraw);
@@ -153,6 +196,9 @@ export function BrushCanvas() {
       // Erasing should have a predictable footprint instead of inheriting the
       // brush's pressure/speed taper.
       if (toolRef.current === 'eraser') return 14;
+      // Marker freehand uses an even, wide band to match text highlighting —
+      // never the brush's tapered pressure response.
+      if (toolRef.current === 'slant') return 10;
       let target: number;
       if (e.pointerType === 'pen' && e.pressure > 0) {
         target = BASE_W * (0.25 + e.pressure * 1.5);
@@ -169,23 +215,61 @@ export function BrushCanvas() {
       return Math.max(0.6, lastW / 2);
     };
 
+    const isUiTarget = (target: EventTarget | null) => {
+      const element = target instanceof Element ? target : null;
+      // The brush is global so it can draw over normal page content, but it
+      // must never take ownership of a gesture meant to move a file card,
+      // operate the dock, submit a form, or follow a link.
+      return Boolean(
+        element?.closest(
+          "[aria-label='Highlighter tray'],[data-note-card],[data-brush-ignore],button,input,textarea,select,a,[role='button'],[role='slider']",
+        ),
+      );
+    };
+
+    const startsOnText = (x: number, y: number) => {
+      const doc = document as Document & {
+        caretRangeFromPoint?: (x: number, y: number) => Range | null;
+        caretPositionFromPoint?: (x: number, y: number) => CaretPosition | null;
+      };
+      const range = doc.caretRangeFromPoint?.(x, y);
+      const node = range?.startContainer ?? doc.caretPositionFromPoint?.(x, y)?.offsetNode ?? null;
+      return node?.nodeType === Node.TEXT_NODE && Boolean(node.textContent?.trim());
+    };
+
+    let activePointerId: number | null = null;
+
     const down = (e: PointerEvent) => {
       const tool = toolRef.current;
-      if (tool !== 'brush' && tool !== 'eraser') return;
+      if (tool !== 'brush' && tool !== 'eraser' && tool !== 'slant') return;
+      if (!e.isPrimary || e.button !== 0 || activePointerId !== null) return;
+      if (isUiTarget(e.target)) return;
+      // On real text, preserve native selection for the highlighter overlay.
+      // On blank space, the same marker becomes a direct chisel stroke.
+      if (tool === 'slant' && startsOnText(e.clientX, e.clientY)) return;
+      e.preventDefault();
+      activePointerId = e.pointerId;
       lastT = performance.now();
       lastW = tool === 'eraser' ? 28 : BASE_W;
       current = {
         mode: tool === 'eraser' ? 'erase' : 'paint',
+        tool: tool === 'eraser' ? 'eraser' : tool === 'slant' ? 'marker' : 'brush',
         color: colorRef.current,
-        alpha: tool === 'eraser' ? 1 : alphaRef.current,
+        alpha: tool === 'eraser' ? 1 : tool === 'slant' ? Math.min(0.85, alphaRef.current) : alphaRef.current,
         pts: [{ x: e.clientX + window.scrollX, y: e.clientY + window.scrollY, w: widthFor(e, undefined) }],
       };
       strokes.current.push(current);
-      canvas.setPointerCapture(e.pointerId);
       schedule();
     };
     const move = (e: PointerEvent) => {
-      if (!current) return;
+      if (!current || activePointerId !== e.pointerId) return;
+      // If another component cancelled the pointer gesture, stop cleanly
+      // rather than continuing a stroke on later pointer movement.
+      if (e.buttons === 0) {
+        current = null;
+        activePointerId = null;
+        return;
+      }
       // Coalesced events give the full sub-frame path, so fast strokes stay smooth.
       const events = typeof e.getCoalescedEvents === 'function' ? e.getCoalescedEvents() : [e];
       for (const ev of events.length ? events : [e]) {
@@ -198,39 +282,46 @@ export function BrushCanvas() {
       }
       schedule();
     };
-    const up = () => {
+    const up = (e?: PointerEvent) => {
+      if (e && activePointerId !== e.pointerId) return;
       current = null;
+      activePointerId = null;
     };
     const clear = () => {
       strokes.current = [];
       schedule();
     };
 
-    canvas.addEventListener('pointerdown', down);
-    canvas.addEventListener('pointermove', move);
+    // Listen on the window, not the canvas. The canvas stays click-through so
+    // text is selectable in marker mode, yet empty page areas can still draw.
+    window.addEventListener('pointerdown', down, { capture: true, passive: false });
+    window.addEventListener('pointermove', move, { capture: true });
     window.addEventListener('pointerup', up);
+    window.addEventListener('pointercancel', up);
+    window.addEventListener('blur', up);
     window.addEventListener('scroll', scheduleScrollRedraw, { passive: true });
     window.addEventListener('resize', schedule, { passive: true });
     window.addEventListener(CLEAR_EVENT, clear);
 
     return () => {
       cancelAnimationFrame(raf);
-      canvas.removeEventListener('pointerdown', down);
-      canvas.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerdown', down, true);
+      window.removeEventListener('pointermove', move, true);
       window.removeEventListener('pointerup', up);
+      window.removeEventListener('pointercancel', up);
+      window.removeEventListener('blur', up);
       window.removeEventListener('scroll', scheduleScrollRedraw);
       window.removeEventListener('resize', schedule);
       window.removeEventListener(CLEAR_EVENT, clear);
     };
   }, []);
 
-  const active = style.pen === 'brush' || style.pen === 'eraser';
   return (
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="fixed inset-0 z-40 h-full w-full"
-      style={{ pointerEvents: active ? 'auto' : 'none', cursor: active ? TOOL_CURSORS[style.pen] : 'auto' }}
+      className="fixed inset-0 z-[95] h-full w-full"
+      style={{ pointerEvents: 'none' }}
     />
   );
 }

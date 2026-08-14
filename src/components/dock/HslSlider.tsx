@@ -63,6 +63,14 @@ export function HslSlider({
       className="relative w-full shrink-0 cursor-pointer touch-none select-none"
       style={{ height: TRACK_H }}
     >
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-paper/85"
+        style={{
+          ...capsuleMask,
+          boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.32), 0 3px 10px rgba(0,0,0,0.18)",
+        }}
+      />
       <div aria-hidden className="absolute inset-0" style={{ ...capsuleMask, background: gradient }} />
       <CapsuleKnob left={knobLeftPercent(value, min, max)} color={knobColor} />
     </div>

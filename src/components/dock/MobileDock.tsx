@@ -12,7 +12,7 @@ export function MobileDock() {
 
   return (
     <nav
-      className="pointer-events-none fixed inset-x-0 z-50 flex select-none justify-center px-3"
+      className="pointer-events-none fixed inset-x-0 z-[100] flex select-none justify-center px-3"
       style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
       aria-label="Navigation"
     >

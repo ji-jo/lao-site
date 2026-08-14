@@ -10,13 +10,79 @@ import * as THREE from "three";
 import { ScrollObserver } from "@/components/ScrollObserver";
 import monitorModelUrl from "../../assets/3D/Monitor/Monitor 2/crt_monitor.optimized.glb?url";
 
-const ANIMATRON_VIDEO_URL = "/media/animatron-demo.mp4";
-const STOP_MOTION_VIDEO_URL = "/media/stopmotion-demo.mp4";
+// Fetch the CRT model as soon as the island loads, before its section reaches
+// the viewport, so the monitors are ready on arrival.
+useGLTF.preload(monitorModelUrl);
+
+const ANIMATRON_VIDEO_URL = "/media/animatron-demo.optimized.mp4";
+const STOP_MOTION_VIDEO_URL = "/media/stopmotion-demo.optimized.mp4";
+
+// CRT layout controls — tweak these two values while tuning the mode section.
+// Higher separation moves the monitors farther apart; higher scale enlarges
+// both 3D monitors, their inset video surfaces, and the expansion origin.
+const CRT_MONITOR_SEPARATION = 1;
+const CRT_MONITOR_SCALE = 1.2;
+// The base footprint intentionally leaves breathing room between the two CRTs
+// and the rounded panel edge. CRT_MONITOR_SCALE is applied on top of this.
+const CRT_MONITOR_WIDTH_RATIO = 0.27;
+const CRT_MONITOR_HEIGHT_RATIO = 0.35;
+const CRT_MONITOR_YAW = THREE.MathUtils.degToRad(15);
+const CRT_MONITOR_PITCH = 0.42;
+const CRT_MONITOR_ENTRY_YAW = THREE.MathUtils.degToRad(45);
+const CRT_MONITOR_ENTRY_PITCH = 0.58;
+
+// Tune the two embedded videos independently. They are mounted beneath the
+// GLB's picture-tube node, so they inherit its exact transform at every frame.
+const CRT_ANIMATRON_SURFACE = {
+  // Left monitor tuning (local to its own picture tube).
+  x: -0.025,
+  y: 0,
+  z: -0.1,
+  width: 1.88,
+  height: 1.59,
+  curvature: -0.05,
+  scale: .8,
+  entryScale: 1,
+  rotationX: 0,
+  // The GLB's tube faces -Z. A default Three plane faces +Z, which would make
+  // the footage appear mirrored because the camera sees its back face.
+  rotationY: Math.PI - 0.15,
+  rotationZ: 0,
+};
+const CRT_STOP_MOTION_SURFACE = {
+  // Right monitor tuning is intentionally independent from Animatron.
+  x: 0.05,
+  y: 0,
+  z: -0.1,
+  width: 1.88,
+  height: 1.59,
+  curvature: -0.05,
+  scale: .8,
+  entryScale: 1,
+  rotationX: 0,
+  rotationY: Math.PI - 0.15,
+  rotationZ: 0,
+};
 
 type ScreenRect = { left: number; top: number; width: number; height: number };
 
 const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
 const smoothstep = (value: number) => value * value * (3 - 2 * value);
+
+function createCurvedCrtGeometry(width: number, height: number, curvature: number) {
+  const geometry = new THREE.PlaneGeometry(width, height, 18, 10);
+  const positions = geometry.attributes.position;
+  for (let index = 0; index < positions.count; index += 1) {
+    const horizontal = positions.getX(index) / (width * 0.5);
+    // The picture tube bows forward through its centre. Keeping the corners at
+    // zero locks the video edge to the opening while the middle follows CRT's
+    // subtle horizontal bulge.
+    positions.setZ(index, -curvature * (1 - horizontal * horizontal));
+  }
+  positions.needsUpdate = true;
+  geometry.computeVertexNormals();
+  return geometry;
+}
 
 function ModeCube({
   side,
@@ -24,28 +90,46 @@ function ModeCube({
   progress,
   screenOverlayRef,
   screenRectRef,
+  renderActive,
 }: {
   side: -1 | 1;
   label: string;
   progress: MotionValue<number>;
   screenOverlayRef: MutableRefObject<HTMLVideoElement | null>;
   screenRectRef?: MutableRefObject<ScreenRect | null>;
+  renderActive: boolean;
 }) {
   const groupRef = useRef<THREE.Group>(null);
-  const screenCanvasRef = useRef<HTMLCanvasElement | null>(null);
-  const screenTextureRef = useRef<THREE.CanvasTexture | null>(null);
-  const originalScreenMaterialRef = useRef<THREE.Material | THREE.Material[] | null>(null);
+  const displaySurfaceRef = useRef<THREE.Mesh<THREE.BufferGeometry>>(null);
+  const displaySurfaceBaseScaleRef = useRef(new THREE.Vector3(1, 1, 1));
   const { camera, viewport, size: canvasSize, invalidate } = useThree();
   const panelPadding = THREE.MathUtils.clamp(canvasSize.width * 0.03, 16, 40);
   const panelPixelWidth = Math.min(canvasSize.width - panelPadding * 2, 1200);
   const panelPixelHeight = Math.max(420, panelPixelWidth * (2 / 3));
   const panelWidth = viewport.width * (panelPixelWidth / canvasSize.width);
   const panelHeight = viewport.height * (panelPixelHeight / canvasSize.height);
-  const width = panelWidth * 0.34;
-  const height = panelHeight * 0.39;
-  const targetX = side * panelWidth * 0.16;
+  const width = panelWidth * CRT_MONITOR_WIDTH_RATIO;
+  const height = panelHeight * CRT_MONITOR_HEIGHT_RATIO;
   const targetY = -panelHeight * 0.22;
+  const surface = side === -1 ? CRT_ANIMATRON_SURFACE : CRT_STOP_MOTION_SURFACE;
   const { scene } = useGLTF(monitorModelUrl);
+  // The monitor export's glass has no usable UV data, so we render a curved
+  // video surface inside the exact picture-tube node instead.
+  const screenCanvas = useMemo(() => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 480;
+    canvas.height = 400;
+    return canvas;
+  }, []);
+  const screenTexture = useMemo(() => {
+    const texture = new THREE.CanvasTexture(screenCanvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.flipY = true;
+    texture.minFilter = THREE.LinearFilter;
+    texture.magFilter = THREE.LinearFilter;
+    texture.generateMipmaps = false;
+    return texture;
+  }, [screenCanvas]);
 
   useEffect(() => {
     document.documentElement.dataset.monitorReady = "true";
@@ -62,8 +146,8 @@ function ModeCube({
     let screen: THREE.Mesh<THREE.BufferGeometry> | null = null;
     object.traverse((child) => {
       if (child instanceof THREE.Mesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
+        child.castShadow = false;
+        child.receiveShadow = false;
         if (child.material?.name === "Material.004") {
           screen = child as THREE.Mesh<THREE.BufferGeometry>;
         }
@@ -92,37 +176,67 @@ function ModeCube({
       }
     }
 
-    return { object, size, screen };
-  }, [scene]);
+    // A subdivided, gently curved surface keeps the footage inside the CRT
+    // opening but gives it the same tube-like bow as the monitor face.
+    if (screen) {
+      const displaySurface = new THREE.Mesh(
+        createCurvedCrtGeometry(surface.width, surface.height, surface.curvature),
+        new THREE.MeshBasicMaterial({
+          map: screenTexture,
+          toneMapped: false,
+          // The GLB glass itself is an opaque black material. Draw this video
+          // surface after it, while its geometry remains clipped to the tube.
+          depthTest: false,
+          depthWrite: false,
+          side: THREE.DoubleSide,
+        }),
+      );
+      displaySurface.scale.setScalar(surface.scale);
+      displaySurface.position.set(surface.x, surface.y, surface.z);
+      displaySurface.rotateX(surface.rotationX);
+      displaySurface.rotateY(surface.rotationY);
+      displaySurface.rotateZ(surface.rotationZ);
+      displaySurface.renderOrder = 20;
+      displaySurface.frustumCulled = false;
+      screen.add(displaySurface);
+      displaySurfaceRef.current = displaySurface;
+      displaySurfaceBaseScaleRef.current.copy(displaySurface.scale);
+    }
 
-  const modelScale = Math.min(width / monitor.size.x, height / monitor.size.y) * 0.92;
+    return { object, size, screen };
+  }, [scene, screenTexture, surface]);
+
+  const modelScale = Math.min(width / monitor.size.x, height / monitor.size.y) * 0.92 * CRT_MONITOR_SCALE;
+  // Keep a readable gap between the CRTs using their real scaled width. This
+  // means enlarging CRT_MONITOR_SCALE also expands their resting separation.
+  const visualMonitorWidth = monitor.size.x * modelScale;
+  const visualMonitorDepth = monitor.size.z * modelScale;
+  const targetX = side * (visualMonitorWidth * 0.62 + panelWidth * 0.03) * CRT_MONITOR_SEPARATION;
   const labelTexture = useMemo(() => {
     const canvas = document.createElement("canvas");
-    canvas.width = 1024;
-    canvas.height = 256;
+    canvas.width = 512;
+    canvas.height = 128;
     const context = canvas.getContext("2d");
     if (context) {
       context.clearRect(0, 0, canvas.width, canvas.height);
       context.fillStyle = "#ef2b26";
       context.textAlign = "center";
       context.textBaseline = "middle";
-      context.font = '700 122px "Redaction 35", Georgia, serif';
+      context.font = '700 61px "Redaction 35", Georgia, serif';
       context.fillText(label, canvas.width / 2, canvas.height / 2, canvas.width * 0.94);
     }
     const texture = new THREE.CanvasTexture(canvas);
     texture.colorSpace = THREE.SRGBColorSpace;
     texture.minFilter = THREE.LinearFilter;
+    texture.magFilter = THREE.LinearFilter;
+    texture.generateMipmaps = false;
     return texture;
   }, [label]);
 
   useEffect(() => () => labelTexture.dispose(), [labelTexture]);
-  useEffect(() => () => {
-    if (monitor.screen && originalScreenMaterialRef.current) {
-      monitor.screen.material = originalScreenMaterialRef.current;
-    }
-    screenTextureRef.current?.dispose();
-  }, [monitor]);
+  useEffect(() => () => screenTexture.dispose(), [screenTexture]);
   useEffect(() => {
+    if (!renderActive) return;
     const video = screenOverlayRef.current;
     if (!video) return;
 
@@ -132,21 +246,20 @@ function ModeCube({
 
     const requestNextFrame = () => {
       if (cancelled) return;
-      const canvas = screenCanvasRef.current;
-      const texture = screenTextureRef.current;
-      if (canvas && texture && video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
-        const context = canvas.getContext("2d", { alpha: false });
+      if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+        const context = screenCanvas.getContext("2d", { alpha: false });
         if (context && video.videoWidth > 0 && video.videoHeight > 0) {
           const sourceAspect = video.videoWidth / video.videoHeight;
+          const targetAspect = screenCanvas.width / screenCanvas.height;
           let sourceX = 0;
           let sourceY = 0;
           let sourceWidth = video.videoWidth;
           let sourceHeight = video.videoHeight;
-          if (sourceAspect > 1) {
-            sourceWidth = video.videoHeight;
+          if (sourceAspect > targetAspect) {
+            sourceWidth = video.videoHeight * targetAspect;
             sourceX = (video.videoWidth - sourceWidth) / 2;
-          } else if (sourceAspect < 1) {
-            sourceHeight = video.videoWidth;
+          } else if (sourceAspect < targetAspect) {
+            sourceHeight = video.videoWidth / targetAspect;
             sourceY = (video.videoHeight - sourceHeight) / 2;
           }
           context.drawImage(
@@ -157,10 +270,10 @@ function ModeCube({
             sourceHeight,
             0,
             0,
-            canvas.width,
-            canvas.height,
+            screenCanvas.width,
+            screenCanvas.height,
           );
-          texture.needsUpdate = true;
+          screenTexture.needsUpdate = true;
         }
       }
       invalidate();
@@ -179,7 +292,7 @@ function ModeCube({
       }
       if (animationFrame) cancelAnimationFrame(animationFrame);
     };
-  }, [invalidate, screenOverlayRef]);
+  }, [invalidate, renderActive, screenOverlayRef, screenCanvas, screenTexture]);
   const labelOffsetX = (viewport.width / canvasSize.width) * (side === -1 ? -10 : 15);
 
   useFrame(() => {
@@ -187,70 +300,40 @@ function ModeCube({
     if (!cube) return;
 
     const entered = THREE.MathUtils.smootherstep(progress.get(), 0, 1);
-    const startX = side * (viewport.width / 2 + width * 0.58);
+    // At the 60° entry angle both width and depth project horizontally. Clear
+    // their combined footprint so a monitor never appears before the entrance.
+    const startX = side * (viewport.width / 2 + visualMonitorWidth * 0.72 + visualMonitorDepth * 0.42 + 0.2);
     cube.position.x = THREE.MathUtils.lerp(startX, targetX, entered);
     cube.position.y = targetY;
-    cube.rotation.x = THREE.MathUtils.lerp(0.58, 0.42, entered);
-    cube.rotation.y = THREE.MathUtils.lerp(
-      side * THREE.MathUtils.degToRad(60),
-      side * THREE.MathUtils.degToRad(15),
-      entered,
-    );
+    cube.rotation.x = THREE.MathUtils.lerp(CRT_MONITOR_ENTRY_PITCH, CRT_MONITOR_PITCH, entered);
+    cube.rotation.y = THREE.MathUtils.lerp(side * CRT_MONITOR_ENTRY_YAW, side * CRT_MONITOR_YAW, entered);
     cube.rotation.z = THREE.MathUtils.lerp(side * 0.06, 0, entered);
 
-    // Copy decoded frames into a CanvasTexture and map it onto the exact CRT
-    // glass mesh. CanvasTexture is reliable even when the source video lives
-    // off-canvas, unlike direct VideoTexture uploads in some browsers.
-    if (monitor.screen && !screenTextureRef.current && screenOverlayRef.current) {
-      const screenCanvas = document.createElement("canvas");
-      screenCanvas.width = 512;
-      screenCanvas.height = 512;
-      const texture = new THREE.CanvasTexture(screenCanvas);
-      texture.colorSpace = THREE.SRGBColorSpace;
-      texture.flipY = true;
-      texture.minFilter = THREE.LinearFilter;
-      texture.magFilter = THREE.LinearFilter;
-      texture.generateMipmaps = false;
-      originalScreenMaterialRef.current = monitor.screen.material;
-      monitor.screen.material = new THREE.MeshBasicMaterial({
-        map: texture,
-        toneMapped: false,
-        side: THREE.DoubleSide,
-        // Material.003 is the opaque black face that sits just in front of
-        // this inner picture tube in the export. Render the picture tube last
-        // without depth testing so the video is visible, while its smaller
-        // geometry still leaves the original black bezel around it.
-        depthTest: false,
-        depthWrite: false,
-      });
-      monitor.screen.material.needsUpdate = true;
-      monitor.screen.renderOrder = 10;
-      screenCanvasRef.current = screenCanvas;
-      screenTextureRef.current = texture;
-    }
+    const surfaceScale = THREE.MathUtils.lerp(surface.entryScale, 1, entered);
+    displaySurfaceRef.current?.scale.copy(displaySurfaceBaseScaleRef.current).multiplyScalar(surfaceScale);
 
-    if (monitor.screen) {
-      const geometry = monitor.screen.geometry;
-      geometry.computeBoundingBox();
-      const bounds = geometry.boundingBox;
-      if (bounds) {
-        cube.updateMatrixWorld(true);
-        const z = bounds.max.z;
-        const corners = [
-          new THREE.Vector3(bounds.min.x, bounds.min.y, z),
-          new THREE.Vector3(bounds.max.x, bounds.min.y, z),
-          new THREE.Vector3(bounds.max.x, bounds.max.y, z),
-          new THREE.Vector3(bounds.min.x, bounds.max.y, z),
-        ].map((point) => monitor.screen!.localToWorld(point).project(camera));
-        const xs = corners.map((point) => (point.x * 0.5 + 0.5) * canvasSize.width);
-        const ys = corners.map((point) => (-point.y * 0.5 + 0.5) * canvasSize.height);
-        const left = Math.min(...xs);
-        const right = Math.max(...xs);
-        const top = Math.min(...ys);
-        const bottom = Math.max(...ys);
-        const rect = { left, top, width: right - left, height: bottom - top };
-        if (side === -1 && screenRectRef) screenRectRef.current = rect;
-      }
+    // Use the actual visible video plane—not the GLB's unused black glass—to
+    // seed the expanded Animatron video. This keeps the handoff anchored when
+    // CRT_MONITOR_SCALE or the surface coordinates are adjusted.
+    const displaySurface = displaySurfaceRef.current;
+    if (displaySurface && side === -1 && screenRectRef) {
+      cube.updateMatrixWorld(true);
+      displaySurface.geometry.computeBoundingBox();
+      const screenBounds = displaySurface.geometry.boundingBox;
+      if (!screenBounds) return;
+      const corners = [
+        new THREE.Vector3(screenBounds.min.x, screenBounds.min.y, screenBounds.min.z),
+        new THREE.Vector3(screenBounds.max.x, screenBounds.min.y, screenBounds.min.z),
+        new THREE.Vector3(screenBounds.max.x, screenBounds.max.y, screenBounds.max.z),
+        new THREE.Vector3(screenBounds.min.x, screenBounds.max.y, screenBounds.max.z),
+      ].map((point) => displaySurface.localToWorld(point).project(camera));
+      const xs = corners.map((point) => (point.x * 0.5 + 0.5) * canvasSize.width);
+      const ys = corners.map((point) => (-point.y * 0.5 + 0.5) * canvasSize.height);
+      const left = Math.min(...xs);
+      const right = Math.max(...xs);
+      const top = Math.min(...ys);
+      const bottom = Math.max(...ys);
+      screenRectRef.current = { left, top, width: right - left, height: bottom - top };
     }
   });
 
@@ -281,11 +364,13 @@ function CubeScene({
   animatronScreenRef,
   stopMotionScreenRef,
   screenRectRef,
+  renderActive,
 }: {
   progress: MotionValue<number>;
   animatronScreenRef: MutableRefObject<HTMLVideoElement | null>;
   stopMotionScreenRef: MutableRefObject<HTMLVideoElement | null>;
   screenRectRef: MutableRefObject<ScreenRect | null>;
+  renderActive: boolean;
 }) {
   return (
     <>
@@ -293,8 +378,8 @@ function CubeScene({
       <ambientLight intensity={2.2} />
       <directionalLight position={[0, 8, 10]} intensity={1.15} color="#ffffff" />
       <directionalLight position={[-7, 1, 6]} intensity={0.4} color="#b6cbe6" />
-      <ModeCube side={-1} label="Animatron" progress={progress} screenOverlayRef={animatronScreenRef} screenRectRef={screenRectRef} />
-      <ModeCube side={1} label="Stop motion" progress={progress} screenOverlayRef={stopMotionScreenRef} />
+      <ModeCube side={-1} label="Animatron" progress={progress} screenOverlayRef={animatronScreenRef} screenRectRef={screenRectRef} renderActive={renderActive} />
+      <ModeCube side={1} label="Stop motion" progress={progress} screenOverlayRef={stopMotionScreenRef} renderActive={renderActive} />
     </>
   );
 }
@@ -307,30 +392,28 @@ function FallbackMonitor({ side, progress }: { side: -1 | 1; progress: MotionVal
   const panelPixelHeight = Math.max(420, panelPixelWidth * (2 / 3));
   const panelWidth = viewport.width * (panelPixelWidth / canvasSize.width);
   const panelHeight = viewport.height * (panelPixelHeight / canvasSize.height);
-  const width = panelWidth * 0.34;
-  const height = panelHeight * 0.39;
+  const width = panelWidth * CRT_MONITOR_WIDTH_RATIO;
+  const height = panelHeight * CRT_MONITOR_HEIGHT_RATIO;
   const depth = width * 0.28;
-  const targetX = side * panelWidth * 0.16;
+  const visualMonitorWidth = width * 0.86 * CRT_MONITOR_SCALE;
+  const visualMonitorDepth = depth * CRT_MONITOR_SCALE;
+  const targetX = side * (visualMonitorWidth * 0.62 + panelWidth * 0.03) * CRT_MONITOR_SEPARATION;
   const targetY = -panelHeight * 0.22;
 
   useFrame(() => {
     const monitor = groupRef.current;
     if (!monitor) return;
     const entered = THREE.MathUtils.smootherstep(progress.get(), 0, 1);
-    const startX = side * (viewport.width / 2 + width * 0.58);
+    const startX = side * (viewport.width / 2 + visualMonitorWidth * 0.72 + visualMonitorDepth * 0.42 + 0.2);
     monitor.position.x = THREE.MathUtils.lerp(startX, targetX, entered);
     monitor.position.y = targetY;
-    monitor.rotation.x = THREE.MathUtils.lerp(0.58, 0.42, entered);
-    monitor.rotation.y = THREE.MathUtils.lerp(
-      side * THREE.MathUtils.degToRad(60),
-      side * THREE.MathUtils.degToRad(15),
-      entered,
-    );
+    monitor.rotation.x = THREE.MathUtils.lerp(CRT_MONITOR_ENTRY_PITCH, CRT_MONITOR_PITCH, entered);
+    monitor.rotation.y = THREE.MathUtils.lerp(side * CRT_MONITOR_ENTRY_YAW, side * CRT_MONITOR_YAW, entered);
     monitor.rotation.z = THREE.MathUtils.lerp(side * 0.06, 0, entered);
   });
 
   return (
-    <group ref={groupRef}>
+    <group ref={groupRef} scale={CRT_MONITOR_SCALE}>
       <mesh>
         <boxGeometry args={[width * 0.86, height * 0.72, depth]} />
         <meshBasicMaterial color="#dedbd2" />
@@ -384,6 +467,7 @@ export default function ModeCubeSection() {
   const [animatronAvailable, setAnimatronAvailable] = useState(false);
   const [animatronAspectRatio, setAnimatronAspectRatio] = useState(1);
   const [stopMotionAspectRatio, setStopMotionAspectRatio] = useState(1);
+  const [renderActive, setRenderActive] = useState(false);
 
   const captureAnimatronVideo = useCallback((video: HTMLVideoElement | null) => {
     animatronVideoRef.current = video;
@@ -541,13 +625,24 @@ export default function ModeCubeSection() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         isNear = entry?.isIntersecting ?? false;
-        if (isNear) scheduleUpdate();
-        else if (frame) {
-          cancelAnimationFrame(frame);
-          frame = 0;
+        setRenderActive(isNear);
+        if (isNear) {
+          scheduleUpdate();
+        } else {
+          if (frame) {
+            cancelAnimationFrame(frame);
+            frame = 0;
+          }
+          animatronScreenRef.current?.pause();
+          stopMotionScreenRef.current?.pause();
+          animatronVideoRef.current?.pause();
+          stopMotionVideoRef.current?.pause();
+          animatronPlayedRef.current = false;
+          stopMotionCrtPlayedRef.current = false;
+          stopMotionPlayedRef.current = false;
         }
       },
-      { rootMargin: "60% 0px 60% 0px" },
+      { rootMargin: "100% 0px 100% 0px" },
     );
     observer.observe(section);
     window.addEventListener("scroll", scheduleUpdate, { passive: true });
@@ -583,6 +678,7 @@ export default function ModeCubeSection() {
                 animatronScreenRef={animatronScreenRef}
                 stopMotionScreenRef={stopMotionScreenRef}
                 screenRectRef={screenRectRef}
+                renderActive={renderActive}
               />
             </Suspense>
           </Canvas>
@@ -596,20 +692,20 @@ export default function ModeCubeSection() {
           <video
             ref={animatronScreenRef}
             src={ANIMATRON_VIDEO_URL}
-          muted
-          loop
-          playsInline
-            preload="auto"
+            muted
+            loop
+            playsInline
+            preload="metadata"
             aria-hidden="true"
             className="h-full w-full"
           />
           <video
             ref={stopMotionScreenRef}
             src={STOP_MOTION_VIDEO_URL}
-          muted
-          loop
-          playsInline
-            preload="auto"
+            muted
+            loop
+            playsInline
+            preload="metadata"
             aria-hidden="true"
             className="h-full w-full"
           />
@@ -667,7 +763,7 @@ export default function ModeCubeSection() {
               muted
               loop
               playsInline
-              preload="auto"
+              preload="metadata"
               onLoadedMetadata={(event) => {
                 const video = event.currentTarget;
                 if (video.videoWidth > 0 && video.videoHeight > 0) {
@@ -701,7 +797,7 @@ export default function ModeCubeSection() {
               muted
               loop
               playsInline
-              preload="auto"
+              preload="metadata"
               onLoadedMetadata={(event) => {
                 const video = event.currentTarget;
                 if (video.videoWidth > 0 && video.videoHeight > 0) {

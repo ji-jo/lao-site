@@ -26,10 +26,10 @@ const getViewportMetrics = () => {
   if (typeof window === "undefined") return { isMobile: false, wrapperScale: 1.4 };
 
   const width = window.innerWidth;
-  if (width >= 768) return { isMobile: false, wrapperScale: 1.4 };
-  // Tablet: reduce the laptop by 25% while preserving its centred sticky
-  // behaviour and enough inline room for the chassis at the narrow end.
-  if (width >= 600) return { isMobile: false, wrapperScale: 0.844 };
+  if (width >= 1024) return { isMobile: false, wrapperScale: 1.4 };
+  // Tablet (600–1023px): scale the entire MacBook assembly — chassis and
+  // embedded screen/video together — down by 30% from desktop.
+  if (width >= 600) return { isMobile: false, wrapperScale: 0.98 };
 
   // The former phone scale was 0.5. Use the requested 2x size wherever the
   // 32rem chassis fits, then shrink only enough to retain a 12px safe margin.

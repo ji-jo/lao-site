@@ -163,7 +163,7 @@ export function MarkerRow({
   /** Per-pen ink opacity (0-1); each pen shows its own as a percentage. */
   opacityByPen: Record<PenTip, number>;
   onSelect: (pen: PenTip) => void;
-  /** Clicking the already-selected pen opens the marker popover on this button. */
+  /** Clicking the already-selected marker opens its settings popover. */
   onActivate: (button: HTMLButtonElement) => void;
   /** Carried-overlay opacity (0-1). The selected pen's art fades out as this rises (1 - value), driven
    *  off the SAME MotionValue as the overlay so the hand-off is atomic in one rAF - never a frame with
@@ -234,7 +234,9 @@ export function MarkerRow({
             aria-label={p.label}
             aria-pressed={isSelected}
             onClick={(e) => {
-              if (isSelected && p.id !== "eraser") {
+              // The freehand brush has no marker-settings panel. Only the text
+              // marker opens this popover; the brush stays a direct drawing tool.
+              if (isSelected && p.id === "slant") {
                 onActivate(e.currentTarget);
               } else {
                 playMarkerSelect();

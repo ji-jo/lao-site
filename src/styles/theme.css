@@ -34,7 +34,7 @@
 
 @layer base {
   html, body {
-    @apply bg-ink-900 text-text font-body antialiased selection:bg-accent/30 selection:text-text-hi;
+    @apply bg-ink-900 text-text font-body antialiased selection:bg-accent/30;
     margin: 0;
     padding: 0;
     cursor: var(--drawing-tool-cursor, url('../../assets/cursor-mac.svg') 4 2, auto);
@@ -133,10 +133,20 @@
   }
 }
 
-.selection-marker-ready *::selection {
+/* The browser's blue selection sits above the rendered highlighter and reads
+   like a blue underline. Hide only its fill; preserve inherited text colour. */
+.selection-marker-active *::selection {
   background: transparent !important;
-  color: inherit !important;
 }
+
+/* The marker must be able to start a native text range in every story panel.
+   A few animated sections mark their copy pointer-events:none; override that
+   only for real text nodes, never their surrounding visual/canvas layers. */
+#main-app :is(h1, h2, h3, h4, h5, h6, p, li, blockquote, figcaption) {
+  pointer-events: auto;
+  user-select: text;
+}
+
 
 #main-app > [style*="absolute"] {
   z-index: 9999 !important;
@@ -376,4 +386,13 @@ html.is-preloading body {
   from { stroke-dashoffset: 439.82; transform: translate(100px, 100px) rotate(-113deg); }
   50% { stroke-dashoffset: 164.93; transform: translate(100px, 100px) rotate(-113deg); }
   75%, to { stroke-dashoffset: 439.82; transform: translate(100px, 100px) rotate(112deg); }
+}
+/* Static paper grain replaces a continuously rendered WebGL texture. */
+.waitlist-paper-texture {
+  background-color: #f7f4ee;
+  background-image:
+    radial-gradient(circle at 18% 27%, rgb(118 101 74 / 9%) 0 0.7px, transparent 0.9px),
+    radial-gradient(circle at 72% 61%, rgb(255 255 255 / 55%) 0 0.8px, transparent 1px),
+    repeating-linear-gradient(7deg, transparent 0 5px, rgb(110 94 70 / 2.5%) 6px 7px);
+  background-size: 13px 17px, 19px 23px, 100% 13px;
 }

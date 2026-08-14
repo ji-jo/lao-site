@@ -2,8 +2,8 @@
 
 The live files are stored one directory above this note:
 
-- `../animatron-demo.mp4` — appears inside the Animatron CRT, then expands into the Prussian-blue viewport stage.
-- `../stopmotion-demo.mp4` — slides upward and overlaps the Animatron video later in the same pinned sequence.
+- `../animatron-demo.optimized.mp4` — appears inside the Animatron CRT, then expands into the Prussian-blue viewport stage.
+- `../stopmotion-demo.optimized.mp4` — slides upward and overlaps the Animatron video later in the same pinned sequence.
 
 Export requirements:
 

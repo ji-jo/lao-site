@@ -1,62 +1,96 @@
 import { useEffect, useRef } from "react";
-import { type MarkHandle, highlightSelection } from "@highlighters/core";
-import {
-  BASE_SELECTION_OPTIONS,
-  DEFAULT_INK,
-  penToTip,
-  useSelectionStyle,
-} from "../selection-style.tsx";
-import { useAnimatedColor } from "../hooks/useAnimatedColor.ts";
+import { useSelectionStyle } from "../selection-style.tsx";
 import { CLEAR_EVENT } from "./dock/ClearButton.tsx";
 
-// Document-global live selection marker: paints selectable text instead of the native blue band;
-// the dock drives colour/pen/opacity/mark via update(). READY_CLASS gates the native-selection
-// suppression in global.css, so the blue band survives if JS never loads.
-const READY_CLASS = "selection-marker-ready";
-
-// Glide the ink in OKLCH (useAnimatedColor) so a swatch swap morphs the selection in place; the renderer recolours each frame, no geometry reseed.
-const COLOR_TWEEN = { duration: 0.35, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] };
-
+// Native range geometry is viewport-relative. Keeping the overlay fixed to the
+// viewport avoids the anchor drift the previous renderer had inside Lenis/
+// transformed story sections.
 export function SelectionMarker(): null {
   const { style } = useSelectionStyle();
-  const handleRef = useRef<MarkHandle | null>(null);
-  const color = useAnimatedColor(style.color, COLOR_TWEEN);
+  const styleRef = useRef(style);
+  styleRef.current = style;
 
-  // Defaults match the dock so the first paint agrees.
   useEffect(() => {
-    const handle = highlightSelection({
-      ...BASE_SELECTION_OPTIONS,
-      color: DEFAULT_INK,
-      ...penToTip("slant"),
+    const overlay = document.createElement("div");
+    overlay.setAttribute("aria-hidden", "true");
+    Object.assign(overlay.style, {
+      position: "fixed",
+      inset: "0",
+      zIndex: "98",
+      pointerEvents: "none",
+      overflow: "hidden",
     });
+    document.body.appendChild(overlay);
 
-    handleRef.current = handle;
-    document.documentElement.classList.add(READY_CLASS);
+    let frame = 0;
+    const clear = () => {
+      overlay.replaceChildren();
+    };
+    const paint = () => {
+      frame = 0;
+      const active = styleRef.current;
+      const selection = window.getSelection();
+      const text = selection?.toString().trim() ?? "";
+      const anchor = selection?.anchorNode instanceof Element
+        ? selection.anchorNode
+        : selection?.anchorNode?.parentElement;
+      if (
+        active.pen !== "slant" || !selection || selection.rangeCount === 0 || !text ||
+        anchor?.closest("[aria-label='Highlighter tray'], input, textarea, select, button")
+      ) {
+        clear();
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+      const rects = Array.from(selection.getRangeAt(0).getClientRects());
+      for (const rect of rects) {
+        if (rect.width < 1 || rect.height < 1) continue;
+        const band = document.createElement("div");
+        Object.assign(band.style, {
+          position: "absolute",
+          left: `${rect.left - 2}px`,
+          top: `${rect.top + rect.height * 0.12}px`,
+          width: `${rect.width + 4}px`,
+          height: `${Math.max(10, rect.height * 0.74)}px`,
+          background: `linear-gradient(100deg, transparent 0, ${active.color} 4px, ${active.color} calc(100% - 4px), transparent 100%)`,
+          opacity: String(active.opacity),
+          mixBlendMode: "screen",
+          filter: `drop-shadow(0 0 2px ${active.color})`,
+          clipPath: "polygon(3px 0, 100% 0, calc(100% - 3px) 100%, 0 100%)",
+          transform: "skewX(-4deg)",
+        });
+        fragment.appendChild(band);
+      }
+      overlay.replaceChildren(fragment);
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(paint);
+    };
+    const onClear = () => {
+      window.getSelection()?.removeAllRanges();
+      clear();
+    };
+
+    document.addEventListener("selectionchange", schedule);
+    window.addEventListener("scroll", schedule, { capture: true, passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
+    window.addEventListener(CLEAR_EVENT, onClear);
+    schedule();
     return () => {
-      handle.remove();
-      handleRef.current = null;
-      document.documentElement.classList.remove(READY_CLASS);
+      cancelAnimationFrame(frame);
+      document.removeEventListener("selectionchange", schedule);
+      window.removeEventListener("scroll", schedule, true);
+      window.removeEventListener("resize", schedule);
+      window.removeEventListener(CLEAR_EVENT, onClear);
+      overlay.remove();
     };
   }, []);
 
-  // Clear drops the live selection, which takes its mark with it.
   useEffect(() => {
-    const clear = () => window.getSelection()?.removeAllRanges();
-    window.addEventListener(CLEAR_EVENT, clear);
-    return () => window.removeEventListener(CLEAR_EVENT, clear);
-  }, []);
-
-  // Canvas tools have no highlighter nib; keep the core renderer on the slant
-  // fallback while brush or eraser mode is selected.
-  useEffect(() => {
-    const markerPen = style.pen === "brush" || style.pen === "eraser" ? "slant" : style.pen;
-    handleRef.current?.update({
-      color,
-      opacity: style.opacity,
-      markType: style.markType,
-      ...penToTip(markerPen),
-    });
-  }, [color, style.pen, style.opacity, style.markType]);
+    document.documentElement.classList.toggle("selection-marker-active", style.pen === "slant");
+    return () => document.documentElement.classList.remove("selection-marker-active");
+  }, [style.pen]);
 
   return null;
 }

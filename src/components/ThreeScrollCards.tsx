@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import OpenItLaoAnimation from './OpenItLaoAnimation';
 
 const CARDS = [
-  { text: 'Open it', enterStart: 0, enterDistance: 0.18, rotationZ: -3, zOffset: 0, targetPctX: 22, targetPctY: 34 },
-  { text: 'Draw it', enterStart: 0.22, enterDistance: 0.18, rotationZ: 0, zOffset: 24, targetPctX: 50, targetPctY: 50 },
-  { text: 'Already moving', enterStart: 0.44, enterDistance: 0.18, rotationZ: 3, zOffset: 48, targetPctX: 73, targetPctY: 67 },
+  { text: 'Open Lao', enterStart: 0, enterDistance: 0.18, rotationZ: -3, zOffset: 0, targetPctX: 22, targetPctY: 34, offsetX: 72 },
+  { text: 'Sketch', enterStart: 0.22, enterDistance: 0.18, rotationZ: 0, zOffset: 24, targetPctX: 50, targetPctY: 50, offsetX: 0 },
+  { text: '& Action', enterStart: 0.44, enterDistance: 0.18, rotationZ: 3, zOffset: 48, targetPctX: 73, targetPctY: 67, offsetX: 0 },
 ] as const;
 
 const clamp = (value: number, min = 0, max = 1) => Math.min(max, Math.max(min, value));
@@ -16,6 +17,11 @@ export default function ThreeScrollCards() {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<Array<HTMLElement | null>>([]);
   const cardSizesRef = useRef(CARDS.map(() => ({ width: 0, height: 0 })));
+  const [isSectionActive, setIsSectionActive] = useState(false);
+  const [openCardSettled, setOpenCardSettled] = useState(false);
+  const [sketchCardSettled, setSketchCardSettled] = useState(false);
+  const [actionCardSettled, setActionCardSettled] = useState(false);
+  const [actionAnimationComplete, setActionAnimationComplete] = useState(false);
 
   useEffect(() => {
     let frame = 0;
@@ -44,6 +50,15 @@ export default function ThreeScrollCards() {
       const rect = container.getBoundingClientRect();
       const travel = Math.max(1, rect.height - viewportHeight);
       const globalProgress = clamp(-rect.top / travel);
+      const openCard = CARDS[0];
+      const shouldPlayOpenAnimation = globalProgress >= openCard.enterStart + openCard.enterDistance;
+      if (shouldPlayOpenAnimation) setOpenCardSettled(true);
+      const sketchCard = CARDS[1];
+      const shouldPlaySketchAnimation = globalProgress >= sketchCard.enterStart + sketchCard.enterDistance;
+      if (shouldPlaySketchAnimation) setSketchCardSettled(true);
+      const actionCard = CARDS[2];
+      const shouldPlayActionAnimation = globalProgress >= actionCard.enterStart + actionCard.enterDistance;
+      if (shouldPlayActionAnimation) setActionCardSettled(true);
 
       cardRefs.current.forEach((card, index) => {
         if (!card) return;
@@ -51,8 +66,8 @@ export default function ThreeScrollCards() {
         const localProgress = clamp((globalProgress - config.enterStart) / config.enterDistance);
         const entered = smootherstep(localProgress);
         const { width: cardWidth, height: cardHeight } = cardSizesRef.current[index];
-        const startX = -cardWidth * 0.72;
-        const targetX = viewportWidth * (config.targetPctX / 100) - cardWidth / 2;
+        const startX = -cardWidth * 1.35;
+        const targetX = viewportWidth * (config.targetPctX / 100) - cardWidth / 2 + config.offsetX;
         const targetY = viewportHeight * (config.targetPctY / 100) - cardHeight / 2;
         const x = startX + (targetX - startX) * entered;
         const rotationY = 46 * (1 - entered);
@@ -77,6 +92,7 @@ export default function ThreeScrollCards() {
     const intersectionObserver = new IntersectionObserver(
       ([entry]) => {
         active = entry?.isIntersecting ?? false;
+        setIsSectionActive((previous) => previous === active ? previous : active);
         if (active) scheduleUpdate();
         else if (frame) {
           cancelAnimationFrame(frame);
@@ -101,6 +117,16 @@ export default function ThreeScrollCards() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!actionCardSettled) return;
+
+    const timeout = window.setTimeout(() => {
+      setActionAnimationComplete(true);
+    }, 2000);
+
+    return () => window.clearTimeout(timeout);
+  }, [actionCardSettled]);
+
   return (
     <div ref={containerRef} className="relative z-10 h-full w-full pointer-events-none">
       <div className="sticky top-0 h-[100dvh] w-full overflow-hidden [perspective:1100px]">
@@ -112,11 +138,40 @@ export default function ThreeScrollCards() {
             style={{
               opacity: index === 0 ? 1 : 0,
               visibility: index === 0 ? 'visible' : 'hidden',
-              transform: `translate3d(-72%, ${card.targetPctY}vh, ${card.zOffset}px) rotateY(46deg) rotateZ(${card.rotationZ}deg)`,
+              transform: `translate3d(-140%, ${card.targetPctY}vh, ${card.zOffset}px) rotateY(46deg) rotateZ(${card.rotationZ}deg)`,
               zIndex: index + 1,
             }}
           >
-            {card.text}
+            {index === 0 || index === 1 || index === 2 ? (
+              <>
+                {/* The outer frame only clips at the bottom; its extended top preserves
+                    the full illustration while leaving the title area clear. */}
+                <div className="absolute inset-x-7 top-[-160px] bottom-[76px] overflow-hidden">
+                  <div className="absolute inset-x-0 top-[166px] bottom-0 flex items-center justify-center">
+                    {(
+                      (index === 0 && openCardSettled)
+                      || (index === 1 && sketchCardSettled)
+                      || (index === 2 && actionCardSettled)
+                    ) ? (
+                      <OpenItLaoAnimation
+                        className="aspect-square h-full w-auto max-w-none origin-center scale-[1.6]"
+                        src={index === 0
+                          ? '/media/open-it-lao-animation.svg'
+                          : index === 1
+                            ? '/media/sketch-lao-animation.svg'
+                            : actionAnimationComplete
+                              ? '/media/action-lao-frame-1.svg'
+                              : '/media/action-lao-animation.svg'}
+                      />
+                    ) : null}
+                  </div>
+                </div>
+
+                <span className="absolute inset-x-4 bottom-4 text-center leading-none">
+                  {card.text}
+                </span>
+              </>
+            ) : card.text}
           </article>
         ))}
       </div>
