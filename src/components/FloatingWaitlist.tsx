@@ -308,4 +308,513 @@ export default function FloatingWaitlist() {
     const cardHeight = card.scrollHeight;
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
-    const safeRight = Math.max(0, Number.parseFloat(getComputedStyle(doÛ½µ¶‰žËkºwµçU¹Ð¹±¥•¹Ñ]¥‘Ñ ì4(€€€€€‘½Õµ•¹Ð¹‘½Õµ•¹Ñ±•µ•¹Ð¹ÍÑå±”¹½Ù•É™±½Ü€ô€‰¡¥‘‘•¸ˆì4(€€€€€‘½Õµ•¹Ð¹‰½‘ä¹ÍÑå±”¹Á…‘‘¥¹%¹±¥¹•¹€ôÍÉ½±±‰…É]¥‘Ñ €ø€À€ü€‘íÍÉ½±±‰…É]¥‘Ñ¡õÁá€€è€ˆˆì4(€€€€€™½Éµ½¹Ñ•¹Ð¹¥¹•ÉÐ€ô™…±Í”ì4(€€€€€Í•ÑA••­¥¹œ¡™…±Í”¤ì4(4(€€€€€½¹ÍÐ…É‘]¥‘Ñ €ô…É¹½™™Í•Ñ]¥‘Ñ ì4(€€€€€½¹ÍÐÙ¥ÍÕ…±!•¥¡Ð€ô5…Ñ ¹µ¥¸¡…É¹ÍÉ½±±!•¥¡Ð°Ý¥¹‘½Ü¹¥¹¹•É!•¥¡Ð€´€ÌÈ¤ì4(€€€€€½¹ÍÐà€ô5…Ñ ¹µ…à ÄØ°€¡Ý¥¹‘½Ü¹¥¹¹•É]¥‘Ñ €´…É‘]¥‘Ñ ¤€¼€È¤ì4(€€€€€½¹ÍÐä€ô5…Ñ ¹µ…à ÄØ°€¡Ý¥¹‘½Ü¹¥¹¹•É!•¥¡Ð€´Ù¥ÍÕ…±!•¥¡Ð¤€¼€È¤ì4(€€€€€½¹ÍÐ±½­ÕÁQ…É•Ð€ô•Ñ1½­ÕÁQÉ…¹Í™½É´ Ä¤ì4(€€€€€½¹ÍÐ‘ÕÉ…Ñ¥½¸€ôÉ•‘Õ•€ü€À€è€À¸ÐÈì4(€€€€€Í…À¹Í•Ð¡™½Éµ½¹Ñ•¹Ð°ìÉ½Ñ…Ñ¥½¸è€À°…ÕÑ½±Á¡„è€Àô¤ì4(€€€€€½¹ÍÐ…É‘¹¥µ…Ñ¥½¸€ôµ½Ñ¥½¹¹¥µ…Ñ”¡…É°ì4(€€€€€€€à°4(€€€€€€€ä°4(€€€€€€€É½Ñ…Ñ”è€À°4(€€€€€€€Í…±•`è€Ä°4(€€€€€€€Í…±•dè€Ä°4(€€€€€€€Í­•Ýdè€À°4(€€€€€ô°ì4(€€€€€€€‘ÕÉ…Ñ¥½¸°4(€€€€€€€•…Í”èlÀ¸ÈÈ°€Ä°€À¸ÌØ°€Åt°4(€€€€€ô¤ì4(€€€€€½¹ÍÐ±½­ÕÁ¹¥µ…Ñ¥½¸€ôµ½Ñ¥½¹¹¥µ…Ñ”¡±½­ÕÀ°ì4(€€€€€€€àè±½­ÕÁQ…É•Ð¹à°4(€€€€€€€äè±½­ÕÁQ…É•Ð¹ä°4(€€€€€€€É½Ñ…Ñ”è±½­ÕÁQ…É•Ð¹É½Ñ…Ñ¥½¸°4(€€€€€ô°ì4(€€€€€€€‘ÕÉ…Ñ¥½¸°4(€€€€€€€•…Í”èlÀ¸ÈÈ°€Ä°€À¸ÌØ°€Åt°4(€€€€€ô¤ì4(€€€€€½¹ÍÐ±…‰•±¹¥µ…Ñ¥½¸€ôµ½Ñ¥½¹¹¥µ…Ñ”¡½Á•¹1…‰•°°ì4(€€€€€€€½Á…¥Ñäè€À°4(€€€€€ô°ì4(€€€€€€€‘ÕÉ…Ñ¥½¸èÉ•‘Õ•€ü€À€è€À¸ÄØ°4(€€€€€€€•…Í”è€‰•…Í•=ÕÐˆ°4(€€€€€ô¤ì4(€€€€€…Ñ¥Ù•¹¥µ…Ñ¥½¹ÍI•˜¹ÕÉÉ•¹Ð€ôm…É‘¹¥µ…Ñ¥½¸°±½­ÕÁ¹¥µ…Ñ¥½¸°±…‰•±¹¥µ…Ñ¥½¹tì4(€€€€€Ù½¥…É‘¹¥µ…Ñ¥½¸¹Ñ¡•¸  ¤€ôøì4(€€€€€€€¥˜€¡ÑÉ…¹Í¥Ñ¥½¹%‘I•˜¹ÕÉÉ•¹Ð€„ôôÑÉ…¹Í¥Ñ¥½¹%ñð€…½Á•¹I•˜¹ÕÉÉ•¹Ð¤É•ÑÕÉ¸ì4(€€€€€€€ÑÉ…¹Í¥Ñ¥½¹¥¹I•˜¹ÕÉÉ•¹Ð€ô™…±Í”ì4(€€€€€€€Í•Ñ5½Ù¥¹MÑ…Ñ”¡™…±Í”¤ì4(€€€€€€€Í•Ñ¥…±½MÉ½±±…‰±”¡ÑÉÕ”¤ì4(€€€€€€€Í…À¹Í•Ð¡™½Éµ½¹Ñ•¹Ð°ì…ÕÑ½±Á¡„è€Äô¤ì4(€€€€€€€…Ñ¥Ù•¹¥µ…Ñ¥½¹ÍI•˜¹ÕÉÉ•¹Ð€ômtì4(€€€€€ô¤ì4(€€€€€É•ÅÕ•ÍÑ¹¥µ…Ñ¥½¹É…µ”  ¤€ôø…É¹™½ÕÌ¡ìÁÉ•Ù•¹ÑMÉ½±°èÑÉÕ”ô¤¤ì4(€€€ô•±Í”ì4(€€€€€ÑÉ…¹Í¥Ñ¥½¹¥¹I•˜¹ÕÉÉ•¹Ð€ôÑÉÕ”ì4(€€€€€Í•Ñ¥…±½MÉ½±±…‰±”¡™…±Í”¤ì4(€€€€€‘½Õµ•¹Ð¹‘½Õµ•¹Ñ±•µ•¹Ð¹ÍÑå±”¹½Ù•É™±½Ü€ô€ˆˆì4(€€€€€‘½Õµ•¹Ð¹‰½‘ä¹ÍÑå±”¹Á…‘‘¥¹%¹±¥¹•¹€ô€ˆˆì4(€€€€€½¹ÍÐÑ…É•Ð€ô•Ñ±½Í•‘A½Í¥Ñ¥½¸¡™½É•A••­I•˜¹ÕÉÉ•¹Ð¤ì4(€€€€€½¹ÍÐÁ••­M…±”€ô€À¸ÐÈì4(€€€€€½¹ÍÐÑ…É•ÑM…±”€ôÍ…À¹ÕÑ¥±Ì¹¥¹Ñ•ÉÁ½±…Ñ”¡Á••­M…±”°€Ä°Ñ…É•Ð¹ÁÉ½É•ÍÌ¤ì4(€€€€€½¹ÍÐÑ…É•ÑI•Ù•…°€ôÍµ½½Ñ¡ÍÑ•À¡±…µÀÀÄ ¡Ñ…É•Ð¹ÁÉ½É•ÍÌ€´€À¸Ôà¤€¼€À¸ÌØ¤¤ì4(€€€€€½¹ÍÐ±½­ÕÁQ…É•Ð€ô•Ñ1½­ÕÁQÉ…¹Í™½É´¡Ñ…É•Ð¹ÁÉ½É•ÍÌ¤ì4(€€€€€½¹ÍÐ‘ÕÉ…Ñ¥½¸€ôÉ•‘Õ•€ü€À€è€À¸Ðì4(€€€€€Á½Í¥Ñ¥½¹I•˜¹ÕÉÉ•¹Ð€ôÑ…É•Ðì4(€€€€€Í…À¹Í•Ð¡™½Éµ½¹Ñ•¹Ð°ìÉ½Ñ…Ñ¥½¸è€À°…ÕÑ½±Á¡„è€Àô¤ì4(€€€€€½¹ÍÐ…É‘¹¥µ…Ñ¥½¸€ôµ½Ñ¥½¹¹¥µ…Ñ”¡…É°ì4(€€€€€€€àèÑ…É•Ð¹à°4(€€€€€€€äèÑ…É•Ð¹ä°4(€€€€€€€É½Ñ…Ñ”èÍ…À¹ÕÑ¥±Ì¹¥¹Ñ•ÉÁ½±…Ñ” ´ÐÔ°€À°Ñ…É•Ð¹ÁÉ½É•ÍÌ¤°4(€€€€€€€Í…±•`èÑ…É•ÑM…±”°4(€€€€€€€Í…±•dèÑ…É•ÑM…±”°4(€€€€€€€Í­•Ýdè€À°4(€€€€€ô°ì4(€€€€€€€‘ÕÉ…Ñ¥½¸°4(€€€€€€€•…Í”èlÀ¸Ð°€À°€À¸È°€Åt°4(€€€€€ô¤ì4(€€€€€½¹ÍÐ±½­ÕÁ¹¥µ…Ñ¥½¸€ôµ½Ñ¥½¹¹¥µ…Ñ”¡±½­ÕÀ°ì4(€€€€€€€àè±½­ÕÁQ…É•Ð¹à°4(€€€€€€€äè±½­ÕÁQ…É•Ð¹ä°4(€€€€€€€É½Ñ…Ñ”è±½­ÕÁQ…É•Ð¹É½Ñ…Ñ¥½¸°4(€€€€€ô°ì4(€€€€€€€‘ÕÉ…Ñ¥½¸°4(€€€€€€€•…Í”èlÀ¸Ð°€À°€À¸È°€Åt°4(€€€€€ô¤ì4(€€€€€½¹ÍÐ±…‰•±¹¥µ…Ñ¥½¸€ôµ½Ñ¥½¹¹¥µ…Ñ”¡½Á•¹1…‰•°°ì4(€€€€€€€½Á…¥ÑäèÑ…É•Ð¹ÁÉ½É•ÍÌ€ð€À¸äàÔ€ü€Ä€è€À°4(€€€€€ô°ì4(€€€€€€€‘ÕÉ…Ñ¥½¸èÉ•‘Õ•€ü€À€è€À¸Äà°4(€€€€€€€‘•±…äèÉ•‘Õ•€ü€À€è€À¸Àà°4(€€€€€€€•…Í”è€‰•…Í•=ÕÐˆ°4(€€€€€ô¤ì4(€€€€€…Ñ¥Ù•¹¥µ…Ñ¥½¹ÍI•˜¹ÕÉÉ•¹Ð€ôm…É‘¹¥µ…Ñ¥½¸°±½­ÕÁ¹¥µ…Ñ¥½¸°±…‰•±¹¥µ…Ñ¥½¹tì4(€€€€€Ù½¥…É‘¹¥µ…Ñ¥½¸¹Ñ¡•¸  ¤€ôøì4(€€€€€€€¥˜€¡ÑÉ…¹Í¥Ñ¥½¹%‘I•˜¹ÕÉÉ•¹Ð€„ôôÑÉ…¹Í¥Ñ¥½¹%ñð½Á•¹I•˜¹ÕÉÉ•¹Ð¤É•ÑÕÉ¸ì4(€€€€€€€ÑÉ…¹Í¥Ñ¥½¹¥¹I•˜¹ÕÉÉ•¹Ð€ô™…±Í”ì4(€€€€€€€Í•Ñ5½Ù¥¹MÑ…Ñ”¡Ñ…É•Ð¹ÁÉ½É•ÍÌ€ø€À¸ÀÄÔ€˜˜Ñ…É•Ð¹ÁÉ½É•ÍÌ€ð€À¸äàÔ¤ì4(€€€€€€€Í•ÑA••­¥¹œ¡Ñ…É•Ð¹ÁÉ½É•ÍÌ€ð€À¸äàÔ¤ì4(€€€€€€€¥˜€¡Ñ…É•ÑI•Ù•…°€ø€À¤ì4(€€€€€€€€€Í…À¹Í•Ð¡™½Éµ½¹Ñ•¹Ð°ì…ÕÑ½±Á¡„èÑ…É•ÑI•Ù•…°ô¤ì4(€€€€€€€€€…Ñ¥Ù•¹¥µ…Ñ¥½¹ÍI•˜¹ÕÉÉ•¹Ð€ômtì4(€€€€€€€ô•±Í”ì4(€€€€€€€€€…Ñ¥Ù•¹¥µ…Ñ¥½¹ÍI•˜¹ÕÉÉ•¹Ð€ômtì4(€€€€€€€ô4(€€€€€€€É•¹‘•ÉI•˜¹ÕÉÉ•¹Ð ¤ì4(€€€€€ô¤ì4(€€€ô4(4(€€€É•ÑÕÉ¸€ ¤€ôøì4(€€€€€ÍÑ½ÁÑ¥Ù•¹¥µ…Ñ¥½¹Ì ¤ì4(€€€€€‘½Õµ•¹Ð¹‘½Õµ•¹Ñ±•µ•¹Ð¹ÍÑå±”¹½Ù•É™±½Ü€ô€ˆˆì4(€€€€€‘½Õµ•¹Ð¹‰½‘ä¹ÍÑå±”¹Á…‘‘¥¹%¹±¥¹•¹€ô€ˆˆì4(€€€ôì4(€ô°m•Ñ±½Í•‘A½Í¥Ñ¥½¸°•Ñ1½­ÕÁQÉ…¹Í™½É´°µ½Õ¹Ñ•°½Á•¸°Í•Ñ5½Ù¥¹MÑ…Ñ”°Í•ÑA••­¥¹œ°ÍÑ½ÁÑ¥Ù•¹¥µ…Ñ¥½¹Ít¤ì4(4(€ÕÍ•™™•Ð  ¤€ôøì4(€€€¥˜€ …½Á•¸¤É•ÑÕÉ¸ì4(€€€½¹ÍÐ½¹-•å½Ý¸€ô€¡•Ù•¹Ðè-•å‰½…É‘Ù•¹Ð¤€ôøì4(€€€€€¥˜€¡•Ù•¹Ð¹­•ä€ôôô€‰Í…Á”ˆ¤±½Í•]…¥Ñ±¥ÍÐ ¤ì4(€€€ôì4(€€€½¹ÍÐ½¹MÉ½±±%¹Ñ•¹Ð€ô€ ¤€ôøÉ•ÑÕÉ¹]…¥Ñ±¥ÍÑQ½M¥‘” ¤ì4(€€€Ý¥¹‘½Ü¹…‘‘Ù•¹Ñ1¥ÍÑ•¹•È ‰­•å‘½Ý¸ˆ°½¹-•å½Ý¸¤ì4(€€€Ý¥¹‘½Ü¹…‘‘Ù•¹Ñ1¥ÍÑ•¹•È ‰Ý¡••°ˆ°½¹MÉ½±±%¹Ñ•¹Ð°ìÁ…ÍÍ¥Ù”èÑÉÕ”ô¤ì4(€€€Ý¥¹‘½Ü¹…‘‘Ù•¹Ñ1¥ÍÑ•¹•È ‰Ñ½Õ¡µ½Ù”ˆ°½¹MÉ½±±%¹Ñ•¹Ð°ìÁ…ÍÍ¥Ù”èÑÉÕ”ô¤ì4(€€€É•ÑÕÉ¸€ ¤€ôøì4(€€€€€Ý¥¹‘½Ü¹É•µ½Ù•Ù•¹Ñ1¥ÍÑ•¹•È ‰­•å‘½Ý¸ˆ°½¹-•å½Ý¸¤ì4(€€€€€Ý¥¹‘½Ü¹É•µ½Ù•Ù•¹Ñ1¥ÍÑ•¹•È ‰Ý¡••°ˆ°½¹MÉ½±±%¹Ñ•¹Ð¤ì4(€€€€€Ý¥¹‘½Ü¹É•µ½Ù•Ù•¹Ñ1¥ÍÑ•¹•È ‰Ñ½Õ¡µ½Ù”ˆ°½¹MÉ½±±%¹Ñ•¹Ð¤ì4(€€€ôì4(€ô°m±½Í•]…¥Ñ±¥ÍÐ°½Á•¸°É•ÑÕÉ¹]…¥Ñ±¥ÍÑQ½M¥‘•t¤ì4(4(€É•ÑÕÉ¸€ 4(€€€€ðø4(€€€€€€ñ‘¥Ø4(€€€€€€€É•˜õíÍ±½ÑI•™ô4(€€€€€€€…É¥„µ¡¥‘‘•¸ô‰ÑÉÕ”ˆ4(€€€€€€€±…ÍÍ9…µ”ô‰µàµ…ÕÑ¼Üµ™Õ±°ˆ4(€€€€€€€ÍÑå±”õíì¡•¥¡ÐèÍ±½Ñ!•¥¡Ðõô4(€€€€€€¼ø4(4(€€€€€íµ½Õ¹Ñ•€˜˜É•…Ñ•A½ÉÑ…° ðø4(€€€€€€ñ‰ÕÑÑ½¸4(€€€€€€€ÑåÁ”ô‰‰ÕÑÑ½¸ˆ4(€€€€€€€±…ÍÍ9…µ”õí™¥á•¥¹Í•Ð´ÀèµlÄÄÁtÑ½Õ µ¹½¹”‰œµ‰±…¬¼ÜÀÑÉ…¹Í¥Ñ¥½¸µ½Á…¥Ñä‘ÕÉ…Ñ¥½¸´ÈÀÀ€‘í½Á•¸€ü€‰Á½¥¹Ñ•Èµ•Ù•¹ÑÌµ…ÕÑ¼½Á…¥Ñä´ÄÀÀˆ€è€‰Á½¥¹Ñ•Èµ•Ù•¹ÑÌµ¹½¹”½Á…¥Ñä´À‰õô4(€€€€€€€…É¥„µ±…‰•°ô‰±½Í”Ý…¥Ñ±¥ÍÐˆ4(€€€€€€€Ñ…‰%¹‘•àõí½Á•¸€ü€À€è€´Åô4(€€€€€€€½¹A½¥¹Ñ•É½Ý¸õí±½Í•]…¥Ñ±¥ÍÑô4(€€€€€€€½¹±¥¬õí±½Í•]…¥Ñ±¥ÍÑô4(€€€€€€¼ø4(4(€€€€€€ñ‘¥Ø4(€€€€€€€É•˜õí…É‘I•™ô4(€€€€€€€É½±”õí½Á•¸€ü€‰‘¥…±½œˆ€èÕ¹‘•™¥¹•‘ô4(€€€€€€€…É¥„µµ½‘…°õí½Á•¸€ü€‰ÑÉÕ”ˆ€èÕ¹‘•™¥¹•‘ô4(€€€€€€€…É¥„µ±…‰•±±•‘‰äô‰Ý…¥Ñ±¥ÍÐµÑ¥Ñ±”ˆ4(€€€€€€€Ñ…‰%¹‘•àõí½Á•¸€ü€´Ä€èÕ¹‘•™¥¹•‘ô4(€€€€€€€±…ÍÍ9…µ”õíÝ…¥Ñ±¥ÍÐµ™±½…Ð™¥á•±•™Ð´ÀÑ½À´ÀèµlÄÈÁtÉ½Õ¹‘•µlÈáÁát‰œµÁ…Á•È½ÕÑ±¥¹”µ¹½¹”Ý¥±°µ¡…¹”µÑÉ…¹Í™½É´m‰…­™…”µÙ¥Í¥‰¥±¥Ñäé¡¥‘‘•¹tµéÉ½Õ¹‘•µlÔåÁát€‘íµ½Ù¥¹œ€ü€‰Í¡…‘½Üµ¹½¹”ˆ€è€‰Í¡…‘½ÜµlÁ|ÈáÁá|äÁÁá}É‰„ À°À°À°¸Ðà¥t‰ô€‘í½Á•¸€üµ…àµ µm…±Œ ÄÀÁ‘Ù ´ÌÉÁà¥t€‘í‘¥…±½MÉ½±±…‰±”€ü€‰½Ù•É™±½Üµäµ…ÕÑ¼½Ù•ÉÍÉ½±°µ½¹Ñ…¥¸ˆ€è€‰½Ù•É™±½Üµ¡¥‘‘•¸‰õ€€è€‰½Ù•É™±½ÜµÙ¥Í¥‰±”‰ô€‘íÉ•…‘ä€ü€‰Ù¥Í¥‰±”ˆ€è€‰¥¹Ù¥Í¥‰±”‰õô4(€€€€€€ø4(€€€€€€€€ñ‘¥Ø±…ÍÍ9…µ”ô‰Á½¥¹Ñ•Èµ•Ù•¹ÑÌµ¹½¹”…‰Í½±ÕÑ”¥¹Í•Ð´Àè´À½Ù•É™±½Üµ¡¥‘‘•¸É½Õ¹‘•µm¥¹¡•É¥Ñtm½¹Ñ…¥¸éÁ…¥¹Ñtˆ…É¥„µ¡¥‘‘•¸ô‰ÑÉÕ”ˆø(€€€€€€€€€ì…µ½Ù¥¹œ€˜˜€ñ‘¥Ø±…ÍÍ9…µ”ô‰Ý…¥Ñ±¥ÍÐµÁ…Á•ÈµÑ•áÑÕÉ” µ™Õ±°Üµ™Õ±°½Á…¥Ñä´ÐÔµ¥àµ‰±•¹µµÕ±Ñ¥Á±äˆ€¼ùô(€€€€€€€€ð½‘¥Øø(4(€€€€€€€€ñ‰ÕÑÑ½¸4(€€€€€€€€€É•˜õíÁ••­	ÕÑÑ½¹I•™ô4(€€€€€€€€€ÑåÁ”ô‰‰ÕÑÑ½¸ˆ4(€€€€€€€€€…É¥„µ±…‰•°ô‰=Á•¸Ñ¡”Ý…¥Ñ±¥ÍÐˆ4(€€€€€€€€€±…ÍÍ9…µ”ô‰…‰Í½±ÕÑ”±•™Ð´ÀÑ½À´Àè´ÌÀ µmµ¥¸ ÌÐ”°ÄäÁÁà¥tÜµlÈà•tÕÉÍ½ÈµÁ½¥¹Ñ•ÈÉ½Õ¹‘•µÑ°µm¥¹¡•É¥Ñt™½ÕÌµÙ¥Í¥‰±”é½ÕÑ±¥¹”´È™½ÕÌµÙ¥Í¥‰±”é½ÕÑ±¥¹”µ…•¹Ð™½ÕÌµÙ¥Í¥‰±”é½ÕÑ±¥¹”µ½™™Í•Ð´Ðˆ4(€€€€€€€€€½¹±¥¬õí½Á•¹]…¥Ñ±¥ÍÑô4(€€€€€€€€¼ø4(4(€€€€€€€€ñ‘¥Ø4(€€€€€€€€€…É¥„µ¡¥‘‘•¸ô‰ÑÉÕ”ˆ4(€€€€€€€€€±…ÍÍ9…µ”õíÁ½¥¹Ñ•Èµ•Ù•¹ÑÌµ¹½¹”…‰Í½±ÕÑ”±•™Ð´ÀÑ½À´Àè´ÄÀ µmµ¥¸ ÌÐ”°ÄäÁÁà¥tÜµlÈà•tÉ½Õ¹‘•µÑ°µm¥¹¡•É¥Ñt‰œµÁ…Á•È¼ØÔÑÉ…¹Í¥Ñ¥½¸µ½Á…¥Ñä‘ÕÉ…Ñ¥½¸´ÌÀÀ€‘íÁ••­¥¹œ€˜˜€…½Á•¸€ü€‰½Á…¥Ñä´ÄÀÀˆ€è€‰½Á…¥Ñä´À‰õô4(€€€€€€€€¼ø4(4(€€€€€€€€ñ‘¥Ø4(€€€€€€€€€É•˜õí±½­ÕÁI•™ô4(€€€€€€€€€…É¥„µ¡¥‘‘•¸ô‰ÑÉÕ”ˆ4(€€€€€€€€€±…ÍÍ9…µ”ô‰Á½¥¹Ñ•Èµ•Ù•¹ÑÌµ¹½¹”…‰Í½±ÕÑ”±•™Ð´ÀÑ½À´Àè´ÈÀÝ¥±°µ¡…¹”µÑÉ…¹Í™½É´m‰…­™…”µÙ¥Í¥‰¥±¥Ñäé¡¥‘‘•¹tˆ4(€€€€€€€€ø4(€€€€€€€€€€ñ‘¥Ø±…ÍÍ9…µ”ô‰™±•à™±•àµ½°¥Ñ•µÌµ•¹Ñ•È…À´Ðˆø4(€€€€€€€€€€€€ñ¥µœÍÉŒõíÁ±…¹•¥ÍÁ±…åUÉ±ô…±Ðôˆˆ±…ÍÍ9…µ”ô‰ µ…ÕÑ¼ÜµlÄÔÁÁát½Á…¥Ñä´ÜÀµ¥¸µlØÀÁÁátéÜµlÄØÑÁátµéÜµlÄàÉÁátˆ€¼ø4(€€€€€€€€€€€€ñ¥µœÍÉŒõíÝ…¥Ñ±¥ÍÑ¥ÍÁ±…åUÉ±ô…±Ðôˆˆ±…ÍÍ9…µ”ô‰ µ…ÕÑ¼ÜµlÄÔÁÁát½Á…¥Ñä´àÀµ¥¸µlØÀÁÁátéÜµlÄØÑÁátµéÜµlÄàÉÁátˆ€¼ø4(€€€€€€€€€€ð½‘¥Øø4(€€€€€€€€€€ñÍÁ…¸É•˜õí½Á•¹1…‰•±I•™ô±…ÍÍ9…µ”ô‰µÐ´Ä‰±½¬Ñ•áÐµ•¹Ñ•È™½¹Ðµµ½¹¼Ñ•áÐµlÈÁÁátÕÁÁ•É…Í”ÑÉ…­¥¹œµlÀ¸ÄÑ•µtÑ•áÐµlŒÑ„Ñ„Ñ…tÍ´éÑ•áÐµlÈÉÁátˆù=Á•¸ð½ÍÁ…¸ø(€€€€€€€€ð½‘¥Øø4(4(€€€€€€€€ñ‘¥ØÉ•˜õí™½Éµ½¹Ñ•¹ÑI•™ô±…ÍÍ9…µ”ô‰É•±…Ñ¥Ù”èµlÅtÁàµlÈÉÁátÁäµlÐÑÁátÑ•áÐµ•¹Ñ•ÈÝ¥±°µ¡…¹”µm½Á…¥ÑåtµéÁàµlÐáÁátµéÁäµlÔÉÁátˆø4(€€€€€€€€€€ñ‘¥Ø…É¥„µ¡¥‘‘•¸ô‰ÑÉÕ”ˆ±…ÍÍ9…µ”ô‰ µlÈÈÁÁátˆ€¼ø4(4(€€€€€€€€€íÉ•Í•ÉÙ…Ñ¥½¸€ü€ 4(€€€€€€€€€€€€ñI•Í•ÉÙ…Ñ¥½¹A…¹•°É•Í•ÉÙ…Ñ¥½¸õíÉ•Í•ÉÙ…Ñ¥½¹ôÉ•‘Õ•5½Ñ¥½¸õí	½½±•…¸¡É•‘Õ•5½Ñ¥½¸¥ô€¼ø4(€€€€€€€€€€¤€è€ 4(€€€€€€€€€€ñ‘¥Ø±…ÍÍ9…µ”ô‰µàµ…ÕÑ¼µ…àµÜµlÔØÁÁátˆø4(€€€€€€€€€€€€ñ È¥ô‰Ý…¥Ñ±¥ÍÐµÑ¥Ñ±”ˆ±…ÍÍ9…µ”ô‰Í¥Ñ”µ¡•…‘¥¹œ´´ÀÑ•áÐµ¥¹¬´àÀÀˆø4(€€€€€€€€€€€€€•Ð¥¸•…É±ä¸Q…­”„½½ÕÍ•É¹…µ”¸4(€€€€€€€€€€€€ð½ Èø4(€€€€€€€€€€€€ñÀ±…ÍÍ9…µ”ô‰µàµ…ÕÑ¼µˆµlÌÑÁátµÐµlÄÙÁátµ…àµÜµlÔÈÁÁátÑ•áÐµÁÉ•ÑÑäÑ•áÐµlÄÝÁát±•…‘¥¹œµlÄ¸ÙtÑ•áÐµlŒÍÑÕtˆø4(€€€€€€€€€€€€€…É±ä…•ÍÌ½•Ì½ÕÐ¥¸Ý…Ù•Ì¸Q•±°µ”Ý¡…Ðå½×Še…¹¥µ…Ñ”…¹å½×Še±°‰”¥¸…¸•…É±¥•È½¹”¸4(€€€€€€€€€€€€ð½Àø4(4(€€€€€€€€€€€€ñ™½É´µ•Ñ¡½ô‰A=MPˆ…Ñ¥½¸ôˆ½…Á¤½Ý…¥Ñ±¥ÍÐˆ½¹MÕ‰µ¥ÐõíÍÕ‰µ¥Ñ]…¥Ñ±¥ÍÑô¹½Y…±¥‘…Ñ”±…ÍÍ9…µ”ô‰™±•à™±•àµ½°…ÀµlÈÉÁátÑ•áÐµ±•™Ðˆø4(€€€€€€€€€€€€€€ñ‘¥Ø±…ÍÍ9…µ”ô‰É•±…Ñ¥Ù”™±•à™±•àµ½°…À´Èˆø4(€€€€€€€€€€€€€€€€ñ±…‰•°¡Ñµ±½Èô‰±…¼µÕÍ•É¹…µ”ˆ±…ÍÍ9…µ”ô‰ÍÈµ½¹±äˆùUÍ•É¹…µ”ð½±…‰•°ø4(€€€€€€€€€€€€€€€€ñ½½•å%¹ÁÕÐ4(€€€€€€€€€€€€€€€€€¥ô‰±…¼µÕÍ•É¹…µ”ˆ4(€€€€€€€€€€€€€€€€€¹…µ”ô‰ÕÍ•É¹…µ”ˆ4(€€€€€€€€€€€€€€€€€É•ÅÕ¥É•4(€€€€€€€€€€€€€€€€€…ÕÑ½½µÁ±•Ñ”ô‰½™˜ˆ4(€€€€€€€€€€€€€€€€€Á±…•¡½±‘•Èô‰UÍ•É¹…µ”ˆ4(€€€€€€€€€€€€€€€€€Í¡½ÝA±…•¡½±‘•É]¡•¹½±±…ÁÍ•4(€€€€€€€€€€€€€€€€€±…ÍÍ9…µ”ô‰Üµ™Õ±°©ÕÍÑ¥™äµÍÑ…ÉÐˆ4(€€€€€€€€€€€€€€€€€±…ÍÍ9…µ•Ìõíì¥¹ÁÕÐè€‰ÁÈ´ÌÈÑ•áÐµlÄÙÁátÍ´éÑ•áÐµÍ´ˆõô4(€€€€€€€€€€€€€€€€€½±±…ÁÍ•‘]¥‘Ñ ôˆÄÀÀ”ˆ4(€€€€€€€€€€€€€€€€€•áÁ…¹‘•‘]¥‘Ñ ô‰…±Œ ÄÀÀ”€´€ØÑÁà¤ˆ4(€€€€€€€€€€€€€€€€€¥½¹9…µ”ô‰ÕÍ•É¹…µ”ˆ4(€€€€€€€€€€€€€€€€€‘¥Í…‰±•½½•ä4(€€€€€€€€€€€€€€€€€Ù…±Õ”õíÕÍ•É¹…µ•ô4(€€€€€€€€€€€€€€€€€½¹Y…±Õ•¡…¹”õì¡Ù…±Õ”¤€ôøì4(€€€€€€€€€€€€€€€€€€€Í•ÑUÍ•É¹…µ”¡Ù…±Õ”¤ì4(€€€€€€€€€€€€€€€€€€€Í•ÑUÍ•É¹…µ•MÑ…ÑÕÌ ‰¥‘±”ˆ¤ì4(€€€€€€€€€€€€€€€€€€€Í•ÑUÍ•É¹…µ•5•ÍÍ…” ˆˆ¤ì4(€€€€€€€€€€€€€€€€€€€Í•Ñ¡•­•‘UÍ•É¹…µ” ˆˆ¤ì4(€€€€€€€€€€€€€€€€€õô4(€€€€€€€€€€€€€€€€€½¹	±ÕÈõì ¤€ôøÙ½¥¡•­UÍ•É¹…µ” ¥ô4(€€€€€€€€€€€€€€€€€…É¥„µ‘•ÍÉ¥‰•‘‰äõíÕÍ•É¹…µ•5•ÍÍ…”€ü€‰±…¼µÕÍ•É¹…µ”µÍÑ…ÑÕÌˆ€èÕ¹‘•™¥¹•‘ô4(€€€€€€€€€€€€€€€€€…É¥„µ¥¹Ù…±¥õíÕÍ•É¹…µ•MÑ…ÑÕÌ€ôôô€‰Ñ…­•¸ˆñðÕÍ•É¹…µ•MÑ…ÑÕÌ€ôôô€‰¥¹Ù…±¥‰ô4(€€€€€€€€€€€€€€€€€‘¥Í…‰±•õíÍÕ‰µ¥ÑÑ¥¹ô4(€€€€€€€€€€€€€€€€¼ø4(€€€€€€€€€€€€€€€íÕÍ•É¹…µ•5•ÍÍ…”€˜˜€ 4(€€€€€€€€€€€€€€€€€€ñÍÁ…¸4(€€€€€€€€€€€€€€€€€€€¥ô‰±…¼µÕÍ•É¹…µ”µÍÑ…ÑÕÌˆ4(€€€€€€€€€€€€€€€€€€€É½±”ô‰ÍÑ…ÑÕÌˆ4(€€€€€€€€€€€€€€€€€€€…É¥„µ±¥Ù”ô‰Á½±¥Ñ”ˆ4(€€€€€€€€€€€€€€€€€€€Ñ¥Ñ±”õíÕÍ•É¹…µ•5•ÍÍ…•ô4(€€€€€€€€€€€€€€€€€€€±…ÍÍ9…µ”õíÁ½¥¹Ñ•Èµ•Ù•¹ÑÌµ¹½¹”…‰Í½±ÕÑ”É¥¡Ð´ÔÑ½ÀµlÄÝÁátè´ÄÀµ…àµÜµlÐÈ•tÑÉÕ¹…Ñ”É½Õ¹‘•µ™Õ±°Áà´ÈÁä´À¸ÔÑ•áÐµlÄÁÁát™½¹Ðµµ½¹¼ÕÁÁ•É…Í”ÑÉ…­¥¹œµl¸ÀÑ•µt€‘íÕÍ•É¹…µ•MÑ…ÑÕÌ€ôôô€‰…Ù…¥±…‰±”ˆ€ü€‰‰œµl‘•‰‘tÑ•áÐµlŒÐÈÙˆÐÕtˆ€èÕÍ•É¹…µ•MÑ…ÑÕÌ€ôôô€‰¡•­¥¹œˆ€ü€‰‰œµl”Í”Ý•tÑ•áÐµlŒÔàØÐÜÍtˆ€è€‰‰œµl˜Í‘ÝtÑ•áÐµlŒäàÍˆÌÉt‰õô4(€€€€€€€€€€€€€€€€€€ø4(€€€€€€€€€€€€€€€€€€€íÕÍ•É¹…µ•MÑ…ÑÕÍ1…‰•°¡ÕÍ•É¹…µ•MÑ…ÑÕÌ°ÕÍ•É¹…µ•5•ÍÍ…”¥ô4(€€€€€€€€€€€€€€€€€€ð½ÍÁ…¸ø4(€€€€€€€€€€€€€€€€¥ô4(€€€€€€€€€€€€€€ð½‘¥Øø4(4(€€€€€€€€€€€€€€ñ‘¥Ø±…ÍÍ9…µ”ô‰™±•à™±•àµ½°…À´Èˆø4(€€€€€€€€€€€€€€€€ñ±…‰•°¡Ñµ±½Èô‰±…¼µ•µ…¥°ˆ±…ÍÍ9…µ”ô‰ÍÈµ½¹±äˆùµ…¥°ð½±…‰•°ø4(€€€€€€€€€€€€€€€€ñ½½•å%¹ÁÕÐ4(€€€€€€€€€€€€€€€€€¥ô‰±…¼µ•µ…¥°ˆ4(€€€€€€€€€€€€€€€€€¹…µ”ô‰•µ…¥°ˆ4(€€€€€€€€€€€€€€€€€ÑåÁ”ô‰•µ…¥°ˆ4(€€€€€€€€€€€€€€€€€É•ÅÕ¥É•4(€€€€€€€€€€€€€€€€€…ÕÑ½½µÁ±•Ñ”ô‰•µ…¥°ˆ4(€€€€€€€€€€€€€€€€€Á±…•¡½±‘•Èô‰µ…¥°ˆ4(€€€€€€€€€€€€€€€€€Í¡½ÝA±…•¡½±‘•É]¡•¹½±±…ÁÍ•4(€€€€€€€€€€€€€€€€€±…ÍÍ9…µ”ô‰Üµ™Õ±°©ÕÍÑ¥™äµÍÑ…ÉÐˆ4(€€€€€€€€€€€€€€€€€±…ÍÍ9…µ•Ìõíì¥¹ÁÕÐè€‰Ñ•áÐµlÄÙÁátÍ´éÑ•áÐµÍ´ˆõô4(€€€€€€€€€€€€€€€€€½±±…ÁÍ•‘]¥‘Ñ ôˆÄÀÀ”ˆ4(€€€€€€€€€€€€€€€€€•áÁ…¹‘•‘]¥‘Ñ ô‰…±Œ ÄÀÀ”€´€ØÑÁà¤ˆ4(€€€€€€€€€€€€€€€€€¥½¹9…µ”ô‰•µ…¥°ˆ4(€€€€€€€€€€€€€€€€€‘¥Í…‰±•½½•ä4(€€€€€€€€€€€€€€€€€Ù…±Õ”õí•µ…¥±ô4(€€€€€€€€€€€€€€€€€½¹Y…±Õ•¡…¹”õì¡Ù…±Õ”¤€ôøì4(€€€€€€€€€€€€€€€€€€€Í•Ñµ…¥°¡Ù…±Õ”¤ì4(€€€€€€€€€€€€€€€€€€€Í•Ñ½Éµ5•ÍÍ…” ˆˆ¤ì4(€€€€€€€€€€€€€€€€€õô4(€€€€€€€€€€€€€€€€€‘¥Í…‰±•õíÍÕ‰µ¥ÑÑ¥¹ô4(€€€€€€€€€€€€€€€€¼ø4(€€€€€€€€€€€€€€ð½‘¥Øø4(4(€€€€€€€€€€€€€€ñ‘¥Ø±…ÍÍ9…µ”ô‰™±•à™±•àµ½°…À´Èˆø4(€€€€€€€€€€€€€€€€ñ±…‰•°¡Ñµ±½Èô‰±…¼µ™¥ÉÍÐˆ±…ÍÍ9…µ”ô‰ÍÈµ½¹±äˆù]¡…ÐÝ½Õ±å½Ô…¹¥µ…Ñ”™¥ÉÍÐüð½±…‰•°ø4(€€€€€€€€€€€€€€€€ñ½½•å%¹ÁÕÐ4(€€€€€€€€€€€€€€€€€¥ô‰±…¼µ™¥ÉÍÐˆ4(€€€€€€€€€€€€€€€€€¹…µ”ô‰™¥ÉÍÑ}…¹¥µ…Ñ¥½¸ˆ4(€€€€€€€€€€€€€€€€€Á±…•¡½±‘•Èô‰]¡…ÐÝ½Õ±å½Ô…¹¥µ…Ñ”™¥ÉÍÐüˆ4(€€€€€€€€€€€€€€€€€Í¡½ÝA±…•¡½±‘•É]¡•¹½±±…ÁÍ•4(€€€€€€€€€€€€€€€€€±…ÍÍ9…µ”ô‰Üµ™Õ±°©ÕÍÑ¥™äµÍÑ…ÉÐˆ4(€€€€€€€€€€€€€€€€€±…ÍÍ9…µ•Ìõíì¥¹ÁÕÐè€‰Ñ•áÐµlÄÙÁátÍ´éÑ•áÐµÍ´ˆõô4(€€€€€€€€€€€€€€€€€½±±…ÁÍ•‘]¥‘Ñ ôˆÄÀÀ”ˆ4(€€€€€€€€€€€€€€€€€•áÁ…¹‘•‘]¥‘Ñ ô‰…±Œ ÄÀÀ”€´€ØÑÁà¤ˆ4(€€€€€€€€€€€€€€€€€¥½¹9…µ”ô‰…¹¥µ…Ñ¥½¸ˆ4(€€€€€€€€€€€€€€€€€‘¥Í…‰±•½½•ä4(€€€€€€€€€€€€€€€€€Ù…±Õ”õí‘•ÍÉ¥ÁÑ¥½¹ô4(€€€€€€€€€€€€€€€€€½¹Y…±Õ•¡…¹”õíÍ•Ñ•ÍÉ¥ÁÑ¥½¹ô4(€€€€€€€€€€€€€€€€€µ…á1•¹Ñ õìÈàÁô4(€€€€€€€€€€€€€€€€€‘¥Í…‰±•õíÍÕ‰µ¥ÑÑ¥¹ô4(€€€€€€€€€€€€€€€€¼ø4(€€€€€€€€€€€€€€ð½‘¥Øø4(4(€€€€€€€€€€€€€€ñ¥¹ÁÕÐÑåÁ”ô‰Ñ•áÐˆ¹…µ”ô‰½µÁ…¹äˆÑ…‰%¹‘•àõì´Åô…ÕÑ½½µÁ±•Ñ”ô‰½™˜ˆ…É¥„µ¡¥‘‘•¸ô‰ÑÉÕ”ˆ±…ÍÍ9…µ”ô‰…‰Í½±ÕÑ”±•™Ðµl´äääåÁát µÁàÜµÁà½Á…¥Ñä´Àˆ€¼ø4(4(€€€€€€€€€€€€€€ñÉ…‘¥•¹Ñ!½Ù•É	ÕÑÑ½¸4(€€€€€€€€€€€€€€€ÑåÁ”ô‰ÍÕ‰µ¥Ðˆ4(€€€€€€€€€€€€€€€‘¥Í…‰±•õíÍÕ‰µ¥ÑÑ¥¹œñðÕÍ•É¹…µ•MÑ…ÑÕÌ€ôôô€‰¡•­¥¹œ‰ô4(€€€€€€€€€€€€€€€‰…­É½Õ¹ô‰±¥¹•…ÈµÉ…‘¥•¹Ð¡¥¸½­±…ˆ€ÄàÁ‘•œ°½­±…ˆ À”€À€À¤€À”°½­±…ˆ Ðà¸Ô”€´À¸ÀÄà€´À¸ÀàÈ¤€ÄÀÀ”¤ˆ4(€€€€€€€€€€€€€€€¡½Ù•É	…­É½Õ¹ô‰±¥¹•…ÈµÉ…‘¥•¹Ð¡¥¸½­±…ˆ€ÄàÁ‘•œ°½­±…ˆ ÄÀ”€À€´À¸ÀÄ¤€À”°½­±…ˆ Ôà”€´À¸ÀÌ€´À¸ÄÌ¤€ÄÀÀ”¤ˆ4(€€€€€€€€€€€€€€€‰½É‘•É½±½ÈôˆŒÈäÉÉˆ4(€€€€€€€€€€€€€€€¡½Ù•É	½É‘•É½±½ÈôˆŒÌØÌØÌØˆ4(€€€€€€€€€€€€€€€±…ÍÍ9…µ”ô‰µÐµlÙÁát™±•àÜµ™Õ±°¥Ñ•µÌµ•¹Ñ•È©ÕÍÑ¥™äµ•¹Ñ•È…À´ÌÉ½Õ¹‘•µ™Õ±°À´Ð™½¹Ðµµ½¹¼Ñ•áÐµlÄÍÁátÕÁÁ•É…Í”ÑÉ…­¥¹œµlÀ¸Àá•µtÑ•áÐµÑ•áÐµ¡¤Í¡…‘½ÜµlÁ|ÑÁá|ÄÑÁá|Á}É‰„ À°À°À°À¸Ìä¥tˆ4(€€€€€€€€€€€€€€ø4(€€€€€€€€€€€€€€€€ñ¥µœÍÉŒõíÁ±…¹•Ñ…UÉ±ô…±Ðôˆˆ…É¥„µ¡¥‘‘•¸ô‰ÑÉÕ”ˆ±…ÍÍ9…µ”ô‰ ´ÔÜµ…ÕÑ¼½‰©•Ðµ½¹Ñ…¥¸ˆ€¼ø4(€€€€€€€€€€€€€€€€ñÍÁ…¸ùíÍÕ‰µ¥ÑÑ¥¹œ€ü€‰!½±‘¥¹œå½ÕÈÕÍ•É¹…µ—Š˜ˆ€è€‰±…¥´µäÍÁ½Ð‰ôð½ÍÁ…¸ø4(€€€€€€€€€€€€€€ð½É…‘¥•¹Ñ!½Ù•É	ÕÑÑ½¸ø4(4(€€€€€€€€€€€€€í™½Éµ5•ÍÍ…”€˜˜€ñÀÉ½±”ô‰…±•ÉÐˆ±…ÍÍ9…µ”ô‰´´ÀÑ•áÐµ•¹Ñ•ÈÑ•áÐµlÄÑÁát±•…‘¥¹œµlÄ¸ÕtÑ•áÐµl„ÌÍˆÌÉtˆùí™½Éµ5•ÍÍ…•ôð½Àùô4(4(€€€€€€€€€€€€€€ñÀ±…ÍÍ9…µ”ô‰´´ÀµÐµlÙÁátÑ•áÐµ•¹Ñ•ÈÑ•áÐµlÄÑÁát±•…‘¥¹œµlÄ¸ÙtÑ•áÐµlŒÔäØÈÜÁtˆø4(€€€€€€€€€€€€€€€9¼ÍÁ…´¸=¹”•µ…¥°Ý¡•¸¥ÓŠeÌÉ•…‘ä°…¹Ñ¡”½…Í¥½¹…°‰Õ¥±ÕÁ‘…Ñ”å½Ô…¸±•…Ù”…¹åÑ¥µ”¸4(€€€€€€€€€€€€€€ð½Àø4(€€€€€€€€€€€€ð½™½É´ø4(€€€€€€€€€€ð½‘¥Øø4(€€€€€€€€€€¥ô4(€€€€€€€€ð½‘¥Øø4(€€€€€€ð½‘¥Øø4(4(€€€€€í½Á•¸€˜˜€ 4(€€€€€€€€ñ‰ÕÑÑ½¸4(€€€€€€€€€É•˜õí±½Í•	ÕÑÑ½¹I•™ô4(€€€€€€€€€ÑåÁ”ô‰‰ÕÑÑ½¸ˆ4(€€€€€€€€€…É¥„µ±…‰•°ô‰±½Í”Ý…¥Ñ±¥ÍÐˆ4(€€€€€€€€€½¹A½¥¹Ñ•É½Ý¸õí±½Í•]…¥Ñ±¥ÍÑô4(€€€€€€€€€½¹±¥¬õí±½Í•]…¥Ñ±¥ÍÑô4(€€€€€€€€€±…ÍÍ9…µ”ô‰É½ÕÀ™¥á•É¥¡Ðµmµ…à ÄÉÁà±•¹Ø¡Í…™”µ…É•„µ¥¹Í•ÐµÉ¥¡Ð¤¥tÑ½Àµmµ…à ÄÉÁà±•¹Ø¡Í…™”µ…É•„µ¥¹Í•ÐµÑ½À¤¥tèµlÄÌÁtÉ¥Í¥é”´ÄÈÑ½Õ µµ…¹¥ÁÕ±…Ñ¥½¸Á±…”µ¥Ñ•µÌµ•¹Ñ•ÈÉ½Õ¹‘•µ™Õ±°‰œµl˜Ñ˜Å•‰tÑ•áÐµlŒÍŒÍŒÍtÍ¡…‘½Üµá°ÑÉ…¹Í¥Ñ¥½¸µ½±½ÉÌ‘ÕÉ…Ñ¥½¸´ÄÔÀ¡½Ù•Èé‰œµl‘•å™t™½ÕÌµÙ¥Í¥‰±”é‰œµl‘•å™t™½ÕÌµÙ¥Í¥‰±”é½ÕÑ±¥¹”´È™½ÕÌµÙ¥Í¥‰±”é½ÕÑ±¥¹”µ…•¹Ð™½ÕÌµÙ¥Í¥‰±”é½ÕÑ±¥¹”µ½™™Í•Ð´Ìˆ4(€€€€€€€€ø4(€€€€€€€€€€ñÍÁ…¸…É¥„µ¡¥‘‘•¸ô‰ÑÉÕ”ˆ±…ÍÍ9…µ”ô‰É•±…Ñ¥Ù”‰±½¬Í¥é”´Ô‰•™½É”é…‰Í½±ÕÑ”‰•™½É”é±•™Ð´Ä¼È‰•™½É”éÑ½À´Ä¼È‰•™½É”é µlÉÁát‰•™½É”éÜ´Ô‰•™½É”èµÑÉ…¹Í±…Ñ”µà´Ä¼È‰•™½É”èµÑÉ…¹Í±…Ñ”µä´Ä¼È‰•™½É”éÉ½Ñ…Ñ”´ÐÔ‰•™½É”é‰œµÕÉÉ•¹Ð…™Ñ•Èé…‰Í½±ÕÑ”…™Ñ•Èé±•™Ð´Ä¼È…™Ñ•ÈéÑ½À´Ä¼È…™Ñ•Èé µlÉÁát…™Ñ•ÈéÜ´Ô…™Ñ•ÈèµÑÉ…¹Í±…Ñ”µà´Ä¼È…™Ñ•ÈèµÑÉ…¹Í±…Ñ”µä´Ä¼È…™Ñ•ÈèµÉ½Ñ…Ñ”´ÐÔ…™Ñ•Èé‰œµÕÉÉ•¹Ðˆ€¼ø4(€€€€€€€€ð½‰ÕÑÑ½¸ø4(€€€€€€¥ô4(€€€€€€ð¼ø°‘½Õµ•¹Ð¹‰½‘ä¥ô4(€€€€ð¼ø4(€€¤ì4)ô4
+    const safeRight = Math.max(0, Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--waitlist-safe-right")) || 0);
+
+    card.style.width = `${cardWidth}px`;
+
+    // Match Feather's independent corner card: roughly one quarter of its
+    // width remains on-screen, pinned to the top-right before the section.
+    const peekVisibleFraction = viewportWidth < 640 ? 0.28 : 0.24;
+    // Keep the desktop corner card 16px left of its base position: this moves
+    // it 8px right from the previous placement. Keep the
+    // mobile position unchanged so the visible paper triangle remains generous.
+    const peekX = viewportWidth - cardWidth * peekVisibleFraction - safeRight - (viewportWidth >= 640 ? 16 : 0);
+    const peekY = viewportWidth < 640 ? 16 : 24;
+
+    // Begin the hand-off just below the viewport. Finish early enough that the
+    // card is tracking its real slot before the form can be interacted with.
+    const start = viewportHeight * 1.16;
+    const end = Math.max(84, viewportHeight * 0.13);
+    const rawEntryProgress = clamp01((start - slotRect.top) / (start - end));
+    const entryProgress = smoothstep(clamp01(rawEntryProgress / 0.94));
+
+    // The card is an independent corner object, not a permanently fixed
+    // replacement for its slot. After its full-form moment has been visible,
+    // hand it back to the original corner peek while the reader continues
+    // down the page. Reversing the same progress when scrolling up keeps the
+    // transition continuous in both directions.
+    const exitStart = viewportHeight * 0.55;
+    const exitEnd = -Math.min(cardHeight * 0.16, viewportHeight * 0.18);
+    const exitProgress = smoothstep(clamp01((exitStart - slotRect.bottom) / (exitStart - exitEnd)));
+    const progress = forcePeek ? 0 : entryProgress * (1 - exitProgress);
+
+    return {
+      x: gsap.utils.interpolate(
+        peekX - cardWidth * peekVisibleFraction * 0.4,
+        slotRect.left,
+        progress,
+      ),
+      y: gsap.utils.interpolate(peekY - 240, slotRect.top, progress),
+      progress,
+    };
+  }, []);
+
+  const getLockupTransform = useCallback((progress: number): LockupTransform => {
+    const card = cardRef.current;
+    const lockup = lockupRef.current;
+    if (!card || !lockup) return { x: 0, y: 0, rotation: 0 };
+
+    const isMobile = window.innerWidth < 600;
+    const isTablet = window.innerWidth >= 600 && window.innerWidth < 1024;
+    // A +32 / +32 local offset becomes a clean horizontal shift once the
+    // peeking card is rotated -45Â°, putting the entire lockup inside the
+    // mobile paper triangle rather than straddling its diagonal edge.
+    const mobileTriangleInset = isMobile ? 32 : 0;
+    // Compensate for the card's -45Â° rotation so the mobile lockup moves
+    // straight up by its established 48px, with no sideways drift.
+    const mobileUpOffset = isMobile ? 48 / Math.SQRT2 : 0;
+    // Tablet needs the same rotation-aware treatment: the original 24px lift
+    // plus the requested additional 16px.
+    const tabletUpOffset = isTablet ? 40 / Math.SQRT2 : 0;
+    // Equal local X/Y movement maps to a straight rightward shift through the
+    // card's -45Â° rotation, preserving the vertical placement.
+    const tabletRightOffset = isTablet ? 24 / Math.SQRT2 : 0;
+    const peekX = card.offsetWidth * 0.12 - lockup.offsetWidth / 2 + mobileTriangleInset + mobileUpOffset + tabletUpOffset + tabletRightOffset;
+    const peekY = 120 - lockup.offsetHeight / 2 + mobileTriangleInset - mobileUpOffset - tabletUpOffset + tabletRightOffset;
+    const formX = (card.offsetWidth - lockup.offsetWidth) / 2;
+    const formY = isMobile ? 28 : 32;
+
+    return {
+      x: gsap.utils.interpolate(peekX, formX, progress),
+      y: gsap.utils.interpolate(peekY, formY, progress),
+      rotation: gsap.utils.interpolate(40, 0, progress),
+    };
+  }, []);
+
+  const setPeeking = useCallback((peeking: boolean) => {
+    const formContent = formContentRef.current as (HTMLDivElement & { inert?: boolean }) | null;
+    const peekButton = peekButtonRef.current;
+    if (formContent) formContent.inert = peeking;
+    if (peekButton) {
+      peekButton.style.pointerEvents = peeking ? "auto" : "none";
+      peekButton.tabIndex = peeking ? 0 : -1;
+      peekButton.setAttribute("aria-hidden", peeking ? "false" : "true");
+    }
+    if (peekingRef.current !== peeking) {
+      peekingRef.current = peeking;
+      setPeekingState(peeking);
+    }
+  }, []);
+
+  useLayoutEffect(() => {
+    const card = cardRef.current;
+    const slot = slotRef.current;
+    if (!card || !slot) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let frame = 0;
+    let previousScroll = window.scrollY;
+    let filteredVelocity = 0;
+
+    const render = () => {
+      frame = 0;
+      if (openRef.current || transitioningRef.current) return;
+
+      const next = getClosedPosition(forcePeekRef.current);
+      const scrollDelta = window.scrollY - previousScroll;
+      previousScroll = window.scrollY;
+      filteredVelocity += (scrollDelta - filteredVelocity) * 0.22;
+
+      const inTransfer = next.progress > 0.015 && next.progress < 0.985;
+      const stretch = reduced || !inTransfer ? 0 : Math.min(0.055, Math.abs(filteredVelocity) * 0.0022);
+      const direction = Math.sign(filteredVelocity || 1);
+      const peekScale = 0.42;
+      const baseScale = gsap.utils.interpolate(peekScale, 1, next.progress);
+      const contentReveal = smoothstep(clamp01((next.progress - 0.58) / 0.36));
+      const lockupTransform = getLockupTransform(next.progress);
+
+      positionRef.current = next;
+      setMovingState(inTransfer);
+      setPeeking(next.progress < 0.985);
+      gsap.set(card, {
+        x: next.x,
+        y: next.y,
+        rotation: gsap.utils.interpolate(-45, 0, next.progress),
+        scaleX: baseScale * (1 - stretch * 0.34),
+        scaleY: baseScale * (1 + stretch),
+        skewY: reduced ? 0 : -direction * stretch * 24,
+        transformOrigin: "50% 50%",
+      });
+      gsap.set(formContentRef.current, {
+        rotation: 0,
+        autoAlpha: contentReveal,
+      });
+      gsap.set(lockupRef.current, {
+        ...lockupTransform,
+        transformOrigin: "50% 50%",
+      });
+      gsap.set(openLabelRef.current, {
+        opacity: 1 - smoothstep(next.progress),
+      });
+      setReady(true);
+    };
+
+    const requestRender = () => {
+      if (!frame) frame = requestAnimationFrame(render);
+    };
+
+    renderRef.current = requestRender;
+    const resizeObserver = new ResizeObserver(() => {
+      if (!openRef.current) setSlotHeight(card.scrollHeight);
+      requestRender();
+    });
+    resizeObserver.observe(card);
+    resizeObserver.observe(slot);
+
+    const onScroll = () => {
+      forcePeekRef.current = false;
+      requestRender();
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", requestRender, { passive: true });
+    render();
+
+    return () => {
+      cancelAnimationFrame(frame);
+      resizeObserver.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", requestRender);
+      gsap.killTweensOf([card, formContentRef.current, lockupRef.current, openLabelRef.current]);
+    };
+  }, [getClosedPosition, getLockupTransform, mounted, setMovingState, setPeeking]);
+
+  useEffect(() => {
+    openRef.current = open;
+    const card = cardRef.current;
+    const formContent = formContentRef.current as (HTMLDivElement & { inert?: boolean }) | null;
+    const lockup = lockupRef.current;
+    const openLabel = openLabelRef.current;
+    if (!card || !formContent || !lockup || !openLabel) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const transitionId = ++transitionIdRef.current;
+    stopActiveAnimations();
+    gsap.killTweensOf([card, formContent, lockup, openLabel]);
+
+    if (open) {
+      transitioningRef.current = true;
+      setDialogScrollable(false);
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.paddingInlineEnd = scrollbarWidth > 0 ? `${scrollbarWidth}px` : "";
+      formContent.inert = false;
+      setPeeking(false);
+
+      const cardWidth = card.offsetWidth;
+      const visualHeight = Math.min(card.scrollHeight, window.innerHeight - 32);
+      const x = Math.max(16, (window.innerWidth - cardWidth) / 2);
+      const y = Math.max(16, (window.innerHeight - visualHeight) / 2);
+      const lockupTarget = getLockupTransform(1);
+      const duration = reduced ? 0 : 0.42;
+      gsap.set(formContent, { rotation: 0, autoAlpha: 0 });
+      const cardAnimation = motionAnimate(card, {
+        x,
+        y,
+        rotate: 0,
+        scaleX: 1,
+        scaleY: 1,
+        skewY: 0,
+      }, {
+        duration,
+        ease: [0.22, 1, 0.36, 1],
+      });
+      const lockupAnimation = motionAnimate(lockup, {
+        x: lockupTarget.x,
+        y: lockupTarget.y,
+        rotate: lockupTarget.rotation,
+      }, {
+        duration,
+        ease: [0.22, 1, 0.36, 1],
+      });
+      const labelAnimation = motionAnimate(openLabel, {
+        opacity: 0,
+      }, {
+        duration: reduced ? 0 : 0.16,
+        ease: "easeOut",
+      });
+      activeAnimationsRef.current = [cardAnimation, lockupAnimation, labelAnimation];
+      void cardAnimation.then(() => {
+        if (transitionIdRef.current !== transitionId || !openRef.current) return;
+        transitioningRef.current = false;
+        setMovingState(false);
+        setDialogScrollable(true);
+        gsap.set(formContent, { autoAlpha: 1 });
+        activeAnimationsRef.current = [];
+      });
+      requestAnimationFrame(() => card.focus({ preventScroll: true }));
+    } else {
+      transitioningRef.current = true;
+      setDialogScrollable(false);
+      document.documentElement.style.overflow = "";
+      document.body.style.paddingInlineEnd = "";
+      const target = getClosedPosition(forcePeekRef.current);
+      const peekScale = 0.42;
+      const targetScale = gsap.utils.interpolate(peekScale, 1, target.progress);
+      const targetReveal = smoothstep(clamp01((target.progress - 0.58) / 0.36));
+      const lockupTarget = getLockupTransform(target.progress);
+      const duration = reduced ? 0 : 0.4;
+      positionRef.current = target;
+      gsap.set(formContent, { rotation: 0, autoAlpha: 0 });
+      const cardAnimation = motionAnimate(card, {
+        x: target.x,
+        y: target.y,
+        rotate: gsap.utils.interpolate(-45, 0, target.progress),
+        scaleX: targetScale,
+        scaleY: targetScale,
+        skewY: 0,
+      }, {
+        duration,
+        ease: [0.4, 0, 0.2, 1],
+      });
+      const lockupAnimation = motionAnimate(lockup, {
+        x: lockupTarget.x,
+        y: lockupTarget.y,
+        rotate: lockupTarget.rotation,
+      }, {
+        duration,
+        ease: [0.4, 0, 0.2, 1],
+      });
+      const labelAnimation = motionAnimate(openLabel, {
+        opacity: target.progress < 0.985 ? 1 : 0,
+      }, {
+        duration: reduced ? 0 : 0.18,
+        delay: reduced ? 0 : 0.08,
+        ease: "easeOut",
+      });
+      activeAnimationsRef.current = [cardAnimation, lockupAnimation, labelAnimation];
+      void cardAnimation.then(() => {
+        if (transitionIdRef.current !== transitionId || openRef.current) return;
+        transitioningRef.current = false;
+        setMovingState(target.progress > 0.015 && target.progress < 0.985);
+        setPeeking(target.progress < 0.985);
+        if (targetReveal > 0) {
+          gsap.set(formContent, { autoAlpha: targetReveal });
+          activeAnimationsRef.current = [];
+        } else {
+          activeAnimationsRef.current = [];
+        }
+        renderRef.current();
+      });
+    }
+
+    return () => {
+      stopActiveAnimations();
+      document.documentElement.style.overflow = "";
+      document.body.style.paddingInlineEnd = "";
+    };
+  }, [getClosedPosition, getLockupTransform, mounted, open, setMovingState, setPeeking, stopActiveAnimations]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeWaitlist();
+    };
+    const onScrollIntent = () => returnWaitlistToSide();
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("wheel", onScrollIntent, { passive: true });
+    window.addEventListener("touchmove", onScrollIntent, { passive: true });
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("wheel", onScrollIntent);
+      window.removeEventListener("touchmove", onScrollIntent);
+    };
+  }, [closeWaitlist, open, returnWaitlistToSide]);
+
+  return (
+    <>
+      <div
+        ref={slotRef}
+        aria-hidden="true"
+        className="mx-auto w-full"
+        style={{ height: slotHeight }}
+      />
+
+      {mounted && createPortal(<>
+      <button
+        type="button"
+        className={`fixed inset-0 z-[110] touch-none bg-black/70 transition-opacity duration-200 ${open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
+        aria-label="Close waitlist"
+        tabIndex={open ? 0 : -1}
+        onPointerDown={closeWaitlist}
+        onClick={closeWaitlist}
+      />
+
+      <div
+        ref={cardRef}
+        role={open ? "dialog" : undefined}
+        aria-modal={open ? "true" : undefined}
+        aria-labelledby="waitlist-title"
+        tabIndex={open ? -1 : undefined}
+        className={`waitlist-float fixed left-0 top-0 z-[120] rounded-[28px] bg-paper outline-none will-change-transform [backface-visibility:hidden] md:rounded-[59px] ${moving ? "shadow-none" : "shadow-[0_28px_90px_rgba(0,0,0,.48)]"} ${open ? `max-h-[calc(100dvh-32px)] ${dialogScrollable ? "overflow-y-auto overscroll-contain" : "overflow-hidden"}` : "overflow-visible"} ${ready ? "visible" : "invisible"}`}
+      >
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[inherit] [contain:paint]" aria-hidden="true">
+          {!moving && <div className="waitlist-paper-texture h-full w-full opacity-45 mix-blend-multiply" />}
+        </div>
+
+        <button
+          ref={peekButtonRef}
+          type="button"
+          aria-label="Open the waitlist"
+          className="absolute left-0 top-0 z-30 h-[min(34%,190px)] w-[28%] cursor-pointer rounded-tl-[inherit] focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
+          onClick={openWaitlist}
+        />
+
+        <div
+          aria-hidden="true"
+          className={`pointer-events-none absolute left-0 top-0 z-10 h-[min(34%,190px)] w-[28%] rounded-tl-[inherit] bg-paper/65 transition-opacity duration-300 ${peeking && !open ? "opacity-100" : "opacity-0"}`}
+        />
+
+        <div
+          ref={lockupRef}
+          aria-hidden="true"
+          className="pointer-events-none absolute left-0 top-0 z-20 will-change-transform [backface-visibility:hidden]"
+        >
+          <div className="flex flex-col items-center gap-4">
+            <img src={planeDisplayUrl} alt="" className="h-auto w-[150px] opacity-70 min-[600px]:w-[164px] md:w-[182px]" />
+            <img src={waitlistDisplayUrl} alt="" className="h-auto w-[150px] opacity-80 min-[600px]:w-[164px] md:w-[182px]" />
+          </div>
+          <span ref={openLabelRef} className="mt-1 block text-center font-mono text-[20px] uppercase tracking-[0.14em] text-[#4a4a4a] sm:text-[22px]">Open</span>
+        </div>
+
+        <div ref={formContentRef} className="relative z-[1] px-[22px] py-[44px] text-center will-change-[opacity] md:px-[48px] md:py-[52px]">
+          <div aria-hidden="true" className="h-[220px]" />
+
+          {reservation ? (
+            <ReservationPanel reservation={reservation} reduceMotion={Boolean(reduceMotion)} />
+          ) : (
+          <div className="mx-auto max-w-[560px]">
+            <h2 id="waitlist-title" className="site-heading m-0 text-ink-800">
+              Get in early. Take a good username.
+            </h2>
+            <p className="mx-auto mb-[34px] mt-[16px] max-w-[520px] text-pretty text-[17px] leading-[1.6] text-[#3E4A5C]">
+              Early access goes out in waves. Tell me what youâ€™d animate and youâ€™ll be in an earlier one.
+            </p>
+
+            <form method="POST" action="/api/waitlist" onSubmit={submitWaitlist} noValidate className="flex flex-col gap-[22px] text-left">
+              <div className="relative flex flex-col gap-2">
+                <label htmlFor="lao-username" className="sr-only">Username</label>
+                <GooeyInput
+                  id="lao-username"
+                  name="username"
+                  required
+                  autoComplete="off"
+                  placeholder="Username"
+                  showPlaceholderWhenCollapsed
+                  className="w-full justify-start"
+                  classNames={{ input: "pr-32 text-[16px] sm:text-sm" }}
+                  collapsedWidth="100%"
+                  expandedWidth="calc(100% - 64px)"
+                  iconName="username"
+                  disableGooey
+                  value={username}
+                  onValueChange={(value) => {
+                    setUsername(value);
+                    setUsernameStatus("idle");
+                    setUsernameMessage("");
+                    setCheckedUsername("");
+                  }}
+                  onBlur={() => void checkUsername()}
+                  aria-describedby={usernameMessage ? "lao-username-status" : undefined}
+                  aria-invalid={usernameStatus === "taken" || usernameStatus === "invalid"}
+                  disabled={submitting}
+                />
+                {usernameMessage && (
+                  <span
+                    id="lao-username-status"
+                    role="status"
+                    aria-live="polite"
+                    title={usernameMessage}
+                    className={`pointer-events-none absolute right-5 top-[17px] z-10 max-w-[42%] truncate rounded-full px-2 py-0.5 text-[10px] font-mono uppercase tracking-[.04em] ${usernameStatus === "available" ? "bg-[#dcebdc] text-[#426b45]" : usernameStatus === "checking" ? "bg-[#e3e7ec] text-[#586473]" : "bg-[#f3dcd7] text-[#983b32]"}`}
+                  >
+                    {usernameStatusLabel(usernameStatus, usernameMessage)}
+                  </span>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label htmlFor="lao-email" className="sr-only">Email</label>
+                <GooeyInput
+                  id="lao-email"
+                  name="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  placeholder="Email"
+                  showPlaceholderWhenCollapsed
+                  className="w-full justify-start"
+                  classNames={{ input: "text-[16px] sm:text-sm" }}
+                  collapsedWidth="100%"
+                  expandedWidth="calc(100% - 64px)"
+                  iconName="email"
+                  disableGooey
+                  value={email}
+                  onValueChange={(value) => {
+                    setEmail(value);
+                    setFormMessage("");
+                  }}
+                  disabled={submitting}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label htmlFor="lao-first" className="sr-only">What would you animate first?</label>
+                <GooeyInput
+                  id="lao-first"
+                  name="first_animation"
+                  placeholder="What would you animate first?"
+                  showPlaceholderWhenCollapsed
+                  className="w-full justify-start"
+                  classNames={{ input: "text-[16px] sm:text-sm" }}
+                  collapsedWidth="100%"
+                  expandedWidth="calc(100% - 64px)"
+                  iconName="animation"
+                  disableGooey
+                  value={description}
+                  onValueChange={setDescription}
+                  maxLength={280}
+                  disabled={submitting}
+                />
+              </div>
+
+              <input type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute left-[-9999px] h-px w-px opacity-0" />
+
+              <GradientHoverButton
+                type="submit"
+                disabled={submitting || usernameStatus === "checking"}
+                background="linear-gradient(in oklab 180deg, oklab(0% 0 0) 0%, oklab(48.5% -0.018 -0.082) 100%)"
+                hoverBackground="linear-gradient(in oklab 180deg, oklab(10% 0 -0.01) 0%, oklab(58% -0.03 -0.13) 100%)"
+                borderColor="#292A2A"
+                hoverBorderColor="#363636"
+                className="mt-[6px] flex w-full items-center justify-center gap-3 rounded-full p-4 font-mono text-[13px] uppercase tracking-[0.08em] text-text-hi shadow-[0_4px_14px_0_rgba(0,0,0,0.39)]"
+              >
+                <img src={planeCtaUrl} alt="" aria-hidden="true" className="h-5 w-auto object-contain" />
+                <span>{submitting ? "Holding your usernameâ€¦" : "Claim my spot"}</span>
+              </GradientHoverButton>
+
+              {formMessage && <p role="alert" className="m-0 text-center text-[14px] leading-[1.5] text-[#a33b32]">{formMessage}</p>}
+
+              <p className="m-0 mt-[6px] text-center text-[14px] leading-[1.6] text-[#596270]">
+                No spam. One email when itâ€™s ready, and the occasional build update you can leave anytime.
+              </p>
+            </form>
+          </div>
+          )}
+        </div>
+      </div>
+
+      {open && (
+        <button
+          ref={closeButtonRef}
+          type="button"
+          aria-label="Close waitlist"
+          onPointerDown={closeWaitlist}
+          onClick={closeWaitlist}
+          className="group fixed right-[max(12px,env(safe-area-inset-right))] top-[max(12px,env(safe-area-inset-top))] z-[130] grid size-12 touch-manipulation place-items-center rounded-full bg-[#f4f1eb] text-[#3c3c3c] shadow-xl transition-colors duration-150 hover:bg-[#ded9cf] focus-visible:bg-[#ded9cf] focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-3"
+        >
+          <span aria-hidden="true" className="relative block size-5 before:absolute before:left-1/2 before:top-1/2 before:h-[2px] before:w-5 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:bg-current after:absolute after:left-1/2 after:top-1/2 after:h-[2px] after:w-5 after:-translate-x-1/2 after:-translate-y-1/2 after:-rotate-45 after:bg-current" />
+        </button>
+      )}
+      </>, document.body)}
+    </>
+  );
+}
