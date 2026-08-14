@@ -1,2 +1,820 @@
-ÁBÊ6∆ñVÁEvñGFÉ∞–¢Fˆ7V÷VÁBÊFˆ7V÷VÁDV∆V÷VÁBÁ7Gñ∆RÊ˜fW&f∆˜r“&ÜñFFV‚#∞–¢Fˆ7V÷VÁBÊ&ˆGíÁ7Gñ∆RÁFFñÊtñÊ∆ñÊTVÊB“67&ˆ∆∆&%vñGFÇ‚ÚG∑67&ˆ∆∆&%vñGFá◊Ü¢"#∞–¢f˜&‘6ˆÁFVÁBÊñÊW'B“f«6S∞–¢6WEVV∂ñÊrÜf«6Rì∞–†–¢6ˆÁ7B6&EvñGFÇ“6&BÊˆfg6WEvñGFÉ∞–¢6ˆÁ7Bfó7VƒÜVñváB“÷FÇÊ÷ñ‚Ü6&BÁ67&ˆ∆ƒÜVñváB¬vñÊF˜rÊñÊÊW$ÜVñváB“3"ì∞–¢6ˆÁ7BÇ“÷FÇÊ÷ÇÉb¬ávñÊF˜rÊñÊÊW%vñGFÇ“6&EvñGFÇíÚ"ì∞–¢6ˆÁ7Bí“÷FÇÊ÷ÇÉb¬ávñÊF˜rÊñÊÊW$ÜVñváB“fó7VƒÜVñváBíÚ"ì∞–¢6ˆÁ7B∆ˆ6∑WF&vWB“vWD∆ˆ6∑WG&Á6f˜&“Éì∞–¢6ˆÁ7BGW&Fñˆ‚“&VGV6VBÚ¢„C#∞–¢w6Á6WBÜf˜&‘6ˆÁFVÁB¬≤&˜FFñˆ„¢¬WFÙ«Ü¢“ì∞–¢6ˆÁ7B6&DÊñ÷Fñˆ‚“÷˜Fñˆ‰Êñ÷FRÜ6&B¬∞–¢Ç¿–¢í¿–¢&˜FFS¢¿–¢66∆UÉ¢¿–¢66∆Uì¢¿–¢6∂Wuì¢¿–¢“¬∞–¢GW&Fñˆ‚¿–¢V6S¢≥„#"¬¬„3b¬“¿–¢“ì∞–¢6ˆÁ7B∆ˆ6∑WÊñ÷Fñˆ‚“÷˜Fñˆ‰Êñ÷FRÜ∆ˆ6∑W¬∞–¢É¢∆ˆ6∑WF&vWBÁÇ¿–¢ì¢∆ˆ6∑WF&vWBÁí¿–¢&˜FFS¢∆ˆ6∑WF&vWBÁ&˜FFñˆ‚¿–¢“¬∞–¢GW&Fñˆ‚¿–¢V6S¢≥„#"¬¬„3b¬“¿–¢“ì∞–¢6ˆÁ7B∆&VƒÊñ÷Fñˆ‚“÷˜Fñˆ‰Êñ÷FRÜ˜V‰∆&V¬¬∞–¢˜6óGì¢¿–¢“¬∞–¢GW&Fñˆ„¢&VGV6VBÚ¢„b¿–¢V6S¢&V6T˜WB"¿–¢“ì∞–¢7FófTÊñ÷FñˆÁ5&VbÊ7W'&VÁB“∂6&DÊñ÷Fñˆ‚¬∆ˆ6∑WÊñ÷Fñˆ‚¬∆&VƒÊñ÷FñˆÂ”∞–¢fˆñB6&DÊñ÷Fñˆ‚ÁFÜV‚ÇÇí”‚∞–¢ñbáG&Á6óFñˆ‰ñE&VbÊ7W'&VÁB”“G&Á6óFñˆ‰ñB«¬˜VÂ&VbÊ7W'&VÁBí&WGW&„∞–¢G&Á6óFñˆÊñÊu&VbÊ7W'&VÁB“f«6S∞–¢6WD÷˜fñÊu7FFRÜf«6Rì∞–¢6WDFñ∆ˆu67&ˆ∆∆&∆RáG'VRì∞–¢w6Á6WBÜf˜&‘6ˆÁFVÁB¬≤WFÙ«Ü¢“ì∞–¢7FófTÊñ÷FñˆÁ5&VbÊ7W'&VÁB“µ”∞–¢“ì∞–¢&WVW7DÊñ÷Fñˆ‰g&÷RÇÇí”‚6&BÊfˆ7W2á≤&WfVÁE67&ˆ∆√¢G'VR“íì∞–¢“V«6R∞–¢G&Á6óFñˆÊñÊu&VbÊ7W'&VÁB“G'VS∞–¢6WDFñ∆ˆu67&ˆ∆∆&∆RÜf«6Rì∞–¢Fˆ7V÷VÁBÊFˆ7V÷VÁDV∆V÷VÁBÁ7Gñ∆RÊ˜fW&f∆˜r“"#∞–¢Fˆ7V÷VÁBÊ&ˆGíÁ7Gñ∆RÁFFñÊtñÊ∆ñÊTVÊB“"#∞–¢6ˆÁ7BF&vWB“vWD6∆˜6VE˜6óFñˆ‚Üf˜&6UVVµ&VbÊ7W'&VÁBì∞–¢6ˆÁ7BVVµ66∆R“„C#∞–¢6ˆÁ7BF&vWE66∆R“w6ÁWFñ«2ÊñÁFW'ˆ∆FRáVVµ66∆R¬¬F&vWBÁ&ˆw&W72ì∞–¢6ˆÁ7BF&vWE&WfV¬“6÷ˆ˜Fá7FWÜ6∆◊ÇáF&vWBÁ&ˆw&W72“„SÇíÚ„3bíì∞–¢6ˆÁ7B∆ˆ6∑WF&vWB“vWD∆ˆ6∑WG&Á6f˜&“áF&vWBÁ&ˆw&W72ì∞–¢6ˆÁ7BGW&Fñˆ‚“&VGV6VBÚ¢„C∞–¢˜6óFñˆÂ&VbÊ7W'&VÁB“F&vWC∞–¢w6Á6WBÜf˜&‘6ˆÁFVÁB¬≤&˜FFñˆ„¢¬WFÙ«Ü¢“ì∞–¢6ˆÁ7B6&DÊñ÷Fñˆ‚“÷˜Fñˆ‰Êñ÷FRÜ6&B¬∞–¢É¢F&vWBÁÇ¿–¢ì¢F&vWBÁí¿–¢&˜FFS¢w6ÁWFñ«2ÊñÁFW'ˆ∆FRÇ”CR¬¬F&vWBÁ&ˆw&W72í¿–¢66∆UÉ¢F&vWE66∆R¿–¢66∆Uì¢F&vWE66∆R¿–¢6∂Wuì¢¿–¢“¬∞–¢GW&Fñˆ‚¿–¢V6S¢≥„B¬¬„"¬“¿–¢“ì∞–¢6ˆÁ7B∆ˆ6∑WÊñ÷Fñˆ‚“÷˜Fñˆ‰Êñ÷FRÜ∆ˆ6∑W¬∞–¢É¢∆ˆ6∑WF&vWBÁÇ¿–¢ì¢∆ˆ6∑WF&vWBÁí¿–¢&˜FFS¢∆ˆ6∑WF&vWBÁ&˜FFñˆ‚¿–¢“¬∞–¢GW&Fñˆ‚¿–¢V6S¢≥„B¬¬„"¬“¿–¢“ì∞–¢6ˆÁ7B∆&VƒÊñ÷Fñˆ‚“÷˜Fñˆ‰Êñ÷FRÜ˜V‰∆&V¬¬∞–¢˜6óGì¢F&vWBÁ&ˆw&W72¬„ìÉRÚ¢¿–¢“¬∞–¢GW&Fñˆ„¢&VGV6VBÚ¢„Ç¿–¢FV∆ì¢&VGV6VBÚ¢„Ç¿–¢V6S¢&V6T˜WB"¿–¢“ì∞–¢7FófTÊñ÷FñˆÁ5&VbÊ7W'&VÁB“∂6&DÊñ÷Fñˆ‚¬∆ˆ6∑WÊñ÷Fñˆ‚¬∆&VƒÊñ÷FñˆÂ”∞–¢fˆñB6&DÊñ÷Fñˆ‚ÁFÜV‚ÇÇí”‚∞–¢ñbáG&Á6óFñˆ‰ñE&VbÊ7W'&VÁB”“G&Á6óFñˆ‰ñB«¬˜VÂ&VbÊ7W'&VÁBí&WGW&„∞–¢G&Á6óFñˆÊñÊu&VbÊ7W'&VÁB“f«6S∞–¢6WD÷˜fñÊu7FFRáF&vWBÁ&ˆw&W72‚„RbbF&vWBÁ&ˆw&W72¬„ìÉRì∞–¢6WEVV∂ñÊráF&vWBÁ&ˆw&W72¬„ìÉRì∞–¢ñbáF&vWE&WfV¬‚í∞–¢w6Á6WBÜf˜&‘6ˆÁFVÁB¬≤WFÙ«Ü¢F&vWE&WfV¬“ì∞–¢7FófTÊñ÷FñˆÁ5&VbÊ7W'&VÁB“µ”∞–¢“V«6R∞–¢7FófTÊñ÷FñˆÁ5&VbÊ7W'&VÁB“µ”∞–¢––¢&VÊFW%&VbÊ7W'&VÁBÇì∞–¢“ì∞–¢––†–¢&WGW&‚Çí”‚∞–¢7F˜7FófTÊñ÷FñˆÁ2Çì∞–¢Fˆ7V÷VÁBÊFˆ7V÷VÁDV∆V÷VÁBÁ7Gñ∆RÊ˜fW&f∆˜r“"#∞–¢Fˆ7V÷VÁBÊ&ˆGíÁ7Gñ∆RÁFFñÊtñÊ∆ñÊTVÊB“"#∞–¢”∞–¢“¬∂vWD6∆˜6VE˜6óFñˆ‚¬vWD∆ˆ6∑WG&Á6f˜&“¬÷˜VÁFVB¬˜V‚¬6WD÷˜fñÊu7FFR¬6WEVV∂ñÊr¬7F˜7FófTÊñ÷FñˆÁ5“ì∞–†–¢W6TVffV7BÇÇí”‚∞–¢ñbÇ˜V‚í&WGW&„∞–¢6ˆÁ7Bˆ‰∂WîF˜v‚“ÜWfVÁC¢∂Wñ&ˆ&DWfVÁBí”‚∞–¢ñbÜWfVÁBÊ∂Wí””“$W66R"í6∆˜6UvóF∆ó7BÇì∞–¢”∞–¢6ˆÁ7BˆÂ67&ˆ∆ƒñÁFVÁB“Çí”‚&WGW&ÂvóF∆ó7EFı6ñFRÇì∞–¢vñÊF˜rÊFDWfVÁD∆ó7FVÊW"Ç&∂WñF˜v‚"¬ˆ‰∂WîF˜v‚ì∞–¢vñÊF˜rÊFDWfVÁD∆ó7FVÊW"Ç'vÜVV¬"¬ˆÂ67&ˆ∆ƒñÁFVÁB¬≤76ófS¢G'VR“ì∞–¢vñÊF˜rÊFDWfVÁD∆ó7FVÊW"Ç'F˜V6Ü÷˜fR"¬ˆÂ67&ˆ∆ƒñÁFVÁB¬≤76ófS¢G'VR“ì∞–¢&WGW&‚Çí”‚∞–¢vñÊF˜rÁ&V÷˜fTWfVÁD∆ó7FVÊW"Ç&∂WñF˜v‚"¬ˆ‰∂WîF˜v‚ì∞–¢vñÊF˜rÁ&V÷˜fTWfVÁD∆ó7FVÊW"Ç'vÜVV¬"¬ˆÂ67&ˆ∆ƒñÁFVÁBì∞–¢vñÊF˜rÁ&V÷˜fTWfVÁD∆ó7FVÊW"Ç'F˜V6Ü÷˜fR"¬ˆÂ67&ˆ∆ƒñÁFVÁBì∞–¢”∞–¢“¬∂6∆˜6UvóF∆ó7B¬˜V‚¬&WGW&ÂvóF∆ó7EFı6ñFU“ì∞–†–¢&WGW&‚Ä–¢√‡–¢∆Fó`–¢&Vc◊∑6∆˜E&Vg––¢&ñ÷ÜñFFV„“'G'VR –¢6∆74Ê÷S“&◊Ç÷WFÚr÷gV∆¬ –¢7Gñ∆S◊∑≤ÜVñváC¢6∆˜DÜVñváB◊––¢Û‡–†–¢∂÷˜VÁFVBbb7&VFU˜'F¬É√‡–¢∆'WGFˆ‡–¢GóS“&'WGFˆ‚ –¢6∆74Ê÷S◊∂fóÜVBñÁ6WB”¢’≥“F˜V6Ç÷ÊˆÊR&r÷&∆6≤ÛsG&Á6óFñˆ‚÷˜6óGíGW&Fñˆ‚”#G∂˜V‚Ú'ˆñÁFW"÷WfVÁG2÷WFÚ˜6óGí”"¢'ˆñÁFW"÷WfVÁG2÷ÊˆÊR˜6óGí”'÷––¢&ñ÷∆&V√“$6∆˜6RvóF∆ó7B –¢F$ñÊFWÉ◊∂˜V‚Ú¢”––¢ˆÂˆñÁFW$F˜v„◊∂6∆˜6UvóF∆ó7G––¢ˆ‰6∆ñ6≥◊∂6∆˜6UvóF∆ó7G––¢Û‡–†–¢∆Fó`–¢&Vc◊∂6&E&Vg––¢&ˆ∆S◊∂˜V‚Ú&Fñ∆ˆr"¢VÊFVfñÊVG––¢&ñ÷÷ˆF√◊∂˜V‚Ú'G'VR"¢VÊFVfñÊVG––¢&ñ÷∆&V∆∆VF'ì“'vóF∆ó7B◊FóF∆R –¢F$ñÊFWÉ◊∂˜V‚Ú”¢VÊFVfñÊVG––¢6∆74Ê÷S◊∂vóF∆ó7B÷f∆ˆBfóÜVB∆VgB”F˜”¢’≥#“&˜VÊFVB’≥#áÖ“&r◊W"˜WF∆ñÊR÷ÊˆÊRvñ∆¬÷6ÜÊvR◊G&Á6f˜&“∂&6∂f6R◊fó6ñ&ñ∆óGì¶ÜñFFVÂ“÷Cß&˜VÊFVB’≥SóÖ“G∂÷˜fñÊrÚ'6ÜF˜r÷ÊˆÊR"¢'6ÜF˜r’≥Û#áÖÛìÖ˜&v&É√√¬„CÇï“'“G∂˜V‚Ú÷Ç÷Ç’∂6∆2ÉGfÇ”3'Çï“G∂Fñ∆ˆu67&ˆ∆∆&∆RÚ&˜fW&f∆˜r◊í÷WFÚ˜fW'67&ˆ∆¬÷6ˆÁFñ‚"¢&˜fW&f∆˜r÷ÜñFFV‚'÷¢&˜fW&f∆˜r◊fó6ñ&∆R'“G∑&VGíÚ'fó6ñ&∆R"¢&ñÁfó6ñ&∆R'÷––¢‡–¢∆Fób6∆74Ê÷S“'ˆñÁFW"÷WfVÁG2÷ÊˆÊR'6ˆ«WFRñÁ6WB”¢”˜fW&f∆˜r÷ÜñFFV‚&˜VÊFVB’∂ñÊÜW&óE“∂6ˆÁFñ„ßñÁE“"&ñ÷ÜñFFV„“'G'VR#‡¢≤÷˜fñÊrbb∆Fób6∆74Ê÷S“'vóF∆ó7B◊W"◊FWáGW&RÇ÷gV∆¬r÷gV∆¬˜6óGí”CR÷óÇ÷&∆VÊB÷◊V«Fó«í"ÛÁ–¢¬ˆFóc‡†–¢∆'WGFˆ‡–¢&Vc◊∑VV¥'WGFˆÂ&Vg––¢GóS“&'WGFˆ‚ –¢&ñ÷∆&V√“$˜V‚FÜRvóF∆ó7B –¢6∆74Ê÷S“&'6ˆ«WFR∆VgB”F˜”¢”3Ç’∂÷ñ‚É3BR√ìÇï“r’≥#ÇU“7W'6˜"◊ˆñÁFW"&˜VÊFVB◊F¬’∂ñÊÜW&óE“fˆ7W2◊fó6ñ&∆S¶˜WF∆ñÊR”"fˆ7W2◊fó6ñ&∆S¶˜WF∆ñÊR÷66VÁBfˆ7W2◊fó6ñ&∆S¶˜WF∆ñÊR÷ˆfg6WB”B –¢ˆ‰6∆ñ6≥◊∂˜VÂvóF∆ó7G––¢Û‡–†–¢∆Fó`–¢&ñ÷ÜñFFV„“'G'VR –¢6∆74Ê÷S◊∂ˆñÁFW"÷WfVÁG2÷ÊˆÊR'6ˆ«WFR∆VgB”F˜”¢”Ç’∂÷ñ‚É3BR√ìÇï“r’≥#ÇU“&˜VÊFVB◊F¬’∂ñÊÜW&óE“&r◊W"ÛcRG&Á6óFñˆ‚÷˜6óGíGW&Fñˆ‚”3G∑VV∂ñÊrbb˜V‚Ú&˜6óGí”"¢&˜6óGí”'÷––¢Û‡–†–¢∆Fó`–¢&Vc◊∂∆ˆ6∑W&Vg––¢&ñ÷ÜñFFV„“'G'VR –¢6∆74Ê÷S“'ˆñÁFW"÷WfVÁG2÷ÊˆÊR'6ˆ«WFR∆VgB”F˜”¢”#vñ∆¬÷6ÜÊvR◊G&Á6f˜&“∂&6∂f6R◊fó6ñ&ñ∆óGì¶ÜñFFVÂ“ –¢‡–¢∆Fób6∆74Ê÷S“&f∆WÇf∆WÇ÷6ˆ¬óFV◊2÷6VÁFW"v”B#‡–¢∆ñ÷r7&3◊∑∆ÊTFó7∆ïW&«“«C“""6∆74Ê÷S“&Ç÷WFÚr’≥SÖ“˜6óGí”s÷ñ‚’≥cÖ”ßr’≥cGÖ“÷Cßr’≥É'Ö“"Û‡–¢∆ñ÷r7&3◊∑vóF∆ó7DFó7∆ïW&«“«C“""6∆74Ê÷S“&Ç÷WFÚr’≥SÖ“˜6óGí”É÷ñ‚’≥cÖ”ßr’≥cGÖ“÷Cßr’≥É'Ö“"Û‡–¢¬ˆFóc‡–¢«7‚&Vc◊∂˜V‰∆&V≈&Vg“6∆74Ê÷S“&◊B”&∆ˆ6≤FWáB÷6VÁFW"fˆÁB÷÷ˆÊÚFWáB’≥#Ö“WW&66RG&6∂ñÊr’≥„FV’“FWáB’≤3FFF“6”ßFWáB’≥#'Ö“#‰˜V„¬˜7„‡¢¬ˆFóc‡–†–¢∆Fób&Vc◊∂f˜&‘6ˆÁFVÁE&Vg“6∆74Ê÷S“'&V∆FófR¢’≥“Ç’≥#'Ö“í’≥CGÖ“FWáB÷6VÁFW"vñ∆¬÷6ÜÊvR’∂˜6óGï“÷CßÇ’≥CáÖ“÷Cßí’≥S'Ö“#‡–¢∆Fób&ñ÷ÜñFFV„“'G'VR"6∆74Ê÷S“&Ç’≥##Ö“"Û‡–†–¢∑&W6W'fFñˆ‚ÚÄ–¢≈&W6W'fFñˆÂÊV¬&W6W'fFñˆ„◊∑&W6W'fFñˆÁ“&VGV6T÷˜Fñˆ„◊¥&ˆˆ∆V‚á&VGV6T÷˜Fñˆ‚ó“Û‡–¢í¢Ä–¢∆Fób6∆74Ê÷S“&◊Ç÷WFÚ÷Ç◊r’≥ScÖ“#‡–¢∆É"ñC“'vóF∆ó7B◊FóF∆R"6∆74Ê÷S“'6óFR÷ÜVFñÊr“”FWáB÷ñÊ≤”É#‡–¢vWBñ‚V&«í‚F∂RvˆˆBW6W&Ê÷R‡–¢¬ˆÉ#‡–¢«6∆74Ê÷S“&◊Ç÷WFÚ÷"’≥3GÖ“◊B’≥gÖ“÷Ç◊r’≥S#Ö“FWáB◊&WGGíFWáB’≥wÖ“∆VFñÊr’≥„e“FWáB’≤34SDT5“#‡–¢V&«í66W72vˆW2˜WBñ‚vfW2‚FV∆¬÷RvÜBñ˜^(	ñBÊñ÷FRÊBñ˜^(	ñ∆¬&Rñ‚‚V&∆ñW"ˆÊR‡–¢¬˜‡–†–¢∆f˜&“÷WFÜˆC“%ı5B"7Fñˆ„“"ˆí˜vóF∆ó7B"ˆÂ7V&÷óC◊∑7V&÷óEvóF∆ó7G“Êıf∆ñFFR6∆74Ê÷S“&f∆WÇf∆WÇ÷6ˆ¬v’≥#'Ö“FWáB÷∆VgB#‡–¢∆Fób6∆74Ê÷S“'&V∆FófRf∆WÇf∆WÇ÷6ˆ¬v”"#‡–¢∆∆&V¬áF÷ƒf˜#“&∆Ú◊W6W&Ê÷R"6∆74Ê÷S“'7"÷ˆÊ«í#ÂW6W&Ê÷S¬ˆ∆&V√‡–¢ƒvˆˆWîñÁW@–¢ñC“&∆Ú◊W6W&Ê÷R –¢Ê÷S“'W6W&Ê÷R –¢&WVó&V@–¢WFÙ6ˆ◊∆WFS“&ˆfb –¢∆6VÜˆ∆FW#“%W6W&Ê÷R –¢6Ü˜u∆6VÜˆ∆FW%vÜV‰6ˆ∆∆6V@–¢6∆74Ê÷S“'r÷gV∆¬ßW7Fñgí◊7F'B –¢6∆74Ê÷W3◊∑≤ñÁWC¢'"”3"FWáB’≥gÖ“6”ßFWáB◊6“"◊––¢6ˆ∆∆6VEvñGFÉ“#R –¢WáÊFVEvñGFÉ“&6∆2ÉR“cGÇí –¢ñ6ˆ‰Ê÷S“'W6W&Ê÷R –¢Fó6&∆TvˆˆWê–¢f«VS◊∑W6W&Ê÷W––¢ˆÂf«VT6ÜÊvS◊≤áf«VRí”‚∞–¢6WEW6W&Ê÷Ráf«VRì∞–¢6WEW6W&Ê÷U7FGW2Ç&ñF∆R"ì∞–¢6WEW6W&Ê÷T÷W76vRÇ""ì∞–¢6WD6ÜV6∂VEW6W&Ê÷RÇ""ì∞–¢◊––¢ˆ‰&«W#◊≤Çí”‚fˆñB6ÜV6µW6W&Ê÷RÇó––¢&ñ÷FW67&ñ&VF'ì◊∑W6W&Ê÷T÷W76vRÚ&∆Ú◊W6W&Ê÷R◊7FGW2"¢VÊFVfñÊVG––¢&ñ÷ñÁf∆ñC◊∑W6W&Ê÷U7FGW2””“'F∂V‚"«¬W6W&Ê÷U7FGW2””“&ñÁf∆ñB'––¢Fó6&∆VC◊∑7V&÷óGFñÊw––¢Û‡–¢∑W6W&Ê÷T÷W76vRbbÄ–¢«7‡–¢ñC“&∆Ú◊W6W&Ê÷R◊7FGW2 –¢&ˆ∆S“'7FGW2 –¢&ñ÷∆ófS“'ˆ∆óFR –¢FóF∆S◊∑W6W&Ê÷T÷W76vW––¢6∆74Ê÷S◊∂ˆñÁFW"÷WfVÁG2÷ÊˆÊR'6ˆ«WFR&ñváB”RF˜’≥wÖ“¢”÷Ç◊r’≥C"U“G'VÊ6FR&˜VÊFVB÷gV∆¬Ç”"í”„RFWáB’≥Ö“fˆÁB÷÷ˆÊÚWW&66RG&6∂ñÊr’≤„FV’“G∑W6W&Ê÷U7FGW2””“&fñ∆&∆R"Ú&&r’≤6F6V&F5“FWáB’≤3C#f#CU“"¢W6W&Ê÷U7FGW2””“&6ÜV6∂ñÊr"Ú&&r’≤6S6SvV5“FWáB’≤3SÉcCs5“"¢&&r’≤6c6F6Cu“FWáB’≤3ìÉ6#3%“'÷––¢‡–¢∑W6W&Ê÷U7FGW4∆&V¬áW6W&Ê÷U7FGW2¬W6W&Ê÷T÷W76vRó––¢¬˜7„‡–¢ó––¢¬ˆFóc‡–†–¢∆Fób6∆74Ê÷S“&f∆WÇf∆WÇ÷6ˆ¬v”"#‡–¢∆∆&V¬áF÷ƒf˜#“&∆Ú÷V÷ñ¬"6∆74Ê÷S“'7"÷ˆÊ«í#‰V÷ñ√¬ˆ∆&V√‡–¢ƒvˆˆWîñÁW@–¢ñC“&∆Ú÷V÷ñ¬ –¢Ê÷S“&V÷ñ¬ –¢GóS“&V÷ñ¬ –¢&WVó&V@–¢WFÙ6ˆ◊∆WFS“&V÷ñ¬ –¢∆6VÜˆ∆FW#“$V÷ñ¬ –¢6Ü˜u∆6VÜˆ∆FW%vÜV‰6ˆ∆∆6V@–¢6∆74Ê÷S“'r÷gV∆¬ßW7Fñgí◊7F'B –¢6∆74Ê÷W3◊∑≤ñÁWC¢'FWáB’≥gÖ“6”ßFWáB◊6“"◊––¢6ˆ∆∆6VEvñGFÉ“#R –¢WáÊFVEvñGFÉ“&6∆2ÉR“cGÇí –¢ñ6ˆ‰Ê÷S“&V÷ñ¬ –¢Fó6&∆TvˆˆWê–¢f«VS◊∂V÷ñ«––¢ˆÂf«VT6ÜÊvS◊≤áf«VRí”‚∞–¢6WDV÷ñ¬áf«VRì∞–¢6WDf˜&‘÷W76vRÇ""ì∞–¢◊––¢Fó6&∆VC◊∑7V&÷óGFñÊw––¢Û‡–¢¬ˆFóc‡–†–¢∆Fób6∆74Ê÷S“&f∆WÇf∆WÇ÷6ˆ¬v”"#‡–¢∆∆&V¬áF÷ƒf˜#“&∆Ú÷fó'7B"6∆74Ê÷S“'7"÷ˆÊ«í#ÂvÜBv˜V∆Bñ˜RÊñ÷FRfó'7CÛ¬ˆ∆&V√‡–¢ƒvˆˆWîñÁW@–¢ñC“&∆Ú÷fó'7B –¢Ê÷S“&fó'7EˆÊñ÷Fñˆ‚ –¢∆6VÜˆ∆FW#“%vÜBv˜V∆Bñ˜RÊñ÷FRfó'7CÚ –¢6Ü˜u∆6VÜˆ∆FW%vÜV‰6ˆ∆∆6V@–¢6∆74Ê÷S“'r÷gV∆¬ßW7Fñgí◊7F'B –¢6∆74Ê÷W3◊∑≤ñÁWC¢'FWáB’≥gÖ“6”ßFWáB◊6“"◊––¢6ˆ∆∆6VEvñGFÉ“#R –¢WáÊFVEvñGFÉ“&6∆2ÉR“cGÇí –¢ñ6ˆ‰Ê÷S“&Êñ÷Fñˆ‚ –¢Fó6&∆TvˆˆWê–¢f«VS◊∂FW67&óFñˆÁ––¢ˆÂf«VT6ÜÊvS◊∑6WDFW67&óFñˆÁ––¢÷Ñ∆VÊwFÉ◊≥#É––¢Fó6&∆VC◊∑7V&÷óGFñÊw––¢Û‡–¢¬ˆFóc‡–†–¢∆ñÁWBGóS“'FWáB"Ê÷S“&6ˆ◊Áí"F$ñÊFWÉ◊≤”“WFÙ6ˆ◊∆WFS“&ˆfb"&ñ÷ÜñFFV„“'G'VR"6∆74Ê÷S“&'6ˆ«WFR∆VgB’≤”ìììóÖ“Ç◊Çr◊Ç˜6óGí”"Û‡–†–¢ƒw&FñVÁDÜ˜fW$'WGFˆ‡–¢GóS“'7V&÷óB –¢Fó6&∆VC◊∑7V&÷óGFñÊr«¬W6W&Ê÷U7FGW2””“&6ÜV6∂ñÊr'––¢&6∂w&˜VÊC“&∆ñÊV"÷w&FñVÁBÜñ‚ˆ∂∆"ÉFVr¬ˆ∂∆"ÉRíR¬ˆ∂∆"ÉCÇ„RR”„Ç”„É"íRí –¢Ü˜fW$&6∂w&˜VÊC“&∆ñÊV"÷w&FñVÁBÜñ‚ˆ∂∆"ÉFVr¬ˆ∂∆"ÉR”„íR¬ˆ∂∆"ÉSÇR”„2”„2íRí –¢&˜&FW$6ˆ∆˜#“"3#ì$$ –¢Ü˜fW$&˜&FW$6ˆ∆˜#“"33c3c3b –¢6∆74Ê÷S“&◊B’≥gÖ“f∆WÇr÷gV∆¬óFV◊2÷6VÁFW"ßW7Fñgí÷6VÁFW"v”2&˜VÊFVB÷gV∆¬”BfˆÁB÷÷ˆÊÚFWáB’≥7Ö“WW&66RG&6∂ñÊr’≥„ÜV’“FWáB◊FWáB÷Üí6ÜF˜r’≥ÛGÖÛGÖÛ˜&v&É√√√„3íï“ –¢‡–¢∆ñ÷r7&3◊∑∆ÊT7FW&«“«C“""&ñ÷ÜñFFV„“'G'VR"6∆74Ê÷S“&Ç”Rr÷WFÚˆ&¶V7B÷6ˆÁFñ‚"Û‡–¢«7„Á∑7V&÷óGFñÊrÚ$Üˆ∆FñÊrñ˜W"W6W&Ê÷^(
-b"¢$6∆ñ“◊í7˜B'”¬˜7„‡–¢¬Ùw&FñVÁDÜ˜fW$'WGFˆ„‡–†–¢∂f˜&‘÷W76vRbb«&ˆ∆S“&∆W'B"6∆74Ê÷S“&“”FWáB÷6VÁFW"FWáB’≥GÖ“∆VFñÊr’≥„U“FWáB’≤636#3%“#Á∂f˜&‘÷W76vW”¬˜Á––†–¢«6∆74Ê÷S“&“”◊B’≥gÖ“FWáB÷6VÁFW"FWáB’≥GÖ“∆VFñÊr’≥„e“FWáB’≤3Sìc#s“#‡–¢ÊÚ7“‚ˆÊRV÷ñ¬vÜV‚óN(	ó2&VGí¬ÊBFÜRˆ666ñˆÊ¬'Vñ∆BWFFRñ˜R6‚∆VfRÁóFñ÷R‡–¢¬˜‡–¢¬ˆf˜&”‡–¢¬ˆFóc‡–¢ó––¢¬ˆFóc‡–¢¬ˆFóc‡–†–¢∂˜V‚bbÄ–¢∆'WGFˆ‡–¢&Vc◊∂6∆˜6T'WGFˆÂ&Vg––¢GóS“&'WGFˆ‚ –¢&ñ÷∆&V√“$6∆˜6RvóF∆ó7B –¢ˆÂˆñÁFW$F˜v„◊∂6∆˜6UvóF∆ó7G––¢ˆ‰6∆ñ6≥◊∂6∆˜6UvóF∆ó7G––¢6∆74Ê÷S“&w&˜WfóÜVB&ñváB’∂÷ÇÉ'Ç∆VÁbá6fR÷&V÷ñÁ6WB◊&ñváBíï“F˜’∂÷ÇÉ'Ç∆VÁbá6fR÷&V÷ñÁ6WB◊F˜íï“¢’≥3“w&ñB6ó¶R”"F˜V6Ç÷÷ÊóV∆Fñˆ‚∆6R÷óFV◊2÷6VÁFW"&˜VÊFVB÷gV∆¬&r’≤6cFcV%“FWáB’≤3636365“6ÜF˜r◊Ü¬G&Á6óFñˆ‚÷6ˆ∆˜'2GW&Fñˆ‚”SÜ˜fW#¶&r’≤6FVCñ6e“fˆ7W2◊fó6ñ&∆S¶&r’≤6FVCñ6e“fˆ7W2◊fó6ñ&∆S¶˜WF∆ñÊR”"fˆ7W2◊fó6ñ&∆S¶˜WF∆ñÊR÷66VÁBfˆ7W2◊fó6ñ&∆S¶˜WF∆ñÊR÷ˆfg6WB”2 –¢‡–¢«7‚&ñ÷ÜñFFV„“'G'VR"6∆74Ê÷S“'&V∆FófR&∆ˆ6≤6ó¶R”R&Vf˜&S¶'6ˆ«WFR&Vf˜&S¶∆VgB”Û"&Vf˜&SßF˜”Û"&Vf˜&S¶Ç’≥'Ö“&Vf˜&Sßr”R&Vf˜&S¢◊G&Á6∆FR◊Ç”Û"&Vf˜&S¢◊G&Á6∆FR◊í”Û"&Vf˜&Sß&˜FFR”CR&Vf˜&S¶&r÷7W'&VÁBgFW#¶'6ˆ«WFRgFW#¶∆VgB”Û"gFW#ßF˜”Û"gFW#¶Ç’≥'Ö“gFW#ßr”RgFW#¢◊G&Á6∆FR◊Ç”Û"gFW#¢◊G&Á6∆FR◊í”Û"gFW#¢◊&˜FFR”CRgFW#¶&r÷7W'&VÁB"Û‡–¢¬ˆ'WGFˆ„‡–¢ó––¢¬Û‚¬Fˆ7V÷VÁBÊ&ˆGíó––¢¬Û‡–¢ì∞–ß––
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import { createPortal } from "react-dom";
+import { gsap } from "gsap";
+import { animate as motionAnimate, motion, useReducedMotion } from "framer-motion";
+import { GooeyInput } from "./ui/gooey-input";
+import { GradientHoverButton } from "./ui/GradientHoverButton";
+import planeDisplayUrl from "../icons/waitlist/plane-display.png?url";
+import waitlistDisplayUrl from "../icons/waitlist/waitlist-display.png?url";
+import planeCtaUrl from "../icons/waitlist/plane-cta.png?url";
+
+const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
+const smoothstep = (value: number) => value * value * (3 - 2 * value);
+
+type Position = { x: number; y: number; progress: number };
+type LockupTransform = { x: number; y: number; rotation: number };
+type UsernameStatus = "idle" | "checking" | "available" | "taken" | "invalid" | "error";
+type ReservationState = { stage: "pending" | "confirmed"; username: string; email?: string } | null;
+
+const LOCAL_RESERVED_USERNAMES = new Set([
+  "admin", "administrator", "api", "billing", "contact", "cursor", "diana", "help",
+  "jijo", "joji", "lao", "lao_so", "login", "moderator", "nik", "oni", "official",
+  "root", "security", "staff", "support", "system", "team", "waitlist", "www",
+]);
+const LOCAL_BLOCKED_USERNAME_TERMS = [
+  "abuse", "aryan", "bastard", "bigot", "chink", "cracker", "cunt", "dyke",
+  "faggot", "gook", "hate", "heil", "hitler", "homo", "jihad", "kkk", "kike",
+  "lynch", "nazi", "negro", "pedo", "racist", "rape", "rapist", "retard",
+  "slut", "spic", "terrorist", "tranny", "whore",
+];
+
+function locallyValidateUsername(username: string) {
+  if (!/^[a-z0-9_]{3,20}$/.test(username)) return "Use 3‚Äì20 letters, numbers, or underscores.";
+  if (LOCAL_RESERVED_USERNAMES.has(username)) return "That username is reserved. Try another.";
+  const moderationKey = username.toLowerCase()
+    .replace(/[01345@$!]/g, (character) => ({ "0": "o", "1": "i", "3": "e", "4": "a", "5": "s", "@": "a", "$": "s", "!": "i" })[character] || character)
+    .replace(/[_-]/g, "");
+  if (LOCAL_BLOCKED_USERNAME_TERMS.some((term) => moderationKey.includes(term))) return "Choose a different username.";
+  return null;
+}
+
+function usernameStatusLabel(status: UsernameStatus, message: string) {
+  if (status === "checking") return "Checking";
+  if (status === "available") return "Available";
+  if (status === "taken") return "Taken";
+  if (status === "invalid") return message.startsWith("That username is reserved") ? "Reserved" : "Choose another";
+  if (status === "error") return "Looks good";
+  return "";
+}
+
+function ReservationPanel({ reservation, reduceMotion }: { reservation: NonNullable<ReservationState>; reduceMotion: boolean }) {
+  const confirmed = reservation.stage === "confirmed";
+  const shareText = encodeURIComponent(`I secured @${reservation.username} for LAO.`);
+  const shareUrl = `https://x.com/intent/post?text=${shareText}&url=${encodeURIComponent("https://lao.lt")}`;
+
+  return (
+    <div className="mx-auto flex max-w-[560px] flex-col items-center">
+      <div className="mb-10 mt-1 h-[240px] w-full [perspective:1100px] sm:h-[270px]">
+        <motion.div
+          className="relative mx-auto h-full w-[min(86%,390px)] [transform-style:preserve-3d]"
+          initial={{ rotateX: -5, rotateY: -35, rotateZ: -2 }}
+          animate={reduceMotion ? { rotateX: 0, rotateY: 0, rotateZ: 0 } : { rotateX: [-5, 2, -5], rotateY: [-35, 35, 325], rotateZ: [-2, 1, -2] }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 11, ease: "easeInOut", repeat: Infinity, repeatDelay: 0.8 }}
+        >
+          <div className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-[24px] border border-black/10 bg-[#e9e0cc] p-6 text-left shadow-[0_28px_55px_rgba(0,0,0,.22)] [backface-visibility:hidden] sm:p-8">
+            <div className="flex items-start justify-between font-mono text-[9px] uppercase tracking-[0.14em] text-[#57534d]">
+              <span>LAO WAITLIST</span><span>{confirmed ? "LOCKED" : "HELD 24H"}</span>
+            </div>
+            <div>
+              <p className="m-0 font-serif text-[42px] leading-none text-[#181818] sm:text-[54px]">@{reservation.username}</p>
+              <div className="mt-6 flex justify-between border-t border-black/25 pt-3 font-mono text-[8px] uppercase tracking-[.12em] text-[#57534d]">
+                <span>Position<br />reserved</span><span>Status<br />{confirmed ? "confirmed" : "email pending"}</span>
+              </div>
+            </div>
+          </div>
+          <div className="absolute inset-0 grid place-items-center overflow-hidden rounded-[24px] border border-black/10 bg-[#e9e0cc] shadow-[0_28px_55px_rgba(0,0,0,.22)] [backface-visibility:hidden] [transform:rotateY(180deg)]">
+            <div className="flex flex-col items-center gap-3 opacity-75">
+              <img src={planeDisplayUrl} alt="" className="h-auto w-[126px]" />
+              <img src={waitlistDisplayUrl} alt="" className="h-auto w-[126px]" />
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      <h2 id="waitlist-title" className="site-heading m-0 text-ink-800">
+        {confirmed ? "It‚Äôs yours." : "Check your inbox."}
+      </h2>
+      <p className="mx-auto mb-7 mt-4 max-w-[510px] text-pretty text-[17px] leading-[1.6] text-[#3E4A5C]">
+        {confirmed
+          ? `@${reservation.username} is locked. You‚Äôre on the LAO waitlist. I‚Äôll email you when early access is ready.`
+          : `I‚Äôm holding @${reservation.username} for 24 hours. Confirm ${reservation.email || "your email"} to lock it and join the waitlist.`}
+      </p>
+
+      {confirmed && (
+        <a
+          href={shareUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-[#171717] px-7 font-mono text-[12px] uppercase tracking-[.09em] text-white transition-colors hover:bg-[#303030] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+        >
+          <span aria-hidden="true" className="text-base">ùïè</span>
+          Share on X
+        </a>
+      )}
+      {!confirmed && <p className="m-0 font-mono text-[11px] uppercase tracking-[.09em] text-[#687080]">The link expires after 24 hours.</p>}
+    </div>
+  );
+}
+
+export default function FloatingWaitlist() {
+  const reduceMotion = useReducedMotion();
+  const slotRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const formContentRef = useRef<HTMLDivElement>(null);
+  const lockupRef = useRef<HTMLDivElement>(null);
+  const openLabelRef = useRef<HTMLSpanElement>(null);
+  const peekButtonRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const positionRef = useRef<Position>({ x: 0, y: 0, progress: 0 });
+  const renderRef = useRef<() => void>(() => undefined);
+  const openRef = useRef(false);
+  const peekingRef = useRef(true);
+  const movingRef = useRef(false);
+  const transitioningRef = useRef(false);
+  const forcePeekRef = useRef(false);
+  const transitionIdRef = useRef(0);
+  const activeAnimationsRef = useRef<Array<{ stop: () => void }>>([]);
+  const [slotHeight, setSlotHeight] = useState(720);
+  const [ready, setReady] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [dialogScrollable, setDialogScrollable] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [peeking, setPeekingState] = useState(true);
+  const [moving, setMoving] = useState(false);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [description, setDescription] = useState("");
+  const [usernameStatus, setUsernameStatus] = useState<UsernameStatus>("idle");
+  const [usernameMessage, setUsernameMessage] = useState("");
+  const [checkedUsername, setCheckedUsername] = useState("");
+  const [formMessage, setFormMessage] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [reservation, setReservation] = useState<ReservationState>(null);
+
+  useEffect(() => setMounted(true), []);
+
+  const setMovingState = useCallback((next: boolean) => {
+    if (movingRef.current === next) return;
+    movingRef.current = next;
+    setMoving(next);
+  }, []);
+
+  const stopActiveAnimations = useCallback(() => {
+    activeAnimationsRef.current.forEach((animation) => animation.stop());
+    activeAnimationsRef.current = [];
+  }, []);
+
+  const openWaitlist = useCallback(() => {
+    if (openRef.current) return;
+    forcePeekRef.current = false;
+    openRef.current = true;
+    transitioningRef.current = true;
+    setMovingState(true);
+    setOpen(true);
+  }, [setMovingState]);
+
+  const requestClose = useCallback((forcePeek: boolean) => {
+    if (!openRef.current) return;
+    forcePeekRef.current = forcePeek;
+    openRef.current = false;
+    transitioningRef.current = true;
+    setMovingState(true);
+    setOpen(false);
+  }, [setMovingState]);
+
+  const closeWaitlist = useCallback(() => requestClose(false), [requestClose]);
+  const returnWaitlistToSide = useCallback(() => requestClose(true), [requestClose]);
+
+  const checkUsername = useCallback(async (candidate = username) => {
+    const normalized = candidate.trim().replace(/^@+/, "").toLowerCase();
+    setUsername(normalized);
+    setCheckedUsername("");
+    const localValidationMessage = locallyValidateUsername(normalized);
+    if (localValidationMessage) {
+      setUsernameStatus("invalid");
+      setUsernameMessage(localValidationMessage);
+      return false;
+    }
+
+    setUsernameStatus("checking");
+    setUsernameMessage("Checking‚Ä¶");
+    try {
+      const response = await fetch(`/api/username?username=${encodeURIComponent(normalized)}`, {
+        headers: { Accept: "application/json" },
+      });
+      const result = await response.json() as { available?: boolean; message?: string };
+      if (response.ok && result.available) {
+        setUsernameStatus("available");
+        setUsernameMessage(`@${normalized} is available.`);
+        setCheckedUsername(normalized);
+        return true;
+      }
+      if (response.status === 404 || response.status === 503) {
+        // Astro's local preview does not run Pages Functions. The final submit
+        // still checks the database after D1 is bound on Cloudflare.
+        setUsernameStatus("available");
+        setUsernameMessage("Looks good. Availability is confirmed when you reserve it.");
+        setCheckedUsername(normalized);
+        return true;
+      }
+      setUsernameStatus(response.status === 409 ? "taken" : "invalid");
+      setUsernameMessage(result.message || "That username isn‚Äôt available.");
+      return false;
+    } catch {
+      // Keep local previews usable when Pages Functions are not running.
+      setUsernameStatus("available");
+      setUsernameMessage("Looks good. Availability is confirmed when you reserve it.");
+      setCheckedUsername(normalized);
+      return true;
+    }
+  }, [username]);
+
+  const submitWaitlist = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (submitting) return;
+    setFormMessage("");
+    setSubmitting(true);
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setFormMessage("Enter a valid email address.");
+      setSubmitting(false);
+      return;
+    }
+
+    const normalizedUsername = username.trim().replace(/^@+/, "").toLowerCase();
+    const usernameIsReady = checkedUsername === normalizedUsername && usernameStatus === "available"
+      ? true
+      : await checkUsername(normalizedUsername);
+    if (!usernameIsReady) {
+      setSubmitting(false);
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ username: normalizedUsername, email, first_animation: description, company: "" }),
+      });
+      const result = await response.json() as { message?: string; field?: string; username?: string; status?: string };
+      if (!response.ok) {
+        // Astro's local dev server renders the site but does not mount Pages
+        // Functions. Let the interaction be previewed locally; Cloudflare D1
+        // remains the authority for the actual reservation in production.
+        if ((response.status === 404 || response.status === 503) && window.location.hostname === "127.0.0.1") {
+          setReservation({ stage: "pending", username: normalizedUsername, email });
+          return;
+        }
+        if (result.field === "username") {
+          setUsernameStatus("taken");
+          setUsernameMessage(result.message || "That username is taken. Try another.");
+        } else {
+          setFormMessage(result.message || "Something went wrong. Try again.");
+        }
+        return;
+      }
+      setReservation({ stage: "pending", username: result.username || normalizedUsername, email });
+    } catch {
+      if (window.location.hostname === "127.0.0.1") {
+        setReservation({ stage: "pending", username: normalizedUsername, email });
+      } else {
+        setFormMessage("Unable to reach the waitlist. Check your connection and try again.");
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  }, [checkUsername, checkedUsername, description, email, submitting, username, usernameStatus]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const waitlistState = params.get("waitlist");
+    if (waitlistState === "confirmed") {
+      const confirmedUsername = (params.get("username") || "").replace(/^@+/, "");
+      if (confirmedUsername) {
+        setReservation({ stage: "confirmed", username: confirmedUsername });
+        requestAnimationFrame(openWaitlist);
+      }
+    } else if (waitlistState === "expired" || waitlistState === "invalid") {
+      setFormMessage(waitlistState === "expired"
+        ? "That confirmation link expired. Submit the form again to reclaim the username."
+        : "That confirmation link isn‚Äôt valid.");
+      requestAnimationFrame(openWaitlist);
+    }
+  }, [openWaitlist]);
+
+  const getClosedPosition = useCallback((forcePeek = false): Position => {
+    const slot = slotRef.current;
+    const card = cardRef.current;
+    if (!slot || !card) return positionRef.current;
+
+    const slotRect = slot.getBoundingClientRect();
+    const cardWidth = slotRect.width;
+    const cardHeight = card.scrollHeight;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const safeRight = Math.max(0, Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--waitlist-safe-right")) || 0);
+
+    card.style.width = `${cardWidth}px`;
+
+    // Match Feather's independent corner card: roughly one quarter of its
+    // width remains on-screen, pinned to the top-right before the section.
+    const peekVisibleFraction = viewportWidth < 640 ? 0.28 : 0.24;
+    // Keep the desktop corner card 16px left of its base position: this moves
+    // it 8px right from the previous placement. Keep the
+    // mobile position unchanged so the visible paper triangle remains generous.
+    const peekX = viewportWidth - cardWidth * peekVisibleFraction - safeRight - (viewportWidth >= 640 ? 16 : 0);
+    const peekY = viewportWidth < 640 ? 16 : 24;
+
+    // Begin the hand-off just below the viewport. Finish early enough that the
+    // card is tracking its real slot before the form can be interacted with.
+    const start = viewportHeight * 1.16;
+    const end = Math.max(84, viewportHeight * 0.13);
+    const rawEntryProgress = clamp01((start - slotRect.top) / (start - end));
+    const entryProgress = smoothstep(clamp01(rawEntryProgress / 0.94));
+
+    // The card is an independent corner object, not a permanently fixed
+    // replacement for its slot. After its full-form moment has been visible,
+    // hand it back to the original corner peek while the reader continues
+    // down the page. Reversing the same progress when scrolling up keeps the
+    // transition continuous in both directions.
+    const exitStart = viewportHeight * 0.55;
+    const exitEnd = -Math.min(cardHeight * 0.16, viewportHeight * 0.18);
+    const exitProgress = smoothstep(clamp01((exitStart - slotRect.bottom) / (exitStart - exitEnd)));
+    const progress = forcePeek ? 0 : entryProgress * (1 - exitProgress);
+
+    return {
+      x: gsap.utils.interpolate(
+        peekX - cardWidth * peekVisibleFraction * 0.4,
+        slotRect.left,
+        progress,
+      ),
+      y: gsap.utils.interpolate(peekY - 240, slotRect.top, progress),
+      progress,
+    };
+  }, []);
+
+  const getLockupTransform = useCallback((progress: number): LockupTransform => {
+    const card = cardRef.current;
+    const lockup = lockupRef.current;
+    if (!card || !lockup) return { x: 0, y: 0, rotation: 0 };
+
+    const isMobile = window.innerWidth < 600;
+    const isTablet = window.innerWidth >= 600 && window.innerWidth < 1024;
+    // A +32 / +32 local offset becomes a clean horizontal shift once the
+    // peeking card is rotated -45¬∞, putting the entire lockup inside the
+    // mobile paper triangle rather than straddling its diagonal edge.
+    const mobileTriangleInset = isMobile ? 32 : 0;
+    // Compensate for the card's -45¬∞ rotation so the mobile lockup moves
+    // straight up by its established 48px, with no sideways drift.
+    const mobileUpOffset = isMobile ? 48 / Math.SQRT2 : 0;
+    // Tablet needs the same rotation-aware treatment: the original 24px lift
+    // plus the requested additional 16px.
+    const tabletUpOffset = isTablet ? 40 / Math.SQRT2 : 0;
+    // Equal local X/Y movement maps to a straight rightward shift through the
+    // card's -45¬∞ rotation, preserving the vertical placement.
+    const tabletRightOffset = isTablet ? 24 / Math.SQRT2 : 0;
+    const peekX = card.offsetWidth * 0.12 - lockup.offsetWidth / 2 + mobileTriangleInset + mobileUpOffset + tabletUpOffset + tabletRightOffset;
+    const peekY = 120 - lockup.offsetHeight / 2 + mobileTriangleInset - mobileUpOffset - tabletUpOffset + tabletRightOffset;
+    const formX = (card.offsetWidth - lockup.offsetWidth) / 2;
+    const formY = isMobile ? 28 : 32;
+
+    return {
+      x: gsap.utils.interpolate(peekX, formX, progress),
+      y: gsap.utils.interpolate(peekY, formY, progress),
+      rotation: gsap.utils.interpolate(40, 0, progress),
+    };
+  }, []);
+
+  const setPeeking = useCallback((peeking: boolean) => {
+    const formContent = formContentRef.current as (HTMLDivElement & { inert?: boolean }) | null;
+    const peekButton = peekButtonRef.current;
+    if (formContent) formContent.inert = peeking;
+    if (peekButton) {
+      peekButton.style.pointerEvents = peeking ? "auto" : "none";
+      peekButton.tabIndex = peeking ? 0 : -1;
+      peekButton.setAttribute("aria-hidden", peeking ? "false" : "true");
+    }
+    if (peekingRef.current !== peeking) {
+      peekingRef.current = peeking;
+      setPeekingState(peeking);
+    }
+  }, []);
+
+  useLayoutEffect(() => {
+    const card = cardRef.current;
+    const slot = slotRef.current;
+    if (!card || !slot) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let frame = 0;
+    let previousScroll = window.scrollY;
+    let filteredVelocity = 0;
+
+    const render = () => {
+      frame = 0;
+      if (openRef.current || transitioningRef.current) return;
+
+      const next = getClosedPosition(forcePeekRef.current);
+      const scrollDelta = window.scrollY - previousScroll;
+      previousScroll = window.scrollY;
+      filteredVelocity += (scrollDelta - filteredVelocity) * 0.22;
+
+      const inTransfer = next.progress > 0.015 && next.progress < 0.985;
+      const stretch = reduced || !inTransfer ? 0 : Math.min(0.055, Math.abs(filteredVelocity) * 0.0022);
+      const direction = Math.sign(filteredVelocity || 1);
+      const peekScale = 0.42;
+      const baseScale = gsap.utils.interpolate(peekScale, 1, next.progress);
+      const contentReveal = smoothstep(clamp01((next.progress - 0.58) / 0.36));
+      const lockupTransform = getLockupTransform(next.progress);
+
+      positionRef.current = next;
+      setMovingState(inTransfer);
+      setPeeking(next.progress < 0.985);
+      gsap.set(card, {
+        x: next.x,
+        y: next.y,
+        rotation: gsap.utils.interpolate(-45, 0, next.progress),
+        scaleX: baseScale * (1 - stretch * 0.34),
+        scaleY: baseScale * (1 + stretch),
+        skewY: reduced ? 0 : -direction * stretch * 24,
+        transformOrigin: "50% 50%",
+      });
+      gsap.set(formContentRef.current, {
+        rotation: 0,
+        autoAlpha: contentReveal,
+      });
+      gsap.set(lockupRef.current, {
+        ...lockupTransform,
+        transformOrigin: "50% 50%",
+      });
+      gsap.set(openLabelRef.current, {
+        opacity: 1 - smoothstep(next.progress),
+      });
+      setReady(true);
+    };
+
+    const requestRender = () => {
+      if (!frame) frame = requestAnimationFrame(render);
+    };
+
+    renderRef.current = requestRender;
+    const resizeObserver = new ResizeObserver(() => {
+      if (!openRef.current) setSlotHeight(card.scrollHeight);
+      requestRender();
+    });
+    resizeObserver.observe(card);
+    resizeObserver.observe(slot);
+
+    const onScroll = () => {
+      forcePeekRef.current = false;
+      requestRender();
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", requestRender, { passive: true });
+    render();
+
+    return () => {
+      cancelAnimationFrame(frame);
+      resizeObserver.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", requestRender);
+      gsap.killTweensOf([card, formContentRef.current, lockupRef.current, openLabelRef.current]);
+    };
+  }, [getClosedPosition, getLockupTransform, mounted, setMovingState, setPeeking]);
+
+  useEffect(() => {
+    openRef.current = open;
+    const card = cardRef.current;
+    const formContent = formContentRef.current as (HTMLDivElement & { inert?: boolean }) | null;
+    const lockup = lockupRef.current;
+    const openLabel = openLabelRef.current;
+    if (!card || !formContent || !lockup || !openLabel) return;
+
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const transitionId = ++transitionIdRef.current;
+    stopActiveAnimations();
+    gsap.killTweensOf([card, formContent, lockup, openLabel]);
+
+    if (open) {
+      transitioningRef.current = true;
+      setDialogScrollable(false);
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.paddingInlineEnd = scrollbarWidth > 0 ? `${scrollbarWidth}px` : "";
+      formContent.inert = false;
+      setPeeking(false);
+
+      const cardWidth = card.offsetWidth;
+      const visualHeight = Math.min(card.scrollHeight, window.innerHeight - 32);
+      const x = Math.max(16, (window.innerWidth - cardWidth) / 2);
+      const y = Math.max(16, (window.innerHeight - visualHeight) / 2);
+      const lockupTarget = getLockupTransform(1);
+      const duration = reduced ? 0 : 0.42;
+      gsap.set(formContent, { rotation: 0, autoAlpha: 0 });
+      const cardAnimation = motionAnimate(card, {
+        x,
+        y,
+        rotate: 0,
+        scaleX: 1,
+        scaleY: 1,
+        skewY: 0,
+      }, {
+        duration,
+        ease: [0.22, 1, 0.36, 1],
+      });
+      const lockupAnimation = motionAnimate(lockup, {
+        x: lockupTarget.x,
+        y: lockupTarget.y,
+        rotate: lockupTarget.rotation,
+      }, {
+        duration,
+        ease: [0.22, 1, 0.36, 1],
+      });
+      const labelAnimation = motionAnimate(openLabel, {
+        opacity: 0,
+      }, {
+        duration: reduced ? 0 : 0.16,
+        ease: "easeOut",
+      });
+      activeAnimationsRef.current = [cardAnimation, lockupAnimation, labelAnimation];
+      void cardAnimation.then(() => {
+        if (transitionIdRef.current !== transitionId || !openRef.current) return;
+        transitioningRef.current = false;
+        setMovingState(false);
+        setDialogScrollable(true);
+        gsap.set(formContent, { autoAlpha: 1 });
+        activeAnimationsRef.current = [];
+      });
+      requestAnimationFrame(() => card.focus({ preventScroll: true }));
+    } else {
+      transitioningRef.current = true;
+      setDialogScrollable(false);
+      document.documentElement.style.overflow = "";
+      document.body.style.paddingInlineEnd = "";
+      const target = getClosedPosition(forcePeekRef.current);
+      const peekScale = 0.42;
+      const targetScale = gsap.utils.interpolate(peekScale, 1, target.progress);
+      const targetReveal = smoothstep(clamp01((target.progress - 0.58) / 0.36));
+      const lockupTarget = getLockupTransform(target.progress);
+      const duration = reduced ? 0 : 0.4;
+      positionRef.current = target;
+      gsap.set(formContent, { rotation: 0, autoAlpha: 0 });
+      const cardAnimation = motionAnimate(card, {
+        x: target.x,
+        y: target.y,
+        rotate: gsap.utils.interpolate(-45, 0, target.progress),
+        scaleX: targetScale,
+        scaleY: targetScale,
+        skewY: 0,
+      }, {
+        duration,
+        ease: [0.4, 0, 0.2, 1],
+      });
+      const lockupAnimation = motionAnimate(lockup, {
+        x: lockupTarget.x,
+        y: lockupTarget.y,
+        rotate: lockupTarget.rotation,
+      }, {
+        duration,
+        ease: [0.4, 0, 0.2, 1],
+      });
+      const labelAnimation = motionAnimate(openLabel, {
+        opacity: target.progress < 0.985 ? 1 : 0,
+      }, {
+        duration: reduced ? 0 : 0.18,
+        delay: reduced ? 0 : 0.08,
+        ease: "easeOut",
+      });
+      activeAnimationsRef.current = [cardAnimation, lockupAnimation, labelAnimation];
+      void cardAnimation.then(() => {
+        if (transitionIdRef.current !== transitionId || openRef.current) return;
+        transitioningRef.current = false;
+        setMovingState(target.progress > 0.015 && target.progress < 0.985);
+        setPeeking(target.progress < 0.985);
+        if (targetReveal > 0) {
+          gsap.set(formContent, { autoAlpha: targetReveal });
+          activeAnimationsRef.current = [];
+        } else {
+          activeAnimationsRef.current = [];
+        }
+        renderRef.current();
+      });
+    }
+
+    return () => {
+      stopActiveAnimations();
+      document.documentElement.style.overflow = "";
+      document.body.style.paddingInlineEnd = "";
+    };
+  }, [getClosedPosition, getLockupTransform, mounted, open, setMovingState, setPeeking, stopActiveAnimations]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeWaitlist();
+    };
+    const onScrollIntent = () => returnWaitlistToSide();
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("wheel", onScrollIntent, { passive: true });
+    window.addEventListener("touchmove", onScrollIntent, { passive: true });
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("wheel", onScrollIntent);
+      window.removeEventListener("touchmove", onScrollIntent);
+    };
+  }, [closeWaitlist, open, returnWaitlistToSide]);
+
+  return (
+    <>
+      <div
+        ref={slotRef}
+        aria-hidden="true"
+        className="mx-auto w-full"
+        style={{ height: slotHeight }}
+      />
+
+      {mounted && createPortal(<>
+      <button
+        type="button"
+        className={`fixed inset-0 z-[110] touch-none bg-black/70 transition-opacity duration-200 ${open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`}
+        aria-label="Close waitlist"
+        tabIndex={open ? 0 : -1}
+        onPointerDown={closeWaitlist}
+        onClick={closeWaitlist}
+      />
+
+      <div
+        ref={cardRef}
+        role={open ? "dialog" : undefined}
+        aria-modal={open ? "true" : undefined}
+        aria-labelledby="waitlist-title"
+        tabIndex={open ? -1 : undefined}
+        className={`waitlist-float fixed left-0 top-0 z-[120] rounded-[28px] bg-paper outline-none will-change-transform [backface-visibility:hidden] md:rounded-[59px] ${moving ? "shadow-none" : "shadow-[0_28px_90px_rgba(0,0,0,.48)]"} ${open ? `max-h-[calc(100dvh-32px)] ${dialogScrollable ? "overflow-y-auto overscroll-contain" : "overflow-hidden"}` : "overflow-visible"} ${ready ? "visible" : "invisible"}`}
+      >
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[inherit] [contain:paint]" aria-hidden="true">
+          {!moving && <div className="waitlist-paper-texture h-full w-full opacity-45 mix-blend-multiply" />}
+        </div>
+
+        <button
+          ref={peekButtonRef}
+          type="button"
+          aria-label="Open the waitlist"
+          className="absolute left-0 top-0 z-30 h-[min(34%,190px)] w-[28%] cursor-pointer rounded-tl-[inherit] focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-4"
+          onClick={openWaitlist}
+        />
+
+        <div
+          aria-hidden="true"
+          className={`pointer-events-none absolute left-0 top-0 z-10 h-[min(34%,190px)] w-[28%] rounded-tl-[inherit] bg-paper/65 transition-opacity duration-300 ${peeking && !open ? "opacity-100" : "opacity-0"}`}
+        />
+
+        <div
+          ref={lockupRef}
+          aria-hidden="true"
+          className="pointer-events-none absolute left-0 top-0 z-20 will-change-transform [backface-visibility:hidden]"
+        >
+          <div className="flex flex-col items-center gap-4">
+            <img src={planeDisplayUrl} alt="" className="h-auto w-[150px] opacity-70 min-[600px]:w-[164px] md:w-[182px]" />
+            <img src={waitlistDisplayUrl} alt="" className="h-auto w-[150px] opacity-80 min-[600px]:w-[164px] md:w-[182px]" />
+          </div>
+          <span ref={openLabelRef} className="mt-1 block text-center font-mono text-[20px] uppercase tracking-[0.14em] text-[#4a4a4a] sm:text-[22px]">Open</span>
+        </div>
+
+        <div ref={formContentRef} className="relative z-[1] px-[22px] py-[44px] text-center will-change-[opacity] md:px-[48px] md:py-[52px]">
+          <div aria-hidden="true" className="h-[220px]" />
+
+          {reservation ? (
+            <ReservationPanel reservation={reservation} reduceMotion={Boolean(reduceMotion)} />
+          ) : (
+          <div className="mx-auto max-w-[560px]">
+            <h2 id="waitlist-title" className="site-heading m-0 text-ink-800">
+              Get in early. Take a good username.
+            </h2>
+            <p className="mx-auto mb-[34px] mt-[16px] max-w-[520px] text-pretty text-[17px] leading-[1.6] text-[#3E4A5C]">
+              Early access goes out in waves. Tell me what you‚Äôd animate and you‚Äôll be in an earlier one.
+            </p>
+
+            <form method="POST" action="/api/waitlist" onSubmit={submitWaitlist} noValidate className="flex flex-col gap-[22px] text-left">
+              <div className="relative flex flex-col gap-2">
+                <label htmlFor="lao-username" className="sr-only">Username</label>
+                <GooeyInput
+                  id="lao-username"
+                  name="username"
+                  required
+                  autoComplete="off"
+                  placeholder="Username"
+                  showPlaceholderWhenCollapsed
+                  className="w-full justify-start"
+                  classNames={{ input: "pr-32 text-[16px] sm:text-sm" }}
+                  collapsedWidth="100%"
+                  expandedWidth="calc(100% - 64px)"
+                  iconName="username"
+                  disableGooey
+                  value={username}
+                  onValueChange={(value) => {
+                    setUsername(value);
+                    setUsernameStatus("idle");
+                    setUsernameMessage("");
+                    setCheckedUsername("");
+                  }}
+                  onBlur={() => void checkUsername()}
+                  aria-describedby={usernameMessage ? "lao-username-status" : undefined}
+                  aria-invalid={usernameStatus === "taken" || usernameStatus === "invalid"}
+                  disabled={submitting}
+                />
+                {usernameMessage && (
+                  <span
+                    id="lao-username-status"
+                    role="status"
+                    aria-live="polite"
+                    title={usernameMessage}
+                    className={`pointer-events-none absolute right-5 top-[17px] z-10 max-w-[42%] truncate rounded-full px-2 py-0.5 text-[10px] font-mono uppercase tracking-[.04em] ${usernameStatus === "available" ? "bg-[#dcebdc] text-[#426b45]" : usernameStatus === "checking" ? "bg-[#e3e7ec] text-[#586473]" : "bg-[#f3dcd7] text-[#983b32]"}`}
+                  >
+                    {usernameStatusLabel(usernameStatus, usernameMessage)}
+                  </span>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label htmlFor="lao-email" className="sr-only">Email</label>
+                <GooeyInput
+                  id="lao-email"
+                  name="email"
+                  type="email"
+                  required
+                  autoComplete="email"
+                  placeholder="Email"
+                  showPlaceholderWhenCollapsed
+                  className="w-full justify-start"
+                  classNames={{ input: "text-[16px] sm:text-sm" }}
+                  collapsedWidth="100%"
+                  expandedWidth="calc(100% - 64px)"
+                  iconName="email"
+                  disableGooey
+                  value={email}
+                  onValueChange={(value) => {
+                    setEmail(value);
+                    setFormMessage("");
+                  }}
+                  disabled={submitting}
+                />
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <label htmlFor="lao-first" className="sr-only">What would you animate first?</label>
+                <GooeyInput
+                  id="lao-first"
+                  name="first_animation"
+                  placeholder="What would you animate first?"
+                  showPlaceholderWhenCollapsed
+                  className="w-full justify-start"
+                  classNames={{ input: "text-[16px] sm:text-sm" }}
+                  collapsedWidth="100%"
+                  expandedWidth="calc(100% - 64px)"
+                  iconName="animation"
+                  disableGooey
+                  value={description}
+                  onValueChange={setDescription}
+                  maxLength={280}
+                  disabled={submitting}
+                />
+              </div>
+
+              <input type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute left-[-9999px] h-px w-px opacity-0" />
+
+              <GradientHoverButton
+                type="submit"
+                disabled={submitting || usernameStatus === "checking"}
+                background="linear-gradient(in oklab 180deg, oklab(0% 0 0) 0%, oklab(48.5% -0.018 -0.082) 100%)"
+                hoverBackground="linear-gradient(in oklab 180deg, oklab(10% 0 -0.01) 0%, oklab(58% -0.03 -0.13) 100%)"
+                borderColor="#292A2A"
+                hoverBorderColor="#363636"
+                className="mt-[6px] flex w-full items-center justify-center gap-3 rounded-full p-4 font-mono text-[13px] uppercase tracking-[0.08em] text-text-hi shadow-[0_4px_14px_0_rgba(0,0,0,0.39)]"
+              >
+                <img src={planeCtaUrl} alt="" aria-hidden="true" className="h-5 w-auto object-contain" />
+                <span>{submitting ? "Holding your username‚Ä¶" : "Claim my spot"}</span>
+              </GradientHoverButton>
+
+              {formMessage && <p role="alert" className="m-0 text-center text-[14px] leading-[1.5] text-[#a33b32]">{formMessage}</p>}
+
+              <p className="m-0 mt-[6px] text-center text-[14px] leading-[1.6] text-[#596270]">
+                No spam. One email when it‚Äôs ready, and the occasional build update you can leave anytime.
+              </p>
+            </form>
+          </div>
+          )}
+        </div>
+      </div>
+
+      {open && (
+        <button
+          ref={closeButtonRef}
+          type="button"
+          aria-label="Close waitlist"
+          onPointerDown={closeWaitlist}
+          onClick={closeWaitlist}
+          className="group fixed right-[max(12px,env(safe-area-inset-right))] top-[max(12px,env(safe-area-inset-top))] z-[130] grid size-12 touch-manipulation place-items-center rounded-full bg-[#f4f1eb] text-[#3c3c3c] shadow-xl transition-colors duration-150 hover:bg-[#ded9cf] focus-visible:bg-[#ded9cf] focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-3"
+        >
+          <span aria-hidden="true" className="relative block size-5 before:absolute before:left-1/2 before:top-1/2 before:h-[2px] before:w-5 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:bg-current after:absolute after:left-1/2 after:top-1/2 after:h-[2px] after:w-5 after:-translate-x-1/2 after:-translate-y-1/2 after:-rotate-45 after:bg-current" />
+        </button>
+      )}
+      </>, document.body)}
+    </>
+  );
+}
