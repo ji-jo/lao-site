@@ -146,6 +146,15 @@ export default function FloatingWaitlist() {
   const [formMessage, setFormMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [reservation, setReservation] = useState<ReservationState>(null);
+  const lockupImageClassName = open
+    ? "h-auto w-[86px] opacity-75 min-[600px]:w-[164px] md:w-[182px]"
+    : "h-auto w-[112px] opacity-75 min-[600px]:w-[164px] md:w-[182px]";
+  const formContentClassName = open
+    ? "relative z-[1] px-3 py-4 text-center will-change-[opacity] sm:px-[22px] sm:py-[44px] md:px-[48px] md:py-[52px]"
+    : "relative z-[1] px-4 py-6 text-center will-change-[opacity] sm:px-[22px] sm:py-[44px] md:px-[48px] md:py-[52px]";
+  const lockupSpacerClassName = open
+    ? "h-[116px] min-[600px]:h-[220px]"
+    : "h-[164px] min-[600px]:h-[220px]";
 
   useEffect(() => setMounted(true), []);
 
@@ -179,7 +188,6 @@ export default function FloatingWaitlist() {
   }, [setMovingState]);
 
   const closeWaitlist = useCallback(() => requestClose(false), [requestClose]);
-  const returnWaitlistToSide = useCallback(() => requestClose(true), [requestClose]);
 
   const checkUsername = useCallback(async (candidate = username) => {
     const normalized = candidate.trim().replace(/^@+/, "").toLowerCase();
@@ -315,10 +323,10 @@ export default function FloatingWaitlist() {
     // Match Feather's independent corner card: roughly one quarter of its
     // width remains on-screen, pinned to the top-right before the section.
     const peekVisibleFraction = viewportWidth < 640 ? 0.28 : 0.24;
-    // Keep the desktop corner card 16px left of its base position: this moves
-    // it 8px right from the previous placement. Keep the
-    // mobile position unchanged so the visible paper triangle remains generous.
-    const peekX = viewportWidth - cardWidth * peekVisibleFraction - safeRight - (viewportWidth >= 640 ? 16 : 0);
+    // On phones, keep the minimized card 40px farther right so it reads as a
+    // corner tab instead of sitting over the page content.
+    const mobilePeekOffset = viewportWidth < 640 ? 40 : 0;
+    const peekX = viewportWidth - cardWidth * peekVisibleFraction - safeRight - (viewportWidth >= 640 ? 16 : 0) + mobilePeekOffset;
     const peekY = viewportWidth < 640 ? 16 : 24;
 
     // Begin the hand-off just below the viewport. Finish early enough that the
@@ -501,9 +509,10 @@ export default function FloatingWaitlist() {
       setPeeking(false);
 
       const cardWidth = card.offsetWidth;
-      const visualHeight = Math.min(card.scrollHeight, window.innerHeight - 32);
-      const x = Math.max(16, (window.innerWidth - cardWidth) / 2);
-      const y = Math.max(16, (window.innerHeight - visualHeight) / 2);
+      const safeInset = window.innerWidth < 640 ? 10 : 16;
+      const visualHeight = Math.min(card.scrollHeight, window.innerHeight - safeInset * 2);
+      const x = Math.max(safeInset, (window.innerWidth - cardWidth) / 2);
+      const y = Math.max(safeInset, (window.innerHeight - visualHeight) / 2);
       const lockupTarget = getLockupTransform(1);
       const duration = reduced ? 0 : 0.42;
       gsap.set(formContent, { rotation: 0, autoAlpha: 0 });
@@ -609,16 +618,11 @@ export default function FloatingWaitlist() {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") closeWaitlist();
     };
-    const onScrollIntent = () => returnWaitlistToSide();
     window.addEventListener("keydown", onKeyDown);
-    window.addEventListener("wheel", onScrollIntent, { passive: true });
-    window.addEventListener("touchmove", onScrollIntent, { passive: true });
     return () => {
       window.removeEventListener("keydown", onKeyDown);
-      window.removeEventListener("wheel", onScrollIntent);
-      window.removeEventListener("touchmove", onScrollIntent);
     };
-  }, [closeWaitlist, open, returnWaitlistToSide]);
+  }, [closeWaitlist, open]);
 
   return (
     <>
@@ -645,7 +649,7 @@ export default function FloatingWaitlist() {
         aria-modal={open ? "true" : undefined}
         aria-labelledby="waitlist-title"
         tabIndex={open ? -1 : undefined}
-        className={`waitlist-float fixed left-0 top-0 z-[120] rounded-[28px] bg-paper outline-none will-change-transform [backface-visibility:hidden] md:rounded-[59px] ${moving ? "shadow-none" : "shadow-[0_28px_90px_rgba(0,0,0,.48)]"} ${open ? `max-h-[calc(100dvh-32px)] ${dialogScrollable ? "overflow-y-auto overscroll-contain" : "overflow-hidden"}` : "overflow-visible"} ${ready ? "visible" : "invisible"}`}
+        className={`waitlist-float fixed left-0 top-0 z-[120] rounded-[28px] bg-paper outline-none will-change-transform [backface-visibility:hidden] md:rounded-[59px] ${moving ? "shadow-none" : "shadow-[0_28px_90px_rgba(0,0,0,.48)]"} ${open ? `max-h-[calc(100dvh-20px)] max-md:max-h-[calc(100dvh-12px)] ${dialogScrollable ? "overflow-y-auto overscroll-contain" : "overflow-hidden max-md:overflow-y-auto max-md:overscroll-contain"}` : "overflow-visible"} ${ready ? "visible" : "invisible"}`}
       >
         <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[inherit] [contain:paint]" aria-hidden="true">
           {!moving && <div className="waitlist-paper-texture h-full w-full opacity-45 mix-blend-multiply" />}
@@ -669,15 +673,15 @@ export default function FloatingWaitlist() {
           aria-hidden="true"
           className="pointer-events-none absolute left-0 top-0 z-20 will-change-transform [backface-visibility:hidden]"
         >
-          <div className="flex flex-col items-center gap-4">
-            <img src={planeDisplayUrl} alt="" className="h-auto w-[150px] opacity-70 min-[600px]:w-[164px] md:w-[182px]" />
-            <img src={waitlistDisplayUrl} alt="" className="h-auto w-[150px] opacity-80 min-[600px]:w-[164px] md:w-[182px]" />
+          <div className={`flex flex-col items-center ${open ? "gap-1.5 sm:gap-4" : "gap-2 sm:gap-4"}`}>
+            <img src={planeDisplayUrl} alt="" className={lockupImageClassName} />
+            <img src={waitlistDisplayUrl} alt="" className={lockupImageClassName} />
           </div>
           <span ref={openLabelRef} className="mt-1 block text-center font-mono text-[20px] uppercase tracking-[0.14em] text-[#4a4a4a] sm:text-[22px]">Open</span>
         </div>
 
-        <div ref={formContentRef} className="relative z-[1] px-[22px] py-[44px] text-center will-change-[opacity] md:px-[48px] md:py-[52px]">
-          <div aria-hidden="true" className="h-[220px]" />
+        <div ref={formContentRef} className={formContentClassName}>
+          <div aria-hidden="true" className={lockupSpacerClassName} />
 
           {reservation ? (
             <ReservationPanel reservation={reservation} reduceMotion={Boolean(reduceMotion)} />
@@ -686,11 +690,11 @@ export default function FloatingWaitlist() {
             <h2 id="waitlist-title" className="site-heading m-0 text-ink-800">
               Get in early. Take a good username.
             </h2>
-            <p className="mx-auto mb-[34px] mt-[16px] max-w-[520px] text-pretty text-[17px] leading-[1.6] text-[#3E4A5C]">
+            <p className="mx-auto mb-5 mt-3 max-w-[520px] text-pretty text-[15px] leading-[1.45] text-[#3E4A5C] sm:mb-[34px] sm:mt-[16px] sm:text-[17px] sm:leading-[1.6]">
               Early access goes out in waves. Tell me what you’d animate and you’ll be in an earlier one.
             </p>
 
-            <form method="POST" action="/api/waitlist" onSubmit={submitWaitlist} noValidate className="flex flex-col gap-[22px] text-left">
+            <form method="POST" action="/api/waitlist" onSubmit={submitWaitlist} noValidate className={`${open ? "gap-3" : "gap-4"} flex flex-col text-left sm:gap-[22px]`}>
               <div className="relative flex flex-col gap-2">
                 <label htmlFor="lao-username" className="sr-only">Username</label>
                 <GooeyInput
@@ -785,7 +789,7 @@ export default function FloatingWaitlist() {
                 hoverBackground="linear-gradient(in oklab 180deg, oklab(10% 0 -0.01) 0%, oklab(58% -0.03 -0.13) 100%)"
                 borderColor="#292A2A"
                 hoverBorderColor="#363636"
-                className="mt-[6px] flex w-full items-center justify-center gap-3 rounded-full p-4 font-mono text-[13px] uppercase tracking-[0.08em] text-text-hi shadow-[0_4px_14px_0_rgba(0,0,0,0.39)]"
+                className={`${open ? "mt-0 p-3.5" : "mt-[6px] p-4"} flex w-full items-center justify-center gap-3 rounded-full font-mono text-[13px] uppercase tracking-[0.08em] text-text-hi shadow-[0_4px_14px_0_rgba(0,0,0,0.39)]`}
               >
                 <img src={planeCtaUrl} alt="" aria-hidden="true" className="h-5 w-auto object-contain" />
                 <span>{submitting ? "Holding your username…" : "Claim my spot"}</span>

@@ -413,7 +413,7 @@ const CrowdCanvas = ({
     };
   }, [cols, count, maxFps, maxPixels, pixelRatio, rows, scale, src]);
   return (
-    <canvas ref={canvasRef} className="pointer-events-none absolute bottom-0 h-screen w-full [contain:strict]" />
+    <canvas ref={canvasRef} className="pointer-events-none absolute bottom-0 h-full w-full [contain:strict]" />
   );
 };
 

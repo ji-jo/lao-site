@@ -29,6 +29,7 @@ export const DEFAULT_INK = "#ff2d3f";
 export const DEFAULT_OPACITY = 0.35; // marker default
 export const MARKER_MAX_OPACITY = 0.85;
 export const DEFAULT_MARK_TYPE: MarkType = "highlight";
+export const DEFAULT_PEN: PenTip = "slant";
 const DEFAULT_OPACITY_BY_PEN: Record<PenTip, number> = {
   slant: DEFAULT_OPACITY,
   round: DEFAULT_OPACITY,
@@ -52,8 +53,8 @@ const SelectionStyleContext = createContext<SelectionStyleContextValue | null>(
 /** Holds the dock's selection style so it drives the live SelectionMarker. */
 export function SelectionStyleProvider({ children }: { children: ReactNode }) {
   const [color, setColor] = useState(DEFAULT_INK);
-  // Freehand brush is the first tool users see and the one standing up in the dock.
-  const [pen, setPen] = useState<PenTip>("brush");
+  // Start in highlighter mode so text marking is immediately available.
+  const [pen, setPen] = useState<PenTip>(DEFAULT_PEN);
   const [opacityByPen, setOpacityByPen] =
     useState<Record<PenTip, number>>(DEFAULT_OPACITY_BY_PEN);
   const [markType, setMarkType] = useState<MarkType>(DEFAULT_MARK_TYPE);

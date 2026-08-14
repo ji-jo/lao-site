@@ -95,8 +95,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="pointer-events-none absolute bottom-0 left-1/2 z-20 h-screen w-screen -translate-x-1/2 overflow-visible [contain:layout_paint_style]">
-        <CrowdCanvas src="/images/peeps/all-peeps ori.webp" rows={15} cols={7} count={8} scale={1} maxFps={15} pixelRatio={0.75} maxPixels={1_200_000} />
+      <div className="pointer-events-none absolute -bottom-[24vh] left-1/2 z-20 h-[38vh] w-screen -translate-x-1/2 overflow-visible [contain:layout_paint_style]">
+        <CrowdCanvas src="/images/peeps/all-peeps ori.webp" rows={15} cols={7} count={8} scale={0.25} maxFps={15} pixelRatio={0.75} maxPixels={1_200_000} />
       </div>
     </section>
   );
