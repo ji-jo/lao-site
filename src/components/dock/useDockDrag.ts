@@ -47,7 +47,9 @@ const SETTLE = { type: "spring", stiffness: 300, damping: 27, velocity: 0 } as c
 // upright on leaving - it does NOT track the cursor angle.
 const ROT_SNAP = { type: "spring", stiffness: 520, damping: 38 } as const;
 const SCALE_MIN = 0.75;
-const MOBILE_COMPACT_QUERY = "(max-width: 639px)";
+// A narrow desktop window still needs the fully expanded dock. Compact-only
+// behavior is reserved for actual touch-first mobile devices.
+const MOBILE_COMPACT_QUERY = "(max-width: 639px) and (pointer: coarse)";
 
 const layoutFadeTransition = (appearing: boolean) =>
   ({ duration: FADE, ease: "easeInOut" as const, delay: appearing ? EXPAND_FADE : 0 });

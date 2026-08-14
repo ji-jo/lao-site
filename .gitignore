@@ -20,3 +20,4 @@ public/audio/audio/
 
 # Original media masters kept locally; only optimized derivatives ship.
 source-media/
+*.local
