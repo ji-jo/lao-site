@@ -121,16 +121,18 @@ export function FooterSunShader({ className = "", active = false }: { className?
       powerPreference: "low-power",
     });
     let frame = 0;
+    let timer = 0;
     let resizeObserver: ResizeObserver | undefined;
     let intersectionObserver: IntersectionObserver | undefined;
     let isVisible = false;
     let pageVisible = !document.hidden;
-    let lastRenderAt = 0;
 
     const resize = () => {
       const bounds = canvas.getBoundingClientRect();
       const scale = Math.min(window.devicePixelRatio || 1, 1);
-      const maxPixels = 700_000;
+      // The flare is intentionally soft, so a small internal buffer looks the
+      // same after browser scaling while cutting most fragment work.
+      const maxPixels = 300_000;
       const requestedWidth = Math.max(1, Math.round(bounds.width * scale));
       const requestedHeight = Math.max(1, Math.round(bounds.height * scale));
       const pixelScale = Math.min(1, Math.sqrt(maxPixels / (requestedWidth * requestedHeight)));
@@ -185,28 +187,42 @@ export function FooterSunShader({ className = "", active = false }: { className?
     resizeObserver.observe(canvas);
     const startedAt = performance.now();
     let glowProgress = activeRef.current ? 1 : 0;
+    const scheduleRender = (delay = 0) => {
+      if (!isVisible || !pageVisible || frame || timer) return;
+      if (delay > 0) {
+        timer = window.setTimeout(() => {
+          timer = 0;
+          frame = requestAnimationFrame(render);
+        }, delay);
+      } else {
+        frame = requestAnimationFrame(render);
+      }
+    };
     const render = (now = performance.now()) => {
       frame = 0;
       if (!isVisible || !pageVisible) return;
-      if (!reducedMotion && now - lastRenderAt < 1000 / 24) {
-        frame = requestAnimationFrame(render);
-        return;
-      }
-      lastRenderAt = now;
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.uniform2f(resolution, canvas.width, canvas.height);
-      gl.uniform1f(time, (now - startedAt) / 1000);
+      // A deliberately slow clock gives the rays a soft drift. Once revealed,
+      // only six frames per second are drawn, so the idle motion stays cheap.
+      gl.uniform1f(time, ((now - startedAt) / 1000) * 0.35);
+      const targetReveal = activeRef.current ? 1 : 0;
       glowProgress = reducedMotion
         ? (activeRef.current ? 1 : 0)
-        : glowProgress + ((activeRef.current ? 1 : 0) - glowProgress) * 0.085;
+        : glowProgress + (targetReveal - glowProgress) * 0.12;
       gl.uniform1f(reveal, glowProgress);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
-      if (!reducedMotion) frame = requestAnimationFrame(render);
+      if (!reducedMotion) {
+        const revealing = Math.abs(targetReveal - glowProgress) > 0.003;
+        if (revealing || targetReveal > 0) {
+          scheduleRender(1000 / (revealing ? 15 : 6));
+        }
+      }
     };
     const requestRender = () => {
-      if (isVisible && pageVisible && !frame) frame = requestAnimationFrame(render);
+      scheduleRender();
     };
     requestRenderRef.current = requestRender;
     intersectionObserver = new IntersectionObserver(
@@ -216,6 +232,10 @@ export function FooterSunShader({ className = "", active = false }: { className?
         else if (frame) {
           cancelAnimationFrame(frame);
           frame = 0;
+        }
+        if (!isVisible && timer) {
+          clearTimeout(timer);
+          timer = 0;
         }
       },
       { rootMargin: "20% 0px 20% 0px" },
@@ -228,11 +248,16 @@ export function FooterSunShader({ className = "", active = false }: { className?
         cancelAnimationFrame(frame);
         frame = 0;
       }
+      if (!pageVisible && timer) {
+        clearTimeout(timer);
+        timer = 0;
+      }
     };
     document.addEventListener("visibilitychange", onVisibilityChange);
 
     return () => {
       cancelAnimationFrame(frame);
+      clearTimeout(timer);
       requestRenderRef.current = () => undefined;
       resizeObserver?.disconnect();
       intersectionObserver?.disconnect();

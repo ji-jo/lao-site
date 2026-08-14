@@ -8,7 +8,7 @@
   --color-ink-600: #313131;
   --color-rule: #363636;
   
-  --color-paper: #F6F4F0;
+  --color-paper: #F0ECE5;
   
   --color-text-hi: #DEDEDE;
   --color-text: #DADADA;
@@ -389,7 +389,7 @@ html.is-preloading body {
 }
 /* Static paper grain replaces a continuously rendered WebGL texture. */
 .waitlist-paper-texture {
-  background-color: #f7f4ee;
+  background-color: #F0ECE5;
   background-image:
     radial-gradient(circle at 18% 27%, rgb(118 101 74 / 9%) 0 0.7px, transparent 0.9px),
     radial-gradient(circle at 72% 61%, rgb(255 255 255 / 55%) 0 0.8px, transparent 1px),

@@ -36,7 +36,7 @@ import FloatingWaitlist from '@/components/FloatingWaitlist';
       </div>
 
       <div class="relative z-20 mx-auto flex max-w-[1200px] flex-col items-center px-[20px] pt-[188px] pb-0">
-        <h1 class="site-heading m-0 text-center text-ink-800 mb-[68px]">
+        <h1 class="site-heading m-0 mb-[68px] text-center text-[48px] leading-[0.94] text-ink-800 md:text-[54px] lg:text-[68px]">
           Animate the thing<br />you're trying to explain.
         </h1>
         <MacbookScrollDemo client:only="react" />
@@ -47,15 +47,15 @@ import FloatingWaitlist from '@/components/FloatingWaitlist';
       <div class="max-w-[1200px] mx-auto px-[clamp(20px,5vw,120px)] flex flex-col md:grid md:grid-cols-12 gap-[24px] md:gap-[24px]">
         <div class="md:col-span-6 w-full">
           <p data-brighten class="m-0 font-display text-[clamp(28px,2.9vw,40px)] leading-[1.12] tracking-[-0.01em]">
-            I spent more time learning animation tools than animating.
+            Most animation tools take longer to learn than to use.
           </p>
         </div>
         <div class="md:col-span-5 md:col-start-8 mt-[56px] md:mt-[96px] w-full">
           <p data-brighten class="m-0 font-display text-[clamp(28px,2.9vw,40px)] leading-[1.12] tracking-[-0.01em]">
-            LAO is the tool I wanted.
+            LAO was built specifically to fix that.
           </p>
           <p class="mt-[26px] mb-0 text-[18px] leading-[1.6] max-w-[60ch] text-text">
-            Two modes — continuous line and stop motion. A canvas, a pen, and a timeline that's already running. Almost nothing to learn.
+            LAO comes with preset animation settings which animates automatically, with nothing to configure
           </p>
         </div>
       </div>
@@ -77,9 +77,12 @@ import FloatingWaitlist from '@/components/FloatingWaitlist';
 
     <section class="relative z-10 bg-ink-900 pt-[150px] pb-[160px] overflow-x-clip">
       <div class="relative max-w-[1200px] mx-auto px-[clamp(20px,5vw,120px)]">
-        <h2 class="site-heading m-0 mb-[90px] text-center text-text-hi">
-          It's a file. You keep it.
+        <h2 class="site-heading m-0 mb-[18px] text-center text-text-hi">
+          LAO works without internet. No drama.
         </h2>
+        <p class="m-0 mb-[90px] text-center font-mono text-[12px] uppercase tracking-[0.16em] text-text-muted md:text-[14px]">
+          Privacy-first. No server. Runs entirely in your browser.
+        </p>
 
         <!-- The component paints its own page background (bg-white / dark:bg-black),
              which would sit as a slab on top of this section. `dark:` here resolves
@@ -91,7 +94,7 @@ import FloatingWaitlist from '@/components/FloatingWaitlist';
           features={[
             {
               title: 'Work on it',
-              description: "Open the canvas and draw. It's already moving.",
+              description: "Open the canvas and start drawing, the timeline is already moving.",
               colorTheme: 'orange',
             },
             {
@@ -106,7 +109,7 @@ import FloatingWaitlist from '@/components/FloatingWaitlist';
             },
             {
               title: 'Share it',
-              description: 'Export to MP4, WebM, or GIF. Drop it in a deck, a site, a group chat.',
+              description: 'Export to MP4, WebM, GIF, SVG, or React. Drop it in a deck, a site, a group chat.',
               colorTheme: 'orange',
             },
           ]}
@@ -122,10 +125,10 @@ import FloatingWaitlist from '@/components/FloatingWaitlist';
         <div class="relative flex min-h-[460px] flex-col justify-between overflow-hidden rounded-[28px] bg-[#F0ECE5] md:min-h-[540px] md:rounded-[59px]">
           <div class="relative z-10 max-w-[620px] p-[28px_22px_0] md:p-[56px_56px_0]">
             <h2 class="site-heading m-0 mb-[20px] text-ink-800">
-              Designed screen by screen, not prompted.
+              Draw scenes into animation, by hand.
             </h2>
             <p class="m-0 text-[17px] leading-[1.6] max-w-[56ch] text-[#3E4A5C]">
-              Every screen, flow, and interaction designed by hand in Paper, on a small design system built from fluid functionalism, beUI, and chanhdai. AI can help you build. It can't draw your map.
+              Give your animation the feel of something made by hand, not polished into AI slop.
             </p>
           </div>
           <img

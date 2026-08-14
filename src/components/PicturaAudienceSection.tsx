@@ -98,7 +98,7 @@ const featureCopy = [
     description: 'Make a feature, flow, or product decision understandable in seconds.',
   },
   {
-    title: 'Designers',
+    title: 'Designers & Engineers',
     description: 'Bring interaction, prototypes, and presentation moments to life.',
   },
   {

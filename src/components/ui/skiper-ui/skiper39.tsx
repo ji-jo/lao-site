@@ -1,7 +1,7 @@
 "use client";
 
-import { gsap } from "gsap";
 import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 interface CrowdCanvasProps {
   src: string;
@@ -9,21 +9,37 @@ interface CrowdCanvasProps {
   cols?: number;
   count?: number;
   scale?: number;
+  maxFps?: number;
+  pixelRatio?: number;
+  maxPixels?: number;
 }
 
 // Keep the registry animation intact while excluding every pose belonging to
 // the two unwanted head-covered characters.
 const EXCLUDED_FRAMES = new Set([12, 24, 25, 35, 60, 62, 63, 65, 70, 75, 85, 87, 98]);
+const spriteRectCache = new Map<string, number[][]>();
 
-const CrowdCanvas = ({ src, rows = 15, cols = 7, count = 12, scale = 1 }: CrowdCanvasProps) => {
+const CrowdCanvas = ({
+  src,
+  rows = 15,
+  cols = 7,
+  count = 12,
+  scale = 1,
+  maxFps = 15,
+  pixelRatio = 1,
+  maxPixels = 360_000,
+}: CrowdCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true, desynchronized: true });
     if (!ctx) return;
+
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "low";
 
     const config = {
       src,
@@ -41,13 +57,17 @@ const CrowdCanvas = ({ src, rows = 15, cols = 7, count = 12, scale = 1 }: CrowdC
     const removeRandomFromArray = (array: any[]) =>
       removeFromArray(array, randomIndex(array));
     const getRandomFromArray = (array: any[]) => array[randomIndex(array) | 0];
+    // Restore GSAP's hand-drawn ease without restoring a GSAP timeline for
+    // every person. The canvas owns the frame loop, so GSAP never runs its
+    // 60fps ticker for this footer.
+    const walkEase = gsap.parseEase("power2.inOut");
 
     // TWEEN FACTORIES
     const resetPeep = ({ stage, peep }: { stage: any; peep: any }) => {
       const direction = Math.random() > 0.5 ? 1 : -1;
       // Never push a character below the canvas edge: the positive offset
       // cropped their lower body in the footer crowd.
-      const offsetY = -150 * gsap.parseEase("power2.in")(Math.random());
+      const offsetY = -150 * Math.pow(Math.random(), 2);
       const startY = stage.height - peep.height + offsetY;
       let startX: number;
       let endX: number;
@@ -73,38 +93,6 @@ const CrowdCanvas = ({ src, rows = 15, cols = 7, count = 12, scale = 1 }: CrowdC
       };
     };
 
-    const normalWalk = ({ peep, props }: { peep: any; props: any }) => {
-      const { startX, startY, endX } = props;
-      const xDuration = 10;
-      const yDuration = 0.25;
-
-      const tl = gsap.timeline();
-      tl.timeScale(randomRange(0.5, 1.5));
-      tl.to(
-        peep,
-        {
-          duration: xDuration,
-          x: endX,
-          ease: "none",
-        },
-        0,
-      );
-      tl.to(
-        peep,
-        {
-          duration: yDuration,
-          repeat: xDuration / yDuration,
-          yoyo: true,
-          y: startY - 10,
-        },
-        0,
-      );
-
-      return tl;
-    };
-
-    const walks = [normalWalk];
-
     // TYPES
     type Peep = {
       image: HTMLImageElement;
@@ -116,7 +104,11 @@ const CrowdCanvas = ({ src, rows = 15, cols = 7, count = 12, scale = 1 }: CrowdC
       y: number;
       anchorY: number;
       scaleX: number;
-      walk: any;
+      startX: number;
+      endX: number;
+      walkStart: number;
+      walkDuration: number;
+      bobCycles: number;
       setRect: (rect: number[]) => void;
       render: (ctx: CanvasRenderingContext2D) => void;
     };
@@ -141,7 +133,11 @@ const CrowdCanvas = ({ src, rows = 15, cols = 7, count = 12, scale = 1 }: CrowdC
         y: 0,
         anchorY: 0,
         scaleX: 1,
-        walk: null,
+        startX: 0,
+        endX: 0,
+        walkStart: 0,
+        walkDuration: 0,
+        bobCycles: 1,
         setRect: (rect: number[]) => {
           peep.rect = rect;
           peep.width = rect[2] * scale;
@@ -181,17 +177,18 @@ const CrowdCanvas = ({ src, rows = 15, cols = 7, count = 12, scale = 1 }: CrowdC
     const allPeeps: Peep[] = [];
     const availablePeeps: Peep[] = [];
     const crowd: Peep[] = [];
+    const sampleSize = 32;
+    const sample = document.createElement("canvas");
+    sample.width = sampleSize;
+    sample.height = sampleSize;
+    const sampleContext = sample.getContext("2d", { willReadFrequently: true });
 
     // Some cells in the source sheet are deliberately blank/black. Detect
     // those at runtime rather than ever choosing them as a crowd member.
     const isEmptySpriteCell = (rect: number[]) => {
-      const sampleSize = 32;
-      const sample = document.createElement("canvas");
-      sample.width = sampleSize;
-      sample.height = sampleSize;
-      const sampleContext = sample.getContext("2d", { willReadFrequently: true });
       if (!sampleContext) return false;
 
+      sampleContext.clearRect(0, 0, sampleSize, sampleSize);
       sampleContext.drawImage(
         img,
         rect[0],
@@ -225,46 +222,45 @@ const CrowdCanvas = ({ src, rows = 15, cols = 7, count = 12, scale = 1 }: CrowdC
       const rectWidth = width / rows;
       const rectHeight = height / cols;
 
-      for (let i = 0; i < total; i++) {
-        const rect = [
-          (i % rows) * rectWidth,
-          Math.floor(i / rows) * rectHeight,
-          rectWidth,
-          rectHeight,
-        ];
-        if (EXCLUDED_FRAMES.has(i) || isEmptySpriteCell(rect)) continue;
-
-        allPeeps.push(
-          createPeep({
-            image: img,
-            rect,
-            scale,
-          }),
-        );
+      const cacheKey = `${src}:${width}x${height}:${rows}x${cols}`;
+      let validRects = spriteRectCache.get(cacheKey);
+      if (!validRects) {
+        validRects = [];
+        for (let i = 0; i < total; i++) {
+          const rect = [
+            (i % rows) * rectWidth,
+            Math.floor(i / rows) * rectHeight,
+            rectWidth,
+            rectHeight,
+          ];
+          if (!EXCLUDED_FRAMES.has(i) && !isEmptySpriteCell(rect)) validRects.push(rect);
+        }
+        spriteRectCache.set(cacheKey, validRects);
       }
+
+      validRects.forEach((rect) => {
+        allPeeps.push(createPeep({ image: img, rect, scale }));
+      });
     };
 
     const initCrowd = () => {
       const initialCount = Math.min(count, availablePeeps.length);
       for (let index = 0; index < initialCount; index += 1) {
-        addPeepToCrowd().walk.progress(Math.random());
+        const peep = addPeepToCrowd();
+        if (peep) peep.walkStart -= Math.random() * peep.walkDuration;
       }
     };
 
     const addPeepToCrowd = () => {
+      if (!availablePeeps.length) return null;
       const peep = removeRandomFromArray(availablePeeps);
-      const walk = getRandomFromArray(walks)({
-        peep,
-        props: resetPeep({
-          peep,
-          stage,
-        }),
-      }).eventCallback("onComplete", () => {
-        removePeepFromCrowd(peep);
-        addPeepToCrowd();
-      });
-
-      peep.walk = walk;
+      const { startX, endX } = resetPeep({ peep, stage });
+      peep.startX = startX;
+      peep.endX = endX;
+      peep.walkStart = motionElapsed;
+      // A slow, readable crossing: no frantic movement in the footer.
+      peep.walkDuration = 24_000 / randomRange(0.65, 1.05);
+      peep.bobCycles = randomRange(1, 1.7);
 
       crowd.push(peep);
       crowd.sort((a, b) => a.anchorY - b.anchorY);
@@ -277,59 +273,147 @@ const CrowdCanvas = ({ src, rows = 15, cols = 7, count = 12, scale = 1 }: CrowdC
       availablePeeps.push(peep);
     };
 
-    const render = () => {
-      if (!canvas) return;
+    const requestedPixelRatio = Math.max(0.35, Math.min(window.devicePixelRatio || 1, pixelRatio));
+    const frameInterval = 1000 / Math.max(1, maxFps);
+    let renderFrame = 0;
+    let renderTimer = 0;
+    let lastMotionAt = 0;
+    let motionElapsed = 0;
+    let renderRatio = requestedPixelRatio;
+    let initialized = false;
+    let isVisible = false;
+    let pageVisible = !document.hidden;
+
+    const updateCrowd = (delta: number) => {
+      motionElapsed += delta;
+      for (let index = crowd.length - 1; index >= 0; index -= 1) {
+        const peep = crowd[index];
+        const progress = (motionElapsed - peep.walkStart) / peep.walkDuration;
+        if (progress >= 1) {
+          removePeepFromCrowd(peep);
+          addPeepToCrowd();
+          continue;
+        }
+        const easedProgress = walkEase(progress);
+        peep.x = gsap.utils.interpolate(peep.startX, peep.endX, easedProgress);
+        peep.y = peep.anchorY - Math.abs(Math.sin(easedProgress * Math.PI * peep.bobCycles)) * 7;
+      }
+    };
+
+    const scheduleRender = (delay = frameInterval) => {
+      if (!initialized || !isVisible || !pageVisible || renderFrame || renderTimer) return;
+      renderTimer = window.setTimeout(() => {
+        renderTimer = 0;
+        renderFrame = requestAnimationFrame(render);
+      }, delay);
+    };
+
+    const render = (now: number) => {
+      renderFrame = 0;
+      if (!initialized || !isVisible || !pageVisible) return;
+      const delta = lastMotionAt ? Math.min(now - lastMotionAt, 100) : 0;
+      lastMotionAt = now;
+      updateCrowd(delta);
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.save();
-      ctx.scale(devicePixelRatio, devicePixelRatio);
+      ctx.setTransform(renderRatio, 0, 0, renderRatio, 0, 0);
+      crowd.forEach((peep) => peep.render(ctx));
+      scheduleRender();
+    };
 
-      crowd.forEach((peep) => {
-        peep.render(ctx);
-      });
+    const startRendering = () => {
+      if (!initialized || !isVisible || !pageVisible) return;
+      lastMotionAt = 0;
+      scheduleRender(0);
+    };
 
-      ctx.restore();
+    const stopRendering = () => {
+      if (renderFrame) cancelAnimationFrame(renderFrame);
+      if (renderTimer) window.clearTimeout(renderTimer);
+      renderFrame = 0;
+      renderTimer = 0;
+      lastMotionAt = 0;
     };
 
     const resize = () => {
       if (!canvas) return;
-      stage.width = canvas.clientWidth;
-      stage.height = canvas.clientHeight;
-      canvas.width = stage.width * devicePixelRatio;
-      canvas.height = stage.height * devicePixelRatio;
-
-      crowd.forEach((peep) => {
-        peep.walk.kill();
-      });
+      const nextWidth = Math.max(1, Math.round(canvas.clientWidth));
+      const nextHeight = Math.max(1, Math.round(canvas.clientHeight));
+      const nextRenderRatio = Math.max(
+        0.35,
+        Math.min(requestedPixelRatio, Math.sqrt(maxPixels / (nextWidth * nextHeight))),
+      );
+      if (
+        nextWidth === stage.width
+        && nextHeight === stage.height
+        && nextRenderRatio === renderRatio
+        && crowd.length
+      ) return;
+      stage.width = nextWidth;
+      stage.height = nextHeight;
+      renderRatio = nextRenderRatio;
+      canvas.width = Math.max(1, Math.round(stage.width * renderRatio));
+      canvas.height = Math.max(1, Math.round(stage.height * renderRatio));
 
       crowd.length = 0;
       availablePeeps.length = 0;
       availablePeeps.push(...allPeeps);
 
       initCrowd();
+      lastMotionAt = 0;
+      scheduleRender(0);
     };
 
     const init = () => {
       createPeeps();
       resize();
-      gsap.ticker.add(render);
+      initialized = true;
+      startRendering();
     };
 
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry?.isIntersecting ?? false;
+        if (isVisible) startRendering();
+        else stopRendering();
+      },
+      { rootMargin: "0px" },
+    );
+    intersectionObserver.observe(canvas);
+
+    let resizeFrame = 0;
+    const resizeObserver = new ResizeObserver(() => {
+      if (!resizeFrame) {
+        resizeFrame = requestAnimationFrame(() => {
+          resizeFrame = 0;
+          resize();
+        });
+      }
+    });
+    resizeObserver.observe(canvas);
+
+    const handleVisibilityChange = () => {
+      pageVisible = !document.hidden;
+      if (pageVisible) startRendering();
+      else stopRendering();
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    img.decoding = "async";
     img.onload = init;
     img.src = config.src;
 
-    const handleResize = () => resize();
-    window.addEventListener("resize", handleResize);
-
     return () => {
-      window.removeEventListener("resize", handleResize);
-      gsap.ticker.remove(render);
-      crowd.forEach((peep) => {
-        if (peep.walk) peep.walk.kill();
-      });
+      img.onload = null;
+      stopRendering();
+      if (resizeFrame) cancelAnimationFrame(resizeFrame);
+      resizeObserver.disconnect();
+      intersectionObserver.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, []);
+  }, [cols, count, maxFps, maxPixels, pixelRatio, rows, scale, src]);
   return (
-    <canvas ref={canvasRef} className="absolute bottom-0 h-screen w-full" />
+    <canvas ref={canvasRef} className="pointer-events-none absolute bottom-0 h-screen w-full [contain:strict]" />
   );
 };
 
