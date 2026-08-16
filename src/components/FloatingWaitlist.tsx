@@ -29,13 +29,22 @@ type WaitlistResponse = { id?: string; message?: string; field?: string; usernam
 const LOCAL_RESERVED_USERNAMES = new Set([
   "admin", "administrator", "api", "billing", "contact", "cursor", "diana", "help",
   "jijo", "joji", "lao", "lao_so", "login", "moderator", "nik", "oni", "official",
-  "root", "security", "staff", "support", "system", "team", "waitlist", "www",
+  "puchum", "root", "security", "staff", "support", "system", "team", "waitlist", "www",
 ]);
 const LOCAL_BLOCKED_USERNAME_TERMS = [
-  "abuse", "aryan", "bastard", "bigot", "chink", "cracker", "cunt", "dyke",
-  "faggot", "gook", "hate", "heil", "hitler", "homo", "jihad", "kkk", "kike",
-  "lynch", "nazi", "negro", "pedo", "racist", "rape", "rapist", "retard",
-  "slut", "spic", "terrorist", "tranny", "whore",
+  "abuse", "allah", "arsehole", "aryan", "asshole", "bastard", "beaner", "bible",
+  "bigot", "bitch", "bollocks", "buddha", "buddhist", "buddhism", "catholic",
+  "catholicism", "chink", "christian", "christianity", "cracker", "cuck", "cunt",
+  "dago", "darkie", "dickhead", "dumbass", "dyke", "faggot", "fck", "fuck", "fuk",
+  "gook", "hate", "heil", "hindu", "hinduism", "hitler", "homo", "honky", "idiot",
+  "incel", "islam", "islamic", "jackass", "jesus", "jewish", "jihad", "judaism",
+  "kaffir", "kike", "kkk", "koran", "lynch", "mohammed", "mongoloid", "moron",
+  "motherfuck", "muhammad", "mulatto", "muslim", "muzzie", "nazi", "negro",
+  "nigga", "nigger", "paedophile", "pedo", "pedophile", "piss", "protestant",
+  "pussy", "quran", "racist", "raghead", "rape", "rapist", "redskin", "retard",
+  "shit", "sikh", "sikhism", "slut", "spastic", "spic", "squaw", "terrorist",
+  "thot", "towelhead", "tranny", "twat", "wanker", "wetback", "whore", "wog",
+  "wop", "zipperhead",
 ];
 
 function locallyValidateUsername(username: string) {
@@ -770,9 +779,8 @@ export default function FloatingWaitlist() {
                       "min-w-0 pl-5 pr-[108px] text-[16px] sm:pr-32 sm:text-sm",
                   }}
                   collapsedWidth="100%"
-                  expandedWidth={isTouchUi ? "100%" : "calc(100% - 64px)"}
-                  expandedOffset={isTouchUi ? 0 : 64}
-                  disableGooey={isTouchUi}
+                  expandedWidth="calc(100% - 64px)"
+                  expandedOffset={64}
                   iconName="username"
                   value={username}
                   onValueChange={(value) => {
@@ -814,9 +822,8 @@ export default function FloatingWaitlist() {
                     input: "min-w-0 pl-5 pr-4 text-[16px] sm:text-sm",
                   }}
                   collapsedWidth="100%"
-                  expandedWidth={isTouchUi ? "100%" : "calc(100% - 64px)"}
-                  expandedOffset={isTouchUi ? 0 : 64}
-                  disableGooey={isTouchUi}
+                  expandedWidth="calc(100% - 64px)"
+                  expandedOffset={64}
                   iconName="email"
                   value={email}
                   onValueChange={(value) => {
@@ -839,9 +846,8 @@ export default function FloatingWaitlist() {
                     input: "min-w-0 pl-5 pr-4 text-[16px] sm:text-sm",
                   }}
                   collapsedWidth="100%"
-                  expandedWidth={isTouchUi ? "100%" : "calc(100% - 64px)"}
-                  expandedOffset={isTouchUi ? 0 : 64}
-                  disableGooey={isTouchUi}
+                  expandedWidth="calc(100% - 64px)"
+                  expandedOffset={64}
                   iconName="animation"
                   value={description}
                   onValueChange={setDescription}

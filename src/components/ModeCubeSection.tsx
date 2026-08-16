@@ -513,18 +513,23 @@ export default function ModeCubeSection() {
       // rise visibly from the bottom before this scene releases.
       const secondEntrance = smoothstep(clamp01((stickyProgress - 0.6) / 0.12));
       const viewportWidth = window.innerWidth;
-      const safeInlineMargin = 16;
+      const isMobile = viewportWidth < 768;
+      // Mobile must use the sticky section's layout width. innerWidth can be
+      // wider than the clipped stage, which is what cuts the right edge.
+      const layoutWidth = isMobile ? (section.clientWidth || viewportWidth) : viewportWidth;
+      const safeInlineMargin = isMobile ? 8 : 16;
       const safeBlockMargin = 16;
-      // Phone: exactly 16px at both edges. Tablet/desktop: a true 640px cap.
+      const cardRadius = isMobile ? 16 : 24;
+      // Phone: 8px at both edges. Tablet/desktop: a true 640px cap.
       // Short landscape viewports can shrink further to preserve the source
       // ratio without clipping the card vertically.
       const fullVideoWidth = Math.min(
         640,
-        viewportWidth - safeInlineMargin * 2,
+        layoutWidth - safeInlineMargin * 2,
         (viewportHeight - safeBlockMargin * 2) * animatronAspectRatio,
       );
       const fullVideoHeight = fullVideoWidth / animatronAspectRatio;
-      const fullLeft = (viewportWidth - fullVideoWidth) / 2;
+      const fullLeft = (layoutWidth - fullVideoWidth) / 2;
       const fullTop = (viewportHeight - fullVideoHeight) / 2;
       const origin = screenRectRef.current ?? {
         left: viewportWidth * 0.28,
@@ -541,8 +546,13 @@ export default function ModeCubeSection() {
         blueBackdropRef.current.style.transform = `translate3d(${fullLeft - haloPadding}px, ${fullTop - haloPadding}px, 0)`;
       }
       const oldSceneOpacity = String(1 - smoothstep(clamp01(expansion * 1.35)));
+      const sceneHidden = Number(oldSceneOpacity) < 0.01;
       if (panelRef.current) panelRef.current.style.opacity = oldSceneOpacity;
-      if (canvasLayerRef.current) canvasLayerRef.current.style.opacity = oldSceneOpacity;
+      if (canvasLayerRef.current) {
+        canvasLayerRef.current.style.opacity = oldSceneOpacity;
+        // iOS keeps opaque WebGL layers composited after CSS opacity hits 0.
+        canvasLayerRef.current.style.visibility = sceneHidden ? "hidden" : "visible";
+      }
       if (screenOverlayLayerRef.current) screenOverlayLayerRef.current.style.opacity = oldSceneOpacity;
       if (copyLayerRef.current) copyLayerRef.current.style.opacity = oldSceneOpacity;
 
@@ -554,7 +564,7 @@ export default function ModeCubeSection() {
         expandingVideoRef.current.style.width = `${fullVideoWidth}px`;
         expandingVideoRef.current.style.height = `${fullVideoHeight}px`;
         expandingVideoRef.current.style.opacity = String(smoothstep(clamp01(expansion * 5)));
-        expandingVideoRef.current.style.borderRadius = "16px";
+        expandingVideoRef.current.style.borderRadius = `${cardRadius}px`;
         expandingVideoRef.current.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scaleX}, ${scaleY})`;
       }
 
@@ -562,21 +572,22 @@ export default function ModeCubeSection() {
         const overlapY = fullTop + fullVideoHeight * (viewportWidth < 640 ? 0.16 : 0.12);
         const secondVideoWidth = Math.min(
           640,
-          viewportWidth - safeInlineMargin * 2,
+          layoutWidth - safeInlineMargin * 2,
           Math.max(1, viewportHeight - overlapY - safeBlockMargin) * stopMotionAspectRatio,
         );
         const secondVideoHeight = secondVideoWidth / stopMotionAspectRatio;
-        const desiredSecondX = fullLeft + fullVideoWidth * (viewportWidth < 640 ? 0.04 : 0.08);
+        const desiredSecondX = fullLeft + fullVideoWidth * (isMobile ? 0 : 0.08);
         const secondX = THREE.MathUtils.clamp(
           desiredSecondX,
           safeInlineMargin,
-          viewportWidth - secondVideoWidth - safeInlineMargin,
+          layoutWidth - secondVideoWidth - safeInlineMargin,
         );
         const secondTargetY = Math.min(overlapY, viewportHeight - secondVideoHeight - safeBlockMargin);
         const secondY = THREE.MathUtils.lerp(viewportHeight + 32, secondTargetY, secondEntrance);
         const secondRotation = viewportWidth < 640 ? 0 : THREE.MathUtils.lerp(0, -3, secondEntrance);
         secondVideoLayerRef.current.style.width = `${secondVideoWidth}px`;
         secondVideoLayerRef.current.style.height = `${secondVideoHeight}px`;
+        secondVideoLayerRef.current.style.borderRadius = `${cardRadius}px`;
         secondVideoLayerRef.current.style.opacity = String(secondEntrance);
         secondVideoLayerRef.current.style.transform = `translate3d(${secondX}px, ${secondY}px, 0) rotate(${secondRotation}deg)`;
       }
@@ -645,13 +656,13 @@ export default function ModeCubeSection() {
       { rootMargin: "100% 0px 100% 0px" },
     );
     observer.observe(section);
-    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("scroll", scheduleUpdate, { passive: true, capture: true });
     window.addEventListener("resize", scheduleUpdate, { passive: true });
 
     return () => {
       cancelAnimationFrame(frame);
       observer.disconnect();
-      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("scroll", scheduleUpdate, true);
       window.removeEventListener("resize", scheduleUpdate);
     };
   }, [animatronAspectRatio, cubeProgress, stopMotionAspectRatio]);
@@ -721,14 +732,17 @@ export default function ModeCubeSection() {
               ].map((line, index) => {
                 const isActive = activeStep >= index + 1;
                 const isLast = index === 2;
+                const lineClass = isLast
+                  ? "m-0 font-display text-[24px] leading-none md:text-[clamp(28px,2.9vw,40px)] md:leading-[1.12] md:tracking-[-0.01em]"
+                  : "m-0 font-display text-[24px] leading-[1.12] md:text-[clamp(28px,2.9vw,40px)] md:tracking-[-0.01em]";
                 return (
                   <ScrollObserver.Trigger key={line} className={clsx("relative", isLast && "mt-[clamp(38px,5.6vw,66px)]")}>
                     {() => (
                       <>
-                        <p className={clsx({ "opacity-0": !isActive }, "absolute inset-0 m-0 font-display transition duration-700", isLast ? "text-[24px] leading-none" : "text-[24px] leading-[1.12]")}>
+                        <p className={clsx({ "opacity-0": !isActive }, "absolute inset-0 transition duration-700", lineClass)}>
                           {line}
                         </p>
-                        <p className={clsx("invisible relative m-0 font-display", isLast ? "text-[24px] leading-none" : "text-[24px] leading-[1.12]")}>
+                        <p className={clsx("invisible relative", lineClass)}>
                           {line}
                         </p>
                       </>
@@ -748,10 +762,10 @@ export default function ModeCubeSection() {
 
         <div
           ref={expandingVideoRef}
-          className="pointer-events-none absolute left-0 top-0 z-30 overflow-visible rounded-[16px] opacity-0 will-change-[transform,opacity,border-radius] [transform-origin:0_0]"
+          className="pointer-events-none absolute left-0 top-0 z-30 overflow-visible rounded-[16px] opacity-0 will-change-[transform,opacity,border-radius] [transform-origin:0_0] md:rounded-[24px]"
           aria-label="Animatron product preview"
         >
-          <div className="absolute inset-0 overflow-hidden rounded-[16px] bg-[#050505] shadow-[0_14px_34px_2px_rgba(0,49,83,.28)] [corner-shape:squircle]">
+          <div className="absolute inset-0 overflow-hidden rounded-[16px] bg-[#050505] shadow-[0_14px_34px_2px_rgba(0,49,83,.28)] [corner-shape:squircle] md:rounded-[24px]">
             {!animatronAvailable && (
               <div className="absolute inset-0 grid place-items-center px-4 text-center font-mono text-[10px] uppercase tracking-[.1em] text-white/45">
                 Add animatron-demo.mp4
@@ -787,10 +801,10 @@ export default function ModeCubeSection() {
 
         <div
           ref={secondVideoLayerRef}
-          className="pointer-events-none absolute left-0 top-0 z-40 overflow-visible rounded-[16px] opacity-0 will-change-[transform,opacity] [transform-origin:50%_50%]"
+          className="pointer-events-none absolute left-0 top-0 z-40 overflow-visible rounded-[16px] opacity-0 will-change-[transform,opacity] [transform-origin:50%_50%] md:rounded-[24px]"
           aria-label="Stop-motion product preview"
         >
-          <div className="absolute inset-0 overflow-hidden rounded-[16px] bg-[#050505] shadow-[0_28px_80px_rgba(0,0,0,.48)] [corner-shape:squircle]">
+          <div className="absolute inset-0 overflow-hidden rounded-[16px] bg-[#050505] shadow-[0_28px_80px_rgba(0,0,0,.48)] [corner-shape:squircle] md:rounded-[24px]">
             <video
               ref={captureStopMotionVideo}
               src={STOP_MOTION_VIDEO_URL}

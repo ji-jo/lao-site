@@ -11,19 +11,31 @@ export const USERNAME_PATTERN = /^[a-z0-9_]{3,20}$/;
 const RESERVED_USERNAMES = new Set([
   "admin", "administrator", "api", "billing", "contact", "cursor", "help",
   "diana", "jijo", "joji", "lao", "lao_so", "login", "moderator", "nik",
-  "oni", "official", "root", "security",
+  "oni", "official", "puchum", "root", "security",
   "staff", "support", "system", "team", "waitlist", "www",
 ]);
 
-// This is a deliberately conservative first-pass filter. It blocks common
-// abusive / hate slurs and their obvious leetspeak variants without exposing
-// the matched term back to the visitor. A full production moderation service
-// can be layered on later, but the database always applies this baseline.
+// Substring filter after leetspeak normalization. Terms are kept long enough
+// to avoid common false positives (christ → christopher, ass → classic).
+// The matched term is never shown back to the visitor.
 const BLOCKED_USERNAME_TERMS = [
-  "abuse", "aryan", "bastard", "bigot", "chink", "cracker", "cunt", "dyke",
-  "faggot", "gook", "hate", "heil", "hitler", "homo", "jihad", "kkk", "kike",
-  "lynch", "nazi", "negro", "pedo", "racist", "rape", "rapist", "retard",
-  "slut", "spic", "terrorist", "tranny", "whore",
+  // Curse / abusive
+  "abuse", "asshole", "arsehole", "bastard", "bitch", "bollocks", "cunt",
+  "dickhead", "dumbass", "faggot", "fck", "fuck", "fuk", "homo", "idiot",
+  "jackass", "moron", "motherfuck", "nigga", "nigger", "pedo", "pedophile",
+  "paedophile", "piss", "pussy", "rape", "rapist", "retard", "shit", "slut",
+  "thot", "twat", "wanker", "whore",
+  // Hate / derogatory / racial slurs
+  "aryan", "beaner", "bigot", "chink", "cracker", "cuck", "darkie", "dago",
+  "dyke", "gook", "hate", "heil", "hitler", "honky", "incel", "jihad", "kaffir",
+  "kike", "kkk", "lynch", "mongoloid", "mulatto", "muzzie", "nazi", "negro",
+  "racist", "raghead", "redskin", "spastic", "spic", "squaw", "terrorist",
+  "towelhead", "tranny", "wetback", "wog", "wop", "zipperhead",
+  // Religion names and identifiers (not short stems like christ)
+  "allah", "bible", "buddha", "buddhist", "buddhism", "catholicism", "catholic",
+  "christianity", "christian", "hinduism", "hindu", "islam", "islamic", "jesus",
+  "jewish", "judaism", "koran", "mohammed", "muhammad", "muslim", "protestant",
+  "quran", "sikhism", "sikh",
 ];
 
 function usernameModerationKey(username: string) {
@@ -34,21 +46,137 @@ function usernameModerationKey(username: string) {
     .replace(/[_-]/g, "");
 }
 
+const EMAIL_POLICY_MESSAGE = "We allow known and company email only.";
+
 const KNOWN_MAIL_DOMAINS = new Set([
-  "gmail.com", "googlemail.com", "outlook.com", "hotmail.com", "live.com",
-  "msn.com", "yahoo.com", "ymail.com", "icloud.com", "me.com", "mac.com",
+  "gmail.com", "googlemail.com", "outlook.com", "outlook.co.id", "hotmail.com",
+  "hotmail.co.uk", "live.com", "msn.com", "yahoo.com", "yahoo.co.uk",
+  "yahoo.co.jp", "ymail.com", "rocketmail.com", "icloud.com", "me.com", "mac.com",
   "proton.me", "protonmail.com", "hey.com", "fastmail.com", "aol.com",
   "zoho.com", "gmx.com", "gmx.net", "mail.com",
 ]);
 
+// Static fallback only. temp-mail.org rotates mailbox domains (not @temp-mail.org),
+// so validateEmail also loads their live domain list plus a public disposable blocklist.
 const DISPOSABLE_MAIL_DOMAINS = new Set([
-  "10minutemail.com", "10minutemail.net", "33mail.com", "dispostable.com",
-  "emailondeck.com", "fakeinbox.com", "getnada.com", "guerrillamail.com",
-  "guerrillamail.net", "guerrillamail.org", "maildrop.cc", "mailinator.com",
-  "mailnesia.com", "mintemail.com", "moakt.com", "mohmal.com", "sharklasers.com",
-  "temp-mail.org", "tempail.com", "tempmail.com", "tempmail.net", "throwawaymail.com",
-  "trashmail.com", "yopmail.com", "yopmail.fr", "yopmail.net",
+  "10minutemail.com", "10minutemail.net", "33mail.com", "any.pink", "bltiwd.com",
+  "bwmyga.com", "chitthi.in", "dispostable.com", "emailfake.com", "emailondeck.com",
+  "fakeinbox.com", "fexbox.org", "fexpost.com", "fextemp.com", "generator.email",
+  "getnada.com", "gmeenramy.com", "guerrillamail.com", "guerrillamail.net",
+  "guerrillamail.org", "lnovic.com", "maildrop.cc", "mailinator.com", "mailbox.in.ua",
+  "mailto.plus", "mailnesia.com", "merepost.com", "mintemail.com", "moakt.com",
+  "mohmal.com", "olipii.com", "ozsaip.com", "rover.info", "ruutukf.com",
+  "sharklasers.com", "temp-mail.io", "temp-mail.org", "tempail.com", "tempmail.com",
+  "tempmail.net", "tempmail.plus", "throwawaymail.com", "tmpeml.com", "tmpmail.net",
+  "tmpmail.org", "trashmail.com", "yopmail.com", "yopmail.fr", "yopmail.net",
+  "yzcalo.com",
 ]);
+
+const TEMP_MAIL_ORG_DOMAINS_URL = "https://api.internal.temp-mail.io/api/v3/domains";
+const DISPOSABLE_BLOCKLIST_URL =
+  "https://raw.githubusercontent.com/disposable-email-domains/disposable-email-domains/master/disposable_email_blocklist.conf";
+
+type DomainCache = { domains: Set<string>; expiresAt: number };
+
+let tempMailOrgCache: DomainCache | null = null;
+let disposableBlocklistCache: DomainCache | null = null;
+
+function domainOrParentInSet(domain: string, list: Set<string>) {
+  let current = domain;
+  while (current.includes(".")) {
+    if (list.has(current)) return true;
+    current = current.slice(current.indexOf(".") + 1);
+  }
+  return list.has(current);
+}
+
+async function readEdgeCache(url: string) {
+  try {
+    return await caches.default.match(url);
+  } catch {
+    return undefined;
+  }
+}
+
+async function writeEdgeCache(url: string, body: string, ttlSeconds: number) {
+  try {
+    await caches.default.put(url, new Response(body, {
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": `public, max-age=${ttlSeconds}`,
+      },
+    }));
+  } catch {
+    // Cache is unavailable in some local runtimes; in-memory cache still applies.
+  }
+}
+
+async function loadDomainSet(url: string, ttlMs: number, parse: (body: string) => Set<string>) {
+  const cachedResponse = await readEdgeCache(url);
+  if (cachedResponse) {
+    const domains = parse(await cachedResponse.text());
+    if (domains.size) return domains;
+  }
+
+  const response = await fetch(url, {
+    headers: {
+      Accept: "application/json, text/plain",
+      "User-Agent": "lao-waitlist/1.0",
+    },
+    signal: AbortSignal.timeout(2500),
+  });
+  if (!response.ok) throw new Error(`Lookup failed (${response.status})`);
+  const body = await response.text();
+  const domains = parse(body);
+  if (domains.size) await writeEdgeCache(url, body, Math.ceil(ttlMs / 1000));
+  return domains;
+}
+
+async function getTempMailOrgDomains() {
+  if (tempMailOrgCache && tempMailOrgCache.expiresAt > Date.now()) return tempMailOrgCache.domains;
+  try {
+    const domains = await loadDomainSet(TEMP_MAIL_ORG_DOMAINS_URL, 60 * 60 * 1000, (body) => {
+      const payload = JSON.parse(body) as { domains?: Array<{ name?: string }> };
+      return new Set(
+        (payload.domains ?? [])
+          .map((item) => String(item.name || "").trim().toLowerCase())
+          .filter(Boolean),
+      );
+    });
+    tempMailOrgCache = { domains, expiresAt: Date.now() + 60 * 60 * 1000 };
+    return domains;
+  } catch {
+    return tempMailOrgCache?.domains ?? new Set<string>();
+  }
+}
+
+async function getDisposableBlocklist() {
+  if (disposableBlocklistCache && disposableBlocklistCache.expiresAt > Date.now()) {
+    return disposableBlocklistCache.domains;
+  }
+  try {
+    const domains = await loadDomainSet(DISPOSABLE_BLOCKLIST_URL, 24 * 60 * 60 * 1000, (body) => {
+      return new Set(
+        body.split(/\r?\n/)
+          .map((line) => line.trim().toLowerCase())
+          .filter((line) => line && !line.startsWith("#")),
+      );
+    });
+    disposableBlocklistCache = { domains, expiresAt: Date.now() + 24 * 60 * 60 * 1000 };
+    return domains;
+  } catch {
+    return disposableBlocklistCache?.domains ?? new Set<string>();
+  }
+}
+
+async function isDisposableDomain(domain: string) {
+  if (domainOrParentInSet(domain, DISPOSABLE_MAIL_DOMAINS)) return true;
+  const [tempMailOrgDomains, blocklist] = await Promise.all([
+    getTempMailOrgDomains(),
+    getDisposableBlocklist(),
+  ]);
+  return domainOrParentInSet(domain, tempMailOrgDomains) || domainOrParentInSet(domain, blocklist);
+}
 
 export function json(data: unknown, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -88,10 +216,8 @@ export async function validateEmail(email: string) {
   }
 
   const domain = email.split("@").pop()!;
-  if (DISPOSABLE_MAIL_DOMAINS.has(domain) || [...DISPOSABLE_MAIL_DOMAINS].some((item) => domain.endsWith(`.${item}`))) {
-    return "Temporary email addresses aren’t accepted. Use your regular email.";
-  }
-  if (KNOWN_MAIL_DOMAINS.has(domain)) return null;
+  if (domainOrParentInSet(domain, KNOWN_MAIL_DOMAINS)) return null;
+  if (await isDisposableDomain(domain)) return EMAIL_POLICY_MESSAGE;
 
   try {
     const dnsResponse = await fetch(
@@ -101,7 +227,7 @@ export async function validateEmail(email: string) {
     if (!dnsResponse.ok) throw new Error("DNS lookup failed");
     const dns = await dnsResponse.json() as { Status?: number; Answer?: Array<{ type?: number }> };
     if (dns.Status !== 0 || !dns.Answer?.some((answer) => answer.type === 15)) {
-      return "Use an email from a real mail provider or business domain.";
+      return EMAIL_POLICY_MESSAGE;
     }
   } catch {
     return "We couldn’t verify that email domain. Try again in a moment.";

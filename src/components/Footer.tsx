@@ -2,9 +2,9 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import React, { useRef } from "react";
-import { CrowdCanvas } from "@/components/ui/skiper-ui/skiper39";
 import { FooterSunShader } from "@/components/FooterSunShader";
 import { SpotlightLogo } from "@/components/spotlight-logo";
+import { FooterCrowd } from "@/components/ui/skiper-ui/skiper39";
 
 const Footer = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -14,6 +14,7 @@ const Footer = () => {
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
+    layoutEffect: false,
   });
 
   React.useEffect(() => {
@@ -53,9 +54,9 @@ const Footer = () => {
   return (
     <section
       ref={ref}
-      className="relative mx-auto flex w-full flex-col items-center overflow-x-clip bg-ink-900 px-4 text-text-hi md:h-[calc(200vh+620px)]"
+      className="relative z-10 mx-auto flex w-full flex-col items-center overflow-x-clip bg-ink-900 px-4 text-text-hi md:h-[calc(200vh+1020px)]"
     >
-      <div className="sticky top-0 z-10 mt-16 flex h-[100svh] w-full flex-col items-center justify-start gap-5 text-center md:relative md:mt-24 md:h-auto md:w-fit">
+      <div className="sticky top-0 z-10 mt-16 flex h-[100svh] w-full flex-col items-center justify-start gap-5 overflow-visible text-center md:relative md:mt-24 md:h-auto md:w-fit">
         <h2 className="site-heading relative z-10">
           Draw, animate, <br /> and explain <br />
           with LAO
@@ -65,8 +66,18 @@ const Footer = () => {
         </p>
 
         <LinePath
-          className="pointer-events-none absolute left-1/2 top-[min(28vh,200px)] z-0 h-[50vh] w-auto origin-top -translate-x-[70%] text-[#0047AB] drop-shadow-[0_0_8px_rgba(0,71,171,0.9)] drop-shadow-[0_0_22px_rgba(0,71,171,0.55)] md:left-auto md:right-[-40%] md:top-[440px] md:h-auto md:w-[1278px] md:origin-top-right md:translate-x-0 md:scale-100"
+          className="pointer-events-none absolute left-1/2 top-[min(28vh,200px)] z-0 h-[50vh] w-auto origin-top -translate-x-[70%] text-[#0047AB] drop-shadow-[0_0_8px_rgba(0,71,171,0.9)] drop-shadow-[0_0_22px_rgba(0,71,171,0.55)] md:hidden"
           scrollYProgress={scrollYProgress}
+          pathD={MOBILE_LINE_PATH}
+          pathLengthRange={[0, 0.62, 1]}
+          pathLengthOutput={[0.5, 0.86, 0.86]}
+        />
+        <LinePath
+          className="pointer-events-none absolute -right-[40%] top-0 z-0 hidden text-[#0047AB] drop-shadow-[0_0_8px_rgba(0,71,171,0.9)] drop-shadow-[0_0_22px_rgba(0,71,171,0.55)] md:block"
+          scrollYProgress={scrollYProgress}
+          pathD={DESKTOP_LINE_PATH}
+          pathLengthRange={[0, 1]}
+          pathLengthOutput={[0.5, 1]}
         />
       </div>
 
@@ -97,28 +108,55 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="pointer-events-none relative z-20 -mt-[22vh] h-[32vh] w-screen max-w-none overflow-visible md:absolute md:-bottom-[24vh] md:left-1/2 md:mt-0 md:h-[38vh] md:w-screen md:-translate-x-1/2 md:translate-y-[300px]">
-        <CrowdCanvas src="/images/peeps/all-peeps.optimized.webp" rows={15} cols={7} count={8} scale={0.32} desktopScale={0.5} maxFps={15} pixelRatio={0.75} maxPixels={1_200_000} />
-      </div>
+
+      <FooterCrowd />
     </section>
   );
 };
 
 export default Footer;
 
+const DESKTOP_LINE_PATH =
+  "M876.605 394.131C788.982 335.917 696.198 358.139 691.836 416.303C685.453 501.424 853.722 498.43 941.95 409.714C1016.1 335.156 1008.64 186.907 906.167 142.846C807.014 100.212 712.699 198.494 789.049 245.127C889.053 306.207 986.062 116.979 840.548 43.3233C743.932 -5.58141 678.027 57.1682 672.279 112.188C666.53 167.208 712.538 172.943 736.353 163.088C760.167 153.234 764.14 120.924 746.651 93.3868C717.461 47.4252 638.894 77.8642 601.018 116.979C568.164 150.908 557 201.079 576.467 246.924C593.342 286.664 630.24 310.55 671.68 302.614C756.114 286.446 729.747 206.546 681.86 186.442C630.54 164.898 492 209.318 495.026 287.644C496.837 334.494 518.402 366.466 582.455 367.287C680.013 368.538 771.538 299.456 898.634 292.434C1007.02 286.446 1192.67 309.384 1242.36 382.258C1266.99 418.39 1273.65 443.108 1247.75 474.477C1217.32 511.33 1149.4 511.259 1096.84 466.093C1044.29 420.928 1029.14 380.576 1033.97 324.172C1038.31 273.428 1069.55 228.986 1117.2 216.384C1152.2 207.128 1188.29 213.629 1194.45 245.127C1201.49 281.062 1132.22 280.104 1100.44 272.673C1065.32 264.464 1044.22 234.837 1032.77 201.413C1019.29 162.061 1029.71 131.126 1056.44 100.965C1086.19 67.4032 1143.96 54.5526 1175.78 86.1513C1207.02 117.17 1186.81 143.379 1156.22 166.691C1112.57 199.959 1052.57 186.238 999.784 155.164C957.312 130.164 899.171 63.7054 931.284 26.3214C952.068 2.12513 996.288 3.87363 1007.22 43.58C1018.15 83.2749 1003.56 122.644 975.969 163.376C948.377 204.107 907.272 255.122 913.558 321.045C919.727 385.734 990.968 497.068 1063.84 503.35C1111.46 507.456 1166.79 511.984 1175.68 464.527C1191.52 379.956 1101.26 334.985 1030.29 377.017C971.109 412.064 956.297 483.647 953.797 561.655C947.587 755.413 1197.56 941.828 936.039 1140.66C745.771 1285.32 321.926 950.737 134.536 1202.19C-6.68295 1391.68 -53.4837 1655.38 131.935 1760.5C478.381 1956.91 1124.19 1515 1201.28 1997.83C1273.66 2451.23 100.805 1864.7 303.794 2668.89";
+
+const MOBILE_LINE_PATH = `${DESKTOP_LINE_PATH}C260 2815 350 2945 303.794 3068.89`;
+
 const LinePath = ({
   className,
   scrollYProgress,
+  pathD,
+  pathLengthRange,
+  pathLengthOutput,
 }: {
   className: string;
   scrollYProgress: any;
+  pathD: string;
+  pathLengthRange: number[];
+  pathLengthOutput: number[];
 }) => {
-  const pathLength = useTransform(
-    scrollYProgress,
-    [0, 0.62, 1],
-    [0.5, 0.86, 0.86],
-  );
+  const pathRef = useRef<SVGPathElement>(null);
+  const arrowRef = useRef<SVGPolygonElement>(null);
+  const pathLength = useTransform(scrollYProgress, pathLengthRange, pathLengthOutput);
   const strokeDashoffset = useTransform(pathLength, (value) => 1 - value);
+
+  React.useEffect(() => {
+    const path = pathRef.current;
+    const arrow = arrowRef.current;
+    if (!path || !arrow) return;
+
+    const placeArrow = (progress: number) => {
+      const total = path.getTotalLength();
+      if (!total) return;
+      const at = Math.max(0, Math.min(1, progress)) * total;
+      const point = path.getPointAtLength(at);
+      const behind = path.getPointAtLength(Math.max(0, at - Math.min(12, at)));
+      const angle = Math.atan2(point.y - behind.y, point.x - behind.x) * (180 / Math.PI);
+      arrow.setAttribute("transform", `translate(${point.x} ${point.y}) rotate(${angle})`);
+    };
+
+    placeArrow(pathLength.get());
+    return pathLength.on("change", placeArrow);
+  }, [pathD, pathLength]);
 
   return (
     <svg
@@ -131,17 +169,17 @@ const LinePath = ({
       className={className}
     >
       <motion.path
-        d="M876.605 394.131C788.982 335.917 696.198 358.139 691.836 416.303C685.453 501.424 853.722 498.43 941.95 409.714C1016.1 335.156 1008.64 186.907 906.167 142.846C807.014 100.212 712.699 198.494 789.049 245.127C889.053 306.207 986.062 116.979 840.548 43.3233C743.932 -5.58141 678.027 57.1682 672.279 112.188C666.53 167.208 712.538 172.943 736.353 163.088C760.167 153.234 764.14 120.924 746.651 93.3868C717.461 47.4252 638.894 77.8642 601.018 116.979C568.164 150.908 557 201.079 576.467 246.924C593.342 286.664 630.24 310.55 671.68 302.614C756.114 286.446 729.747 206.546 681.86 186.442C630.54 164.898 492 209.318 495.026 287.644C496.837 334.494 518.402 366.466 582.455 367.287C680.013 368.538 771.538 299.456 898.634 292.434C1007.02 286.446 1192.67 309.384 1242.36 382.258C1266.99 418.39 1273.65 443.108 1247.75 474.477C1217.32 511.33 1149.4 511.259 1096.84 466.093C1044.29 420.928 1029.14 380.576 1033.97 324.172C1038.31 273.428 1069.55 228.986 1117.2 216.384C1152.2 207.128 1188.29 213.629 1194.45 245.127C1201.49 281.062 1132.22 280.104 1100.44 272.673C1065.32 264.464 1044.22 234.837 1032.77 201.413C1019.29 162.061 1029.71 131.126 1056.44 100.965C1086.19 67.4032 1143.96 54.5526 1175.78 86.1513C1207.02 117.17 1186.81 143.379 1156.22 166.691C1112.57 199.959 1052.57 186.238 999.784 155.164C957.312 130.164 899.171 63.7054 931.284 26.3214C952.068 2.12513 996.288 3.87363 1007.22 43.58C1018.15 83.2749 1003.56 122.644 975.969 163.376C948.377 204.107 907.272 255.122 913.558 321.045C919.727 385.734 990.968 497.068 1063.84 503.35C1111.46 507.456 1166.79 511.984 1175.68 464.527C1191.52 379.956 1101.26 334.985 1030.29 377.017C971.109 412.064 956.297 483.647 953.797 561.655C947.587 755.413 1197.56 941.828 936.039 1140.66C745.771 1285.32 321.926 950.737 134.536 1202.19C-6.68295 1391.68 -53.4837 1655.38 131.935 1760.5C478.381 1956.91 1124.19 1515 1201.28 1997.83C1273.66 2451.23 100.805 1864.7 303.794 2668.89C260 2815 350 2945 303.794 3068.89"
-        pathLength={1}
+        ref={pathRef}
+        d={pathD}
         stroke="currentColor"
         strokeWidth="20"
         strokeLinecap="round"
-        strokeLinejoin="round"
         style={{
           pathLength,
           strokeDashoffset,
         }}
       />
+      <polygon ref={arrowRef} points="26,0 -16,-18 -16,18" fill="currentColor" />
     </svg>
   );
 };

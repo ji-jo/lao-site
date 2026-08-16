@@ -16,32 +16,32 @@ import FloatingWaitlist from '@/components/FloatingWaitlist';
   title="LAO | Hand-drawn animation tool"
   description="LAO is a hand-drawn animation tool in the browser. Draw, animate, and export for lessons, demos, decks, and group chats."
 >
-  <div id="main-app" class="relative bg-ink-900 font-body text-text overflow-x-clip">
+  <div id="main-app" class="relative bg-ink-900 font-body text-text">
 
     <HighlighterDock client:only="react" />
 
+    <!-- Viewport-fixed hero wash. Must stay a sibling at z-0 — never inside the
+         hero's z-20 stacking context. iOS Safari promotes this opaque WebGL
+         canvas to its own layer and ignores parent opacity, so a z-20 ancestor
+         would keep a black slab over every later z-10 section. -->
+    <div data-hero-wave data-shader-active="true" class="pointer-events-none fixed inset-0 z-0 h-[100dvh] w-full overflow-hidden bg-[#05050b]">
+      <div
+        class="absolute inset-0 rotate-180"
+        style="mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%);"
+      >
+        <WaveShaderBackground client:only="react" className="h-full w-full" />
+      </div>
+    </div>
+
     <!-- Keep the sticky laptop above the following story panel while its
-         display is still opening/holding in the viewport. -->
-    <section data-hero-wave-stage class="relative z-20 bg-ink-900 overflow-visible">
+         display is still opening/holding in the viewport. No section fill:
+         the wave behind this stack has to remain visible through the hero. -->
+    <section data-hero-wave-stage class="relative z-20 overflow-visible">
       <div class="pointer-events-none absolute top-0 left-1/2 z-10 h-[800px] w-[min(1200px,100%)] -translate-x-1/2 overflow-hidden rounded-bl-[24px] rounded-br-[24px]">
         <CloudShader client:only="react" cloud={{ speed: 3 }} />
       </div>
 
-      <!-- Keep the wave shader inside the hero stack, beneath the cloud panel
-           and the laptop/content layers. -->
-      <div data-hero-wave data-shader-active="true" class="pointer-events-none fixed inset-0 z-[-3] h-[100dvh] w-full overflow-hidden bg-[#05050b] will-change-opacity">
-        <div
-          class="absolute inset-0 rotate-180"
-          style="mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 100%);"
-        >
-          <WaveShaderBackground client:only="react" className="h-full w-full" />
-        </div>
-      </div>
-
       <div class="relative z-20 mx-auto flex max-w-[1200px] flex-col items-center px-[20px] pt-[188px] pb-0">
-        <p class="m-0 mb-5 font-mono text-[12px] uppercase tracking-[0.16em] text-text-muted md:text-[14px]">
-          LAO · Hand-drawn animation tool
-        </p>
         <h1 class="site-heading m-0 mb-[68px] text-center text-[48px] leading-[0.94] text-ink-800 md:text-[54px] lg:text-[68px]">
           Animate the thing<br />you're trying to explain.
         </h1>
@@ -175,23 +175,29 @@ import FloatingWaitlist from '@/components/FloatingWaitlist';
     // one animation frame to avoid adding work to every scroll event.
     const waveStage = document.querySelector<HTMLElement>('[data-hero-wave-stage]');
     const wave = document.querySelector<HTMLElement>('[data-hero-wave]');
-    if (waveStage && wave && !reduced) {
+    if (waveStage && wave) {
       const updateWaveFade = () => {
         waveFrame = 0;
         const travelled = Math.max(0, -waveStage.getBoundingClientRect().top);
         const holdDistance = window.innerHeight * 0.9;
         const fadeDistance = window.innerHeight * 0.59;
-        const progress = Math.min(1, Math.max(0, (travelled - holdDistance) / fadeDistance));
-        wave.style.opacity = String(1 - progress);
+        const progress = reduced
+          ? (travelled > holdDistance ? 1 : 0)
+          : Math.min(1, Math.max(0, (travelled - holdDistance) / fadeDistance));
         const shaderActive = progress < 0.999;
+        wave.style.opacity = String(1 - progress);
         wave.dataset.shaderActive = String(shaderActive);
         wave.style.visibility = shaderActive ? 'visible' : 'hidden';
+        // iOS does not composite opacity/visibility onto opaque WebGL canvases.
+        // Taking the layer out of display is what actually removes the black slab.
+        wave.style.display = shaderActive ? '' : 'none';
       };
       const requestWaveFade = () => {
         if (!waveFrame) waveFrame = requestAnimationFrame(updateWaveFade);
       };
-      window.addEventListener('scroll', requestWaveFade, { passive: true, signal });
+      window.addEventListener('scroll', requestWaveFade, { passive: true, capture: true, signal });
       window.addEventListener('resize', requestWaveFade, { passive: true, signal });
+      window.visualViewport?.addEventListener('resize', requestWaveFade, { passive: true, signal });
       requestWaveFade();
     }
 
