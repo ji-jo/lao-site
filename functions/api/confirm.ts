@@ -33,5 +33,5 @@ export async function onRequestGet(context: { request: Request; env: WaitlistEnv
     console.error("Waitlist confirmation succeeded, but welcome email failed", error);
   }
 
-  return Response.redirect(`${origin}/?waitlist=confirmed&username=${encodeURIComponent(entry.username)}#waitlist`, 302);
+  return Response.redirect(`${origin}/?waitlist=confirmed&id=${encodeURIComponent(entry.id)}&username=${encodeURIComponent(entry.username)}#waitlist`, 302);
 }

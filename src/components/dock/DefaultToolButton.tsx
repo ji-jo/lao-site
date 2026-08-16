@@ -17,7 +17,7 @@ export function DefaultToolButton({ active, onClick }: { active: boolean; onClic
       <svg
         aria-hidden="true"
         viewBox="0 0 256 256"
-        className="size-[14px] transition-transform duration-150 group-active:scale-[0.92] sm:size-[18px]"
+        className="h-[14px] w-[14px] transition-transform duration-150 group-active:scale-[0.92] sm:h-[18px] sm:w-[18px]"
         fill="var(--color-text-hi)"
       >
         <path d={active ? FILLED_PATH : OUTLINED_PATH} />

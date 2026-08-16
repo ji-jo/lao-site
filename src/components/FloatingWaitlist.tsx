@@ -13,6 +13,7 @@ import { GradientHoverButton } from "./ui/GradientHoverButton";
 import planeDisplayUrl from "../icons/waitlist/plane-display.png?url";
 import waitlistDisplayUrl from "../icons/waitlist/waitlist-display.png?url";
 import planeCtaUrl from "../icons/waitlist/plane-cta.png?url";
+import waitlistLogoUrl from "../icons/waitlist/lao-temp-logo.svg?url";
 
 const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
 const smoothstep = (value: number) => value * value * (3 - 2 * value);
@@ -21,6 +22,7 @@ type Position = { x: number; y: number; progress: number };
 type LockupTransform = { x: number; y: number; rotation: number };
 type UsernameStatus = "idle" | "checking" | "available" | "taken" | "invalid" | "error";
 type ReservationState = { stage: "pending" | "confirmed"; username: string; email?: string } | null;
+type WaitlistResponse = { id?: string; message?: string; field?: string; username?: string; status?: string };
 
 const LOCAL_RESERVED_USERNAMES = new Set([
   "admin", "administrator", "api", "billing", "contact", "cursor", "diana", "help",
@@ -79,9 +81,8 @@ function ReservationPanel({ reservation, reduceMotion }: { reservation: NonNulla
             </div>
           </div>
           <div className="absolute inset-0 grid place-items-center overflow-hidden rounded-[24px] border border-black/10 bg-[#e9e0cc] shadow-[0_28px_55px_rgba(0,0,0,.22)] [backface-visibility:hidden] [transform:rotateY(180deg)]">
-            <div className="flex flex-col items-center gap-3 opacity-75">
-              <img src={planeDisplayUrl} alt="" className="h-auto w-[126px]" />
-              <img src={waitlistDisplayUrl} alt="" className="h-auto w-[126px]" />
+            <div className="flex items-center justify-center opacity-85">
+              <img src={waitlistLogoUrl} alt="LAO" className="h-auto w-[190px]" />
             </div>
           </div>
         </motion.div>
@@ -101,6 +102,7 @@ function ReservationPanel({ reservation, reduceMotion }: { reservation: NonNulla
           href={shareUrl}
           target="_blank"
           rel="noreferrer"
+          onClick={() => window.posthog?.capture("waitlist_share_clicked", { share_destination: "x" })}
           className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-[#171717] px-7 font-mono text-[12px] uppercase tracking-[.09em] text-white transition-colors hover:bg-[#303030] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
         >
           <span aria-hidden="true" className="text-base">𝕏</span>
@@ -171,6 +173,7 @@ export default function FloatingWaitlist() {
 
   const openWaitlist = useCallback(() => {
     if (openRef.current) return;
+    window.posthog?.capture("waitlist_opened");
     forcePeekRef.current = false;
     openRef.current = true;
     transitioningRef.current = true;
@@ -188,6 +191,10 @@ export default function FloatingWaitlist() {
   }, [setMovingState]);
 
   const closeWaitlist = useCallback(() => requestClose(false), [requestClose]);
+
+  const identifyWaitlistEntry = useCallback((id: string, email: string, username: string) => {
+    window.posthog?.identify(id, { email, username, waitlist_status: "pending" });
+  }, []);
 
   const checkUsername = useCallback(async (candidate = username) => {
     const normalized = candidate.trim().replace(/^@+/, "").toLowerCase();
@@ -260,7 +267,7 @@ export default function FloatingWaitlist() {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({ username: normalizedUsername, email, first_animation: description, company: "" }),
       });
-      const result = await response.json() as { message?: string; field?: string; username?: string; status?: string };
+      const result = await response.json() as WaitlistResponse;
       if (!response.ok) {
         // Astro's local dev server renders the site but does not mount Pages
         // Functions. Let the interaction be previewed locally; Cloudflare D1
@@ -273,11 +280,20 @@ export default function FloatingWaitlist() {
           setUsernameStatus("taken");
           setUsernameMessage(result.message || "That username is taken. Try another.");
         } else {
+          if (result.id && result.username && result.status) {
+            identifyWaitlistEntry(result.id, email, result.username);
+          }
           setFormMessage(result.message || "Something went wrong. Try again.");
         }
         return;
       }
-      setReservation({ stage: "pending", username: result.username || normalizedUsername, email });
+      const waitlistId = result.id;
+      const reservedUsername = result.username || normalizedUsername;
+      if (waitlistId) {
+        identifyWaitlistEntry(waitlistId, email, reservedUsername);
+        window.posthog?.capture("waitlist_reservation_created", { reservation_status: "pending" });
+      }
+      setReservation({ stage: "pending", username: reservedUsername, email });
     } catch {
       if (window.location.hostname === "127.0.0.1") {
         setReservation({ stage: "pending", username: normalizedUsername, email });
@@ -287,14 +303,17 @@ export default function FloatingWaitlist() {
     } finally {
       setSubmitting(false);
     }
-  }, [checkUsername, checkedUsername, description, email, submitting, username, usernameStatus]);
+  }, [checkUsername, checkedUsername, description, email, identifyWaitlistEntry, submitting, username, usernameStatus]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const waitlistState = params.get("waitlist");
     if (waitlistState === "confirmed") {
       const confirmedUsername = (params.get("username") || "").replace(/^@+/, "");
-      if (confirmedUsername) {
+      const waitlistId = params.get("id");
+      if (confirmedUsername && waitlistId) {
+        window.posthog?.identify(waitlistId, { username: confirmedUsername, waitlist_status: "confirmed" });
+        window.posthog?.capture("waitlist_confirmation_completed");
         setReservation({ stage: "confirmed", username: confirmedUsername });
         requestAnimationFrame(openWaitlist);
       }

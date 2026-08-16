@@ -10,11 +10,22 @@ const Footer = () => {
   const ref = useRef<HTMLDivElement>(null);
   const footerCardRef = useRef<HTMLDivElement>(null);
   const [sunActive, setSunActive] = React.useState(false);
+  const [isMobileLine, setIsMobileLine] = React.useState(false);
   const sunTriggeredRef = useRef(false);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
   });
+
+  React.useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const updateLineSize = () => setIsMobileLine(media.matches);
+
+    updateLineSize();
+    media.addEventListener("change", updateLineSize);
+
+    return () => media.removeEventListener("change", updateLineSize);
+  }, []);
 
   React.useEffect(() => {
     const activateSun = () => {
@@ -65,7 +76,8 @@ const Footer = () => {
         </p>
 
         <LinePath
-          className="pointer-events-none absolute -right-[40%] top-[440px] z-0 text-[#0047AB] drop-shadow-[0_0_8px_rgba(0,71,171,0.9)] drop-shadow-[0_0_22px_rgba(0,71,171,0.55)]"
+          className="pointer-events-none absolute -right-[18%] top-[300px] z-0 origin-top-right scale-[0.22] text-[#0047AB] drop-shadow-[0_0_8px_rgba(0,71,171,0.9)] drop-shadow-[0_0_22px_rgba(0,71,171,0.55)] md:-right-[40%] md:top-[440px] md:scale-100"
+          isMobile={isMobileLine}
           scrollYProgress={scrollYProgress}
         />
       </div>
@@ -95,7 +107,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="pointer-events-none absolute -bottom-[24vh] left-1/2 z-20 h-[38vh] w-screen -translate-x-1/2 overflow-visible [contain:layout_paint_style]">
+      <div className="pointer-events-none absolute -bottom-[24vh] left-1/2 z-20 h-[38vh] w-screen -translate-x-1/2 overflow-visible [contain:layout_paint_style] md:translate-y-[300px]">
         <CrowdCanvas src="/images/peeps/all-peeps ori.webp" rows={15} cols={7} count={8} scale={0.25} desktopScale={0.5} maxFps={15} pixelRatio={0.75} maxPixels={1_200_000} />
       </div>
     </section>
@@ -106,16 +118,27 @@ export default Footer;
 
 const LinePath = ({
   className,
+  isMobile,
   scrollYProgress,
 }: {
   className: string;
+  isMobile: boolean;
   scrollYProgress: any;
 }) => {
-  const pathLength = useTransform(
+  const desktopPathLength = useTransform(
     scrollYProgress,
     [0, 0.62, 1],
     [0.5, 0.86, 0.86],
   );
+  // On phones, begin with no line visible and stop its draw at the card,
+  // rather than showing the oversized continuation used by the desktop art.
+  const mobilePathLength = useTransform(
+    scrollYProgress,
+    [0, 0.56, 1],
+    [0, 0.63, 0.63],
+  );
+  const pathLength = isMobile ? mobilePathLength : desktopPathLength;
+  const strokeDashoffset = useTransform(pathLength, (value) => 1 - value);
 
   return (
     <svg
@@ -135,7 +158,7 @@ const LinePath = ({
         strokeLinejoin="round"
         style={{
           pathLength,
-          strokeDashoffset: useTransform(pathLength, (value) => 1 - value),
+          strokeDashoffset,
         }}
       />
     </svg>

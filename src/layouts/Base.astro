@@ -4,6 +4,7 @@ import '@fontsource/redaction-20';
 import '@fontsource-variable/geist';
 import { SmoothScroller } from '../components/SmoothScroller';
 import SitePreloader from '../components/SitePreloader';
+import PostHog from '../components/posthog.astro';
 
 interface Props {
 	title: string;
@@ -25,6 +26,7 @@ const socialImageAlt = "LAO, animate the thing you're trying to explain";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="color-scheme" content="light" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" media="(prefers-color-scheme: light)" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" media="(prefers-color-scheme: dark)" />
 		<link rel="canonical" href={canonicalUrl} />
@@ -48,6 +50,7 @@ const socialImageAlt = "LAO, animate the thing you're trying to explain";
 		<meta name="twitter:image" content={socialImageUrl} />
 		<meta name="twitter:image:alt" content={socialImageAlt} />
 		<meta name="generator" content={Astro.generator} />
+		<PostHog />
 		<script is:inline>
 			document.documentElement.classList.add('is-preloading');
 			if ('scrollRestoration' in history) history.scrollRestoration = 'manual';

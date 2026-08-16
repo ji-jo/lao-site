@@ -47,9 +47,10 @@ const SETTLE = { type: "spring", stiffness: 300, damping: 27, velocity: 0 } as c
 // upright on leaving - it does NOT track the cursor angle.
 const ROT_SNAP = { type: "spring", stiffness: 520, damping: 38 } as const;
 const SCALE_MIN = 0.75;
+const DEFAULT_DESKTOP_SCALE = SCALE_MIN;
 // A narrow desktop window still needs the fully expanded dock. Compact-only
 // behavior is reserved for actual touch-first mobile devices.
-const MOBILE_COMPACT_QUERY = "(max-width: 639px) and (pointer: coarse)";
+const MOBILE_COMPACT_QUERY = "(max-width: 767px) and (pointer: coarse)";
 
 const layoutFadeTransition = (appearing: boolean) =>
   ({ duration: FADE, ease: "easeInOut" as const, delay: appearing ? EXPAND_FADE : 0 });
@@ -206,12 +207,13 @@ export function useDockDrag({
   const freezeCx = useMotionValue(0);
   const freezeCy = useMotionValue(0);
   const frozen = useMotionValue(0);
-  // Desktop opens full size; the compact mobile dock stays readable without
-  // exposing a larger state that would crowd the narrow viewport.
+  // Keep the reduced desktop tray as the default; mobile recalculates its scale
+  // from the available width so the visual capsule always has its edge inset.
   const mobileCompactRef = useRef(
     typeof window !== "undefined" && window.matchMedia(MOBILE_COMPACT_QUERY).matches,
   );
-  const dragScale = useMotionValue(mobileCompactRef.current ? SCALE_MIN : 1);
+  const mobileScaleRef = useRef(SCALE_MIN);
+  const dragScale = useMotionValue(mobileCompactRef.current ? mobileScaleRef.current : DEFAULT_DESKTOP_SCALE);
   // Ref to the in-flight dragScale animation so a new press can hard-cancel the previous one.
   const dragScaleCtrl = useRef<ReturnType<typeof animate> | null>(null);
   const animateDragScale = (to: number, stiffness = 400, damping = 36) => {
@@ -228,14 +230,14 @@ export function useDockDrag({
   const [collapsed, collapsedRef, setCollapsed] = useStateRef(false);
   const [preview, previewRef, setPreview] = useStateRef<DockTarget | null>(null);
   // Mobile is deliberately compact-only; desktop begins expanded and can toggle compact mode.
-  const [, minimizedRef, setMinimized] = useStateRef(mobileCompactRef.current);
+  const [, minimizedRef, setMinimized] = useStateRef(true);
 
   useEffect(() => {
     const media = window.matchMedia(MOBILE_COMPACT_QUERY);
     const update = () => {
       mobileCompactRef.current = media.matches;
-      setMinimized(media.matches);
-      dragScale.set(media.matches ? SCALE_MIN : 1);
+      setMinimized(true);
+      dragScale.set(media.matches ? mobileScaleRef.current : DEFAULT_DESKTOP_SCALE);
     };
     media.addEventListener("change", update);
     update();
@@ -418,9 +420,16 @@ export function useDockDrag({
       const w = horizontal.width;
       const h = DOCK_H;
       const y = target === "top" ? EDGE_INSET : viewport.height - h - EDGE_INSET;
+      const mobileScale = mobileCompactRef.current ? dragScale.get() : 1;
+      const minX = mobileCompactRef.current
+        ? EDGE_INSET - (1 - mobileScale) * w / 2
+        : EDGE_INSET;
+      const maxX = mobileCompactRef.current
+        ? viewport.width - EDGE_INSET - (1 + mobileScale) * w / 2
+        : viewport.width - w - EDGE_INSET;
       let bx = (viewport.width - w) / 2;
       if (edgeXRef.current !== null) {
-        bx = Math.max(EDGE_INSET, Math.min(viewport.width - w - EDGE_INSET, edgeXRef.current));
+        bx = Math.max(minX, Math.min(maxX, edgeXRef.current));
       }
       return { w, h, radius: 24, x: bx, y };
     }
@@ -459,6 +468,14 @@ export function useDockDrag({
 
   const syncSizes = useCallback((sizes: DockSizes) => {
     sizesRef.current = sizes;
+    if (mobileCompactRef.current && sizes.horizontal.width > 0) {
+      // Keep the transformed capsule inside a fixed 24px visual inset on phones.
+      mobileScaleRef.current = Math.min(
+        1,
+        Math.max(0.5, (sizes.viewport.width - EDGE_INSET * 2) / sizes.horizontal.width),
+      );
+      dragScale.set(mobileScaleRef.current);
+    }
     setSizesState((prev) =>
       prev.horizontal.width === sizes.horizontal.width &&
       prev.horizontal.height === sizes.horizontal.height &&
@@ -469,7 +486,7 @@ export function useDockDrag({
         ? prev
         : sizes,
     );
-  }, []);
+  }, [dragScale]);
 
   // Reposition the resting tray whenever sizes/phase settle. Skipped mid-drag and during the
   // snap/return animations (which own the values until they finish and flip phase here).
@@ -943,7 +960,14 @@ export function useDockDrag({
           // Horizontal sliding
           const w = sizesRef.current.horizontal.width;
           const vw = sizesRef.current.viewport.width;
-          const newX = Math.max(EDGE_INSET, Math.min(vw - w - EDGE_INSET, startXPos - dx));
+          const mobileScale = mobileCompactRef.current ? mobileScaleRef.current : 1;
+          const minX = mobileCompactRef.current
+            ? EDGE_INSET - (1 - mobileScale) * w / 2
+            : EDGE_INSET;
+          const maxX = mobileCompactRef.current
+            ? vw - EDGE_INSET - (1 + mobileScale) * w / 2
+            : vw - w - EDGE_INSET;
+          const newX = Math.max(minX, Math.min(maxX, startXPos - dx));
           x.set(newX);
           edgeXRef.current = newX;
         }

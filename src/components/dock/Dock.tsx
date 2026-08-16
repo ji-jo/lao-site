@@ -154,16 +154,16 @@ export function Dock() {
             >
               <div
                 ref={refs.horizontal}
-                className="relative flex shrink-0 items-center justify-center gap-[32px] pl-[64px] pr-[56px]"
+                className="relative flex shrink-0 items-center justify-center gap-[32px] pl-[64px] pr-[56px] max-md:gap-[16px] max-md:pl-[24px] max-md:pr-[24px]"
                 style={{ width: "max-content", height: DOCK_H }}
               >
-                <div className="flex h-full items-center gap-[28px]">
+                <div className="flex h-full items-center gap-[28px] max-md:gap-[16px]">
                   <div className="flex h-full items-end">
                     <MarkerRow {...markerRowProps} />
                   </div>
                   {widthTier.showColors && <ColorPalette {...paletteProps} />}
                 </div>
-                <div className="flex items-center gap-[8px]">
+                <div className="flex items-center gap-[8px] max-md:gap-[6px]">
                   <DefaultToolButton active={!style.active} onClick={setDefaultTool} />
                   <ClearButton />
                 </div>

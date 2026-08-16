@@ -33,6 +33,11 @@
 }
 
 @layer base {
+  :root {
+    /* Do not let the browser apply its automatic dark-mode colour inversion. */
+    color-scheme: only light;
+  }
+
   html, body {
     @apply bg-ink-900 text-text font-body antialiased selection:bg-accent/30;
     margin: 0;

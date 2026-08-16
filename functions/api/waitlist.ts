@@ -28,13 +28,13 @@ export async function onRequestPost(context: { request: Request; env: WaitlistEn
 
     await cleanExpiredReservations(env.WAITLIST_DB);
     const existingEmail = await env.WAITLIST_DB.prepare(
-      "SELECT username, status FROM waitlist_entries WHERE lower(email) = lower(?) LIMIT 1",
-    ).bind(email).first() as { username: string; status: string } | null;
+      "SELECT id, username, status FROM waitlist_entries WHERE lower(email) = lower(?) LIMIT 1",
+    ).bind(email).first() as { id: string; username: string; status: string } | null;
     if (existingEmail) {
       const message = existingEmail.status === "confirmed"
         ? `You’re already on the waitlist as @${existingEmail.username}.`
         : `Check your inbox. @${existingEmail.username} is already being held for this email.`;
-      return json({ code: "EMAIL_EXISTS", field: "email", status: existingEmail.status, username: existingEmail.username, message }, 409);
+      return json({ code: "EMAIL_EXISTS", field: "email", id: existingEmail.id, status: existingEmail.status, username: existingEmail.username, message }, 409);
     }
 
     const existingUsername = await env.WAITLIST_DB.prepare(
@@ -66,6 +66,7 @@ export async function onRequestPost(context: { request: Request; env: WaitlistEn
     return json({
       success: true,
       status: "pending",
+      id,
       username,
       email,
       message: `Check your inbox. We’re holding @${username} for 24 hours.`,

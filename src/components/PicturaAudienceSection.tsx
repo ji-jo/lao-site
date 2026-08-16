@@ -88,14 +88,19 @@ const featureTargets = [
   { x: 0.33, y: 0.08, rotate: 8 },
 ];
 
-// On narrower viewports, keep the audience cards in one readable vertical
-// sequence. This prevents an expanded card or its caption from being pushed
-// into a neighbour or beyond the bottom edge.
 const compactFeatureTargets = [
   { x: 0, y: -0.22, rotate: -3 },
   { x: 0, y: -0.06, rotate: 3 },
   { x: 0, y: 0.1, rotate: -2 },
   { x: 0, y: 0.26, rotate: 2 },
+];
+
+// Phones use a conventional upright stack instead of the desktop scatter.
+const mobileFeatureTargets = [
+  { x: 0, y: -0.18, rotate: 0 },
+  { x: 0, y: -0.06, rotate: 0 },
+  { x: 0, y: 0.06, rotate: 0 },
+  { x: 0, y: 0.18, rotate: 0 },
 ];
 
 const featureCopy = [
@@ -164,6 +169,7 @@ export default function PicturaAudienceSection() {
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
       const useCompactFeatureLayout = viewportWidth <= 900;
+      const useMobileFeatureLayout = viewportWidth <= 767;
 
       if (
         Math.abs(progress - previousProgress) < 0.0005
@@ -200,16 +206,24 @@ export default function PicturaAudienceSection() {
         if (!element) return;
 
         if (tile.id < featureTargets.length) {
-          const target = (useCompactFeatureLayout ? compactFeatureTargets : featureTargets)[tile.id];
+          const target = (useMobileFeatureLayout
+            ? mobileFeatureTargets
+            : useCompactFeatureLayout
+              ? compactFeatureTargets
+              : featureTargets)[tile.id];
           const initialX = (tile.x + tile.width / 2 - width / 2) * scaleX;
           const initialY = (tile.y + tile.height / 2 - height / 2) * scaleY;
           const targetX = viewportWidth * target.x;
           const targetY = viewportHeight * target.y;
           const moveX = (targetX - initialX) / scaleX;
           const moveY = (targetY - initialY) / scaleY;
-          // Mobile cards stop at their close stack positions and finish at
-          // twice the previous compact size, rather than travelling outward.
-          const scale = useCompactFeatureLayout ? 1 + eased * 0.1 : 1 + eased * 0.36;
+          // Keep phone cards in a compact, upright list instead of letting
+          // the desktop scatter composition throw them across the viewport.
+          const scale = useMobileFeatureLayout
+            ? 1 + eased * 0.04
+            : useCompactFeatureLayout
+              ? 1 + eased * 0.1
+              : 1 + eased * 0.36;
           element.style.transform = `translate3d(${(moveX * eased).toFixed(2)}px, ${(moveY * eased).toFixed(2)}px, 0) rotate(${(target.rotate * eased).toFixed(2)}deg) scale(${scale.toFixed(4)})`;
           element.style.opacity = '1';
           element.style.zIndex = '6';
@@ -373,6 +387,12 @@ export default function PicturaAudienceSection() {
              empty squares while the section is already on screen. Reveal the
              full portrait mosaic together instead. */
           .is-revealed .pictura-tile-reveal { animation-delay: 0ms; }
+        }
+
+        @media (max-width: 767px) {
+          .pictura-side-copy { display: none; }
+          .pictura-feature-copy { top: 50%; left: calc(100% + 14px); width: min(42vw, 170px); gap: 0; text-align: left; transform: translate3d(0,-50%,0); }
+          .pictura-feature-description { display: none; }
         }
 
         @media (prefers-reduced-motion: reduce) {
