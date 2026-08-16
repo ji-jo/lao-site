@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import OpenItLaoAnimation from './OpenItLaoAnimation';
 
 const CARDS = [
-  { text: 'Open Lao', enterStart: 0, enterDistance: 0.18, rotationZ: -3, zOffset: 0, targetPctX: 22, targetPctY: 34, offsetX: 72 },
+  { text: 'Open LAO', enterStart: 0, enterDistance: 0.18, rotationZ: -3, zOffset: 0, targetPctX: 22, targetPctY: 34, offsetX: 72 },
   { text: 'Sketch', enterStart: 0.22, enterDistance: 0.18, rotationZ: 0, zOffset: 24, targetPctX: 50, targetPctY: 50, offsetX: 0 },
   { text: '& Action', enterStart: 0.44, enterDistance: 0.18, rotationZ: 3, zOffset: 48, targetPctX: 73, targetPctY: 67, offsetX: 0 },
 ] as const;

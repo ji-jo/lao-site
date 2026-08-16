@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-const CROWD_SPRITE = '/images/peeps/all-peeps ori.webp';
+const CROWD_SPRITE = '/images/peeps/all-peeps.optimized.webp';
 const CROWD_COLUMNS = 15;
 const CROWD_ROWS = 7;
 // The original sprite is 3600 × 2268: each 15 × 7 frame is 240 × 324.
@@ -9,6 +9,12 @@ const CROWD_FRAME_HEIGHT = 135;
 const EXCLUDED_CROWD_FRAMES = new Set([12, 24, 25, 35, 60, 62, 63, 65, 70, 75, 85, 87, 98]);
 const crowdFrames = Array.from({ length: CROWD_COLUMNS * CROWD_ROWS }, (_, index) => index)
   .filter((index) => !EXCLUDED_CROWD_FRAMES.has(index));
+
+if (typeof window !== 'undefined') {
+  const sprite = new Image();
+  sprite.decoding = 'async';
+  sprite.src = CROWD_SPRITE;
+}
 
 const rows = [
   { count: 4, size: 126, gapAfter: 112, gapAfterIndex: 1 },
@@ -95,13 +101,9 @@ const compactFeatureTargets = [
   { x: 0, y: 0.26, rotate: 2 },
 ];
 
-// Phones use a conventional upright stack instead of the desktop scatter.
-const mobileFeatureTargets = [
-  { x: 0, y: -0.18, rotate: 0 },
-  { x: 0, y: -0.06, rotate: 0 },
-  { x: 0, y: 0.06, rotate: 0 },
-  { x: 0, y: 0.18, rotate: 0 },
-];
+const MOBILE_FEATURE_GAP = 24;
+const MOBILE_FEATURE_INSET = 24;
+const MOBILE_FEATURE_KICKER = 108;
 
 const featureCopy = [
   {
@@ -129,7 +131,31 @@ export default function PicturaAudienceSection() {
   const heartProgressRef = useRef(0);
   const tileRefs = useRef<Array<HTMLDivElement | null>>([]);
   const [isRevealed, setIsRevealed] = useState(false);
+  const [isSpriteReady, setIsSpriteReady] = useState(false);
   const { tiles, width, height } = useMemo(makeTiles, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const sprite = new Image();
+    const markReady = () => {
+      if (!cancelled) setIsSpriteReady(true);
+    };
+    sprite.onload = () => {
+      const decoded = sprite.decode?.();
+      if (decoded) decoded.then(markReady, markReady);
+      else markReady();
+    };
+    sprite.onerror = markReady;
+    sprite.src = CROWD_SPRITE;
+    if (sprite.complete && sprite.naturalWidth > 0) {
+      const decoded = sprite.decode?.();
+      if (decoded) decoded.then(markReady, markReady);
+      else markReady();
+    }
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -200,35 +226,48 @@ export default function PicturaAudienceSection() {
       const heartBounds = heart.getBoundingClientRect();
       const scaleX = heartBounds.width / width;
       const scaleY = heartBounds.height / height;
+      const mobileStackT = Math.min(1, Math.max(0, progress / 0.32));
+      const mobileFeatureEased = mobileStackT * mobileStackT * (3 - 2 * mobileStackT);
 
       tiles.forEach((tile) => {
         const element = tileRefs.current[tile.id];
         if (!element) return;
 
         if (tile.id < featureTargets.length) {
-          const target = (useMobileFeatureLayout
-            ? mobileFeatureTargets
-            : useCompactFeatureLayout
-              ? compactFeatureTargets
-              : featureTargets)[tile.id];
           const initialX = (tile.x + tile.width / 2 - width / 2) * scaleX;
           const initialY = (tile.y + tile.height / 2 - height / 2) * scaleY;
-          const targetX = viewportWidth * target.x;
-          const targetY = viewportHeight * target.y;
-          const moveX = (targetX - initialX) / scaleX;
-          const moveY = (targetY - initialY) / scaleY;
-          // Keep phone cards in a compact, upright list instead of letting
-          // the desktop scatter composition throw them across the viewport.
-          const scale = useMobileFeatureLayout
-            ? 1 + eased * 0.04
-            : useCompactFeatureLayout
-              ? 1 + eased * 0.1
-              : 1 + eased * 0.36;
-          element.style.transform = `translate3d(${(moveX * eased).toFixed(2)}px, ${(moveY * eased).toFixed(2)}px, 0) rotate(${(target.rotate * eased).toFixed(2)}deg) scale(${scale.toFixed(4)})`;
+          const target = (useCompactFeatureLayout ? compactFeatureTargets : featureTargets)[tile.id];
+          const featureEased = useMobileFeatureLayout ? mobileFeatureEased : eased;
+          let moveX = (viewportWidth * target.x - initialX) / scaleX;
+          let moveY = (viewportHeight * target.y - initialY) / scaleY;
+          let rotate = target.rotate;
+          let scale = useCompactFeatureLayout ? 1 + eased * 0.1 : 1 + eased * 0.36;
+
+          if (useMobileFeatureLayout) {
+            const cardSize = tile.width * scaleX;
+            const stackHeight = featureTargets.length * cardSize
+              + (featureTargets.length - 1) * MOBILE_FEATURE_GAP;
+            const stackTop = Math.max(
+              MOBILE_FEATURE_KICKER,
+              (viewportHeight - stackHeight) / 2,
+            );
+            const targetX = MOBILE_FEATURE_INSET + cardSize / 2 - viewportWidth / 2;
+            const targetY = stackTop
+              + tile.id * (cardSize + MOBILE_FEATURE_GAP)
+              + cardSize / 2
+              - viewportHeight / 2;
+            // Screen-space deltas: dividing by scaleX overshoots on a shrunk heart.
+            moveX = targetX - initialX;
+            moveY = targetY - initialY;
+            rotate = 0;
+            scale = 1;
+          }
+
+          element.style.transform = `translate3d(${(moveX * featureEased).toFixed(2)}px, ${(moveY * featureEased).toFixed(2)}px, 0) rotate(${(rotate * featureEased).toFixed(2)}deg) scale(${scale.toFixed(4)})`;
           element.style.opacity = '1';
           element.style.zIndex = '6';
-          element.style.setProperty('--feature-copy-opacity', Math.min(1, Math.max(0, (eased - 0.2) / 0.35)).toFixed(3));
-          element.style.setProperty('--feature-copy-offset', `${(Math.max(0, 1 - eased) * 12).toFixed(2)}px`);
+          element.style.setProperty('--feature-copy-opacity', Math.min(1, Math.max(0, (featureEased - 0.2) / 0.35)).toFixed(3));
+          element.style.setProperty('--feature-copy-offset', `${(Math.max(0, 1 - featureEased) * 12).toFixed(2)}px`);
         } else {
           element.style.transform = `translate3d(${(tile.scatterX * eased).toFixed(2)}px, ${(tile.scatterY * eased).toFixed(2)}px, 0) rotate(${(tile.scatterRotate * eased).toFixed(2)}deg) scale(${(1 - eased * 0.24).toFixed(4)})`;
           element.style.opacity = (1 - eased).toFixed(3);
@@ -255,13 +294,13 @@ export default function PicturaAudienceSection() {
     <section
       ref={sectionRef}
       aria-labelledby="audience-heading"
-      className={`pictura-audience relative z-10 bg-ink-900 ${isRevealed ? 'is-revealed' : ''}`}
+      className={`pictura-audience relative z-10 bg-ink-900 ${isRevealed && isSpriteReady ? 'is-revealed' : ''}`}
     >
       <div className="pictura-pin">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(69,51,104,.30),transparent_27%),radial-gradient(circle_at_50%_52%,rgba(103,62,22,.13),transparent_58%)]" />
 
         <p className="pictura-kicker">Who it&apos;s for</p>
-        <h2 id="audience-heading" className="sr-only">Animation is for anyone. Animate to communicate.</h2>
+        <h2 id="audience-heading" className="sr-only">Who LAO is for</h2>
 
         <div className="pictura-side-copy pictura-side-copy-left" aria-hidden="true">
           <span>Animation</span>
@@ -274,6 +313,14 @@ export default function PicturaAudienceSection() {
           style={{ aspectRatio: `${width} / ${height}` }}
           aria-label="A heart of portraits assembling from top to bottom"
         >
+          <img
+            src={CROWD_SPRITE}
+            alt=""
+            aria-hidden="true"
+            fetchPriority="low"
+            decoding="async"
+            className="pointer-events-none absolute h-px w-px overflow-hidden opacity-0"
+          />
           {tiles.map((tile) => (
             (() => {
               const column = tile.frame % CROWD_COLUMNS;
@@ -296,13 +343,8 @@ export default function PicturaAudienceSection() {
                   }}
                 >
                   <div className="pictura-tile-reveal">
-                    <img
+                    <div
                       className="pictura-crowd-portrait"
-                      src={CROWD_SPRITE}
-                      alt=""
-                      loading="lazy"
-                      decoding="async"
-                      draggable={false}
                       style={{
                         left: `-${column * 100}%`,
                         top: `calc(100% - ${(row + 1) * CROWD_FRAME_HEIGHT}% + ${portraitOffset}px)`,
@@ -353,8 +395,7 @@ export default function PicturaAudienceSection() {
         .pictura-heart { position: absolute; z-index: 2; top: 48%; left: 50%; width: min(48vw,660px); transform: translate(-50%,-50%); }
         .pictura-tile { position: absolute; z-index: 2; transform-origin: center; }
         .pictura-tile-reveal { width: 100%; height: 100%; overflow: hidden; background: #161616; opacity: 0; transform: translate3d(0,-54px,0) scale(.94); filter: blur(10px); }
-        .pictura-tile img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; pointer-events: none; }
-        .pictura-tile img.pictura-crowd-portrait { position: absolute; width: 1500%; height: auto; max-width: none; object-fit: initial; }
+        .pictura-crowd-portrait { position: absolute; width: 1500%; max-width: none; aspect-ratio: 3600 / 2268; background: url('/images/peeps/all-peeps.optimized.webp') 0 0 / 100% 100% no-repeat; }
         .is-revealed .pictura-tile-reveal { animation: picturaTileIn .84s cubic-bezier(.22,1,.36,1) var(--tile-delay) both; }
         .pictura-feature-tile .pictura-tile-reveal { box-shadow: 0 28px 76px rgba(0,0,0,.4); }
         .pictura-feature-copy { position: absolute; top: calc(100% + 13px); left: 0; width: min(260px, 210%); display: grid; gap: 6px; opacity: var(--feature-copy-opacity, 0); transform: translate3d(0,var(--feature-copy-offset,12px),0); color: rgba(255,255,255,.94); pointer-events: none; text-align: left; }
@@ -392,7 +433,7 @@ export default function PicturaAudienceSection() {
         @media (max-width: 767px) {
           .pictura-side-copy { display: none; }
           .pictura-feature-copy { top: 50%; left: calc(100% + 14px); width: min(42vw, 170px); gap: 0; text-align: left; transform: translate3d(0,-50%,0); }
-          .pictura-feature-description { display: none; }
+          .pictura-feature-description { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
         }
 
         @media (prefers-reduced-motion: reduce) {

@@ -1,0 +1,4 @@
+/og-image.webp
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+  Content-Type: image/webp

@@ -336,12 +336,12 @@ export default function HowItWorks({
           const isDragging = draggingIndex === index;
           const isOpenItCard = step.title === "Open it";
           const drawing = step.title === "Work on it"
-            ? <WorkItDrawing play={isVisible} className="pointer-events-none absolute bottom-5 right-4 h-auto w-[78px] text-[#ef603f]/75" />
+            ? <WorkItDrawing play={isVisible} className="pointer-events-none absolute bottom-[15px] right-3 h-auto w-[58.5px] text-[#ef603f]/75" />
             : step.title === "Save it"
-              ? <SaveItDrawing play={isVisible} className="pointer-events-none absolute bottom-5 right-4 h-auto w-[76px] text-[#48618d]/75" />
+              ? <SaveItDrawing play={isVisible} className="pointer-events-none absolute bottom-[15px] right-3 h-auto w-[57px] text-[#48618d]/75" />
               : step.title === "Open it"
-                ? <OpenItDrawing play={isVisible} className="pointer-events-none absolute bottom-5 right-4 h-auto w-[86px] text-[#765f98]/75" />
-                : <ShareItDrawing play={isVisible} className="pointer-events-none absolute bottom-5 right-4 h-auto w-[78px] text-[#ef603f]/75" />;
+                ? <OpenItDrawing play={isVisible} className="pointer-events-none absolute bottom-[15px] right-3 h-auto w-[64.5px] text-[#765f98]/75" />
+                : <ShareItDrawing play={isVisible} className="pointer-events-none absolute bottom-[15px] right-3 h-auto w-[58.5px] text-[#ef603f]/75" />;
 
           return (
             <div
@@ -352,7 +352,7 @@ export default function HowItWorks({
               tabIndex={0}
               className="absolute cursor-grab select-none touch-none outline-none focus-visible:ring-2 focus-visible:ring-[#ff6078] active:cursor-grabbing"
               style={{
-                width: "min(270px, calc(100% - 32px))",
+                width: "min(202.5px, calc(100% - 32px))",
                 left: `${point.x * 100}%`,
                 top: `${point.y * 100}%`,
                 zIndex: isDragging ? 30 : 8 + index,
@@ -369,7 +369,7 @@ export default function HowItWorks({
               onKeyDown={(event) => nudgeCard(event, index)}
             >
               <div
-                className={`relative min-h-[180px] rounded-[3px] border px-6 pb-6 pt-9 text-[#25231f] shadow-[0_16px_30px_rgba(0,0,0,.34)] transition-[opacity,transform,box-shadow] duration-500 ease-out ${isOpenItCard ? "min-h-[200px]" : ""}`}
+                className={`relative min-h-[135px] rounded-[3px] border px-[18px] pb-[18px] pt-[27px] text-[#25231f] shadow-[0_16px_30px_rgba(0,0,0,.34)] transition-[opacity,transform,box-shadow] duration-500 ease-out ${isOpenItCard ? "min-h-[150px]" : ""}`}
                 style={{
                   backgroundColor: step.colors?.bg || theme.wash,
                   backgroundImage:
@@ -391,21 +391,21 @@ export default function HowItWorks({
                     pinRefs.current[index] = node;
                   }}
                   aria-hidden="true"
-                  className="absolute left-1/2 top-[-9px] z-10 h-[22px] w-[22px] -translate-x-1/2 rounded-full border border-black/25 shadow-[0_5px_8px_rgba(0,0,0,.38)]"
+                  className="absolute left-1/2 top-[-7px] z-10 h-[16.5px] w-[16.5px] -translate-x-1/2 rounded-full border border-black/25 shadow-[0_5px_8px_rgba(0,0,0,.38)]"
                   style={{
                     background:
                       "radial-gradient(circle at 35% 28%, #ffd1d8 0 8%, #ff6078 28%, #a91e39 78%, #641022 100%)",
                   }}
                 />
 
-                <div className="mb-5 flex items-center justify-between border-b border-black/10 pb-3 font-mono text-[10px] uppercase tracking-[0.13em] text-black/45">
+                <div className="mb-[15px] flex items-center justify-between border-b border-black/10 pb-[9px] font-mono text-[10px] uppercase tracking-[0.13em] text-black/45">
                   <span>Step {String(index + 1).padStart(2, "0")}</span>
                   <span>LAO file</span>
                 </div>
-                <h3 className="m-0 font-display text-[29px] font-normal leading-none text-[#22201d]">
+                <h3 className="m-0 font-display text-[24px] font-normal leading-none text-[#22201d]">
                   {step.title}
                 </h3>
-                <p className="mb-0 mt-4 max-w-[17ch] text-[14px] leading-[1.55] text-[#4f4a42]">
+                <p className="mb-0 mt-3 max-w-[17ch] text-[14px] leading-[1.55] text-[#4f4a42]">
                   {step.description}
                 </p>
                 {drawing}

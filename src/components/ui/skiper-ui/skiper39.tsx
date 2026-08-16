@@ -82,10 +82,11 @@ const CrowdCanvas = ({
     // TWEEN FACTORIES
     const resetPeep = ({ stage, peep }: { stage: any; peep: any }) => {
       const direction = Math.random() > 0.5 ? 1 : -1;
-      // Never push a character below the canvas edge: the positive offset
-      // cropped their lower body in the footer crowd.
-      const offsetY = -150 * Math.pow(Math.random(), 2);
-      const startY = stage.height - peep.height + offsetY;
+      // Keep the full sprite on the canvas. A random lift is fine, but never
+      // enough to clip a head or drop the feet off the bottom edge.
+      const verticalRoom = Math.max(0, stage.height - peep.height);
+      const offsetY = verticalRoom * 0.22 * Math.pow(Math.random(), 2);
+      const startY = verticalRoom - offsetY;
       let startX: number;
       let endX: number;
 
@@ -430,7 +431,7 @@ const CrowdCanvas = ({
     };
   }, [cols, count, maxFps, maxPixels, pixelRatio, rows, resolvedScale, src]);
   return (
-    <canvas ref={canvasRef} className="pointer-events-none absolute bottom-0 h-full w-full [contain:strict]" />
+    <canvas ref={canvasRef} className="pointer-events-none absolute bottom-0 h-full w-full" />
   );
 };
 
@@ -438,7 +439,7 @@ const Skiper39 = () => {
   return (
     <div className="relative h-full w-full">
       <div className="absolute bottom-0 h-full w-screen">
-        <CrowdCanvas src="/images/peeps/all-peeps ori.webp" rows={15} cols={7} count={12} scale={0.8} />
+        <CrowdCanvas src="/images/peeps/all-peeps.optimized.webp" rows={15} cols={7} count={12} scale={0.8} />
       </div>
     </div>
   );

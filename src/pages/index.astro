@@ -13,8 +13,8 @@ import FloatingWaitlist from '@/components/FloatingWaitlist';
 ---
 
 <Base
-  title="LAO | Hand-drawn animation tool for clear ideas"
-  description="LAO is a browser-based animation tool for turning hand-drawn ideas into expressive motion. Draw, animate, export, and share work for lessons, demos, decks, and group chats."
+  title="LAO | Hand-drawn animation tool"
+  description="LAO is a hand-drawn animation tool in the browser. Draw, animate, and export for lessons, demos, decks, and group chats."
 >
   <div id="main-app" class="relative bg-ink-900 font-body text-text overflow-x-clip">
 
@@ -39,6 +39,9 @@ import FloatingWaitlist from '@/components/FloatingWaitlist';
       </div>
 
       <div class="relative z-20 mx-auto flex max-w-[1200px] flex-col items-center px-[20px] pt-[188px] pb-0">
+        <p class="m-0 mb-5 font-mono text-[12px] uppercase tracking-[0.16em] text-text-muted md:text-[14px]">
+          LAO · Hand-drawn animation tool
+        </p>
         <h1 class="site-heading m-0 mb-[68px] text-center text-[48px] leading-[0.94] text-ink-800 md:text-[54px] lg:text-[68px]">
           Animate the thing<br />you're trying to explain.
         </h1>
@@ -58,7 +61,7 @@ import FloatingWaitlist from '@/components/FloatingWaitlist';
             LAO was built specifically to fix that.
           </p>
           <p class="mt-[26px] mb-0 text-[18px] leading-[1.6] max-w-[60ch] text-text">
-            LAO comes with preset animation settings which animates automatically, with nothing to configure
+            LAO is a hand-drawn animation tool with preset settings that run automatically, so you can draw with nothing to configure.
           </p>
         </div>
       </div>
@@ -97,7 +100,7 @@ import FloatingWaitlist from '@/components/FloatingWaitlist';
           features={[
             {
               title: 'Work on it',
-              description: "Open the canvas and start drawing, the timeline is already moving.",
+              description: 'Open the canvas and start drawing. The timeline is already moving.',
               colorTheme: 'orange',
             },
             {
@@ -121,7 +124,7 @@ import FloatingWaitlist from '@/components/FloatingWaitlist';
       </div>
     </section>
 
-    <PicturaAudienceSection client:visible />
+    <PicturaAudienceSection client:idle />
 
     <section class="relative z-20 isolate bg-ink-900 pt-[160px] pb-[150px] overflow-hidden">
       <div class="max-w-[1200px] mx-auto px-[clamp(20px,5vw,120px)]">
@@ -131,13 +134,12 @@ import FloatingWaitlist from '@/components/FloatingWaitlist';
               Draw scenes into animation, by hand.
             </h2>
             <p class="m-0 text-[17px] leading-[1.6] max-w-[56ch] text-[#3E4A5C]">
-              Give your animation the feel of something made by hand, not polished into AI slop.
+              Give your animation a hand-drawn feel, not something polished into AI slop.
             </p>
           </div>
           <img
             src="/media/hand-30fps-optimize.slower.webp"
-            alt=""
-            aria-hidden="true"
+            alt="A hand drawing a frame in the LAO animation tool"
             loading="lazy"
             decoding="async"
             class="pointer-events-none absolute bottom-0 left-1/2 z-0 h-auto w-[min(88%,560px)] max-w-none -translate-x-1/2 md:left-auto md:right-[4%] md:w-[58%] md:translate-x-0"

@@ -21,7 +21,7 @@ const STOP_MOTION_VIDEO_URL = "/media/stopmotion-demo.optimized.mp4";
 // Higher separation moves the monitors farther apart; higher scale enlarges
 // both 3D monitors, their inset video surfaces, and the expansion origin.
 const CRT_MONITOR_SEPARATION = 1;
-const CRT_MONITOR_SCALE = 1.2;
+const CRT_MONITOR_SCALE = 1.8;
 // The base footprint intentionally leaves breathing room between the two CRTs
 // and the rounded panel edge. CRT_MONITOR_SCALE is applied on top of this.
 const CRT_MONITOR_WIDTH_RATIO = 0.27;
@@ -716,7 +716,7 @@ export default function ModeCubeSection() {
             <ScrollObserver.TriggerGroup className="pointer-events-none absolute inset-x-0 top-[7.5%] z-10 px-5 text-center text-[#090909]">
               {[
                 "Animation should not be complicated",
-                "That’s why we made the product",
+                "That’s why we made LAO",
                 "Lao has two modes",
               ].map((line, index) => {
                 const isActive = activeStep >= index + 1;
@@ -725,10 +725,10 @@ export default function ModeCubeSection() {
                   <ScrollObserver.Trigger key={line} className={clsx("relative", isLast && "mt-[clamp(38px,5.6vw,66px)]")}>
                     {() => (
                       <>
-                        <p className={clsx({ "opacity-0": !isActive }, "absolute inset-0 m-0 font-display transition duration-700", isLast ? "text-[clamp(29px,3.4vw,42px)] leading-none" : "text-[clamp(32px,4.1vw,48px)] leading-[1.12]")}>
+                        <p className={clsx({ "opacity-0": !isActive }, "absolute inset-0 m-0 font-display transition duration-700", isLast ? "text-[24px] leading-none" : "text-[24px] leading-[1.12]")}>
                           {line}
                         </p>
-                        <p className={clsx("invisible relative m-0 font-display", isLast ? "text-[clamp(29px,3.4vw,42px)] leading-none" : "text-[clamp(32px,4.1vw,48px)] leading-[1.12]")}>
+                        <p className={clsx("invisible relative m-0 font-display", isLast ? "text-[24px] leading-none" : "text-[24px] leading-[1.12]")}>
                           {line}
                         </p>
                       </>

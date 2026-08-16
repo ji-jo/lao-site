@@ -14,6 +14,8 @@ import planeDisplayUrl from "../icons/waitlist/plane-display.png?url";
 import waitlistDisplayUrl from "../icons/waitlist/waitlist-display.png?url";
 import planeCtaUrl from "../icons/waitlist/plane-cta.png?url";
 import waitlistLogoUrl from "../icons/waitlist/lao-temp-logo.svg?url";
+import threadsLogoUrl from "../icons/waitlist/threads-logo.svg?url";
+import xLogoUrl from "../icons/waitlist/x-logo.svg?url";
 
 const clamp01 = (value: number) => Math.min(1, Math.max(0, value));
 const smoothstep = (value: number) => value * value * (3 - 2 * value);
@@ -57,8 +59,12 @@ function usernameStatusLabel(status: UsernameStatus, message: string) {
 
 function ReservationPanel({ reservation, reduceMotion }: { reservation: NonNullable<ReservationState>; reduceMotion: boolean }) {
   const confirmed = reservation.stage === "confirmed";
-  const shareText = encodeURIComponent(`I secured @${reservation.username} for LAO.`);
-  const shareUrl = `https://x.com/intent/post?text=${shareText}&url=${encodeURIComponent("https://lao.lt")}`;
+  const shareText = encodeURIComponent(
+    `I secured @${reservation.username} for lao.lt. A fun hand drawn animation tool. You should try it out.`,
+  );
+  const siteUrl = encodeURIComponent("https://lao.lt");
+  const xShareUrl = `https://x.com/intent/post?text=${shareText}&url=${siteUrl}`;
+  const threadsShareUrl = `https://www.threads.com/intent/post?text=${shareText}&url=${siteUrl}`;
 
   return (
     <div className="mx-auto flex max-w-[560px] flex-col items-center">
@@ -98,16 +104,28 @@ function ReservationPanel({ reservation, reduceMotion }: { reservation: NonNulla
       </p>
 
       {confirmed && (
-        <a
-          href={shareUrl}
-          target="_blank"
-          rel="noreferrer"
-          onClick={() => window.posthog?.capture("waitlist_share_clicked", { share_destination: "x" })}
-          className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-[#171717] px-7 font-mono text-[12px] uppercase tracking-[.09em] text-white transition-colors hover:bg-[#303030] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
-        >
-          <span aria-hidden="true" className="text-base">𝕏</span>
-          Share on X
-        </a>
+        <div className="flex w-full max-w-[420px] items-center justify-center gap-3">
+          <a
+            href={xShareUrl}
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => window.posthog?.capture("waitlist_share_clicked", { share_destination: "x" })}
+            className="inline-flex min-h-12 min-w-0 flex-1 items-center justify-center gap-2 rounded-full bg-[#171717] px-4 font-mono text-[12px] uppercase tracking-[.09em] text-[#ffffff] transition-colors hover:bg-[#303030] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+          >
+            <img src={xLogoUrl} alt="" aria-hidden="true" className="h-3.5 w-3.5" />
+            Share on X
+          </a>
+          <a
+            href={threadsShareUrl}
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => window.posthog?.capture("waitlist_share_clicked", { share_destination: "threads" })}
+            className="inline-flex min-h-12 min-w-0 flex-1 items-center justify-center gap-2 rounded-full bg-[#171717] px-4 font-mono text-[12px] uppercase tracking-[.09em] text-[#ffffff] transition-colors hover:bg-[#303030] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+          >
+            <img src={threadsLogoUrl} alt="" aria-hidden="true" className="h-4 w-4" />
+            Share on Threads
+          </a>
+        </div>
       )}
       {!confirmed && <p className="m-0 font-mono text-[11px] uppercase tracking-[.09em] text-[#687080]">The link expires after 24 hours.</p>}
     </div>
@@ -148,17 +166,25 @@ export default function FloatingWaitlist() {
   const [formMessage, setFormMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [reservation, setReservation] = useState<ReservationState>(null);
+  const [isTouchUi, setIsTouchUi] = useState(false);
   const lockupImageClassName = open
     ? "h-auto w-[86px] opacity-75 min-[600px]:w-[164px] md:w-[182px]"
     : "h-auto w-[112px] opacity-75 min-[600px]:w-[164px] md:w-[182px]";
   const formContentClassName = open
-    ? "relative z-[1] px-3 py-4 text-center will-change-[opacity] sm:px-[22px] sm:py-[44px] md:px-[48px] md:py-[52px]"
+    ? "relative z-[1] pl-3 pr-5 py-4 text-center will-change-[opacity] sm:px-[22px] sm:py-[44px] md:px-[48px] md:py-[52px]"
     : "relative z-[1] px-4 py-6 text-center will-change-[opacity] sm:px-[22px] sm:py-[44px] md:px-[48px] md:py-[52px]";
   const lockupSpacerClassName = open
     ? "h-[116px] min-[600px]:h-[220px]"
     : "h-[164px] min-[600px]:h-[220px]";
 
   useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    const media = window.matchMedia("(pointer: coarse), (max-width: 639px)");
+    const update = () => setIsTouchUi(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   const setMovingState = useCallback((next: boolean) => {
     if (movingRef.current === next) return;
@@ -283,7 +309,7 @@ export default function FloatingWaitlist() {
           if (result.id && result.username && result.status) {
             identifyWaitlistEntry(result.id, email, result.username);
           }
-          setFormMessage(result.message || "Something went wrong. Try again.");
+          setFormMessage(result.message || "Unable to join the waitlist. Try again.");
         }
         return;
       }
@@ -443,7 +469,8 @@ export default function FloatingWaitlist() {
       filteredVelocity += (scrollDelta - filteredVelocity) * 0.22;
 
       const inTransfer = next.progress > 0.015 && next.progress < 0.985;
-      const stretch = reduced || !inTransfer ? 0 : Math.min(0.055, Math.abs(filteredVelocity) * 0.0022);
+      const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+      const stretch = reduced || coarsePointer || !inTransfer ? 0 : Math.min(0.055, Math.abs(filteredVelocity) * 0.0022);
       const direction = Math.sign(filteredVelocity || 1);
       const peekScale = 0.42;
       const baseScale = gsap.utils.interpolate(peekScale, 1, next.progress);
@@ -530,9 +557,11 @@ export default function FloatingWaitlist() {
       const cardWidth = card.offsetWidth;
       const safeInset = window.innerWidth < 640 ? 10 : 16;
       const visualHeight = Math.min(card.scrollHeight, window.innerHeight - safeInset * 2);
-      const x = Math.max(safeInset, (window.innerWidth - cardWidth) / 2);
-      const y = Math.max(safeInset, (window.innerHeight - visualHeight) / 2);
+      const x = Math.round(Math.max(safeInset, (window.innerWidth - cardWidth) / 2));
+      const y = Math.round(Math.max(safeInset, (window.innerHeight - visualHeight) / 2));
       const lockupTarget = getLockupTransform(1);
+      lockupTarget.x = Math.round(lockupTarget.x);
+      lockupTarget.y = Math.round(lockupTarget.y);
       const duration = reduced ? 0 : 0.42;
       gsap.set(formContent, { rotation: 0, autoAlpha: 0 });
       const cardAnimation = motionAnimate(card, {
@@ -566,7 +595,12 @@ export default function FloatingWaitlist() {
         transitioningRef.current = false;
         setMovingState(false);
         setDialogScrollable(true);
-        gsap.set(formContent, { autoAlpha: 1 });
+        // Park the open card with top/left so iOS can paint the SVG gooey
+        // filter. A live transform on this ancestor otherwise disables it.
+        card.style.left = `${x}px`;
+        card.style.top = `${y}px`;
+        gsap.set(card, { clearProps: "transform" });
+        gsap.set(formContent, { autoAlpha: 1, clearProps: "transform" });
         activeAnimationsRef.current = [];
       });
       requestAnimationFrame(() => card.focus({ preventScroll: true }));
@@ -575,6 +609,13 @@ export default function FloatingWaitlist() {
       setDialogScrollable(false);
       document.documentElement.style.overflow = "";
       document.body.style.paddingInlineEnd = "";
+      const parkedLeft = Number.parseFloat(card.style.left) || 0;
+      const parkedTop = Number.parseFloat(card.style.top) || 0;
+      if (parkedLeft || parkedTop) {
+        card.style.left = "0px";
+        card.style.top = "0px";
+        gsap.set(card, { x: parkedLeft, y: parkedTop, rotate: 0, scaleX: 1, scaleY: 1, skewY: 0 });
+      }
       const target = getClosedPosition(forcePeekRef.current);
       const peekScale = 0.42;
       const targetScale = gsap.utils.interpolate(peekScale, 1, target.progress);
@@ -668,7 +709,7 @@ export default function FloatingWaitlist() {
         aria-modal={open ? "true" : undefined}
         aria-labelledby="waitlist-title"
         tabIndex={open ? -1 : undefined}
-        className={`waitlist-float fixed left-0 top-0 z-[120] rounded-[28px] bg-paper outline-none will-change-transform [backface-visibility:hidden] md:rounded-[59px] ${moving ? "shadow-none" : "shadow-[0_28px_90px_rgba(0,0,0,.48)]"} ${open ? `max-h-[calc(100dvh-20px)] max-md:max-h-[calc(100dvh-12px)] ${dialogScrollable ? "overflow-y-auto overscroll-contain" : "overflow-hidden max-md:overflow-y-auto max-md:overscroll-contain"}` : "overflow-visible"} ${ready ? "visible" : "invisible"}`}
+        className={`waitlist-float fixed left-0 top-0 z-[120] rounded-[28px] bg-paper outline-none md:rounded-[59px] ${moving ? "shadow-none will-change-transform [backface-visibility:hidden]" : "shadow-[0_28px_90px_rgba(0,0,0,.48)]"} ${open && !moving ? "" : "will-change-transform [backface-visibility:hidden]"} ${open ? `max-h-[calc(100svh-20px)] max-md:max-h-[calc(100svh-12px)] ${dialogScrollable ? "overflow-y-auto overscroll-contain" : "overflow-hidden"}` : "overflow-visible"} ${ready ? "visible" : "invisible"}`}
       >
         <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[inherit] [contain:paint]" aria-hidden="true">
           {!moving && <div className="waitlist-paper-texture h-full w-full opacity-45 mix-blend-multiply" />}
@@ -690,7 +731,7 @@ export default function FloatingWaitlist() {
         <div
           ref={lockupRef}
           aria-hidden="true"
-          className="pointer-events-none absolute left-0 top-0 z-20 will-change-transform [backface-visibility:hidden]"
+          className={`pointer-events-none absolute left-0 top-0 z-20 ${open && !moving ? "" : "will-change-transform [backface-visibility:hidden]"}`}
         >
           <div className={`flex flex-col items-center ${open ? "gap-1.5 sm:gap-4" : "gap-2 sm:gap-4"}`}>
             <img src={planeDisplayUrl} alt="" className={lockupImageClassName} />
@@ -713,7 +754,7 @@ export default function FloatingWaitlist() {
               Early access goes out in waves. Tell me what you’d animate and you’ll be in an earlier one.
             </p>
 
-            <form method="POST" action="/api/waitlist" onSubmit={submitWaitlist} noValidate className={`${open ? "gap-3" : "gap-4"} flex flex-col text-left sm:gap-[22px]`}>
+            <form method="POST" action="/api/waitlist" onSubmit={submitWaitlist} noValidate className={`${open ? "gap-3" : "gap-4"} flex max-w-full min-w-0 flex-col text-left sm:gap-[22px]`}>
               <div className="relative flex flex-col gap-2">
                 <label htmlFor="lao-username" className="sr-only">Username</label>
                 <GooeyInput
@@ -726,13 +767,13 @@ export default function FloatingWaitlist() {
                   className="w-full justify-start"
                   classNames={{
                     input:
-                      "min-w-0 pl-[68px] pr-[108px] text-[16px] sm:pr-32 sm:text-sm",
+                      "min-w-0 pl-5 pr-[108px] text-[16px] sm:pr-32 sm:text-sm",
                   }}
                   collapsedWidth="100%"
-                  expandedWidth="calc(100% - 64px)"
-                  expandedOffset={0}
+                  expandedWidth={isTouchUi ? "100%" : "calc(100% - 64px)"}
+                  expandedOffset={isTouchUi ? 0 : 64}
+                  disableGooey={isTouchUi}
                   iconName="username"
-                  disableGooey
                   value={username}
                   onValueChange={(value) => {
                     setUsername(value);
@@ -770,13 +811,13 @@ export default function FloatingWaitlist() {
                   showPlaceholderWhenCollapsed
                   className="w-full justify-start"
                   classNames={{
-                    input: "min-w-0 pl-[68px] pr-4 text-[16px] sm:text-sm",
+                    input: "min-w-0 pl-5 pr-4 text-[16px] sm:text-sm",
                   }}
                   collapsedWidth="100%"
-                  expandedWidth="calc(100% - 64px)"
-                  expandedOffset={0}
+                  expandedWidth={isTouchUi ? "100%" : "calc(100% - 64px)"}
+                  expandedOffset={isTouchUi ? 0 : 64}
+                  disableGooey={isTouchUi}
                   iconName="email"
-                  disableGooey
                   value={email}
                   onValueChange={(value) => {
                     setEmail(value);
@@ -795,13 +836,13 @@ export default function FloatingWaitlist() {
                   showPlaceholderWhenCollapsed
                   className="w-full justify-start"
                   classNames={{
-                    input: "min-w-0 pl-[68px] pr-4 text-[16px] sm:text-sm",
+                    input: "min-w-0 pl-5 pr-4 text-[16px] sm:text-sm",
                   }}
                   collapsedWidth="100%"
-                  expandedWidth="calc(100% - 64px)"
-                  expandedOffset={0}
+                  expandedWidth={isTouchUi ? "100%" : "calc(100% - 64px)"}
+                  expandedOffset={isTouchUi ? 0 : 64}
+                  disableGooey={isTouchUi}
                   iconName="animation"
-                  disableGooey
                   value={description}
                   onValueChange={setDescription}
                   maxLength={280}
@@ -818,6 +859,7 @@ export default function FloatingWaitlist() {
                 hoverBackground="linear-gradient(in oklab 180deg, oklab(10% 0 -0.01) 0%, oklab(58% -0.03 -0.13) 100%)"
                 borderColor="#292A2A"
                 hoverBorderColor="#363636"
+                pulsate={!isTouchUi}
                 className={`${open ? "mt-0 p-3.5" : "mt-[6px] p-4"} flex w-full items-center justify-center gap-3 rounded-full font-mono text-[13px] uppercase tracking-[0.08em] text-text-hi shadow-[0_4px_14px_0_rgba(0,0,0,0.39)]`}
               >
                 <img src={planeCtaUrl} alt="" aria-hidden="true" className="h-5 w-auto object-contain" />

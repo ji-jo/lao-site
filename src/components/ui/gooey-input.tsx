@@ -22,9 +22,9 @@ function GooeyFilter({
   blur: number;
 }) {
   return (
-    <svg className="absolute hidden h-0 w-0" aria-hidden>
+    <svg className="pointer-events-none absolute left-0 top-0 h-0 w-0 overflow-visible" aria-hidden>
       <defs>
-        <filter id={filterId} x="-50%" y="-50%" width="200%" height="200%">
+        <filter id={filterId} x="-50%" y="-50%" width="200%" height="200%" colorInterpolationFilters="sRGB">
           <feGaussianBlur in="SourceGraphic" stdDeviation={blur} result="blur" />
           <feColorMatrix
             in="blur"
@@ -219,14 +219,18 @@ export function GooeyInput({
 
       <div
         className={cn(
-          "relative flex h-[54px] w-full items-center justify-start",
+          "relative flex h-[54px] w-full max-w-full min-w-0 items-center justify-start overflow-visible",
           classNames?.filterWrap,
         )}
         style={disableGooey ? undefined : { filter: `url(#${filterId})` }}
       >
         <motion.div
           layout
-          className={cn("flex h-[54px] flex-1 items-center justify-start", classNames?.buttonRow)}
+          className={cn("flex h-[54px] w-full max-w-full min-w-0 items-center justify-start overflow-visible", classNames?.buttonRow)}
+          style={{
+            width: isExpanded ? expandedWidth : collapsedWidth,
+            maxWidth: "100%",
+          }}
           variants={buttonVariants}
           initial="collapsed"
           animate={isExpanded ? "expanded" : "collapsed"}
@@ -237,7 +241,7 @@ export function GooeyInput({
             disabled={disabled}
             onClick={handleExpand}
             className={cn(
-              "flex h-[54px] w-full cursor-pointer items-center justify-center gap-2 rounded-full px-4 text-sm font-medium outline-none transition-[color,box-shadow] focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
+              "flex h-[54px] w-full min-w-0 max-w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full px-0 text-sm font-medium outline-none transition-[color,box-shadow] focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
               surfaceClass,
               classNames?.trigger,
             )}
@@ -251,7 +255,7 @@ export function GooeyInput({
                   transition={{ duration: 0.2 }}
                   className={cn(
                     "flex size-full items-center text-text-hi [&_svg]:size-[1.25em]",
-                    showPlaceholderWhenCollapsed ? "justify-start gap-3 px-2" : "justify-center",
+                    showPlaceholderWhenCollapsed ? "justify-start gap-3 px-5" : "justify-center",
                   )}
                 >
                   {icon || iconName ? (
@@ -284,7 +288,7 @@ export function GooeyInput({
                   disabled={disabled || !isExpanded}
                   placeholder={placeholder}
                   className={cn(
-                    "h-full min-w-0 flex-1 bg-transparent text-sm text-text-hi outline-none placeholder:text-text-low",
+                    "h-full w-full min-w-0 max-w-full flex-1 bg-transparent pl-5 pr-4 text-sm text-text-hi outline-none placeholder:text-text-low",
                     classNames?.input,
                   )}
                 />

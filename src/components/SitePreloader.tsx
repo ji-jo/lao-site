@@ -9,6 +9,14 @@ const ASSET_SHARE = 0.8;
 const FONT_SHARE = 0.1;
 const PAGE_SHARE = 0.1;
 const CRITICAL_ASSETS = [wordmarkUrl, palmUrl, cursorUrl];
+const CROWD_SPRITE_URL = "/images/peeps/all-peeps.optimized.webp";
+
+function warmCrowdSprite() {
+  const image = new Image();
+  image.decoding = "async";
+  image.src = CROWD_SPRITE_URL;
+  void image.decode?.().catch(() => undefined);
+}
 
 const clampPercent = (value: number) => Math.min(100, Math.max(0, Math.round(value)));
 
@@ -130,6 +138,7 @@ export default function SitePreloader() {
     };
 
     void finish();
+    warmCrowdSprite();
     return () => {
       cancelled = true;
       html.classList.remove("is-preloading");
